@@ -934,7 +934,7 @@ function calculateAlchemicalResults() {
 
   // 5. Mapear Concentración
   let concentrationKey = "sintetico";
-  if (hhi >= 0.25) concentrationKey = "monocultura";
+  if (hhi >= 0.18) concentrationKey = "monocultura";
   else if (hhi < 0.12) concentrationKey = "disperso";
 
   return {

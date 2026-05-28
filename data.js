@@ -201,98 +201,98 @@ export const TRANSLATIONS = {
       {
         id: "martillo_dialectico",
         nombre: "Martillo Dialéctico",
-        descripcion: "Un trago terroso, denso e intensamente intoxicante, diseñado para revelar las asimetrías del capital.",
+        descripcion: "Diseñado específicamente para responder al expediente de la Desigualdad Estructural. Un trago terroso, denso e intensamente intoxicante que expone las asimetrías de clase.",
         intensidad: "Fuerte (Especialidad)",
         colorPredominante: "#8c2323",
         ingredientes: { marxista: 55, feminista: 25, keynesiana: 20 },
         vectores: { x: "Fuerte Intervención", y: "Máxima Equidad" },
-        tastingNotes: "Notas de cabeza metálicas de conflicto de clases, cuerpo de cuidados domésticos y un final cálido de estabilización fiscal agregada.",
-        sideEffects: "Alta pureza colectivista. Puede provocar alergia severa al libre emprendimiento, hipertrofia burocrática y agitación social incontrolable.",
-        riesgosSistemicos: "Rigidez institucional, erosión absoluta de incentivos individuales a la innovación y estatización monopólica ineficiente."
+        tastingNotes: "Cuerpo pesado con notas de socialización de medios productivos, un corazón terroso de trabajo de cuidado doméstico remunerado y un final estimulante de estabilización fiscal.",
+        sideEffects: "Alta propensión colectivista. Puede provocar rigidez del comité planificador y ceguera ante el dinamismo microeconómico individual descentralizado.",
+        riesgosSistemicos: "Abolición abrupta de incentivos privados, burocratización severa y parálisis en la asignación eficiente de recursos descentralizados."
       },
       {
         id: "libertad_liquida",
         nombre: "Libertad Líquida",
-        descripcion: "Un destilado cristalino, aromático e hipervolátil, que celebra el orden espontáneo de las decisiones libres.",
+        descripcion: "Diseñado para combatir la Inflación Galopante y la asfixia del intervencionismo. Un destilado cristalino, ultra-seco e hipervolátil que celebra el orden espontáneo de las decisiones libres.",
         intensidad: "Extremo",
         colorPredominante: "#c8350d",
         ingredientes: { austriaca: 50, clasica: 30, neoclasica: 20 },
         vectores: { x: "Mercado Libre Absoluto", y: "Productividad y Crecimiento" },
-        tastingNotes: "Aroma penetrante a incentivos puros, sabor a conocimiento disperso, final seco y cristalino, libre de impuestos o regulaciones.",
-        sideEffects: "Alta pureza de mercado. Causa ceguera severa ante externalidades negativas, parálisis estatal en emergencias y deshidratación de bienes comunes.",
-        riesgosSistemicos: "Captura oligopólica corporativa, colapso de la red de seguridad social, atomización individual y degradación planetaria acelerada."
+        tastingNotes: "Aroma penetrante a dinero sano no manipulado por bancos centrales, sabor nítido a precios de mercado espontáneos y un final cristalino libre de impuestos.",
+        sideEffects: "Pureza extrema de laissez-faire. Provoca ceguera total ante las externalidades negativas masivas y parálisis estatal durante colapsos sistémicos.",
+        riesgosSistemicos: "Deshidratación de bienes comunes, desmantelamiento de la red de seguridad social y alta vulnerabilidad ante asimetrías de poder desreguladas."
       },
       {
         id: "socialdemocracia_nordica",
         nombre: "Socialdemocracia Nórdica",
-        descripcion: "Un cóctel extremadamente equilibrado, de trago largo, que combina el motor capitalista con un colchón social robusto.",
+        descripcion: "Diseñado para amortiguar la gentrificación y la Crisis de Vivienda. Mezcla noble que fusiona el motor de la eficiencia privada con un robusto colchón social de bienestar.",
         intensidad: "Moderado",
         colorPredominante: "#579ea4",
         ingredientes: { keynesiana: 40, institucionalista: 30, tradicion_desarrollista: 20, feminista: 10 },
         vectores: { x: "Coordinación Social / Estado Regulador", y: "Equidad Social y Estabilidad" },
-        tastingNotes: "Textura suave y agridulce. Sabor inicial a mercado dinámico balanceado con notas herbales de seguridad social y gobernanza institucional fuerte.",
-        sideEffects: "Gusto adquirido de alta carga impositiva. Riesgo de parálisis fiscal ante la fuga de capitales globalizados si los trade-offs no se vigilan.",
-        riesgosSistemicos: "Fatiga del contribuyente fiscal, excesivo costo institucional administrativo y vulnerabilidad ante shocks externos en mercados de capitales."
+        tastingNotes: "Sabor de mercado dinámico regulado, notas herbales y reconfortantes de vivienda pública y un retrogusto de alta equidad fiscal contracíclica.",
+        sideEffects: "Gusto adquirido de elevada presión impositiva. Riesgo de fuga de capitales globalizados si los trade-offs distributivos no se equilibran.",
+        riesgosSistemicos: "Fatiga fiscal crónica del contribuyente, hipertrofia burocrática del estado de bienestar y parálisis ante shocks globales de capital."
       },
       {
         id: "silicon_valley_sour",
         nombre: "Silicon Valley Sour",
-        descripcion: "Un elixir burbujeante y estimulante que busca acelerar los límites tecnológicos y colonizar el futuro.",
+        descripcion: "Diseñado para canalizar los shocks de IA y Automatización. Un elixir burbujeante que busca guiar la destrucción creativa mediante misiones tecnológicas financiadas por el Estado.",
         intensidad: "Fuerte",
         colorPredominante: "#f9c000",
         ingredientes: { schumpeteriana: 45, estado_emprendedor: 35, neoclasica: 20 },
         vectores: { x: "Moldeamiento Público-Privado", y: "Crecimiento e Innovación" },
-        tastingNotes: "Punzante e innovador. Sabor a destrucción creativa disruptiva con notas efervescentes de riesgo público financiado por el Estado.",
-        sideEffects: "Altos picos de especulación financiera. Puede causar precarización del trabajo analógico y desprecio social por los perdedores tecnológicos.",
-        riesgosSistemicos: "Socialización masiva de las pérdidas de las startups de riesgo, privatización de patentes críticas y burbujas de activos tecnológicos."
+        tastingNotes: "Efervescencia ácida de obsolescencia acelerada y misiones estratégicas de innovación, con un final de optimización microeconómica racional.",
+        sideEffects: "Picos severos de burbujas especulativas. Puede inducir a una tolerancia extrema ante monopolios tecnológicos transitorios.",
+        riesgosSistemicos: "Socialización masiva de pérdidas de startups riesgosas, privatización del conocimiento tecnológico común y precarización laboral analógica."
       },
       {
         id: "equilibrio_esteril",
         nombre: "Equilibrio Estéril",
-        descripcion: "Un destilado de pureza matemática inigualable. Frío, geométrico y conceptualmente impecable.",
+        descripcion: "Diseñado como un trago analítico sobre los límites regulatorios ante los Monopolios Digitales. Frío, geométrico, inorgánico y de una pureza matemática insuperable.",
         intensidad: "Fuerte",
         colorPredominante: "#2d2651",
         ingredientes: { neoclasica: 80, conductista: 20 },
         vectores: { x: "Modelación Racional / Mercado Libre", y: "Asignación Eficiente" },
-        tastingNotes: "Sabor completamente neutro e inorgánico. Notas abstractas de curvas de indiferencia óptimas con una pizca de psicología de sesgos al final.",
-        sideEffects: "Pérdida absoluta de contacto con el comportamiento social real. El Homo Economicus puede inducir a un autismo político de gabinete académico.",
-        riesgosSistemicos: "Inoperancia regulatoria ante crisis no modelables dinámicamente y fragilidad institucional ante la complejidad sistémica irracional."
+        tastingNotes: "Optimización pura de utilidad marginal y curvas de indiferencia abstractas, rematado con una pizca conductual de sesgos heurísticos.",
+        sideEffects: "Pérdida severa de contacto con la fricción empírica. El supuesto de hiper-racionalidad inhabilita la comprensión de monopolios con efectos de red.",
+        riesgosSistemicos: "Inoperancia técnica ante crisis sistémicas complejas y reducción dogmática de la sociedad a un óptimo matemático inalcanzable."
       },
       {
         id: "elixir_bien_comun",
         nombre: "Elixir del Bien Común",
-        descripcion: "Un trago orgánico, regenerativo y profundamente cohesionador socialmente, diseñado para sanar las heridas distributivas.",
+        descripcion: "Diseñado para sanar las heridas del Colapso Ecológico. Un trago orgánico y regenerativo enfocado en salvaguardar el techo planetario y la reproducción de la vida.",
         intensidad: "Ligero",
         colorPredominante: "#2c5e3b",
         ingredientes: { institucionalista: 50, ecologica: 30, feminista: 20 },
         vectores: { x: "Autogestión Policéntrica / Comunitario", y: "Límites y Sostenibilidad Social" },
-        tastingNotes: "Sabores terrosos y de bosque húmedo. Predominan las notas de gobernanza local, reproducción de la vida y límites ecológicos del Donut.",
-        sideEffects: "Cero efervescencia industrial. Exige un alto compromiso de tiempo cívico y puede limitar las tasas agregadas de expansión material inmediata.",
-        riesgosSistemicos: "Ineficiencias de escala local para competir en el tablero geopolítico industrial globalizado e inacción rápida ante emergencias centralizadas."
+        tastingNotes: "Sabores terrosos y herbáceos a economía circular del Donut, notas de gobernanza local policéntrica de comunes y un regusto a cuidados de la biosfera.",
+        sideEffects: "Ausencia total de efervescencia de crecimiento material. Exige una gran dedicación de tiempo cívico para evitar tragedias del común.",
+        riesgosSistemicos: "Ineficiencias de escala frente a mercados internacionales globalizados y lentitud extrema de reacción ante crisis centralizadas."
       },
       {
         id: "destilado_desarrollista",
         nombre: "Destilado Desarrollista",
-        descripcion: "Un licor robusto, de cocción lenta y espíritu fuertemente industrializado nacionalmente.",
+        descripcion: "Diseñado para resolver el dilema de Globalización vs Soberanía. Un licor robusto de cocción lenta enfocado en la soberanía arancelaria y la maduración industrial local.",
         intensidad: "Fuerte",
         colorPredominante: "#c8350d",
         ingredientes: { tradicion_desarrollista: 60, estado_emprendedor: 30, institucionalista: 10 },
         vectores: { x: "Planificación de Oferta Industrial", y: "Productividad y Catching-up" },
-        tastingNotes: "Denso, amargo y persistente. Notas fuertes de protección arancelaria, misiones públicas industriales y fomento de capacidades manufactureras locales.",
-        sideEffects: "Alta resaca corporativista. Puede causar parálisis competitiva si las empresas protegidas se rehúsan a competir en el escenario global.",
-        riesgosSistemicos: "Captura oligopólica estatal, ineficiencias crónicas de subsidio y tensiones arancelarias/guerras comerciales internacionales destructivas."
+        tastingNotes: "Notas densas y persistentes de protección a industrias nacientes, misiones públicas audaces de catching-up productivo y reglas de juego claras.",
+        sideEffects: "Resaca severa de corporativismo. Puede incentivar ineficiencias parasitarias de empresas privadas altamente subsidiadas.",
+        riesgosSistemicos: "Captura rentista del aparato burocrático, parálisis competitiva frente al exterior y fomento crónico de ineficiencias protegidas."
       },
       {
         id: "ponche_gran_crisis",
         nombre: "Ponche de la Gran Crisis",
-        descripcion: "Un estimulante térmico, sumamente confortante y reparador, ideal para resucitar sistemas financieros helados.",
+        descripcion: "Diseñado para estabilizar economías congeladas ante el Dilema de Estabilidad vs Estímulo. Un estimulante térmico para inyectar demanda agregada y mitigar el pánico cívico.",
         intensidad: "Moderado",
         colorPredominante: "#86ad34",
         ingredientes: { keynesiana: 60, institucionalista: 20, conductista: 20 },
         vectores: { x: "Demanda Agregada Dirigida", y: "Estabilidad de Ciclos Cortos" },
-        tastingNotes: "Dulce y especiado. Fuertes notas de gasto contracíclico curativo sobre un lecho de arquitectura institucional y gestión de pánicos irracionales.",
-        sideEffects: "Apetito insaciable de deuda pública fiscal y ceguera ante el recalentamiento inflacionario a largo plazo.",
-        riesgosSistemicos: "Inflación estructural por exceso de demanda inyectada, desincentivo del ahorro de largo plazo y dependencia crónica del estímulo estatal."
+        tastingNotes: "Efervescencia dulce de gasto público contracíclico, notas de arquitectura institucional y una amortiguación conductual contra el pánico financiero.",
+        sideEffects: "Apetito insaciable de endeudamiento fiscal y propensión al desbordamiento inflacionario a largo plazo si el estímulo supera el producto potencial.",
+        riesgosSistemicos: "Inflación estructural persistente, desincentivo del ahorro privado de largo plazo y dependencia crónica del respirador estatal."
       }
     ],
     problemas: [
@@ -513,30 +513,30 @@ export const TRANSLATIONS = {
       monismo_doctrinal: {
         nombre: "Monismo Doctrinal",
         subtitulo: "La Coherencia de un Principio Unificado",
-        descripcion: "Tu mente opera con el rigor y la potencia de un marco conceptual unificado. Al igual que el monista, tú 'sabes una gran cosa' y organizas los complejos fenómenos económicos bajo principios robustos y consistentes. Valorizas la coherencia teórica por encima de los compromisos improvisados de las modas académicas. Esta claridad epistemológica te confiere una formidable capacidad de acción estratégica y una fuerte identidad política.",
-        virtud: "Identidad conceptual firme, pensamiento deductivo de alta precisión y claridad estratégica ante dilemas complejos.",
-        resaca: "Alta vulnerabilidad a la visión de túnel y ceguera ante externalidades o anomalías empíricas imprevistas que cuestionen tus principios esenciales."
+        descripcion: "Tu mente opera con el rigor deductivo de un marco conceptual unificado. Al igual que el monista de Isaiah Berlin, tú 'sabes una gran cosa' y organizas los complejos fenómenos bajo principios robustos y consistentes. En tu búsqueda de un orden coherente, tiendes a priorizar un concepto puro de libertad: ya sea la Libertad Negativa absoluta (el mercado libre de toda interferencia y coerción estatal) o la Libertad Positiva colectiva (la planificación estructurada para dotar de capacidades reales a la sociedad). Esta consistencia axiomática te confiere una formidable capacidad de acción estratégica y una fuerte identidad política, aunque a costa de simplificar las tensiones éticas del tejido social.",
+        virtud: "Identidad intelectual inquebrantable, razonamiento deductivo de alta precisión y extraordinaria claridad estratégica ante dilemas complejos.",
+        resaca: "Alta propensión a la visión de túnel. Si te anclas en la libertad negativa, corres el riesgo de ignorar la precarización social y el desamparo de bienes comunes; si te vuelcas a la libertad positiva, emerges propenso al mesianismo político, al tribalismo ideológico ortodoxo y al paternalismo burocrático que asfixia el albedrío individual."
       },
       pluralismo_sistemico: {
         nombre: "Pluralismo Sistémico",
         subtitulo: "La Adaptabilidad de la Complejidad",
-        descripcion: "Tu mente opera con el dinamismo y la flexibilidad del pluralismo. Rechazas la idea de que la infinita complejidad de las sociedades humanas pueda constreñirse en una única e inflexible fórmula teórica. Eres capaz de combinar perspectivas radicalmente opuestas de manera pragmática y humilde, adaptando tus herramientas intelectuales según el problema y respetando la existencia de trade-offs inevitables.",
-        virtud: "Flexibilidad epistemológica de alto nivel, resiliencia intelectual ante el cambio histórico e inmunidad natural al dogmatismo ortodoxo.",
-        resaca: "Propensión al desgaste conceptual y a la parálisis en la toma de decisiones por ponderar eternamente contradicciones. Riesgo de soledad política."
+        descripcion: "Tu mente opera con la flexibilidad adaptativa de quien reconoce que el mundo social está compuesto por múltiples verdades en tensión inevitable. Siguiendo el pluralismo de Berlin, entiendes que la Libertad Negativa (no interferencia individual) y la Libertad Positiva (realización de capacidades comunes) son valores legítimos pero con frecuencia incompatibles, y que no existe una súper-fórmula científica capaz de fusionarlos sin pérdidas éticas. Navegas estas contradicciones combinando escuelas con pragmatismo y humildad, adaptando tus herramientas analíticas a la escala del problema concreto.",
+        virtud: "Flexibilidad epistemológica de alto nivel, inmunidad natural a la ortodoxia doctrinal y gran resiliencia intelectual ante el cambio histórico.",
+        resaca: "Vulnerabilidad a la parálisis analítica y al desgaste decisional. Al comprender tan bien que toda decisión implica sacrificar una libertad en favor de otra, corres el riesgo de la inoperancia y de una inevitable soledad política ante la falta de un anclaje identitario claro."
       },
       monismo_eclectico: {
         nombre: "Monismo Ecléctico (En Tensión)",
         subtitulo: "La Búsqueda Inquieta de Coherencia",
-        descripcion: "Operas bajo un dilema fascinante. Tu temperamento cognitivo ansía desesperadamente encontrar una única verdad sistemática y unificadora que resuelva de raíz las contradicciones de la sociedad. Sin embargo, tu análisis empírico y ético de la realidad está demasiado fragmentado, lo que distribuye tus intuiciones en polos radicalmente contradictorios. Esta fricción interna te empuja a un estado permanente de debate y autoevaluación intelectual.",
-        virtud: "Incapacidad de conformarte con respuestas autocomplacientes; motor de constante profundización teórica rigurosa.",
-        resaca: "Desgaste analítico frecuente. Sensación constante de inconsistencia ideológica o de transitar en una encrucijada sin salida clara."
+        descripcion: "Operas bajo una tensión intelectual fascinante. Tu temperamento cognitivo ansía desesperadamente encontrar una única verdad sistemática y coherente que unifique la realidad. Sin embargo, tu sensibilidad analítica te impide ignorar que la Libertad Negativa del mercado y la Libertad Positiva de la planificación estatal tiran de ti con la misma fuerza ética y empírica. Esto te mantiene en una permanente encrucijada teórica, intentando reconciliar bajo un mismo techo lógico principios que la historia ha demostrado que conviven en conflicto irreductible.",
+        virtud: "Escepticismo saludable de gabinete, rechazo de dogmas autocomplacientes y un motor de constante profundización conceptual autocrítica.",
+        resaca: "Disonancia cognitiva recurrente. Sensación de inestabilidad o inconsistencia intelectual al saltar entre polos incompatibles, lo que puede alienar a los militantes de doctrinas puras."
       },
       pluralismo_pragmatico: {
         nombre: "Pluralismo Camuflado (Pluralismo Pragmático)",
         subtitulo: "La Doctrina bajo el Disfraz de la Apertura",
-        descripcion: "Te consideras formalmente a ti mismo como un ser intelectualmente abierto, flexible y adaptativo (un pluralista libre de ataduras doctrinales). No obstante, tus elecciones políticas reales y tus respuestas ante dilemas de alta tensión revelan un anclaje inamovible, coherente y sumamente concentrado en un único cuadrante de pensamiento. Operas con la rigidez de un monista pero con el discurso sofisticado y humilde de un pluralista.",
-        virtud: "Combina la indudable eficacia operativa de una doctrina pura con la diplomacia y sofisticación del lenguaje pluralista.",
-        resaca: "Riesgo de incurrir en una disonancia cognitiva tácita o una hipocresía epistemológica al exigir flexibilidad al resto pero no aplicarla en ti."
+        descripcion: "Presentas formalmente un discurso intelectual abierto, empírico y tolerante, autopercibiéndote como un pluralista libre de ataduras doctrinarias. No obstante, tus decisiones políticas reales y tus ponderaciones de dilemas de alta tensión revelan un anclaje inamovible, sumamente concentrado en defender un solo eje de libertad (sea la no interferencia del mercado o la capacidad reguladora estatal). Utilizas el sofisticado lenguaje de la flexibilidad pluralista para justificar y blindar operativamente un núcleo esencialmente monista.",
+        virtud: "Extraordinaria eficacia operativa al combinar la fuerza de una doctrina unificada con la diplomacia y el prestigio intelectual de la apertura académica.",
+        resaca: "Riesgo de incurrir en una disonancia tácita o en una hipocresía epistemológica involuntaria, exigiendo matices y concesiones a los marcos ajenos que tu propio núcleo duro se niega a realizar."
       }
     },
     perfiles_cuadrantes: {
@@ -564,15 +564,15 @@ export const TRANSLATIONS = {
     perfiles_concentracion: {
       monocultura: {
         riesgo: "⚠️ Dogmatismo Agudo",
-        narrativa: "Posees una pureza ideológica sobresaliente. Tu mezcla es un destilado de un solo grano conceptual. Tienes una enorme claridad en tus propuestas y una robusta identidad conceptual. Sin embargo, tu resaca ideológica es el sesgo de túnel: corres el riesgo de ignorar anomalías empíricas masivas y quedar desarmado ante crisis inéditas fuera de tus axiomas esenciales."
+        narrativa: "Posees una pureza ideológica sobresaliente. Tu mezcla doctrinal se estructura en torno a una única escuela o cuadrante conceptual dominante. Esto te dota de una tremenda consistencia lógica y una robusta identidad conceptual. Sin embargo, tu resaca latente es el sesgo de túnel: una alta propensión a la ortodoxia que puede inducir a un sectarismo intelectual, tribalismo político ante el disenso, o a la ceguera defensiva frente a anomalías empíricas imprevistas que cuestionen tus dogmas esenciales."
       },
       sintetico: {
         riesgo: "⚖️ Fricción Decisional",
-        narrativa: "Has logrado formular un cóctel equilibrado y sintético. Combinas licores con sensatez pragmática. Tu virtud es la gran adaptabilidad conceptual; logras sopesar costos y trade-offs con ecuanimidad académica. Tu resaca potencial es la indecisión o parálisis por exceso de consideración analítica antes de actuar."
+        narrativa: "Has logrado formular un cóctel equilibrado y sintético. Combinas escuelas y licores teóricos con sensatez y adaptabilidad conceptual. Tu virtud principal es sopesar costos, externalidades y trade-offs con ecuanimidad y equilibrio cívico. Tu resaca potencial es la indecisión o parálisis analítica por sobrepensar las contradicciones inevitables de cada política antes de actuar."
       },
       disperso: {
         riesgo: "🌪️ Soledad del Ecléctico",
-        narrativa: "Tu mezcla tiene una entropía extrema. Eres un catador cívico de todos los estantes. Tu total inmunidad al dogmatismo te concede una soberana humildad epistemológica. No obstante, tu resaca ideológica es la completa inoperancia o soledad política: al no tener un anclaje doctrinal, corres el riesgo de la parálisis decisional absoluta y de no encajar en ninguna coalición organizada de transformación colectiva."
+        narrativa: "Tu mezcla presenta una dispersión teórica extrema. Eres un catador cívico de múltiples estantes, inmune por completo al dogmatismo ortodoxo. Esto te otorga una soberana humildad epistemológica. No obstante, tu resaca ideológica es la completa inoperancia práctica o la soledad política: al carecer de un anclaje doctrinal unificado, corres el riesgo de diluir tu fuerza transformadora y no encajar en ninguna coalición organizada de acción colectiva."
       }
     }
   },
@@ -769,98 +769,98 @@ export const TRANSLATIONS = {
       {
         id: "martillo_dialectico",
         nombre: "Dialectical Hammer",
-        descripcion: "An earthy, dense, and intensely intoxicating drink, designed to expose the asymmetries of capital.",
+        descripcion: "Specifically engineered to address the Structural Inequality dossier. An earthy, dense, and intensely intoxicating drink exposing the power asymmetries of capital.",
         intensidad: "Strong (Specialty)",
         colorPredominante: "#8c2323",
         ingredientes: { marxista: 55, feminista: 25, keynesiana: 20 },
         vectores: { x: "Strong State Intervention", y: "Maximum Equity" },
-        tastingNotes: "Metallic class struggle head notes, social reproduction body, and a warm contracyclical fiscal policy finish.",
-        sideEffects: "High collectivist purity. May cause severe allergy to free enterprise, bureaucratic hypertrophy, and uncontrollable social unrest.",
-        riesgosSistemicos: "Institutional rigidity, absolute erosion of individual innovation incentives, and inefficient state-run monopoly."
+        tastingNotes: "Heavy body with notes of democratic socialization of production, an earthy core of remunerated domestic care work, and an ebullient countercyclical stabilization finish.",
+        sideEffects: "High collectivist purity. May cause rigidity in planning committees and blindness to decentralized individual market choices.",
+        riesgosSistemicos: "Abrupt erosion of private investment incentives, heavy state bureaucratization, and structural allocation inefficiencies."
       },
       {
         id: "libertad_liquida",
         nombre: "Liquid Liberty",
-        descripcion: "A crystalline, aromatic, and highly volatile spirit celebrating the spontaneous order of free choices.",
+        descripcion: "Designed to tackle Runaway Inflation and regulatory choking. A crystalline, ultra-dry, and highly volatile spirit celebrating the spontaneous coordination of free choices.",
         intensidad: "Extreme",
         colorPredominante: "#c8350d",
         ingredientes: { austriaca: 50, clasica: 30, neoclasica: 20 },
         vectores: { x: "Absolute Free Market", y: "Productivity & Growth" },
-        tastingNotes: "Sharp aroma of pure incentives, taste of dispersed knowledge, dry finish, free of taxes and regulations.",
-        sideEffects: "High market purity. Causes absolute blindness to negative externalities, state paralysis in crises, and dehydration of common goods.",
-        riesgosSistemicos: "Corporate oligopolistic capture, collapse of the social safety net, individual atomization, and accelerated planetary degradation."
+        tastingNotes: "Sharp aroma of sound money untouched by central banking, crisp taste of spontaneous market clearing, and a dry, tax-free finish.",
+        sideEffects: "Pure laissez-faire concentration. Induces absolute blindness to negative externalities and state paralysis during massive systemic shocks.",
+        riesgosSistemicos: "Severe depletion of common public goods, collapse of the social safety net, and acute vulnerability to unregulated corporate monopolies."
       },
       {
         id: "socialdemocracia_nordica",
         nombre: "Nordic Socialdemocracy",
-        descripcion: "An extremely balanced, long drink that merges the capitalist engine with a robust social cushion.",
+        descripcion: "Formulated to buffer urban gentrification and the Housing Crisis. A noble blend that integrates market-driven efficiency with a robust, universal welfare state safety net.",
         intensidad: "Moderate",
         colorPredominante: "#579ea4",
         ingredientes: { keynesiana: 40, institucionalista: 30, tradicion_desarrollista: 20, feminista: 10 },
         vectores: { x: "Social Coordination / Regulator State", y: "Social Equity & Stability" },
-        tastingNotes: "Smooth, bittersweet texture. Initial taste of dynamic market balanced with herbal notes of welfare security and strong governance.",
-        sideEffects: "Acquired taste of high tax burden. Risk of fiscal paralysis in the face of globalized capital flight if trade-offs are not monitored.",
-        riesgosSistemicos: "Taxpayer fatigue, heavy administrative costs, and vulnerability to global capital market shocks."
+        tastingNotes: "Smooth, bittersweet profile of a regulated market, combined with herbal notes of strategic public housing and a solid countercyclical tax redistribution.",
+        sideEffects: "Acquired taste of high tax burden. Vulnerability to global capital flight and regulatory capture if economic parameters are misaligned.",
+        riesgosSistemicos: "Chronic taxpayer fatigue, institutional administrative bloating, and sensitivity to speculative international capital shocks."
       },
       {
         id: "silicon_valley_sour",
         nombre: "Silicon Valley Sour",
-        descripcion: "An effervescent and stimulating elixir seeking to accelerate technological limits and colonize the future.",
+        descripcion: "Designed to navigate the massive shocks of AI and Automation. An effervescent elixir seeking to steer creative destruction through daring state-led technological missions.",
         intensidad: "Strong",
         colorPredominante: "#f9c000",
         ingredientes: { schumpeteriana: 45, estado_emprendedor: 35, neoclasica: 20 },
         vectores: { x: "Public-Private Co-shaping", y: "Growth & Innovation" },
-        tastingNotes: "Sharp and innovative. Taste of creative destruction with bubbly notes of state-funded technological risk.",
-        sideEffects: "High speculative financial peaks. Can cause precarity in analog labor and social contempt for technological losers.",
-        riesgosSistemicos: "Massive socialization of startup venture losses, privatization of critical patents, and speculative technology asset bubbles."
+        tastingNotes: "Bubbly acidity of technological innovation and public strategic venture missions, rounded by a clean neoclassical microeconomic optimization finish.",
+        sideEffects: "High vulnerability to asset bubbles. Can lead to extreme social tolerance for temporary tech monopolies under the guise of innovation.",
+        riesgosSistemicos: "Massive socialization of private venture losses, privatization of state-funded patent commons, and severe analog labor displacement."
       },
       {
         id: "equilibrio_esteril",
         nombre: "Sterile Equilibrium",
-        descripcion: "A distillate of unmatched mathematical purity. Cold, geometric, and conceptually flawless.",
+        descripcion: "Formulated as a cold analytical drink reflecting the regulatory boundaries of Digital Monopolies. Crystalline, geometric, and mathematically pure.",
         intensidad: "Strong",
         colorPredominante: "#2d2651",
         ingredientes: { neoclasica: 80, conductista: 20 },
         vectores: { x: "Rational Modeling / Free Market", y: "Efficient Allocation" },
-        tastingNotes: "Completely neutral, inorganic taste. Abstract notes of optimal indifference curves with a tiny pinch of behavioral bias at the finish.",
-        sideEffects: "Absolute loss of contact with real social behavior. Homo Economicus assumptions can induce academic cabinet political autism.",
-        riesgosSistemicos: "Regulatory impotence during non-modelable crises and institutional fragility in the face of complex, irrational human behaviors."
+        tastingNotes: "Uncompromising marginal utility and optimal indifference curves, topped with a micro-dose of cognitive heuristic biases.",
+        sideEffects: "Severe detachment from empirical friction. Hyper-rational assumptions fail to model Platform Monopolies with compounding network effects.",
+        riesgosSistemicos: "Regulatory paralysis in complex real-world crises, reducing society to unrealistic and rigid mathematical parameters."
       },
       {
         id: "elixir_bien_comun",
         nombre: "Elixir of the Common Good",
-        descripcion: "An organic, regenerative, and deeply cohesive drink, crafted to heal distributive wounds.",
+        descripcion: "Created to heal the wounds of Ecological Collapse. An organic, regenerative mixture designed to protect biophysical planetary ceilings and social foundations.",
         intensidad: "Light",
         colorPredominante: "#2c5e3b",
         ingredientes: { institucionalista: 50, ecologica: 30, feminista: 20 },
         vectores: { x: "Polycentric Self-Governance", y: "Social Boundaries & Sustainability" },
-        tastingNotes: "Earthy forest notes. Dominated by local governance, social reproduction of life, and circular Donut boundaries.",
-        sideEffects: "Zero industrial effervescence. Demands high civic time commitment and can constrain immediate material growth rates.",
-        riesgosSistemicos: "Scale inefficiencies when competing in global geopolitics and slow reaction during centralized emergencies."
+        tastingNotes: "Earthy, mossy aromas of Donut circular limits, complex polycentric local governance of the commons, and a sustainable care finish.",
+        sideEffects: "Zero nominal GDP growth expansion. Demands significant civic time and dedication, slowing down industrial-scale execution.",
+        riesgosSistemicos: "Scale inefficiencies in competing against global industrial export powers and slow response during highly centralized emergencies."
       },
       {
         id: "destilado_desarrollista",
         nombre: "Developmental Distillate",
-        descripcion: "A robust, slow-cooked liqueur with a strong national industrial focus.",
+        descripcion: "Designed to address the high-tension Globalization vs Sovereignty dilemma. A dense, robust spirit focused on industrial policy and domestic catching-up.",
         intensidad: "Strong",
         colorPredominante: "#c8350d",
         ingredientes: { tradicion_desarrollista: 60, estado_emprendedor: 30, institucionalista: 10 },
         vectores: { x: "Industrial Supply Planning", y: "Productivity & Catching-up" },
-        tastingNotes: "Dense, bitter, and persistent. Strong notes of tariff protection, public manufacturing missions, and local capacity building.",
-        sideEffects: "High corporatist hangover. Can cause competitive paralysis if protected firms refuse to face global competition.",
-        riesgosSistemicos: "Oligopolistic capture, chronic subsidy inefficiencies, and destructive international ariff tensions / trade wars."
+        tastingNotes: "Persistent, bitter notes of infant industry tariff protections, bold state-led developmental projects, and clear institutional rules.",
+        sideEffects: "Heavy corporatist hangover. Risk of protecting inefficient, rent-seeking local companies that refuse to face international competition.",
+        riesgosSistemicos: "Private capture of state developmental funds, chronic tariff trade wars, and market inefficiencies under long-term protection."
       },
       {
         id: "ponche_gran_crisis",
         nombre: "Great Crisis Punch",
-        descripcion: "A comforting and restorative stimulant, ideal to resuscitate frozen financial systems.",
+        descripcion: "Formulated to stabilize frozen economies during the Stability vs Stimulus Dilemma. A comforting, warming drink to inject demand and manage public panic.",
         intensidad: "Moderate",
         colorPredominante: "#86ad34",
         ingredientes: { keynesiana: 60, institucionalista: 20, conductista: 20 },
         vectores: { x: "Targeted Aggregate Demand", y: "Short-Cycle Stability" },
-        tastingNotes: "Sweet and spicy. Strong notes of fiscal spending over institutional architecture and management of irrational panics.",
-        sideEffects: "Insatiable appetite for public debt and blindness to long-term structural inflationary overheating.",
-        riesgosSistemicos: "Structural demand-pull inflation, disincentives for long-term saving, and chronic dependence on state stimulus."
+        tastingNotes: "Warm, sweet spices of countercyclical fiscal expansion, structured institutional governance, and choice architecture to buffer financial panic.",
+        sideEffects: "Insatiable appetite for public debt and risk of long-term structural inflationary overheating if stimulus overrides potential output.",
+        riesgosSistemicos: "Chronic demand-pull inflation, erosion of long-term saving incentives, and dependency on state monetary life support."
       }
     ],
     problemas: [
@@ -1081,30 +1081,30 @@ export const TRANSLATIONS = {
       monismo_doctrinal: {
         nombre: "Doctrinal Monism",
         subtitulo: "The Coherence of a Unified Principle",
-        descripcion: "Your mind operates with the rigor and power of a unified conceptual framework. Like a monist, you 'know one big thing' and organize complex economic phenomena under robust and consistent principles. You value theoretical coherence over the improvised compromises of academic trends. This epistemological clarity grants you a formidable capacity for strategic action and a strong political identity.",
-        virtud: "Firm conceptual identity, high-precision deductive thinking, and strategic clarity in the face of complex dilemmas.",
-        resaca: "High vulnerability to tunnel vision and blindness to unexpected externalities or empirical anomalies that challenge your core principles."
+        descripcion: "Your mind operates with the deductive rigor of a unified conceptual framework. Like Isaiah Berlin's monist, you 'know one big thing' and organize complex economic phenomena under robust, consistent principles. In your pursuit of conceptual coherence, you prioritize a single, pure concept of liberty: either absolute Negative Liberty (freedom from state coercion and interference, enabling spontaneous markets) or collective Positive Liberty (structured state planning to build active human capabilities). While this axiom-driven focus grants you formidable strategic clarity and a powerful political identity, it does so at the cost of simplifying the deep ethical tensions of the social fabric.",
+        virtud: "Unwavering intellectual identity, high-precision deductive reasoning, and extraordinary strategic clarity in the face of complex dilemmas.",
+        resaca: "High susceptibility to tunnel vision. If anchored in negative liberty, you risk ignoring social precarity and the erosion of the public commons; if oriented toward positive liberty, you emerge prone to political messianism, orthodox ideological sectarianism, and a paternalistic bureaucracy that stifles individual agency."
       },
       pluralismo_sistemico: {
         nombre: "Systemic Pluralism",
         subtitulo: "The Adaptive Humility of Complexity",
-        descripcion: "Your mind operates with the dynamism and flexibility of pluralism. You reject the idea that the infinite complexity of human societies can be constrained into a single, inflexible theoretical formula. You are capable of combining radically opposite perspectives pragmatically and humbly, adapting your intellectual tools to the specific problem while respecting the existence of inevitable trade-offs.",
-        virtud: "High-level epistemological flexibility, intellectual resilience in the face of historical change, and natural immunity to orthodox dogmatism.",
-        resaca: "Tendency toward conceptual exhaustion and decision paralysis from eternally weighing contradictions. Risk of political isolation."
+        descripcion: "Your mind operates with the adaptive flexibility of one who recognizes that the social world is woven from multiple legitimate truths in permanent, inevitable tension. Guided by Berlin's pluralism, you understand that Negative Liberty (individual non-interference) and Positive Liberty (collective capability development) are both vital but often incompatible values, and that no scientific super-formula can fuse them without ethical sacrifices. You navigate these trade-offs with pragmatism and humility, choosing and adjusting your analytical tools according to the scale of the concrete problem.",
+        virtud: "High-level epistemological flexibility, natural immunity to doctrinal orthodoxy, and deep intellectual resilience through historical shifts.",
+        resaca: "Vulnerability to analytical overthinking and decision paralysis. Understanding that every choice demands sacrificing one form of liberty for another, you risk falling into political inoperancy and a profound solitude due to the lack of a rigid, comfortable ideological anchor."
       },
       monismo_eclectico: {
         nombre: "Eclectic Monism (In Tension)",
         subtitulo: "The Restless Search for Coherence",
-        descripcion: "You operate under a fascinating dilemma. Your cognitive temperament desperately longs to find a single, systematic, and unifying truth that fundamentally resolves society's contradictions. However, your empirical and ethical analysis of reality is highly fragmented, distributing your intuitions across radically contradictory poles. This internal friction pushes you into a permanent state of debate and intellectual self-evaluation.",
-        virtud: "Inability to settle for self-complacent answers; driver of constant, rigorous theoretical deepening.",
-        resaca: "Frequent analytical fatigue. Constant feeling of ideological inconsistency or of walking down a crossroads with no clear exit."
+        descripcion: "You operate under a fascinating cognitive friction. Your intellectual temperament longs to discover a single, systematic, and unifying truth that resolves society's structural contradictions. Yet, your analytical sensitivity prevents you from ignoring that both the Negative Liberty of free markets and the Positive Liberty of state planning pull at you with equal ethical and empirical strength. This keeps you at a permanent theoretical crossroads, trying to reconcile under one logical roof principles that history has shown to exist in irreductible conflict.",
+        virtud: "Healthy intellectual skepticism, rejection of self-complacent dogmas, and a driving force for constant, self-critical conceptual deepening.",
+        resaca: "Recurrent cognitive dissonance. A persistent feeling of intellectual instability or inconsistency when shifting between incompatible poles, which can alienate members of pure, orthodox doctrines."
       },
       pluralismo_pragmatico: {
         nombre: "Camouflaged Pluralism (Pragmatic Pluralism)",
         subtitulo: "Doctrine Under the Guise of Openness",
-        descripcion: "You formally consider yourself intellectually open, flexible, and adaptive (a pluralist free from doctrinal ties). Nonetheless, your actual political choices and your responses to high-tension dilemmas reveal an unyielding, coherent, and highly concentrated anchor in a single quadrant of thought. You operate with the rigidity of a monist but with the sophisticated and humble discourse of a pluralist.",
-        virtud: "Combines the unquestionable operational efficacy of a pure doctrine with the diplomacy and sophistication of pluralist language.",
-        resaca: "Risk of falling into tacit cognitive dissonance or tactical hypocrisy by demanding flexibility from others while failing to apply it to yourself."
+        descripcion: "You formally project an open, empirical, and highly tolerant intellectual discourse, perceiving yourself as a flexible pluralist free from dogmatic handcuffs. Nonetheless, your actual political choices and your scoring on high-tension dilemmas reveal an unyielding, coherent, and highly concentrated anchor in a single concept of liberty (either pure non-interference or state capability coordination). You masterfully deploy the sophisticated language of pluralist flexibility to justify and operationalize an essentially monistic core.",
+        virtud: "Exceptional strategic efficacy, combining the driving force of a unified doctrine with the diplomatic prestige of academic openness.",
+        resaca: "Risk of tacit cognitive dissonance or involuntary epistemological hypocrisy—demanding flexibility, nuance, and concessions from other frameworks while your own hard core remains strictly non-negotiable."
       }
     },
     perfiles_cuadrantes: {
@@ -1132,15 +1132,15 @@ export const TRANSLATIONS = {
     perfiles_concentracion: {
       monocultura: {
         riesgo: "⚠️ Acute Dogmatism",
-        narrativa: "You possess outstanding ideological purity. Your mix is a single-grain conceptual distillate. You display immense clarity and robust conceptual identity. However, your intellectual hangover is tunnel vision: you risk ignoring massive empirical anomalies and remaining helpless in the face of unprecedented crises outside your essential axioms."
+        narrativa: "You possess outstanding ideological purity. Your doctrinal mixture is highly concentrated within a single school or dominant quadrant of thought, granting you exceptional logical consistency and a robust conceptual identity. However, your latent hangover is tunnel vision: a strong propensity for orthodoxy that can breed intellectual sectarianism, political tribalism when facing disagreement, and defensive blindness toward unexpected empirical anomalies that challenge your axioms."
       },
       sintetico: {
         riesgo: "⚖️ Decisional Friction",
-        narrativa: "You have formulated a balanced, synthetic cocktail, blending spirits with pragmatic sensibility. Your virtue is high conceptual adaptability; you weigh costs and trade-offs with academic equanimity. Your potential hangover is overthinking or decision paralysis due to excessive analytical deliberation before taking action."
+        narrativa: "You have formulated a balanced, synthetic cocktail, blending theoretical schools with pragmatic adaptability. Your primary virtue is the capacity to weigh costs, externalities, and trade-offs with academic equanimity and civic balance. Your potential hangover is overthinking or decision paralysis due to excessive analytical deliberation before taking action on inevitable trade-offs."
       },
       disperso: {
         riesgo: "🌪️ Solitude of the Eclectic",
-        narrativa: "Your mixture has extreme entropy; you are a civic taster of all shelves. Your total immunity to dogma grants you sovereign epistemological humility. However, your ideological hangover is political inoperancy or solitude: without a doctrinal anchor, you risk absolute decision paralysis and failing to fit into any organized coalition for collective change."
+        narrativa: "Your mixture displays extreme theoretical dispersion. You are a civic taster of all shelves, completely immune to orthodox dogmas. While this grants you sovereign epistemological humility, your ideological hangover is political inoperancy: without a unified doctrinal anchor, you risk diluting your transformative force and failing to align with any organized coalition for collective change."
       }
     }
   }
