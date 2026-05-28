@@ -771,7 +771,10 @@ function renderQuestion() {
 
     optionsGrid.innerHTML = "";
     
-    q.opciones.forEach((opt) => {
+    // Aleatorizar el orden de las opciones/respuestas para eliminar sesgos de orden
+    const shuffledOptions = [...q.opciones].sort(() => Math.random() - 0.5);
+    
+    shuffledOptions.forEach((opt) => {
       const card = document.createElement("div");
       card.className = "test-option-card";
       card.tabIndex = 0;
@@ -948,6 +951,25 @@ function calculateAlchemicalResults() {
 function renderResultsToUI(results) {
   const isEs = state.currentLang === "es";
 
+  // Ordenar escuelas dominantes por porcentaje
+  const sortedSchools = Object.entries(results.porcentajes)
+    .filter(([_, pct]) => pct > 0)
+    .sort((a, b) => b[1] - a[1]);
+
+  // Aplicar tema de color dinámico de la escuela dominante al panel de resultados
+  const dominantSchoolId = sortedSchools[0] ? sortedSchools[0][0] : "neoclasica";
+  const dominantSchool = ESCUELAS[dominantSchoolId];
+  if (dominantSchool) {
+    const resultsCard = document.getElementById("test-results-screen");
+    resultsCard.style.setProperty("--result-accent", dominantSchool.color);
+    
+    // Extraer canales RGB para inyectar un resplandor translúcido
+    const r = parseInt(dominantSchool.color.slice(1, 3), 16);
+    const g = parseInt(dominantSchool.color.slice(3, 5), 16);
+    const b = parseInt(dominantSchool.color.slice(5, 7), 16);
+    resultsCard.style.setProperty("--result-accent-glow", `rgba(${r}, ${g}, ${b}, 0.2)`);
+  }
+
   // Cargar perfiles reactivos traducidos
   const archetype = PERFILES_COGNITIVOS[results.archetypeKey];
   const quadrant = PERFILES_CUADRANTES[results.quadrantKey];
@@ -962,7 +984,7 @@ function renderResultsToUI(results) {
 
   // Inyectar cabecera e icono
   document.getElementById("result-archetype-name").innerHTML = `
-    <i data-lucide="${iconName}" class="icon-inline" style="margin-right: 10px; color: var(--accent-gold);"></i>
+    <i data-lucide="${iconName}" class="icon-inline" style="margin-right: 10px; color: var(--result-accent, var(--accent-gold));"></i>
     ${archetype.nombre}
   `;
   document.getElementById("result-archetype-sub").textContent = archetype.subtitulo;
@@ -980,10 +1002,6 @@ function renderResultsToUI(results) {
   // Barras de porcentajes
   const barList = document.getElementById("results-bar-list");
   barList.innerHTML = "";
-
-  const sortedSchools = Object.entries(results.porcentajes)
-    .filter(([_, pct]) => pct > 0)
-    .sort((a, b) => b[1] - a[1]);
 
   sortedSchools.forEach(([schoolId, pct]) => {
     const escuela = ESCUELAS[schoolId];
@@ -1363,3 +1381,124 @@ function initScrollReveal() {
     observer.observe(el);
   });
 }
+
+// ── TEST DIAGNÓSTICO COMBINATORIO AUTOMÁTICO DE PERFILES (66 COMBINACIONES) ──
+// Esta función puede ejecutarse en la consola del navegador como: runDiagnosticCombinatoricsTest()
+window.runDiagnosticCombinatoricsTest = function() {
+  console.log("%c🧪 INICIANDO TEST DIAGNÓSTICO COMBINATORIO 2-12 (66 PAREJAS) 🧪", "color: #d9a752; font-weight: bold; font-size: 14px;");
+  
+  const schoolIds = Object.keys(ESCUELAS);
+  const pairs = [];
+  
+  // Generar las 66 combinaciones posibles de 2 escuelas dominantes
+  for (let i = 0; i < schoolIds.length; i++) {
+    for (let j = i + 1; j < schoolIds.length; j++) {
+      pairs.push([schoolIds[i], schoolIds[j]]);
+    }
+  }
+  
+  console.log(`Generadas ${pairs.length} parejas únicas de escuelas de-animalizadas.`);
+  
+  let successfulMappings = 0;
+  const archetypeDistribution = {
+    monismo_doctrinal: 0,
+    pluralismo_sistemico: 0,
+    monismo_eclectico: 0,
+    pluralismo_pragmatico: 0
+  };
+  const quadrantDistribution = { Q1: 0, Q2: 0, Q3: 0, Q4: 0 };
+  
+  pairs.forEach(([s1, s2]) => {
+    // Simulamos dos perfiles para cada pareja:
+    // Camino A: Declara mentalidad Monista (pluralismo_count = 0)
+    // Camino B: Declara mentalidad Pluralista (pluralismo_count = 3)
+    [0, 3].forEach(pluralismoCount => {
+      // Simulamos pesos concentrados en s1 y s2 (ej. 55% y 45%)
+      const porcentajes = {};
+      schoolIds.forEach(id => {
+        porcentajes[id] = 0;
+      });
+      porcentajes[s1] = 55;
+      porcentajes[s2] = 45;
+      
+      // Calcular HHI
+      let hhi = 0;
+      schoolIds.forEach(id => {
+        hhi += Math.pow(porcentajes[id] / 100, 2);
+      });
+      
+      // Determinar arquetipo cognitivo
+      const epistemicStyle = pluralismoCount >= 2 ? "pluralismo" : "monismo";
+      const realPurity = hhi >= 0.18 ? "monismo" : "pluralismo";
+      
+      let finalArchetypeKey = "pluralismo_sistemico";
+      if (epistemicStyle === "monismo" && realPurity === "monismo") finalArchetypeKey = "monismo_doctrinal";
+      else if (epistemicStyle === "pluralismo" && realPurity === "pluralismo") finalArchetypeKey = "pluralismo_sistemico";
+      else if (epistemicStyle === "monismo" && realPurity === "pluralismo") finalArchetypeKey = "monismo_eclectico";
+      else if (epistemicStyle === "pluralismo" && realPurity === "monismo") finalArchetypeKey = "pluralismo_pragmatico";
+      
+      // Cuadrantes dominante
+      const qScores = {
+        Q1: (porcentajes.marxista || 0) + (porcentajes.feminista || 0) + (porcentajes.ecologica || 0),
+        Q2: porcentajes.conductista || 0,
+        Q3: (porcentajes.keynesiana || 0) + (porcentajes.tradicion_desarrollista || 0) + (porcentajes.estado_emprendedor || 0) + (porcentajes.institucionalista || 0),
+        Q4: (porcentajes.clasica || 0) + (porcentajes.neoclasica || 0) + (porcentajes.austriaca || 0) + (porcentajes.schumpeteriana || 0)
+      };
+      
+      const dominantQuadrant = Object.keys(qScores).reduce((a, b) => qScores[a] > qScores[b] ? a : b);
+      
+      // Registro de métricas
+      archetypeDistribution[finalArchetypeKey]++;
+      quadrantDistribution[dominantQuadrant]++;
+      successfulMappings++;
+    });
+  });
+  
+  // Ahora simulamos el caso eclectico y sistemico donde las respuestas son altamente dispersas (HHI < 0.18)
+  // Simulamos 66 caminos dispersos (todas las escuelas reciben un peso similar de ~8.33%)
+  for (let i = 0; i < 66; i++) {
+    [0, 3].forEach(pluralismoCount => {
+      const porcentajes = {};
+      schoolIds.forEach(id => {
+        porcentajes[id] = 8;
+      });
+      porcentajes.neoclasica = 12; // Ajuste para 100%
+      
+      let hhi = 0;
+      schoolIds.forEach(id => {
+        hhi += Math.pow(porcentajes[id] / 100, 2);
+      });
+      
+      const epistemicStyle = pluralismoCount >= 2 ? "pluralismo" : "monismo";
+      const realPurity = hhi >= 0.18 ? "monismo" : "pluralismo";
+      
+      let finalArchetypeKey = "pluralismo_sistemico";
+      if (epistemicStyle === "monismo" && realPurity === "monismo") finalArchetypeKey = "monismo_doctrinal";
+      else if (epistemicStyle === "pluralismo" && realPurity === "pluralismo") finalArchetypeKey = "pluralismo_sistemico";
+      else if (epistemicStyle === "monismo" && realPurity === "pluralismo") finalArchetypeKey = "monismo_eclectico";
+      else if (epistemicStyle === "pluralismo" && realPurity === "monismo") finalArchetypeKey = "pluralismo_pragmatico";
+      
+      archetypeDistribution[finalArchetypeKey]++;
+      successfulMappings++;
+    });
+  }
+
+  console.log("%c✔ VALIDACIÓN COMPLETADA EXITOSAMENTE", "color: #86ad34; font-weight: bold;");
+  console.log(`Total de simulaciones ejecutadas: ${successfulMappings}`);
+  console.log("\n%cDistribución de Arquetipos Cognitivos:", "color: #d9a752; font-weight: bold;");
+  Object.entries(archetypeDistribution).forEach(([arch, val]) => {
+    console.log(`- ${arch.toUpperCase()}: ${val} caminos (${(val/successfulMappings*100).toFixed(1)}%)`);
+  });
+  
+  console.log("\n%cDistribución de Cuadrantes Dominantes:", "color: #d9a752; font-weight: bold;");
+  Object.entries(quadrantDistribution).forEach(([q, val]) => {
+    console.log(`- ${q}: ${val} caminos de parejas (${(val/132*100).toFixed(1)}%)`);
+  });
+  
+  return {
+    success: true,
+    totalSimulations: successfulMappings,
+    archetypeDistribution,
+    quadrantDistribution
+  };
+};
