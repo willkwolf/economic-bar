@@ -272,67 +272,75 @@
 
         <!-- PANTALLA DE RESULTADOS DEL DIAGNÓSTICO (Hidden por defecto) -->
         <div class="test-results-card hidden" id="test-results-screen">
-          <div class="results-layout">
-            
-            <!-- Izquierda: Botella Dinámica, Archetype y Gráfico de Radar -->
-            <div class="results-visuals">
-              <!-- Botella Personalizada -->
-              <div class="personalized-bottle-wrapper">
-                <div class="custom-bottle" role="img" aria-label="Tu botella de elixir ideológico personalizada">
-                  <div class="custom-bottle-neck"></div>
-                  <div class="custom-bottle-cork"></div>
-                  <!-- Capas de líquido coloreado se inyectan aquí con JS -->
-                  <div class="custom-bottle-liquid" id="bottle-liquid-container"></div>
-                  <div class="custom-bottle-reflection" aria-hidden="true"></div>
-                </div>
-                <span class="bottle-label-caption" data-i18n="resultsBottleCaption">TU FÓRMULA DE RAZÓN</span>
-              </div>
+          
+          <!-- Bloque 1: Cabecera & Arquetipo (Majestuoso y Centrado) -->
+          <div class="results-header-block">
+            <span class="dossier-tag" data-i18n="resultsTag">ACTA DE ALCOHOLEMIA POLÍTICA</span>
+            <h3 class="results-archetype-name" id="result-archetype-name">Pluralismo Sistémico</h3>
+            <span class="results-archetype-sub" id="result-archetype-sub">La Adaptabilidad de la Complejidad</span>
+          </div>
 
-              <!-- Gráfico de Radar en Canvas -->
-              <div class="radar-chart-container">
-                <canvas id="radar-canvas" width="240" height="240" aria-label="Gráfico de radar de tus 4 ejes económicos" role="img"></canvas>
+          <!-- Bloque 2: Fórmulas Visuales (Botella y Radar lado a lado) -->
+          <div class="results-visuals-block">
+            <!-- Botella Personalizada con Readout de Hover interactivo -->
+            <div class="personalized-bottle-wrapper">
+              <div class="custom-bottle" role="img" aria-label="Tu botella de elixir ideológico personalizada">
+                <div class="custom-bottle-neck"></div>
+                <div class="custom-bottle-cork"></div>
+                <!-- Capas de líquido coloreado se inyectan aquí con JS -->
+                <div class="custom-bottle-liquid" id="bottle-liquid-container"></div>
+                <div class="custom-bottle-reflection" aria-hidden="true"></div>
               </div>
+              <span class="bottle-label-caption" data-i18n="resultsBottleCaption">TU FÓRMULA DE RAZÓN</span>
+              <!-- Indicador de hover interactivo de ingredientes -->
+              <div class="bottle-hover-readout" id="bottle-hover-readout">&nbsp;</div>
             </div>
 
-            <!-- Derecha: Diagnóstico Narrativo y Estadísticas -->
-            <div class="results-dossier" role="region" aria-label="Narrativa de Resultados">
-              <span class="dossier-tag" data-i18n="resultsTag">ACTA DE ALCOHOLEMIA POLÍTICA</span>
-              <h3 class="results-archetype-name" id="result-archetype-name">Pluralismo Sistémico</h3>
-              <span class="results-archetype-sub" id="result-archetype-sub">La Adaptabilidad de la Complejidad</span>
-              
+            <!-- Gráfico de Radar de gran tamaño sin recortes -->
+            <div class="radar-chart-container">
+              <canvas id="radar-canvas" width="280" height="280" aria-label="Gráfico de radar de tus 4 ejes económicos" role="img"></canvas>
+            </div>
+          </div>
+
+          <!-- Bloque 3: Composición Detallada (Rejilla de Barras con espacio) -->
+          <div class="results-composition-block">
+            <span class="results-block-label"><i data-lucide="bar-chart-2" aria-hidden="true"></i> COMPOSICIÓN MOLECULAR (PORCENTAJES)</span>
+            <div class="results-ingredient-bars" id="results-bar-list" role="list">
+              <!-- Llenado con JS -->
+            </div>
+          </div>
+
+          <!-- Bloque 4: Fórmulas Teóricas y Diagnósticos Amplios -->
+          <div class="results-narrative-block">
+            <div class="results-text-desc-wrapper">
               <p class="results-archetype-desc" id="result-archetype-desc">
                 Tu mente opera con el dinamismo y la flexibilidad del pluralismo. Sabes que la realidad social es fragmentaria e interdependiente.
               </p>
-
-              <div class="results-stats-block">
-                <span class="results-block-label"><i data-lucide="bar-chart-2" aria-hidden="true"></i> COMPOSICIÓN MOLECULAR (PORCENTAJES)</span>
-                <div class="results-ingredient-bars" id="results-bar-list" role="list">
-                  <!-- Llenado con JS -->
-                </div>
-              </div>
-
-              <div class="results-stats-block">
+            </div>
+            
+            <div class="results-cards-grid">
+              <div class="results-info-card">
                 <span class="results-block-label" data-i18n="resultsVirtueTitle"><i data-lucide="award" aria-hidden="true"></i> VIRTUD INTELECTUAL</span>
                 <p class="results-text" id="result-virtue"></p>
               </div>
 
-              <div class="results-stats-block">
-                <span class="results-block-label color-alert" id="result-hangover-title"><i data-lucide="alert-octagon" aria-hidden="true"></i> RIESGO DE RESACA: DOGMATISMO AGUDO</span>
+              <div class="results-info-card">
+                <span class="results-block-label color-alert" id="result-hangover-title"><i data-lucide="alert-octagon" aria-hidden="true"></i> RIESGO DE RESACA</span>
                 <p class="results-text" id="result-hangover-desc"></p>
               </div>
-
-              <div class="results-actions">
-                <button class="btn btn-primary" id="btn-export-card" data-i18n="resultsBtnExport">
-                  <i data-lucide="download" aria-hidden="true"></i> Descargar Tarjeta de Alcoholemia
-                </button>
-                <button class="btn btn-ghost" id="btn-restart-test" data-i18n="resultsBtnRestart">
-                  <i data-lucide="refresh-cw" aria-hidden="true"></i> Volver a Destilar
-                </button>
-              </div>
-
             </div>
-
           </div>
+
+          <!-- Bloque 5: Acciones (Botones Amplios y bien distribuidos) -->
+          <div class="results-actions-block">
+            <button class="btn btn-primary" id="btn-export-card" data-i18n="resultsBtnExport">
+              <i data-lucide="download" aria-hidden="true"></i> Descargar Tarjeta de Alcoholemia
+            </button>
+            <button class="btn btn-ghost" id="btn-restart-test" data-i18n="resultsBtnRestart">
+              <i data-lucide="refresh-cw" aria-hidden="true"></i> Volver a Destilar
+            </button>
+          </div>
+
         </div>
 
       </div>

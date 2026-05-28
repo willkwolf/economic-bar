@@ -1527,26 +1527,28 @@ section {
 
 /* ── PANTALLA DE RESULTADOS Y DIAGNÓSTICO (Tufte Glass Dashboard) ──────────── */
 .test-results-card {
-  padding: 50px;
+  padding: 45px;
 }
 
-.results-layout {
+/* Nueva Estructura Horizontal de Resultados */
+.results-header-block {
+  text-align: center;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 25px;
+  margin-bottom: 35px;
+}
+
+.results-visuals-block {
   display: grid;
-  grid-template-columns: 460px 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 3.5rem;
-  align-items: start;
-}
-
-.results-visuals {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  gap: 2.5rem;
-  background: rgba(255, 255, 255, 0.01);
+  justify-items: center;
+  background: rgba(255, 255, 255, 0.015);
   border: 1px solid var(--border-glass);
-  padding: 30px 20px;
+  padding: 40px;
   border-radius: 6px;
+  margin-bottom: 35px;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -1559,8 +1561,8 @@ section {
 }
 
 .custom-bottle {
-  width: 110px;
-  height: 220px;
+  width: 120px;
+  height: 240px;
   border: 2.5px solid rgba(255, 255, 255, 0.18);
   border-radius: 12px 12px 28px 28px;
   position: relative;
@@ -1570,7 +1572,7 @@ section {
 }
 
 .custom-bottle-neck {
-  width: 30px;
+  width: 32px;
   height: 45px;
   border: 2.5px solid rgba(255, 255, 255, 0.18);
   border-bottom: none;
@@ -1582,7 +1584,7 @@ section {
 }
 
 .custom-bottle-cork {
-  width: 34px;
+  width: 36px;
   height: 18px;
   background: #5c4332;
   border-radius: 3px;
@@ -1603,18 +1605,20 @@ section {
   pointer-events: none;
 }
 
+/* El Contenedor de Capas de Líquido */
 .custom-bottle-liquid {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 75%;
+  height: 80%; /* La llenura de la botella */
   display: flex;
   flex-direction: column-reverse;
   overflow: hidden;
   border-radius: 0 0 24px 24px;
 }
 
+/* Capas de líquido táctiles e interactivas */
 .liquid-layer {
   width: 100%;
   background-color: var(--layer-color);
@@ -1622,6 +1626,7 @@ section {
   position: relative;
   transition: height 1.5s var(--ease-expo);
   box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 }
 
 .liquid-layer::after {
@@ -1636,6 +1641,11 @@ section {
   animation: wave 3s linear infinite;
 }
 
+.liquid-layer:hover {
+  filter: brightness(1.25);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3), 0 0 15px var(--layer-color);
+}
+
 .bottle-label-caption {
   font-family: var(--font-mono);
   font-size: 0.6rem;
@@ -1644,14 +1654,31 @@ section {
   margin-top: 15px;
 }
 
-/* Contenedor del Radar */
+/* Indicador de hover interactivo para ingredientes de botella */
+.bottle-hover-readout {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-gold);
+  margin-top: 12px;
+  height: 18px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+/* Contenedor del Radar de gran tamaño sin recortes */
 .radar-chart-container {
-  width: 240px;
-  height: 240px;
+  width: 280px;
+  height: 280px;
   border: 1px solid var(--border-subtle);
   border-radius: 50%;
-  padding: 10px;
-  background-color: rgba(6, 6, 6, 0.3);
+  padding: 12px;
+  background-color: rgba(6, 6, 6, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #radar-canvas {
@@ -1660,10 +1687,13 @@ section {
   display: block;
 }
 
-/* Dossier de Resultados */
-.results-dossier {
-  border-left: 1px solid var(--border-glass);
-  padding-left: 3.5rem;
+/* Bloque de Composición Detallada (Barras) */
+.results-composition-block {
+  margin-bottom: 35px;
+  background: rgba(255, 255, 255, 0.005);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  padding: 30px;
+  border-radius: 4px;
 }
 
 .results-archetype-name {
@@ -1672,6 +1702,7 @@ section {
   color: var(--text-primary);
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .results-archetype-sub {
@@ -1680,19 +1711,47 @@ section {
   font-style: italic;
   color: var(--accent-gold);
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+}
+
+/* Bloque de Fórmulas y Diagnósticos Amplios */
+.results-narrative-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 40px;
+}
+
+.results-text-desc-wrapper {
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.65;
+  color: var(--text-primary);
+  text-align: justify;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 25px;
 }
 
 .results-archetype-desc {
   font-size: 0.95rem;
   line-height: 1.55;
-  margin-bottom: 30px;
-  word-break: break-word;
-  hyphens: auto;
+}
+
+.results-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.results-info-card {
+  background-color: rgba(6, 6, 6, 0.3);
+  border: 1px solid var(--border-glass);
+  padding: 25px 30px;
+  border-radius: 4px;
+  height: 100%;
 }
 
 .results-stats-block {
-  margin-bottom: 30px;
+  margin-bottom: 0px; /* Reset */
 }
 
 .results-block-label {
@@ -1762,12 +1821,13 @@ section {
   word-break: break-word;
 }
 
-.results-actions {
+/* Distribución de Botones Amplia */
+.results-actions-block {
   display: flex;
-  flex-wrap: wrap; /* Defensive warp */
-  gap: 1rem;
+  justify-content: center;
+  gap: 1.5rem;
   margin-top: 40px;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid var(--border-glass);
   padding-top: 30px;
 }
 

@@ -1015,6 +1015,12 @@ function renderResultsToUI(results) {
   const bottleLiquid = document.getElementById("bottle-liquid-container");
   bottleLiquid.innerHTML = "";
 
+  const hoverReadout = document.getElementById("bottle-hover-readout");
+  if (hoverReadout) {
+    hoverReadout.style.color = "var(--accent-gold)";
+    hoverReadout.textContent = isEs ? "Posa el cursor para inspeccionar" : "Hover over layers to inspect";
+  }
+
   const topIngredients = sortedSchools.slice(0, 4);
   const totalVolumeInBottle = topIngredients.reduce((acc, curr) => acc + curr[1], 0);
 
@@ -1028,6 +1034,21 @@ function renderResultsToUI(results) {
     layer.className = "liquid-layer";
     layer.style.setProperty("--layer-color", escuela.color);
     layer.style.setProperty("--layer-height", "0%");
+    layer.setAttribute("title", `${escuela.nombre}: ${pct}%`);
+
+    // Eventos de hover interactivos para inspeccionar ingredientes de la botella
+    layer.addEventListener("mouseenter", () => {
+      if (hoverReadout) {
+        hoverReadout.style.color = escuela.color;
+        hoverReadout.textContent = `${escuela.nombre}: ${pct}%`;
+      }
+    });
+    layer.addEventListener("mouseleave", () => {
+      if (hoverReadout) {
+        hoverReadout.style.color = "var(--accent-gold)";
+        hoverReadout.textContent = isEs ? "Posa el cursor para inspeccionar" : "Hover over layers to inspect";
+      }
+    });
 
     bottleLiquid.appendChild(layer);
 
@@ -1069,15 +1090,15 @@ function renderRadarChart(qScores) {
   if (!canvas) return;
 
   // Setup de Canvases en Alta Resolución DPR
-  const logicalWidth = 240;
-  const logicalHeight = 240;
+  const logicalWidth = 280;
+  const logicalHeight = 280;
   const ctx = setupCanvasDPR(canvas, logicalWidth, logicalHeight);
 
   const cx = logicalWidth / 2;
   const cy = logicalHeight / 2;
   
-  // Safety Margin defensivo de 35px para evitar desbordamientos tipográficos en HD
-  const radius = Math.min(logicalWidth, logicalHeight) / 2 - 35; 
+  // Safety Margin defensivo de 45px para evitar desbordamientos tipográficos en HD
+  const radius = Math.min(logicalWidth, logicalHeight) / 2 - 45; 
 
   const isEs = state.currentLang === "es";
 
