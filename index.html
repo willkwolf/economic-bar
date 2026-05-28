@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Simulador cognitivo e interactivo de coctelería económica. Analiza tu arquitectura mental entre Zorro o Erizo y destila tu mezcla ideológica en un speakeasy de lujo conceptual.">
+  <meta name="description" content="Simulador cognitivo e interactivo de coctelería económica. Analiza tu arquitectura mental entre Monismo o Pluralismo y destila tu mezcla ideológica en un speakeasy de lujo conceptual.">
   
   <title>Bar de Escuelas Económicas | Elixires de la Razón</title>
   
@@ -21,37 +21,46 @@
 <body>
 
   <!-- Luces de atmósfera Speakeasy (Efecto Laboratorio Alquímico) -->
-  <div class="ambient-glow shadow-left"></div>
-  <div class="ambient-glow shadow-right"></div>
-  <div class="ambient-glow center-light"></div>
+  <div class="ambient-glow shadow-left" aria-hidden="true"></div>
+  <div class="ambient-glow shadow-right" aria-hidden="true"></div>
+  <div class="ambient-glow center-light" aria-hidden="true"></div>
 
   <!-- NAVEGACIÓN COMPONENTIZADA (Cristal Esmerilado) -->
-  <nav class="nav-bar">
+  <nav class="nav-bar" role="navigation" aria-label="Navegación Principal">
     <div class="nav-container">
-      <a href="#hero" class="nav-logo">
-        <span class="logo-icon">🍸</span>
-        <span class="logo-text">ELIXIRES <em>de la</em> RAZÓN</span>
+      <a href="#hero" class="nav-logo" aria-label="Ir al inicio de Elixires de la Razón">
+        <span class="logo-icon" aria-hidden="true">🍸</span>
+        <span class="logo-text" data-i18n="navLogo">ELIXIRES <em>de la</em> RAZÓN</span>
       </a>
-      <div class="nav-links">
-        <a href="#hero" class="nav-link">El Estante</a>
-        <a href="#menu" class="nav-link">La Carta</a>
-        <a href="#cabinet" class="nav-link">Boticario</a>
-        <a href="#test" class="nav-link btn-test-link">Analizar Alcoholemia</a>
+      
+      <div class="nav-links" id="nav-menu">
+        <a href="#hero" class="nav-link" data-i18n="navShelf">El Estante</a>
+        <a href="#menu" class="nav-link" data-i18n="navMenu">La Carta</a>
+        <a href="#cabinet" class="nav-link" data-i18n="navCabinet">Boticario</a>
+        <a href="#test" class="nav-link btn-test-link" data-i18n="navTestLink">Analizar Alcoholemia</a>
       </div>
-      <button class="menu-toggle" aria-label="Abrir menú" id="mobile-menu-btn">
+
+      <!-- Selector de Idiomas i18n Integrado -->
+      <div class="lang-switcher" role="group" aria-label="Selector de Idioma / Language Selector">
+        <button class="lang-btn active" data-lang="es" aria-label="Cambiar idioma a Español" aria-pressed="true">ES</button>
+        <span class="lang-divider" aria-hidden="true">|</span>
+        <button class="lang-btn" data-lang="en" aria-label="Switch language to English" aria-pressed="false">EN</button>
+      </div>
+
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu" id="mobile-menu-btn">
         <i data-lucide="menu"></i>
       </button>
     </div>
   </nav>
 
   <!-- HERO SECTION: EL ALCOVAR ALQUÍMICO -->
-  <section id="hero" class="hero-section">
+  <section id="hero" class="hero-section" role="region" aria-label="Sección de Inicio">
     <div class="hero-container">
       <div class="hero-header reveal">
-        <span class="hero-tag">COCTELERÍA DOCTRINAL & SIMULADOR COGNITIVO</span>
-        <h1 class="hero-title">BAR DE ESCUELAS ECONÓMICAS</h1>
-        <p class="hero-subtitle">“Toda teoría económica es un destilado parcial de la realidad. Las ideologías también intoxican.”</p>
-        <p class="hero-intro">
+        <span class="hero-tag" data-i18n="heroTag">COCTELERÍA DOCTRINAL & SIMULADOR COGNITIVO</span>
+        <h1 class="hero-title" data-i18n="heroTitle">BAR DE ESCUELAS ECONÓMICAS</h1>
+        <p class="hero-subtitle" data-i18n="heroSubtitle">“Toda teoría económica es un destilado parcial de la realidad. Las ideologías también intoxican.”</p>
+        <p class="hero-intro" data-i18n="heroIntro">
           Explora la estantería del barman. Posa tu cursor sobre cada frasco de boticario para analizar sus notas de cata epistemológicas, graduación alcohólica (ABV) y efectos colaterales de intoxicación sistemática.
         </p>
       </div>
@@ -59,47 +68,46 @@
       <!-- ESTANTERÍA VIRTUAL (12 Botellas de Boticario) -->
       <div class="shelf-wrapper reveal">
         <div class="shelf-wood">
-          <div class="bottles-grid" id="bottles-shelf">
-            <!-- Renderizado dinámicamente mediante JS en app.js -->
-            <div class="shelf-loading">Cargando destilados de la razón...</div>
+          <div class="bottles-grid" id="bottles-shelf" role="list" aria-label="Estante de botellas económicas">
+            <div class="shelf-loading" data-i18n="shelfLoading">Cargando destilados de la razón...</div>
           </div>
-          <div class="shelf-board-glow"></div>
+          <div class="shelf-board-glow" aria-hidden="true"></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SECCIÓN 2: LA CARTA DE CÓCTELES PREMIUM -->
-  <section id="menu" class="menu-section">
+  <section id="menu" class="menu-section" role="region" aria-label="La Carta de Mezclas">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-tag">NUESTRA COCTELERÍA DOCTRINAL</span>
-        <h2 class="section-title">El Menú de Mezclas Recomendadas</h2>
-        <p class="section-desc">
+        <span class="section-tag" data-i18n="menuTag">NUESTRA COCTELERÍA DOCTRINAL</span>
+        <h2 class="section-title" data-i18n="menuTitle">El Menú de Mezclas Recomendadas</h2>
+        <p class="section-desc" data-i18n="menuDesc">
           En lugar de consumir licores puros, degusta nuestras mezclas diseñadas con precisión de proporciones para responder a tensiones sistémicas específicas del tejido social.
         </p>
       </div>
 
       <!-- Grid de Cócteles Doctrinales -->
-      <div class="cocktails-grid reveal" id="cocktails-grid">
+      <div class="cocktails-grid reveal" id="cocktails-grid" role="list" aria-label="Lista de cócteles doctrinales">
         <!-- Renderizado dinámicamente mediante JS -->
       </div>
     </div>
 
     <!-- CAJÓN DE MEZCLADO LÍQUIDO (Drawer Lateral Inmersivo) -->
-    <div class="mixing-drawer" id="mixing-drawer">
-      <div class="drawer-overlay" id="drawer-close-overlay"></div>
+    <div class="mixing-drawer" id="mixing-drawer" role="dialog" aria-modal="true" aria-labelledby="mix-title" aria-hidden="true">
+      <div class="drawer-overlay" id="drawer-close-overlay" tabindex="-1"></div>
       <div class="drawer-content">
         <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Cerrar mezclador">
           <i data-lucide="x"></i>
         </button>
         
-        <div class="drawer-scrollable">
+        <div class="drawer-scrollable" tabindex="0">
           <div class="mixing-showcase">
             <!-- Vaso de cristal con Canvas de física líquida -->
-            <div class="glass-container">
+            <div class="glass-container" aria-label="Vaso mezclando cóctel" role="img">
               <canvas id="liquid-canvas" width="260" height="340"></canvas>
-              <div class="glass-reflection"></div>
+              <div class="glass-reflection" aria-hidden="true"></div>
             </div>
             <h3 class="mixing-cocktail-name" id="mix-title">Silicon Valley Sour</h3>
             <span class="mixing-cocktail-intensity" id="mix-intensity">Fuerte (Especialidad)</span>
@@ -107,14 +115,14 @@
 
           <div class="mixing-details">
             <div class="mix-block">
-              <span class="mix-block-label"><i data-lucide="sliders"></i> FÓRMULA QUÍMICA (INGREDIENTES)</span>
-              <div class="recipe-list" id="mix-ingredients">
+              <span class="mix-block-label" data-i18n="recipeLabelFormula"><i data-lucide="sliders" aria-hidden="true"></i> FÓRMULA QUÍMICA (INGREDIENTES)</span>
+              <div class="recipe-list" id="mix-ingredients" role="list">
                 <!-- Se llena con JS -->
               </div>
             </div>
 
             <div class="mix-block">
-              <span class="mix-block-label"><i data-lucide="trending-up"></i> VECTORES DE FUERZA</span>
+              <span class="mix-block-label" data-i18n="recipeLabelVectors"><i data-lucide="trending-up" aria-hidden="true"></i> VECTORES DE FUERZA</span>
               <div class="vector-readout">
                 <span class="vector-tag" id="mix-vector-x">Estado Fuerte</span>
                 <span class="vector-tag" id="mix-vector-y">Equidad</span>
@@ -122,12 +130,12 @@
             </div>
 
             <div class="mix-block">
-              <span class="mix-block-label"><i data-lucide="compass"></i> NOTAS DE CATA DEL BARMAN</span>
+              <span class="mix-block-label" data-i18n="recipeLabelNotes"><i data-lucide="compass" aria-hidden="true"></i> NOTAS DE CATA DEL BARMAN</span>
               <p class="mix-text-desc" id="mix-notes"></p>
             </div>
 
             <div class="mix-block">
-              <span class="mix-block-label color-alert"><i data-lucide="shield-alert"></i> RIESGOS SISTÉMICOS ASOCIADOS</span>
+              <span class="mix-block-label color-alert" data-i18n="recipeLabelRisks"><i data-lucide="shield-alert" aria-hidden="true"></i> RIESGOS SISTÉMICOS ASOCIADOS</span>
               <p class="mix-text-desc" id="mix-risks"></p>
             </div>
           </div>
@@ -137,33 +145,33 @@
   </section>
 
   <!-- SECCIÓN 3: EL GABINETE DE BOTICARIO (PROBLEMAS Y REMEDIOS) -->
-  <section id="cabinet" class="cabinet-section">
+  <section id="cabinet" class="cabinet-section" role="region" aria-label="Gabinete de Boticario">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-tag">EL BOTICARIO COGNITIVO</span>
-        <h2 class="section-title">Gabinete de Boticario: Crisis y Diagnósticos</h2>
-        <p class="section-desc">
+        <span class="section-tag" data-i18n="cabinetTag">EL GABINETE DE PROBLEMAS</span>
+        <h2 class="section-title" data-i18n="cabinetTitle">Gabinete de Boticario: Crisis y Diagnósticos</h2>
+        <p class="section-desc" data-i18n="cabinetDesc">
           Abre los cajones del mueble de boticario antiguo para extraer los expedientes de crisis reales. Analiza y compara las prescripciones de diferentes escuelas y sus efectos secundarios.
         </p>
       </div>
 
       <div class="cabinet-layout reveal">
         <!-- Izquierda: Mueble de Cajonera Madera 3D -->
-        <div class="apothecary-chest" id="apothecary-chest">
+        <div class="apothecary-chest" id="apothecary-chest" role="tablist" aria-label="Cajonera del boticario" aria-orientation="vertical">
           <!-- Renderizado dinámicamente mediante JS -->
         </div>
 
         <!-- Derecha: El Pergamino del Expediente Abierto -->
-        <div class="dossier-scroll" id="dossier-scroll">
+        <div class="dossier-scroll" id="dossier-scroll" role="tabpanel" aria-label="Expediente seleccionado">
           <div class="dossier-empty-state" id="dossier-empty">
-            <span class="dossier-feather">🪶</span>
-            <h3>Selecciona un Cajón del Gabinete</h3>
-            <p>Abre uno de los compartimientos de boticario para extraer el pergamino de diagnóstico y comparar las recetas doctrinales.</p>
+            <span class="dossier-feather" data-i18n="dossierEmptyFeather" aria-hidden="true">🪶</span>
+            <h3 data-i18n="dossierEmptyTitle">Selecciona un Cajón del Gabinete</h3>
+            <p data-i18n="dossierEmptyText">Abre uno de los compartimientos de boticario para extraer el pergamino de diagnóstico y comparar las recetas doctrinales.</p>
           </div>
           
           <div class="dossier-sheet hidden" id="dossier-sheet">
             <div class="dossier-header">
-              <span class="dossier-number">EXPEDIENTE Nº 04-A</span>
+              <span class="dossier-number" data-i18n="dossierExpediente">EXPEDIENTE Nº 04-A</span>
               <h3 class="dossier-title" id="dossier-title">gentrificación y vivienda</h3>
               <p class="dossier-question" id="dossier-question">¿Cómo estabilizar el valor adquisitivo ante una escalada abrupta de precios?</p>
             </div>
@@ -178,26 +186,27 @@
   </section>
 
   <!-- SECCIÓN 4: TEST DE ALCOHOLEMIA POLÍTICA -->
-  <section id="test" class="test-section">
+  <section id="test" class="test-section" role="region" aria-label="Test Diagnóstico de Alcoholemia">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-tag">DIAGNÓSTICO COGNITIVO MENTAL</span>
-        <h2 class="section-title">Test de Alcoholemia Política</h2>
-        <p class="section-desc">
-          No es un test convencional de izquierda o derecha. Este diagnóstico analiza la arquitectura y rigidez de tus marcos conceptuales (Zorro o Erizo) y destila la proporción exacta de tus ingredientes intelectuales.
+        <span class="section-tag" data-i18n="testTag">DIAGNÓSTICO COGNITIVO MENTAL</span>
+        <h2 class="section-title" data-i18n="testTitle">Test de Alcoholemia Política</h2>
+        <p class="section-desc" data-i18n="testDesc">
+          No es un test convencional de izquierda o derecha. Este diagnóstico analiza la arquitectura y rigidez de tus marcos cognitivos (Monismo o Pluralismo) y destila la proporción exacta de tus ingredientes intelectuales.
         </p>
       </div>
 
       <div class="test-card-wrapper reveal" id="test-card-wrapper">
         <!-- Pantalla de Inicio del Test -->
         <div class="test-intro-card" id="test-start-screen">
-          <div class="test-intro-badge">🦊 vs 🦔</div>
-          <h3>¿Qué tan puras son tus convicciones?</h3>
-          <p>
+          <!-- Reemplazo de emojis por icono Lucide académico de balanza/libro -->
+          <div class="test-intro-badge" aria-hidden="true"><i data-lucide="scale"></i></div>
+          <h3 data-i18n="testIntroTitle">¿Qué tan puras son tus convicciones?</h3>
+          <p data-i18n="testIntroText">
             Las personas operamos mezclas con diferentes grados de coherencia, dependencia y contradicción. Responde con honestidad intelectual a 12 dilemas teóricos y de alta tensión práctica para destilar tu botella personalizada y evaluar tu propensión a la resaca ideológica.
           </p>
-          <button class="btn btn-primary" id="start-test-btn">
-            <i data-lucide="play-circle"></i> Iniciar Destilación Mental
+          <button class="btn btn-primary" id="start-test-btn" data-i18n="testIntroBtn">
+            <i data-lucide="play-circle" aria-hidden="true"></i> Iniciar Destilación Mental
           </button>
         </div>
 
@@ -206,9 +215,9 @@
           <div class="test-progress-bar-wrapper">
             <div class="test-progress-header">
               <span class="test-step-label" id="test-step-label">PREGUNTA 1 DE 12</span>
-              <span class="test-phase-label" id="test-phase-label">FASE 1: ARQUITECTURA EPISTÉMICA</span>
+              <span class="test-phase-label" id="test-phase-label">FASE 1: ARQUITECTURA COGNITIVA</span>
             </div>
-            <div class="test-progress-track">
+            <div class="test-progress-track" aria-hidden="true">
               <div class="test-progress-fill" id="test-progress-fill" style="width: 8.33%;"></div>
             </div>
           </div>
@@ -216,7 +225,7 @@
           <h3 class="test-question-text" id="test-question-text">¿Cómo interpretas las grandes crisis sociales y económicas de la historia?</h3>
 
           <!-- Contenedor para Opciones Tipo Tarjeta (Fase 1 y 2) -->
-          <div class="test-options-container" id="test-options-grid">
+          <div class="test-options-container" id="test-options-grid" role="group" aria-label="Opciones de respuesta">
             <!-- Generado dinámicamente -->
           </div>
 
@@ -235,29 +244,30 @@
             
             <div class="slider-control-group">
               <div class="slider-indicators">
-                <span>← Prioridad Izquierda</span>
+                <span data-i18n="sliderLeftHint">← Prioridad Izquierda</span>
                 <span class="slider-value-display" id="slider-value-readout">Equilibrio Central (50%)</span>
-                <span>Prioridad Derecha →</span>
+                <span data-i18n="sliderRightHint">Prioridad Derecha →</span>
               </div>
-              <input type="range" min="0" max="100" value="50" class="luxury-range-slider" id="luxury-slider">
+              <label for="luxury-slider" class="sr-only">Nivel de dilema de trade-off</label>
+              <input type="range" id="luxury-slider" min="0" max="100" value="50" class="luxury-range-slider">
             </div>
 
-            <button class="btn btn-primary btn-block" id="slider-next-btn">
-              Confirmar Peso del Dilema <i data-lucide="chevron-right"></i>
+            <button class="btn btn-primary btn-block" id="slider-next-btn" data-i18n="sliderConfirmBtn">
+              Confirmar Peso del Dilema <i data-lucide="chevron-right" aria-hidden="true"></i>
             </button>
           </div>
         </div>
 
         <!-- Pantalla de Carga de Resultados (Hidden por defecto) -->
         <div class="test-loading-card hidden" id="test-loading-screen">
-          <div class="alchemical-spinner">
+          <div class="alchemical-spinner" aria-hidden="true">
             <div class="spinner-ring ring-outer"></div>
             <div class="spinner-ring ring-middle"></div>
             <div class="spinner-ring ring-inner"></div>
             <div class="spinner-fluid"></div>
           </div>
-          <h3>Destilando tu Perfil Cognitivo...</h3>
-          <p>Midiendo el índice de Herfindahl-Hirschman (HHI), equilibrando vectores de fuerza y filtrando las resacas ideológicas latentes en tus respuestas...</p>
+          <h3 data-i18n="testLoadingTitle">Destilando tu Perfil Cognitivo...</h3>
+          <p data-i18n="testLoadingText">Midiendo el índice de Herfindahl-Hirschman (HHI), equilibrando vectores de fuerza y filtrando las resacas ideológicas latentes en tus respuestas...</p>
         </div>
 
         <!-- PANTALLA DE RESULTADOS DEL DIAGNÓSTICO (Hidden por defecto) -->
@@ -268,55 +278,55 @@
             <div class="results-visuals">
               <!-- Botella Personalizada -->
               <div class="personalized-bottle-wrapper">
-                <div class="custom-bottle">
+                <div class="custom-bottle" role="img" aria-label="Tu botella de elixir ideológico personalizada">
                   <div class="custom-bottle-neck"></div>
                   <div class="custom-bottle-cork"></div>
                   <!-- Capas de líquido coloreado se inyectan aquí con JS -->
                   <div class="custom-bottle-liquid" id="bottle-liquid-container"></div>
-                  <div class="custom-bottle-reflection"></div>
+                  <div class="custom-bottle-reflection" aria-hidden="true"></div>
                 </div>
-                <span class="bottle-label-caption">TU FÓRMULA DE RAZÓN</span>
+                <span class="bottle-label-caption" data-i18n="resultsBottleCaption">TU FÓRMULA DE RAZÓN</span>
               </div>
 
               <!-- Gráfico de Radar en Canvas -->
               <div class="radar-chart-container">
-                <canvas id="radar-canvas" width="240" height="240"></canvas>
+                <canvas id="radar-canvas" width="240" height="240" aria-label="Gráfico de radar de tus 4 ejes económicos" role="img"></canvas>
               </div>
             </div>
 
             <!-- Derecha: Diagnóstico Narrativo y Estadísticas -->
-            <div class="results-dossier">
-              <span class="dossier-tag">ACTA DE ALCOHOLEMIA POLÍTICA</span>
-              <h3 class="results-archetype-name" id="result-archetype-name">Zorro Sistémico</h3>
-              <span class="results-archetype-sub" id="result-archetype-sub">La Humildad Adaptativa de la Complejidad</span>
+            <div class="results-dossier" role="region" aria-label="Narrativa de Resultados">
+              <span class="dossier-tag" data-i18n="resultsTag">ACTA DE ALCOHOLEMIA POLÍTICA</span>
+              <h3 class="results-archetype-name" id="result-archetype-name">Pluralismo Sistémico</h3>
+              <span class="results-archetype-sub" id="result-archetype-sub">La Adaptabilidad de la Complejidad</span>
               
               <p class="results-archetype-desc" id="result-archetype-desc">
-                Tu mente opera con el dinamismo y la flexibilidad del zorro berliniano. Sabes que la realidad social es fragmentaria e interdependiente.
+                Tu mente opera con el dinamismo y la flexibilidad del pluralismo. Sabes que la realidad social es fragmentaria e interdependiente.
               </p>
 
               <div class="results-stats-block">
-                <span class="results-block-label"><i data-lucide="bar-chart-2"></i> COMPOSICIÓN MOLECULAR (PORCENTAJES)</span>
-                <div class="results-ingredient-bars" id="results-bar-list">
+                <span class="results-block-label"><i data-lucide="bar-chart-2" aria-hidden="true"></i> COMPOSICIÓN MOLECULAR (PORCENTAJES)</span>
+                <div class="results-ingredient-bars" id="results-bar-list" role="list">
                   <!-- Llenado con JS -->
                 </div>
               </div>
 
               <div class="results-stats-block">
-                <span class="results-block-label"><i data-lucide="award"></i> VIRTUD INTELECTUAL</span>
+                <span class="results-block-label" data-i18n="resultsVirtueTitle"><i data-lucide="award" aria-hidden="true"></i> VIRTUD INTELECTUAL</span>
                 <p class="results-text" id="result-virtue"></p>
               </div>
 
               <div class="results-stats-block">
-                <span class="results-block-label color-alert" id="result-hangover-title"><i data-lucide="alert-octagon"></i> RIESGO DE RESACA: DOGMATISMO AGUDO</span>
+                <span class="results-block-label color-alert" id="result-hangover-title"><i data-lucide="alert-octagon" aria-hidden="true"></i> RIESGO DE RESACA: DOGMATISMO AGUDO</span>
                 <p class="results-text" id="result-hangover-desc"></p>
               </div>
 
               <div class="results-actions">
-                <button class="btn btn-primary" id="btn-export-card">
-                  <i data-lucide="download"></i> Descargar Tarjeta de Alcoholemia
+                <button class="btn btn-primary" id="btn-export-card" data-i18n="resultsBtnExport">
+                  <i data-lucide="download" aria-hidden="true"></i> Descargar Tarjeta de Alcoholemia
                 </button>
-                <button class="btn btn-ghost" id="btn-restart-test">
-                  <i data-lucide="refresh-cw"></i> Volver a Destilar
+                <button class="btn btn-ghost" id="btn-restart-test" data-i18n="resultsBtnRestart">
+                  <i data-lucide="refresh-cw" aria-hidden="true"></i> Volver a Destilar
                 </button>
               </div>
 
@@ -330,36 +340,36 @@
   </section>
 
   <!-- MANIFIESTO FINAL / REFLEXIÓN INTELECTUAL -->
-  <section class="manifesto-section">
+  <section class="manifesto-section" role="region" aria-label="Manifiesto Alquímico">
     <div class="container">
       <div class="manifesto-content reveal">
-        <span class="manifesto-tag">MANIFIESTO</span>
-        <h2 class="manifesto-title">Humildad Epistemológica en Tiempos de Dogma</h2>
-        <p>
+        <span class="manifesto-tag" data-i18n="manifestoTag">MANIFIESTO</span>
+        <h2 class="manifesto-title" data-i18n="manifestoTitle">Humildad Epistemológica en Tiempos de Dogma</h2>
+        <p data-i18n="manifestoP1">
           Las ideologías simplifican el mundo para permitirnos actuar; ese es su valor y, al mismo tiempo, su mayor peligro. Toda doctrina es un filtro que ilumina ciertos fenómenos mientras oscurece otros por completo. 
         </p>
-        <p>
+        <p data-i18n="manifestoP2">
           El verdadero valor del pensamiento analítico no radica en jurar lealtad a una única estantería de destilación conceptual, sino en comprender las limitaciones, trade-offs y puntos ciegos de nuestras propias herramientas intelectuales. Bebe con moderación, cuestiona tus propios sesgos y cultiva el pluralismo intelectual. Tu cerebro te lo agradecerá.
         </p>
         <div class="manifesto-signature">
-          <span class="signature-line"></span>
-          <span class="signature-author">Cátedra de la Coctelería Económica</span>
+          <span class="signature-line" aria-hidden="true"></span>
+          <span class="signature-author" data-i18n="manifestoSignature">Cátedra de la Coctelería Económica</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER EDITORIAL -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-bottom">
-        <p>
+        <p data-i18n="footerBottom">
           Generado con HTML5 + CSS3 + Vanilla Javascript • 100% Autoportante para Despliegues Directos en GitHub Pages
         </p>
-        <p style="margin-top: 8px; font-size: 0.85em;">
-          Inspirado metodológicamente en <em>Economics: The User's Guide</em> (Ha-Joon Chang, 2015) y el ensayo de <em>El Zorro y el Erizo</em> (Isaiah Berlin, 1953)
+        <p style="margin-top: 8px; font-size: 0.85em;" data-i18n="footerInsp">
+          Inspirado metodológicamente en <em>Economics: The User's Guide</em> (Ha-Joon Chang, 2015) y el marco epistemológico de <em>Monismo y Pluralismo</em>
         </p>
-        <p style="margin-top: 8px; font-size: 0.85em;">
+        <p style="margin-top: 8px; font-size: 0.85em;" data-i18n="footerCopy">
           © 2026 Mapa de Escuelas Políticas Económicas • Licencia Creative Commons BY-SA 4.0
         </p>
       </div>
@@ -367,7 +377,7 @@
   </footer>
 
   <!-- TICKET DE ANÁLISIS ALQUÍMICO (Tooltip Premium Absoluto) -->
-  <div class="tasting-tooltip" id="bottle-tooltip">
+  <div class="tasting-tooltip" id="bottle-tooltip" role="tooltip" aria-hidden="true">
     <div class="tooltip-header">
       <div>
         <h3 class="tooltip-name" id="tooltip-name">Escuela Marxista</h3>
@@ -377,16 +387,16 @@
     </div>
     <div class="tooltip-body">
       <div class="tooltip-section">
-        <span class="tooltip-label"><i data-lucide="compass" class="icon-inline"></i> NOTAS DE CATA</span>
+        <span class="tooltip-label" data-i18n="tooltipLabelNotes"><i data-lucide="compass" class="icon-inline" aria-hidden="true"></i> NOTAS DE CATA</span>
         <p class="tooltip-text" id="tooltip-notes"></p>
       </div>
       <div class="tooltip-section">
-        <span class="tooltip-label color-alert"><i data-lucide="alert-triangle" class="icon-inline"></i> RIESGO DE INTOXICACIÓN</span>
+        <span class="tooltip-label color-alert" data-i18n="tooltipLabelEffects"><i data-lucide="alert-triangle" class="icon-inline" aria-hidden="true"></i> RIESGO DE INTOXICACIÓN</span>
         <p class="tooltip-text" id="tooltip-effects"></p>
       </div>
     </div>
     <div class="tooltip-footer">
-      <span class="tooltip-action-hint"><i data-lucide="sparkles" class="icon-inline"></i> Haz clic en la botella para sumarla al vaso</span>
+      <span class="tooltip-action-hint" data-i18n="tooltipActionHint"><i data-lucide="sparkles" class="icon-inline" aria-hidden="true"></i> Haz clic en la botella para ir al test</span>
     </div>
   </div>
 

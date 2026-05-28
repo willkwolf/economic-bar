@@ -19,10 +19,12 @@
   /* Colores de Alerta y Monitoreo */
   --alert-red: #8c2323;
   --alert-red-glow: rgba(140, 35, 35, 0.2);
+  
+  /* Contraste Elevado para Accesibilidad WCAG AA (>4.5:1, aquí ~6:1) */
   --text-primary: #f5f3ef;
-  --text-muted: rgba(245, 243, 239, 0.45);
-  --border-glass: rgba(217, 167, 82, 0.1);
-  --border-subtle: rgba(255, 255, 255, 0.04);
+  --text-muted: rgba(245, 243, 239, 0.70);
+  --border-glass: rgba(217, 167, 82, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.05);
   
   /* Fuentes de Cátedra */
   --font-display: 'Instrument Serif', 'Cormorant Garamond', serif;
@@ -32,8 +34,8 @@
   /* Curvas de Animación y Espaciados */
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --section-pad: clamp(70px, 9vw, 130px);
-  --container-max: min(1280px, 90vw);
+  --section-pad: clamp(50px, 7vw, 100px);
+  --container-max: min(1200px, 92vw);
 }
 
 /* ── RESET Y CONFIGURACIÓN BASE ─────────────────────────────────────────── */
@@ -59,6 +61,12 @@ body {
   position: relative;
 }
 
+/* Enfoque accesible premium con contorno dorado */
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 4px;
+}
+
 /* Luces de Atmósfera */
 .ambient-glow {
   position: fixed;
@@ -66,7 +74,7 @@ body {
   border-radius: 50%;
   z-index: 0;
   filter: blur(140px);
-  opacity: 0.55;
+  opacity: 0.45;
   transition: all 1s ease;
 }
 
@@ -95,7 +103,7 @@ body {
   background: radial-gradient(circle, rgba(217, 167, 82, 0.02) 0%, transparent 80%);
 }
 
-/* ── TIPOGRAFÍA COMÚN ───────────────────────────────────────────────────── */
+/* ── TIPOGRAFÍA FLUIDA DE PUNTOS DINÁMICOS (Tufte Clean) ─────────────────── */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 400;
@@ -113,6 +121,9 @@ em {
 p {
   color: var(--text-muted);
   font-weight: 300;
+  /* Evitar desbordes de texto */
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .container {
@@ -120,15 +131,17 @@ p {
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  padding: 0 20px;
 }
 
-/* Botones Premium */
+/* Botones Premium con áreas de toque móviles amplias */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   padding: 0.85rem 2rem;
+  min-height: 44px;
   border-radius: 4px;
   font-family: var(--font-body);
   font-size: 0.75rem;
@@ -145,14 +158,13 @@ p {
   background-color: var(--accent-gold);
   color: #0d0d0c;
   border-color: var(--accent-gold);
-  box-shadow: 0 4px 20px rgba(217, 167, 82, 0.15);
 }
 
 .btn-primary:hover {
   background-color: transparent;
   color: var(--accent-gold);
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(217, 167, 82, 0.25);
+  box-shadow: 0 6px 20px rgba(217, 167, 82, 0.2);
 }
 
 .btn-ghost {
@@ -173,8 +185,8 @@ p {
 }
 
 .icon-inline {
-  width: 1em;
-  height: 1em;
+  width: 1.1em;
+  height: 1.1em;
   vertical-align: middle;
 }
 
@@ -182,7 +194,7 @@ p {
   color: var(--accent-gold) !important;
 }
 
-/* ── NAVEGACIÓN COMPONENTIZADA ──────────────────────────────────────────── */
+/* ── NAVEGACIÓN COMPONENTIZADA E i18n SWITCHER ──────────────────────────── */
 .nav-bar {
   position: fixed;
   top: 0;
@@ -208,6 +220,7 @@ p {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  position: relative;
 }
 
 .nav-logo {
@@ -240,6 +253,7 @@ p {
   display: flex;
   align-items: center;
   gap: 2.2rem;
+  flex-wrap: wrap; /* Defensive wrapping */
 }
 
 .nav-link {
@@ -250,6 +264,7 @@ p {
   text-transform: uppercase;
   color: var(--text-muted);
   transition: color 0.3s;
+  padding: 10px 5px;
 }
 
 .nav-link:hover {
@@ -269,19 +284,67 @@ p {
   color: #000;
 }
 
+/* Contenedor del Selector de Idioma ES/EN */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  border-radius: 4px;
+}
+
+.lang-btn.active {
+  color: var(--accent-gold);
+  text-shadow: 0 0 6px var(--accent-gold-glow);
+}
+
+.lang-btn:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.lang-divider {
+  color: rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  user-select: none;
+}
+
 .menu-toggle {
   display: none;
   background: none;
   border: none;
   color: var(--text-primary);
   cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ── HERO SECTION: EL ALCOVAR ALQUÍMICO ──────────────────────────────────── */
 .hero-section {
   min-height: 100vh;
-  padding-top: 150px;
-  padding-bottom: 80px;
+  padding-top: 140px;
+  padding-bottom: 60px;
   display: flex;
   align-items: center;
   position: relative;
@@ -296,7 +359,7 @@ p {
 
 .hero-header {
   max-width: 780px;
-  margin-bottom: 60px;
+  margin-bottom: 45px;
 }
 
 .hero-tag, .section-tag, .dossier-tag, .manifesto-tag {
@@ -310,7 +373,7 @@ p {
 }
 
 .hero-title {
-  font-size: clamp(48px, 6.5vw, 84px);
+  font-size: clamp(38px, 5.5vw, 76px);
   line-height: 0.95;
   margin-bottom: 1.5rem;
   word-spacing: 0.05em;
@@ -325,13 +388,13 @@ p {
 }
 
 .hero-intro {
-  font-size: 1.05rem;
+  font-size: clamp(15px, 1.2vw, 17px);
   max-width: 680px;
 }
 
 /* ── ESTANTERÍA VIRTUAL Y BOTELLAS ────────────────────────────────────────── */
 .shelf-wrapper {
-  margin-top: 40px;
+  margin-top: 20px;
   perspective: 1000px;
 }
 
@@ -386,7 +449,6 @@ p {
   overflow: hidden;
 }
 
-/* El Cuello de la botella */
 .bottle-neck {
   width: 14px;
   height: 22px;
@@ -411,7 +473,6 @@ p {
   box-shadow: inset 0 2px 3px rgba(255,255,255,0.1);
 }
 
-/* El Líquido */
 .bottle-liquid {
   position: absolute;
   bottom: 0;
@@ -424,7 +485,6 @@ p {
   box-shadow: inset 0 5px 12px rgba(255, 255, 255, 0.2);
 }
 
-/* Efecto Ola */
 .bottle-liquid::after {
   content: '';
   position: absolute;
@@ -467,21 +527,22 @@ p {
   transition: color 0.3s;
 }
 
-/* Hover en la Botella */
-.bottle-item:hover {
+/* Hover / Focus en la Botella */
+.bottle-item:hover, .bottle-item:focus {
   transform: translateY(-12px) scale(1.05);
+  outline: none;
 }
 
-.bottle-item:hover .bottle-flask {
+.bottle-item:hover .bottle-flask, .bottle-item:focus .bottle-flask {
   border-color: var(--school-color);
   box-shadow: 0 0 25px var(--school-color-glow), inset 0 0 10px var(--school-color-glow);
 }
 
-.bottle-item:hover .bottle-neck {
+.bottle-item:hover .bottle-neck, .bottle-item:focus .bottle-neck {
   border-color: var(--school-color);
 }
 
-.bottle-item:hover .bottle-title {
+.bottle-item:hover .bottle-title, .bottle-item:focus .bottle-title {
   color: var(--text-primary);
 }
 
@@ -563,6 +624,7 @@ p {
   font-weight: 300;
   color: var(--text-muted);
   line-height: 1.4;
+  word-break: break-word;
 }
 
 .tooltip-footer {
@@ -587,16 +649,16 @@ section {
 
 .section-header {
   max-width: 680px;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
 }
 
 .section-title {
-  font-size: clamp(36px, 4.5vw, 56px);
+  font-size: clamp(28px, 4vw, 48px);
   margin-bottom: 1rem;
 }
 
 .section-desc {
-  font-size: 1rem;
+  font-size: clamp(14px, 1.2vw, 17px);
 }
 
 /* ── GRID DE CÓCTELES ────────────────────────────────────────────────────── */
@@ -632,14 +694,15 @@ section {
   transition: opacity 0.4s;
 }
 
-.cocktail-card:hover {
+.cocktail-card:hover, .cocktail-card:focus {
   background-color: var(--bg-card-hover);
   border-color: var(--cocktail-color, var(--accent-gold));
   transform: translateY(-6px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--cocktail-color-glow);
+  outline: none;
 }
 
-.cocktail-card:hover::before {
+.cocktail-card:hover::before, .cocktail-card:focus::before {
   opacity: 1;
 }
 
@@ -661,7 +724,7 @@ section {
 }
 
 .cocktail-card-title {
-  font-size: 1.8rem;
+  font-size: clamp(20px, 2vw, 26px);
   margin-bottom: 10px;
   color: var(--text-primary);
 }
@@ -677,7 +740,7 @@ section {
   border-top: 1px solid var(--border-subtle);
   padding-top: 15px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Defensive wrap */
   gap: 0.4rem;
 }
 
@@ -691,7 +754,7 @@ section {
   border-radius: 2px;
 }
 
-/* ── DRAWER LATERAL DE MEZCLADO (Mixing Drawer) ──────────────────────────── */
+/* ── DRAWER LATERAL DE MEZCLADO (Mixing Drawer con GPU acceleration) ────────── */
 .mixing-drawer {
   position: fixed;
   top: 0;
@@ -735,14 +798,15 @@ section {
   border-left: 1px solid var(--accent-gold-dark);
   box-shadow: -20px 0 50px rgba(0, 0, 0, 0.8);
   height: 100%;
-  transform: translateX(100%);
+  /* Aceleración por GPU usando translate3d en lugar de alterar left/right */
+  transform: translate3d(100%, 0, 0);
   transition: transform 0.6s var(--ease-expo);
   display: flex;
   flex-direction: column;
 }
 
 .mixing-drawer.open .drawer-content {
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .drawer-close-btn {
@@ -755,6 +819,11 @@ section {
   cursor: pointer;
   z-index: 10;
   transition: transform 0.3s;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .drawer-close-btn:hover {
@@ -767,6 +836,7 @@ section {
   overflow-y: auto;
   padding: 40px;
   scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mixing-showcase {
@@ -778,7 +848,6 @@ section {
   padding-bottom: 30px;
 }
 
-/* Contenedor del Vaso de Cristal */
 .glass-container {
   width: 260px;
   height: 340px;
@@ -806,7 +875,7 @@ section {
 }
 
 .mixing-cocktail-name {
-  font-size: 2.6rem;
+  font-size: clamp(24px, 3.5vw, 38px);
   margin-bottom: 5px;
   text-align: center;
 }
@@ -843,6 +912,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  word-break: break-word;
 }
 
 .recipe-item {
@@ -874,6 +944,7 @@ section {
 
 .vector-readout {
   display: flex;
+  flex-wrap: wrap; /* Defensive wrap */
   gap: 0.5rem;
 }
 
@@ -889,6 +960,7 @@ section {
 .mix-text-desc {
   font-size: 0.85rem;
   line-height: 1.5;
+  word-break: break-word;
 }
 
 /* ── SECCION GABINETE BOTICARIO (Problem Explorer) ───────────────────────── */
@@ -927,7 +999,6 @@ section {
   box-shadow: inset 0 1px 3px rgba(255,255,255,0.05), 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* El tirador de metal */
 .drawer-handle {
   width: 32px;
   height: 10px;
@@ -960,13 +1031,14 @@ section {
 }
 
 /* Hover y Activo en el cajón */
-.cabinet-drawer:hover {
+.cabinet-drawer:hover, .cabinet-drawer:focus {
   transform: translateZ(10px) translateY(-2px);
   border-color: var(--accent-gold-dark);
   background: linear-gradient(180deg, #282825 0%, #1b1b1a 100%);
+  outline: none;
 }
 
-.cabinet-drawer:hover .drawer-handle {
+.cabinet-drawer:hover .drawer-handle, .cabinet-drawer:focus .drawer-handle {
   transform: translateY(-2px);
   border-color: var(--accent-gold);
 }
@@ -1048,7 +1120,7 @@ section {
 }
 
 .dossier-title {
-  font-size: 2.5rem;
+  font-size: clamp(26px, 3.5vw, 40px);
   margin-bottom: 8px;
   text-transform: capitalize;
 }
@@ -1080,6 +1152,8 @@ section {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  flex-wrap: wrap; /* Defensive */
+  gap: 0.5rem;
 }
 
 .prescription-school {
@@ -1120,6 +1194,8 @@ section {
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 8px;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .prescription-toxicity {
@@ -1148,11 +1224,18 @@ section {
 .test-intro-badge {
   font-size: 3rem;
   margin-bottom: 1.5rem;
+  display: inline-block;
+  color: var(--accent-gold);
   animation: float 4s ease-in-out infinite;
 }
 
+.test-intro-badge svg {
+  width: 50px;
+  height: 50px;
+}
+
 .test-intro-card h3 {
-  font-size: 2.6rem;
+  font-size: clamp(24px, 3vw, 42px);
   margin-bottom: 15px;
 }
 
@@ -1207,12 +1290,12 @@ section {
 }
 
 .test-question-text {
-  font-size: clamp(24px, 3.2vw, 36px);
+  font-size: clamp(22px, 2.8vw, 32px);
   margin-bottom: 30px;
   line-height: 1.2;
 }
 
-/* Opciones de Tarjeta (Fase 1 y 2) */
+/* Opciones de Tarjeta (Fase 1 y 2) con áreas amplias táctiles */
 .test-options-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -1223,6 +1306,7 @@ section {
   background-color: rgba(6, 6, 6, 0.4);
   border: 1px solid var(--border-subtle);
   padding: 22px 28px;
+  min-height: 52px;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s var(--ease-expo);
@@ -1254,13 +1338,14 @@ section {
   transition: transform 0.3s var(--ease-back);
 }
 
-.test-option-card:hover {
+.test-option-card:hover, .test-option-card:focus {
   background-color: rgba(255, 255, 255, 0.01);
   border-color: var(--border-glass);
   transform: translateX(4px);
+  outline: none;
 }
 
-.test-option-card:hover .option-marker {
+.test-option-card:hover .option-marker, .test-option-card:focus .option-marker {
   border-color: var(--accent-gold);
 }
 
@@ -1335,6 +1420,8 @@ section {
   margin-bottom: 12px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  flex-wrap: wrap; /* Defensive */
+  gap: 0.5rem;
 }
 
 .slider-value-display {
@@ -1353,8 +1440,8 @@ section {
 
 .luxury-range-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 22px; /* Ampliado touch mobile */
+  height: 22px;
   border-radius: 50%;
   background: var(--accent-gold);
   border: 1.5px solid var(--bg-darker);
@@ -1438,7 +1525,7 @@ section {
   to { transform: rotate(-360deg); }
 }
 
-/* ── PANTALLA DE RESULTADOS Y DIAGNÓSTICO ────────────────────────────────── */
+/* ── PANTALLA DE RESULTADOS Y DIAGNÓSTICO (Tufte Glass Dashboard) ──────────── */
 .test-results-card {
   padding: 50px;
 }
@@ -1516,15 +1603,14 @@ section {
   pointer-events: none;
 }
 
-/* El Contenedor de Capas de Líquido */
 .custom-bottle-liquid {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 75%; /* La llenura de la botella */
+  height: 75%;
   display: flex;
-  flex-direction: column-reverse; /* Se llena de abajo hacia arriba */
+  flex-direction: column-reverse;
   overflow: hidden;
   border-radius: 0 0 24px 24px;
 }
@@ -1581,9 +1667,11 @@ section {
 }
 
 .results-archetype-name {
-  font-size: clamp(32px, 4.5vw, 48px);
+  font-size: clamp(26px, 3.5vw, 42px);
   margin-bottom: 2px;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
 }
 
 .results-archetype-sub {
@@ -1599,6 +1687,8 @@ section {
   font-size: 0.95rem;
   line-height: 1.55;
   margin-bottom: 30px;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .results-stats-block {
@@ -1669,10 +1759,12 @@ section {
   font-size: 0.9rem;
   line-height: 1.5;
   font-weight: 300;
+  word-break: break-word;
 }
 
 .results-actions {
   display: flex;
+  flex-wrap: wrap; /* Defensive warp */
   gap: 1rem;
   margin-top: 40px;
   border-top: 1px solid var(--border-subtle);
@@ -1693,12 +1785,12 @@ section {
 }
 
 .manifesto-title {
-  font-size: clamp(32px, 4.5vw, 52px);
+  font-size: clamp(28px, 4vw, 44px);
   margin-bottom: 1.5rem;
 }
 
 .manifesto-content p {
-  font-size: 1.1rem;
+  font-size: clamp(14px, 1.2vw, 17px);
   line-height: 1.7;
   margin-bottom: 1.8rem;
   color: var(--text-primary);
@@ -1793,11 +1885,33 @@ section {
 
 @media (max-width: 768px) {
   .nav-links {
-    display: none; /* Se podría inyectar menú hamburguesa si se desea */
+    display: none;
+  }
+  
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(6, 6, 6, 0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-glass);
+    padding: 20px;
+    gap: 1.5rem;
+    z-index: 99;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+    animation: slideDown 0.4s var(--ease-expo);
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
   }
   
   .menu-toggle {
-    display: block;
+    display: flex;
   }
   
   .hero-section {
@@ -1821,5 +1935,9 @@ section {
   
   .test-question-card {
     padding: 30px 20px;
+  }
+  
+  .lang-switcher {
+    margin-right: 0.5rem;
   }
 }

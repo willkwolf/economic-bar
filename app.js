@@ -1,31 +1,67 @@
 /**
  * BAR DE ESCUELAS ECONÓMICAS - ELIXIRES DE LA RAZÓN
- * app.js - Lógica interactiva, simulador de fluidos y motor de scoring
+ * app.js - Lógica interactiva, simulador de fluidos DPR, radar defensivo y motor i18n
  */
 
-import { ESCUELAS, COCTELES, PROBLEMAS, PREGUNTAS, PERFILES_COGNITIVOS, PERFILES_CUADRANTES, PERFILES_CONCENTRACION } from './data.js';
+import { TRANSLATIONS } from './data.js';
+
+// ── VARIABLES DE DATOS ACTIVAS (Se actualizan en setLanguage) ───────────────
+let ESCUELAS = {};
+let COCTELES = [];
+let PROBLEMAS = [];
+let PREGUNTAS = [];
+let PERFILES_COGNITIVOS = {};
+let PERFILES_CUADRANTES = {};
+let PERFILES_CONCENTRACION = {};
 
 // ── ESTADO GLOBAL DE LA APLICACIÓN ─────────────────────────────────────────
 const state = {
+  currentLang: "es",
   currentTestQuestion: 0,
-  answers: {}, // Guardará las respuestas { qId: valor }
+  answers: {}, // Respuestas { qId: valor }
   mixingAnimationId: null,
-  activeDossierId: null
+  activeDossierId: null,
+  activeResults: null
 };
+
+// Helper para soporte de teclado en elementos interactivos
+const addKeyboardSupport = (element, callback) => {
+  element.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      callback(e);
+    }
+  });
+};
+
+// Configuración de lienzo en alta resolución (Device Pixel Ratio)
+function setupCanvasDPR(canvas, width, height) {
+  const ctx = canvas.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  
+  // Dimensiones de visualización lógicas CSS
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  
+  // Dimensiones físicas de renderizado escaladas
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  
+  // Escalar el contexto gráfico
+  ctx.scale(dpr, dpr);
+  return ctx;
+}
 
 // ── INICIALIZACIÓN ────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
-  // Inicializar Lucide Icons
-  if (window.lucide) {
-    window.lucide.createIcons();
-  }
+  // Inicializar idioma (ES por defecto o guardado)
+  const savedLang = localStorage.getItem("economic_bar_lang") || "es";
+  setLanguage(savedLang);
 
   initNavScroll();
-  initBottleShelf();
-  initCocktailMenu();
-  initApothecaryChest();
   initTestEngine();
   initScrollReveal();
+  initLanguageSwitcher();
 });
 
 // ── NAVEGACIÓN REACTIVA AL SCROLL ──────────────────────────────────────────
@@ -43,29 +79,112 @@ function initNavScroll() {
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const navLinks = document.querySelector(".nav-links");
   if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener("click", () => {
+    const toggleMenu = () => {
+      const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+      mobileMenuBtn.setAttribute("aria-expanded", !isExpanded);
       navLinks.classList.toggle("hidden");
       navLinks.classList.toggle("mobile-open");
-    });
+    };
+    mobileMenuBtn.addEventListener("click", toggleMenu);
+    addKeyboardSupport(mobileMenuBtn, toggleMenu);
   }
 }
 
-// ── HERO: APARADOR DE BOTELLAS INTERACTIVAS ────────────────────────────────
+// ── SISTEMA DE SWITCHER DE IDIOMAS (i18n) ──────────────────────────────────
+function initLanguageSwitcher() {
+  const langButtons = document.querySelectorAll(".lang-btn");
+  langButtons.forEach(btn => {
+    const lang = btn.dataset.lang;
+    btn.addEventListener("click", () => {
+      setLanguage(lang);
+    });
+    addKeyboardSupport(btn, () => {
+      setLanguage(lang);
+    });
+  });
+}
+
+function setLanguage(lang) {
+  state.currentLang = lang;
+  localStorage.setItem("economic_bar_lang", lang);
+
+  // 1. Actualizar referencias a base de datos activa
+  const dict = TRANSLATIONS[lang];
+  ESCUELAS = dict.escuelas;
+  COCTELES = dict.cocteles;
+  PROBLEMAS = dict.problemas;
+  PREGUNTAS = dict.preguntas;
+  PERFILES_COGNITIVOS = dict.perfiles_cognitivos;
+  PERFILES_CUADRANTES = dict.perfiles_cuadrantes;
+  PERFILES_CONCENTRACION = dict.perfiles_concentracion;
+
+  // 2. Actualizar estado activo de los botones selectores
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    const active = btn.dataset.lang === lang;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+
+  // 3. Traducir textos estáticos marcados con data-i18n
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.dataset.i18n;
+    if (dict.ui[key]) {
+      el.innerHTML = dict.ui[key];
+    }
+  });
+
+  // 4. Actualizar meta tags del documento
+  document.title = dict.ui.exportDocTitle;
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    metaDesc.setAttribute("content", dict.ui.testDesc);
+  }
+
+  // 5. Rerendear componentes dinámicos
+  initBottleShelf();
+  initCocktailMenu();
+  initApothecaryChest();
+
+  // Reabrir cajón activo si existe para traducirlo al vuelo
+  if (state.activeDossierId) {
+    openDossier(state.activeDossierId);
+  }
+
+  // Rerendear pregunta de test en curso
+  const questionScreen = document.getElementById("test-question-screen");
+  if (questionScreen && !questionScreen.classList.contains("hidden")) {
+    renderQuestion();
+  }
+
+  // Rerendear resultados activos
+  if (state.activeResults) {
+    renderResultsToUI(state.activeResults);
+  }
+
+  // Actualizar Iconos Lucide
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+}
+
+// ── HERO: APARADOR DE BOTELLAS INTERACTIVAS (Tufte Clean) ─────────────────
 function initBottleShelf() {
   const shelf = document.getElementById("bottles-shelf");
   if (!shelf) return;
 
-  shelf.innerHTML = ""; // Limpiar loading
+  shelf.innerHTML = ""; // Limpiar carga
 
-  // Renderizar las 12 botellas
   Object.values(ESCUELAS).forEach(escuela => {
     const bottleItem = document.createElement("div");
     bottleItem.className = "bottle-item";
     bottleItem.dataset.schoolId = escuela.id;
+    bottleItem.tabIndex = 0;
+    bottleItem.setAttribute("role", "button");
+    bottleItem.setAttribute("aria-haspopup", "true");
+    bottleItem.setAttribute("aria-label", escuela.nombre);
     
     // Configurar variables CSS individuales para colores reactivos
     bottleItem.style.setProperty("--school-color", escuela.color);
-    // Generar color de brillo con opacidad baja
     const r = parseInt(escuela.color.slice(1, 3), 16);
     const g = parseInt(escuela.color.slice(3, 5), 16);
     const b = parseInt(escuela.color.slice(5, 7), 16);
@@ -81,18 +200,23 @@ function initBottleShelf() {
       <span class="bottle-title">${escuela.nombre}</span>
     `;
 
-    // Eventos de Hover para desplegar el Ticket de Boticario (Tooltip)
+    // Eventos de Hover
     bottleItem.addEventListener("mouseenter", (e) => showTastingTooltip(e, escuela));
     bottleItem.addEventListener("mouseleave", hideTastingTooltip);
     
-    // Agregar clic para añadir ingrediente al test o al vaso
-    bottleItem.addEventListener("click", () => {
-      // Si el test está abierto, podemos interactuar de alguna forma divertida o mandar scroll al test
+    // Eventos de Enfoque Teclado para Accesibilidad
+    bottleItem.addEventListener("focus", (e) => showTastingTooltip(e, escuela));
+    bottleItem.addEventListener("blur", hideTastingTooltip);
+
+    // Enviar scroll al test al hacer click
+    const action = () => {
       const testSection = document.getElementById("test");
       if (testSection) {
         testSection.scrollIntoView({ behavior: 'smooth' });
       }
-    });
+    };
+    bottleItem.addEventListener("click", action);
+    addKeyboardSupport(bottleItem, action);
 
     shelf.appendChild(bottleItem);
   });
@@ -103,14 +227,14 @@ function showTastingTooltip(e, escuela) {
   const tooltip = document.getElementById("bottle-tooltip");
   if (!tooltip) return;
 
-  // Llenar datos
-  document.getElementById("tooltip-name").textContent = `Escuela ${escuela.nombre}`;
+  // Llenar datos traducidos
+  document.getElementById("tooltip-name").textContent = escuela.nombre;
   document.getElementById("tooltip-founder").textContent = escuela.fundador;
   document.getElementById("tooltip-abv").textContent = escuela.abv;
   document.getElementById("tooltip-notes").textContent = escuela.tastingNotes;
   document.getElementById("tooltip-effects").textContent = escuela.sideEffects;
 
-  // Reposicionar tooltip reactivamente con coordenadas de viewport
+  tooltip.setAttribute("aria-hidden", "false");
   tooltip.classList.add("visible");
   
   const rect = e.currentTarget.getBoundingClientRect();
@@ -119,17 +243,17 @@ function showTastingTooltip(e, escuela) {
   const scrollY = window.scrollY;
 
   let xPos = rect.left + rect.width / 2 - tooltipWidth / 2;
-  let yPos = rect.top + scrollY - tooltipHeight - 15; // 15px de holgura superior
+  let yPos = rect.top + scrollY - tooltipHeight - 15; // 15px holgura
 
-  // Evitar desbordamiento por la izquierda/derecha de la pantalla
-  if (xPos < 10) xPos = 10;
-  if (xPos + tooltipWidth > window.innerWidth - 10) {
-    xPos = window.innerWidth - tooltipWidth - 10;
+  // Evitar desbordamiento por laterales
+  if (xPos < 15) xPos = 15;
+  if (xPos + tooltipWidth > window.innerWidth - 15) {
+    xPos = window.innerWidth - tooltipWidth - 15;
   }
 
   // Evitar desbordamiento superior
   if (rect.top - tooltipHeight < 80) {
-    yPos = rect.bottom + scrollY + 15; // Colocar debajo de la botella si no cabe arriba
+    yPos = rect.bottom + scrollY + 15; 
   }
 
   tooltip.style.left = `${xPos}px`;
@@ -139,6 +263,7 @@ function showTastingTooltip(e, escuela) {
 function hideTastingTooltip() {
   const tooltip = document.getElementById("bottle-tooltip");
   if (tooltip) {
+    tooltip.setAttribute("aria-hidden", "true");
     tooltip.classList.remove("visible");
   }
 }
@@ -153,35 +278,38 @@ function initCocktailMenu() {
   COCTELES.forEach(coctel => {
     const card = document.createElement("div");
     card.className = "cocktail-card";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", `${coctel.nombre}, ${coctel.intensidad}`);
     card.style.setProperty("--cocktail-color", coctel.colorPredominante);
     
-    // Configurar color de brillo
     const r = parseInt(coctel.colorPredominante.slice(1, 3), 16);
     const g = parseInt(coctel.colorPredominante.slice(3, 5), 16);
     const b = parseInt(coctel.colorPredominante.slice(5, 7), 16);
     card.style.setProperty("--cocktail-color-glow", `rgba(${r}, ${g}, ${b}, 0.15)`);
 
-    // Traducir ingredientes a badges
     const ingredientBadges = Object.entries(coctel.ingredientes)
       .map(([id, pct]) => {
         const escName = ESCUELAS[id] ? ESCUELAS[id].nombre : id;
-        return `<span class="ingredient-badge">${pct}% ${escName}</span>`;
+        return `<span class="ingredient-badge" role="listitem">${pct}% ${escName}</span>`;
       }).join("");
 
     card.innerHTML = `
       <div class="cocktail-meta">
         <span class="cocktail-intensity">${coctel.intensidad}</span>
-        <i data-lucide="droplet" style="color: ${coctel.colorPredominante}"></i>
+        <i data-lucide="droplet" style="color: ${coctel.colorPredominante}" aria-hidden="true"></i>
       </div>
       <h3 class="cocktail-card-title">${coctel.nombre}</h3>
       <p class="cocktail-card-desc">${coctel.descripcion}</p>
-      <div class="cocktail-card-ingredients">
+      <div class="cocktail-card-ingredients" role="list" aria-label="Ingredientes">
         ${ingredientBadges}
       </div>
     `;
 
-    // Clic abre el Cajón Lateral de Mezclado
-    card.addEventListener("click", () => openMixingDrawer(coctel));
+    // Clic e interacción por teclado abren Drawer
+    const action = () => openMixingDrawer(coctel);
+    card.addEventListener("click", action);
+    addKeyboardSupport(card, action);
 
     grid.appendChild(card);
   });
@@ -213,9 +341,10 @@ function openMixingDrawer(coctel) {
     
     const item = document.createElement("div");
     item.className = "recipe-item";
+    item.setAttribute("role", "listitem");
     item.innerHTML = `
       <span class="recipe-item-name">
-        <span class="recipe-dot" style="background-color: ${escuela.color}"></span>
+        <span class="recipe-dot" style="background-color: ${escuela.color}" aria-hidden="true"></span>
         ${escuela.nombre}
       </span>
       <span class="recipe-pct">${pct}%</span>
@@ -225,20 +354,16 @@ function openMixingDrawer(coctel) {
 
   // Abrir Drawer
   drawer.classList.add("open");
+  drawer.setAttribute("aria-hidden", "false");
+  drawer.querySelector(".drawer-scrollable").focus();
 
-  // Detener cualquier animación previa del líquido
+  // Detener cualquier simulación previa del líquido
   if (state.mixingAnimationId) {
     cancelAnimationFrame(state.mixingAnimationId);
   }
 
   // Lanzar la simulación líquida del cóctel en Canvas
   startLiquidSimulation(coctel);
-
-  // Botón volver a mezclar
-  const reheatBtn = document.getElementById("mix-reheat-btn");
-  reheatBtn.onclick = () => {
-    startLiquidSimulation(coctel);
-  };
 }
 
 // Cerrar Drawer
@@ -246,6 +371,7 @@ const closeDrawer = () => {
   const drawer = document.getElementById("mixing-drawer");
   if (drawer) {
     drawer.classList.remove("open");
+    drawer.setAttribute("aria-hidden", "true");
     if (state.mixingAnimationId) {
       cancelAnimationFrame(state.mixingAnimationId);
     }
@@ -254,17 +380,17 @@ const closeDrawer = () => {
 document.getElementById("drawer-close-btn")?.addEventListener("click", closeDrawer);
 document.getElementById("drawer-close-overlay")?.addEventListener("click", closeDrawer);
 
-// ── SIMULADOR DE FLUIDOS EN CANVAS 2D ──────────────────────────────────────
+// ── SIMULADOR DE FLUIDOS EN CANVAS 2D CON DPR SCALING ──────────────────────────
 function startLiquidSimulation(coctel) {
   const canvas = document.getElementById("liquid-canvas");
   if (!canvas) return;
 
-  const ctx = canvas.getContext("2d");
-  const width = canvas.width;
-  const height = canvas.height;
+  // Setup de Canvases en Alta Resolución DPR
+  const logicalWidth = 260;
+  const logicalHeight = 340;
+  const ctx = setupCanvasDPR(canvas, logicalWidth, logicalHeight);
 
-  // Estructura de capas basada en los ingredientes del cóctel
-  // Cada ingrediente tiene color y porcentaje de volumen
+  // Estructura de capas
   let totalPct = 0;
   const layers = Object.entries(coctel.ingredientes).map(([id, pct]) => {
     totalPct += pct;
@@ -272,23 +398,21 @@ function startLiquidSimulation(coctel) {
     return {
       color: esc ? esc.color : "#d9a752",
       targetVolume: pct / 100,
-      currentVolume: 0, // Inicia vacío
+      currentVolume: 0,
       waveOffset: Math.random() * 100
     };
   });
 
-  let fillProgress = 0; // Progreso general de llenado de 0 a 1
-  let bubbles = []; // Array para burbujas ascendentes
-  let splashParticles = []; // Partículas de salpicadura
+  let fillProgress = 0;
+  let bubbles = [];
+  let splashParticles = [];
 
-  // Geometría del Vaso de Cóctel (Forma trapezoidal de lujo)
-  const glassPadding = 30;
-  const glassBottomY = height - 30;
+  // Geometría del Vaso lógicas
+  const glassBottomY = logicalHeight - 30;
   const glassTopY = 40;
   const glassBottomWidth = 120;
   const glassTopWidth = 190;
 
-  // Función para obtener el ancho del vaso a una altura Y específica
   const getGlassWidthAtY = (y) => {
     const pct = (glassBottomY - y) / (glassBottomY - glassTopY);
     return glassBottomWidth + (glassTopWidth - glassBottomWidth) * pct;
@@ -299,20 +423,21 @@ function startLiquidSimulation(coctel) {
     ctx.lineWidth = 4;
     ctx.lineCap = "round";
     ctx.beginPath();
+    
     // Borde izquierdo
-    ctx.moveTo(width / 2 - glassTopWidth / 2, glassTopY);
-    ctx.lineTo(width / 2 - glassBottomWidth / 2, glassBottomY);
+    ctx.moveTo(logicalWidth / 2 - glassTopWidth / 2, glassTopY);
+    ctx.lineTo(logicalWidth / 2 - glassBottomWidth / 2, glassBottomY);
     // Base curva
-    ctx.arcTo(width / 2, glassBottomY + 12, width / 2 + glassBottomWidth / 2, glassBottomY, 40);
+    ctx.arcTo(logicalWidth / 2, glassBottomY + 12, logicalWidth / 2 + glassBottomWidth / 2, glassBottomY, 40);
     // Borde derecho
-    ctx.lineTo(width / 2 + glassTopWidth / 2, glassTopY);
+    ctx.lineTo(logicalWidth / 2 + glassTopWidth / 2, glassTopY);
     ctx.stroke();
 
     // Fondo del vaso pesado
     ctx.fillStyle = "rgba(255, 255, 255, 0.02)";
     ctx.beginPath();
-    ctx.moveTo(width / 2 - glassBottomWidth / 2 + 3, glassBottomY - 2);
-    ctx.arcTo(width / 2, glassBottomY + 10, width / 2 + glassBottomWidth / 2 - 3, glassBottomY - 2, 38);
+    ctx.moveTo(logicalWidth / 2 - glassBottomWidth / 2 + 3, glassBottomY - 2);
+    ctx.arcTo(logicalWidth / 2, glassBottomY + 10, logicalWidth / 2 + glassBottomWidth / 2 - 3, glassBottomY - 2, 38);
     ctx.closePath();
     ctx.fill();
   };
@@ -321,17 +446,14 @@ function startLiquidSimulation(coctel) {
 
   const animate = () => {
     tick++;
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, logicalWidth, logicalHeight);
 
-    // 1. Incrementar el volumen de llenado de forma secuencial
     fillProgress = Math.min(fillProgress + 0.007, 1);
 
-    // Calcular la acumulación de capas
     let currentY = glassBottomY;
 
     // Dibujar las capas líquidas
-    layers.forEach((layer, index) => {
-      // Llenado dinámico paulatino de cada capa
+    layers.forEach((layer) => {
       layer.currentVolume = Math.min(layer.targetVolume * fillProgress * 1.05, layer.targetVolume);
       
       const layerHeight = layer.currentVolume * (glassBottomY - glassTopY - 20);
@@ -340,26 +462,20 @@ function startLiquidSimulation(coctel) {
       const layerTopY = currentY - layerHeight;
       const layerBottomY = currentY;
 
-      // Dibujar la masa del líquido
       ctx.fillStyle = layer.color;
       ctx.globalAlpha = 0.75;
-
       ctx.beginPath();
       
-      // Mapear geometría para seguir la forma trapezoidal del vaso
-      const leftTopX = width / 2 - getGlassWidthAtY(layerTopY) / 2;
-      const rightTopX = width / 2 + getGlassWidthAtY(layerTopY) / 2;
-      const leftBottomX = width / 2 - getGlassWidthAtY(layerBottomY) / 2;
-      const rightBottomX = width / 2 + getGlassWidthAtY(layerBottomY) / 2;
+      const leftTopX = logicalWidth / 2 - getGlassWidthAtY(layerTopY) / 2;
+      const rightTopX = logicalWidth / 2 + getGlassWidthAtY(layerTopY) / 2;
+      const leftBottomX = logicalWidth / 2 - getGlassWidthAtY(layerBottomY) / 2;
+      const rightBottomX = logicalWidth / 2 + getGlassWidthAtY(layerBottomY) / 2;
 
-      // Curva superior interactiva (Ondulación sinodal)
       const waveFreq = 0.04;
-      const waveAmp = fillProgress < 1 ? 2.5 : 1.2; // Menos ola al estabilizar
+      const waveAmp = fillProgress < 1 ? 2.5 : 1.2;
       const waveSpeed = 0.08;
 
       ctx.moveTo(leftTopX, layerTopY);
-      
-      // Dibujar ola senoidal desde izquierda a derecha
       for (let x = leftTopX; x <= rightTopX; x += 5) {
         const relativeX = (x - leftTopX) / (rightTopX - leftTopX);
         const wave = Math.sin(tick * waveSpeed + relativeX * Math.PI * 2 + layer.waveOffset) * waveAmp;
@@ -371,25 +487,22 @@ function startLiquidSimulation(coctel) {
       ctx.closePath();
       ctx.fill();
 
-      // Efecto brillo/borde de la capa líquida
       ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      // Guardar Y superior para la siguiente capa
       currentY = layerTopY;
     });
 
     ctx.globalAlpha = 1.0;
 
-    // 2. Simulación de Chorro de Vertido Alquímico (pouring stream)
+    // Chorro de Vertido
     if (fillProgress < 0.95) {
       ctx.fillStyle = layers[layers.length - 1].color;
       ctx.globalAlpha = 0.8;
       
-      // Dibujar un chorro dinámico cayendo del cielo
       ctx.beginPath();
-      const streamX = width / 2 + Math.sin(tick * 0.1) * 3;
+      const streamX = logicalWidth / 2 + Math.sin(tick * 0.1) * 3;
       ctx.moveTo(streamX - 2.5, 0);
       ctx.lineTo(streamX - 1.5, currentY);
       ctx.lineTo(streamX + 1.5, currentY);
@@ -399,10 +512,10 @@ function startLiquidSimulation(coctel) {
       
       ctx.globalAlpha = 1.0;
 
-      // Partículas de Salpicadura en el impacto del chorro
+      // Partículas
       if (Math.random() < 0.4) {
         splashParticles.push({
-          x: width / 2 + (Math.random() - 0.5) * 20,
+          x: logicalWidth / 2 + (Math.random() - 0.5) * 20,
           y: currentY,
           vx: (Math.random() - 0.5) * 4,
           vy: -Math.random() * 3 - 1,
@@ -413,7 +526,7 @@ function startLiquidSimulation(coctel) {
       }
     }
 
-    // 3. Renderizar y actualizar partículas de salpicadura
+    // Salpicaduras
     splashParticles.forEach((p, idx) => {
       ctx.fillStyle = p.color;
       ctx.globalAlpha = p.alpha;
@@ -421,10 +534,9 @@ function startLiquidSimulation(coctel) {
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
 
-      // Gravedad
       p.x += p.vx;
       p.y += p.vy;
-      p.vy += 0.12; // Gravedad
+      p.vy += 0.12;
       p.alpha -= 0.025;
 
       if (p.alpha <= 0 || p.y > glassBottomY) {
@@ -434,11 +546,10 @@ function startLiquidSimulation(coctel) {
 
     ctx.globalAlpha = 1.0;
 
-    // 4. Renderizar y actualizar burbujas gaseosas ascendentes
+    // Burbujas
     if (Math.random() < 0.12 && fillProgress > 0.1) {
-      // Spawn en capas aleatorias
       bubbles.push({
-        x: width / 2 + (Math.random() - 0.5) * (glassBottomWidth - 10),
+        x: logicalWidth / 2 + (Math.random() - 0.5) * (glassBottomWidth - 10),
         y: glassBottomY - 10,
         vy: -Math.random() * 1.5 - 0.6,
         size: Math.random() * 2.5 + 0.8,
@@ -455,9 +566,8 @@ function startLiquidSimulation(coctel) {
       ctx.stroke();
 
       b.y += b.vy;
-      b.x += Math.sin(tick * 0.05 + b.size) * 0.3; // Oscilación horizontal suave
+      b.x += Math.sin(tick * 0.05 + b.size) * 0.3;
 
-      // Desaparecer si sube del nivel de líquido superior
       if (b.y < currentY || b.y < glassTopY) {
         bubbles.splice(idx, 1);
       }
@@ -465,7 +575,6 @@ function startLiquidSimulation(coctel) {
 
     ctx.globalAlpha = 1.0;
 
-    // 5. Dibujar el vaso al final para que la cristalería encuadre el líquido
     drawGlassOutline();
 
     state.mixingAnimationId = requestAnimationFrame(animate);
@@ -485,47 +594,52 @@ function initApothecaryChest() {
     const drawer = document.createElement("div");
     drawer.className = "cabinet-drawer";
     drawer.dataset.probId = prob.id;
+    drawer.tabIndex = 0;
+    drawer.setAttribute("role", "tab");
+    drawer.setAttribute("aria-selected", state.activeDossierId === prob.id ? "true" : "false");
+    drawer.setAttribute("aria-controls", "dossier-scroll");
     
-    // Engravado de número elegante en romano
+    if (state.activeDossierId === prob.id) {
+      drawer.classList.add("active");
+    }
+
     const romNum = ["I", "II", "III", "IV", "V", "VI"][index] || (index + 1);
 
     drawer.innerHTML = `
-      <div class="drawer-handle"></div>
+      <div class="drawer-handle" aria-hidden="true"></div>
       <span class="drawer-label">${romNum}. ${prob.titulo}</span>
     `;
 
-    // Clic abre expediente
-    drawer.addEventListener("click", () => openDossier(prob.id));
+    const action = () => openDossier(prob.id);
+    drawer.addEventListener("click", action);
+    addKeyboardSupport(drawer, action);
 
     chest.appendChild(drawer);
   });
 }
 
 function openDossier(probId) {
+  state.activeDossierId = probId;
   const prob = PROBLEMAS.find(p => p.id === probId);
   if (!prob) return;
 
-  // Desactivar cajón anterior y activar nuevo
+  // Sincronizar clases y aria de cajones
   document.querySelectorAll(".cabinet-drawer").forEach(dr => {
-    if (dr.dataset.probId === probId) {
-      dr.classList.add("active");
-    } else {
-      dr.classList.remove("active");
-    }
+    const isActive = dr.dataset.probId === probId;
+    dr.classList.toggle("active", isActive);
+    dr.setAttribute("aria-selected", isActive ? "true" : "false");
   });
 
   const emptyState = document.getElementById("dossier-empty");
   const sheet = document.getElementById("dossier-sheet");
 
-  // Esconder empty y animar entrada del pergamino
   emptyState.classList.add("hidden");
   sheet.classList.remove("hidden");
 
-  // Llenar cabecera del pergamino
   document.getElementById("dossier-title").textContent = prob.titulo;
   document.getElementById("dossier-question").textContent = prob.pregunta;
 
-  // Llenar las 3 prescripciones escolares
+  // Llenar las 3 prescripciones
   const presList = document.getElementById("dossier-prescriptions");
   presList.innerHTML = "";
 
@@ -533,21 +647,23 @@ function openDossier(probId) {
     const item = document.createElement("div");
     item.className = "prescription-item";
     
-    // Configurar pH visual (acidez regulatoria estatal vs alcalinidad de mercado)
-    const phWidth = pres.ph; // % de 0 a 100
+    const phWidth = pres.ph;
+    const isEs = state.currentLang === "es";
+    const localPhLabel = isEs ? "pH Estatal:" : "State pH:";
+    const localToxLabel = isEs ? "Toxicidad Colateral:" : "Collateral Toxicity:";
 
     item.innerHTML = `
       <div class="prescription-header">
-        <span class="prescription-school">PRESCRIPCIÓN: Escuela ${pres.escuela}</span>
+        <span class="prescription-school">${isEs ? "PRESCRIPCIÓN:" : "PRESCRIPTION:"} ${isEs ? "Escuela" : ""} ${pres.escuela}</span>
         <div class="ph-metric">
-          <span class="ph-label">pH Estatal:</span>
-          <div class="ph-bar-track" title="Nivel de intervención del Estado">
+          <span class="ph-label">${localPhLabel}</span>
+          <div class="ph-bar-track" title="${TRANSLATIONS[state.currentLang].ui.phInterventionTitle}">
             <div class="ph-bar-fill" style="width: ${phWidth}%;"></div>
           </div>
         </div>
       </div>
       <p class="prescription-desc">${pres.remedio}</p>
-      <span class="prescription-toxicity"><i data-lucide="shield-alert" class="icon-inline"></i> Toxicidad Colateral: ${pres.toxicidad}</span>
+      <span class="prescription-toxicity"><i data-lucide="shield-alert" class="icon-inline" aria-hidden="true"></i> ${localToxLabel} ${pres.toxicidad}</span>
     `;
 
     presList.appendChild(item);
@@ -558,7 +674,7 @@ function openDossier(probId) {
   }
 }
 
-// ── SECCIÓN 4: MOTOR DE PREGUNTAS DEL TEST ────────────────────────────────
+// ── SECCIÓN 4: TEST DE ALCOHOLEMIA POLÍTICA ────────────────────────────────
 function initTestEngine() {
   const startBtn = document.getElementById("start-test-btn");
   const startScreen = document.getElementById("test-start-screen");
@@ -566,14 +682,15 @@ function initTestEngine() {
 
   if (!startBtn) return;
 
-  // Iniciar Test
-  startBtn.addEventListener("click", () => {
+  const startAction = () => {
     startScreen.classList.add("hidden");
     questionScreen.classList.remove("hidden");
     state.currentTestQuestion = 0;
     state.answers = {};
     renderQuestion();
-  });
+  };
+  startBtn.addEventListener("click", startAction);
+  addKeyboardSupport(startBtn, startAction);
 
   // Listener para el Slider de la Fase 3
   const slider = document.getElementById("luxury-slider");
@@ -581,24 +698,26 @@ function initTestEngine() {
   if (slider && readout) {
     slider.addEventListener("input", (e) => {
       const val = parseInt(e.target.value);
-      let text = "Equilibrio Central (50%)";
+      const isEs = state.currentLang === "es";
+      
+      let text = isEs ? "Equilibrio Central (50%)" : "Central Balance (50%)";
       if (val < 40) {
-        text = `Sesgo Mercado (${100 - val * 2}%)`;
+        text = `${isEs ? "Sesgo Mercado" : "Market Bias"} (${100 - val * 2}%)`;
       } else if (val > 60) {
-        text = `Sesgo Planificación (${(val - 50) * 2}%)`;
+        text = `${isEs ? "Sesgo Planificación" : "Planning Bias"} (${(val - 50) * 2}%)`;
       }
       readout.textContent = text;
     });
   }
 
-  // Clic en Siguiente Pregunta para el Slider
+  // Confirmar slider
   const sliderNextBtn = document.getElementById("slider-next-btn");
   if (sliderNextBtn) {
-    sliderNextBtn.addEventListener("click", () => {
-      const val = parseInt(slider.value) / 100; // Normalizar a [0, 1]
+    const sliderAction = () => {
+      const val = parseInt(slider.value) / 100; // [0, 1]
       const q = PREGUNTAS[state.currentTestQuestion];
       
-      state.answers[q.id] = val; // Guardar valor analógico del slider
+      state.answers[q.id] = val;
       
       state.currentTestQuestion++;
       if (state.currentTestQuestion < PREGUNTAS.length) {
@@ -606,7 +725,9 @@ function initTestEngine() {
       } else {
         triggerAlchemicalCalculation();
       }
-    });
+    };
+    sliderNextBtn.addEventListener("click", sliderAction);
+    addKeyboardSupport(sliderNextBtn, sliderAction);
   }
 }
 
@@ -615,20 +736,23 @@ function renderQuestion() {
   const q = PREGUNTAS[state.currentTestQuestion];
   if (!q) return;
 
-  // Actualizar indicadores visuales
-  document.getElementById("test-step-label").textContent = `PREGUNTA ${state.currentTestQuestion + 1} DE ${PREGUNTAS.length}`;
+  const isEs = state.currentLang === "es";
+
+  // Actualizar indicadores
+  document.getElementById("test-step-label").textContent = isEs 
+    ? `PREGUNTA ${state.currentTestQuestion + 1} DE ${PREGUNTAS.length}`
+    : `QUESTION ${state.currentTestQuestion + 1} OF ${PREGUNTAS.length}`;
   
-  // Traducir nombre de Fase
-  let phaseText = "FASE 1: ARQUITECTURA COGNITIVA";
-  if (q.fase === 2) phaseText = "FASE 2: INGREDIENTES IDEOLÓGICOS";
-  if (q.fase === 3) phaseText = "FASE 3: DILEMAS DE ALTA TENSIÓN";
+  let phaseText = isEs ? "FASE 1: ARQUITECTURA COGNITIVA" : "PHASE 1: COGNITIVE FRAMEWORK";
+  if (q.fase === 2) phaseText = isEs ? "FASE 2: INGREDIENTES IDEOLÓGICOS" : "PHASE 2: IDEOLOGICAL INGREDIENTS";
+  if (q.fase === 3) phaseText = isEs ? "FASE 3: DILEMAS DE ALTA TENSIÓN" : "PHASE 3: HIGH-TENSION DILEMMAS";
   document.getElementById("test-phase-label").textContent = phaseText;
 
-  // Rellenar barra de progreso
+  // Barra progreso
   const pct = ((state.currentTestQuestion) / PREGUNTAS.length) * 100;
   document.getElementById("test-progress-fill").style.width = `${pct}%`;
 
-  // Rellenar texto de pregunta
+  // Texto pregunta
   document.getElementById("test-question-text").textContent = q.texto;
 
   const optionsGrid = document.getElementById("test-options-grid");
@@ -638,34 +762,34 @@ function renderQuestion() {
   const slider = document.getElementById("luxury-slider");
   if (slider) {
     slider.value = 50;
-    document.getElementById("slider-value-readout").textContent = "Equilibrio Central (50%)";
+    document.getElementById("slider-value-readout").textContent = isEs ? "Equilibrio Central (50%)" : "Central Balance (50%)";
   }
 
   if (q.fase === 1 || q.fase === 2) {
-    // Mostrar GRID y ocultar SLIDER
     optionsGrid.classList.remove("hidden");
     sliderWrapper.classList.add("hidden");
 
     optionsGrid.innerHTML = "";
     
-    q.opciones.forEach((opt, idx) => {
+    q.opciones.forEach((opt) => {
       const card = document.createElement("div");
       card.className = "test-option-card";
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-label", opt.texto);
       
       card.innerHTML = `
-        <div class="option-marker"></div>
+        <div class="option-marker" aria-hidden="true"></div>
         <p class="option-text">${opt.texto}</p>
       `;
 
-      card.addEventListener("click", () => {
-        // Añadir clase seleccionada y retrasar ligeramente el paso para feedback visual
+      const selectOption = () => {
         card.classList.add("selected");
         
-        // Guardar respuesta
         if (q.fase === 1) {
-          state.answers[q.id] = opt.tipo; // "erizo" o "zorro"
+          state.answers[q.id] = opt.tipo; // "monismo" o "pluralismo"
         } else {
-          state.answers[q.id] = opt.pesos; // Guardar objeto de pesos { escuela: valor }
+          state.answers[q.id] = opt.pesos; // pesos
         }
 
         setTimeout(() => {
@@ -676,17 +800,18 @@ function renderQuestion() {
             triggerAlchemicalCalculation();
           }
         }, 300);
-      });
+      };
+
+      card.addEventListener("click", selectOption);
+      addKeyboardSupport(card, selectOption);
 
       optionsGrid.appendChild(card);
     });
 
   } else if (q.fase === 3) {
-    // Mostrar SLIDER y ocultar GRID
     optionsGrid.classList.add("hidden");
     sliderWrapper.classList.remove("hidden");
 
-    // Llenar los polos conceptuales del Slider
     document.getElementById("slider-left-title").textContent = q.izquierda.titulo;
     document.getElementById("slider-right-title").textContent = q.derecha.titulo;
     document.getElementById("slider-left-text").textContent = q.izquierda.texto;
@@ -694,7 +819,7 @@ function renderQuestion() {
   }
 }
 
-// ── SPINNER DE ALQUIMIA Y CÁLCULOS ─────────────────────────────────────────
+// SPINNER DE ALQUIMIA Y CÁLCULOS
 function triggerAlchemicalCalculation() {
   const questionScreen = document.getElementById("test-question-screen");
   const loadingScreen = document.getElementById("test-loading-screen");
@@ -702,50 +827,46 @@ function triggerAlchemicalCalculation() {
 
   questionScreen.classList.add("hidden");
   loadingScreen.classList.remove("hidden");
-
-  // Barra de progreso llena
   document.getElementById("test-progress-fill").style.width = "100%";
 
   setTimeout(() => {
-    // Ejecutar motor matemático vectorial de alcoholemia
     const results = calculateAlchemicalResults();
+    state.activeResults = results; // Persistir en estado activo
 
     loadingScreen.classList.add("hidden");
     resultsScreen.classList.remove("hidden");
 
-    // Renderizar los resultados detallados en UI
     renderResultsToUI(results);
+    resultsScreen.scrollIntoView({ behavior: 'smooth' });
 
-  }, 2200); // 2.2 segundos para atmósfera dramática de mezcla
+  }, 2200);
 }
 
 // ── MOTOR DE CÁLCULO VECTORIAL HHI ─────────────────────────────────────────
 function calculateAlchemicalResults() {
-  // Inicializar vector de pesos de escuelas con ceros
   const w = {};
   Object.keys(ESCUELAS).forEach(id => {
     w[id] = 0;
   });
 
-  let zorroAnswersCount = 0;
+  let pluralismoAnswersCount = 0;
 
   // Procesar respuestas
   Object.entries(state.answers).forEach(([qId, val]) => {
+    // Buscar pregunta en la base de datos activa
     const q = PREGUNTAS.find(p => p.id === qId);
     if (!q) return;
 
     if (q.fase === 1) {
-      if (val === "zorro") zorroAnswersCount++;
+      if (val === "pluralismo") pluralismoAnswersCount++;
     } else if (q.fase === 2) {
-      // Sumar pesos de afinidad ideológica directos
       Object.entries(val).forEach(([schoolId, weight]) => {
         if (w[schoolId] !== undefined) {
           w[schoolId] += weight;
         }
       });
     } else if (q.fase === 3) {
-      // Interpolador continuo lineal de Sliders: t de 0 a 1
-      const t = val; // Posición de slider (0 es izquierda extrema, 1 derecha extrema)
+      const t = val; // [0, 1]
       
       // Lado Izquierdo
       Object.entries(q.izquierda.pesos).forEach(([schoolId, weight]) => {
@@ -762,7 +883,6 @@ function calculateAlchemicalResults() {
     }
   });
 
-  // Asegurar que no quede todo en cero (fallback preventivo)
   let sumW = Object.values(w).reduce((acc, val) => acc + val, 0);
   if (sumW === 0) {
     w.neoclasica = 1;
@@ -770,36 +890,34 @@ function calculateAlchemicalResults() {
     sumW = 2;
   }
 
-  // 1. Normalizar porcentajes de ingredientes (suma 100)
+  // 1. Normalizar porcentajes a exactamente 100
   const porcentajes = {};
   Object.entries(w).forEach(([id, val]) => {
     porcentajes[id] = Math.round((val / sumW) * 100);
   });
 
-  // Ajustar redondeos para asegurar suma exacta de 100
   let currentSum = Object.values(porcentajes).reduce((acc, val) => acc + val, 0);
   if (currentSum !== 100) {
     const diff = 100 - currentSum;
-    // Buscar la escuela más alta y sumarle la diferencia
     const highestSchool = Object.keys(porcentajes).reduce((a, b) => porcentajes[a] > porcentajes[b] ? a : b);
     porcentajes[highestSchool] += diff;
   }
 
-  // 2. Calcular Índice de Herfindahl-Hirschman (HHI) para medir Entropía
+  // 2. Calcular HHI (Índice de Herfindahl-Hirschman)
   let hhi = 0;
   Object.values(porcentajes).forEach(pct => {
     hhi += Math.pow(pct / 100, 2);
   });
 
-  // 3. Determinar Arquetipo Epistémico de Isaiah Berlin
-  const epistemicStyle = zorroAnswersCount >= 2 ? "zorro" : "erizo";
-  const realPurity = hhi >= 0.18 ? "erizo" : "zorro"; // HHI >= 0.18 es concentrado (erizo)
+  // 3. Determinar Arquetipo Epistémico de forma Académica
+  const epistemicStyle = pluralismoAnswersCount >= 2 ? "pluralismo" : "monismo";
+  const realPurity = hhi >= 0.18 ? "monismo" : "pluralismo"; 
 
-  let finalArchetypeKey = "zorro_sistemico";
-  if (epistemicStyle === "erizo" && realPurity === "erizo") finalArchetypeKey = "erizo_doctrinal";
-  else if (epistemicStyle === "zorro" && realPurity === "zorro") finalArchetypeKey = "zorro_sistemico";
-  else if (epistemicStyle === "erizo" && realPurity === "zorro") finalArchetypeKey = "erizo_tension";
-  else if (epistemicStyle === "zorro" && realPurity === "erizo") finalArchetypeKey = "zorro_pragmatico";
+  let finalArchetypeKey = "pluralismo_sistemico";
+  if (epistemicStyle === "monismo" && realPurity === "monismo") finalArchetypeKey = "monismo_doctrinal";
+  else if (epistemicStyle === "pluralismo" && realPurity === "pluralismo") finalArchetypeKey = "pluralismo_sistemico";
+  else if (epistemicStyle === "monismo" && realPurity === "pluralismo") finalArchetypeKey = "monismo_eclectico";
+  else if (epistemicStyle === "pluralismo" && realPurity === "monismo") finalArchetypeKey = "pluralismo_pragmatico";
 
   // 4. Mapear Centro de Gravedad por Cuadrantes
   const qScores = {
@@ -811,7 +929,7 @@ function calculateAlchemicalResults() {
 
   const dominantQuadrant = Object.keys(qScores).reduce((a, b) => qScores[a] > qScores[b] ? a : b);
 
-  // 5. Mapear Perfil de Concentración y su Resaca
+  // 5. Mapear Concentración
   let concentrationKey = "sintetico";
   if (hhi >= 0.25) concentrationKey = "monocultura";
   else if (hhi < 0.12) concentrationKey = "disperso";
@@ -819,31 +937,50 @@ function calculateAlchemicalResults() {
   return {
     porcentajes,
     hhi,
-    archetype: PERFILES_COGNITIVOS[finalArchetypeKey],
-    quadrant: PERFILES_CUADRANTES[dominantQuadrant],
-    concentration: PERFILES_CONCENTRACION[concentrationKey],
+    archetypeKey: finalArchetypeKey,
+    quadrantKey: dominantQuadrant,
+    concentrationKey,
     qScores
   };
 }
 
 // ── RENDERIZAR RESULTADOS A LA INTERFAZ ───────────────────────────────────
 function renderResultsToUI(results) {
-  // 1. Cabecera de Arquetipo
-  document.getElementById("result-archetype-name").textContent = results.archetype.nombre;
-  document.getElementById("result-archetype-sub").textContent = results.archetype.subtitulo;
-  document.getElementById("result-archetype-desc").textContent = `${results.archetype.descripcion} ${results.quadrant.descripcion}`;
+  const isEs = state.currentLang === "es";
 
-  document.getElementById("result-virtue").textContent = results.archetype.virtud;
+  // Cargar perfiles reactivos traducidos
+  const archetype = PERFILES_COGNITIVOS[results.archetypeKey];
+  const quadrant = PERFILES_CUADRANTES[results.quadrantKey];
+  const concentration = PERFILES_CONCENTRACION[results.concentrationKey];
 
-  // 2. Resacas y Riesgos
-  document.getElementById("result-hangover-title").innerHTML = `<i data-lucide="alert-octagon"></i> RIESGO DE RESACA: ${results.concentration.riesgo}`;
-  document.getElementById("result-hangover-desc").textContent = `${results.concentration.narrativa} ${results.archetype.resaca}`;
+  // Determinar icono Lucide según el arquetipo de-animalizado
+  let iconName = "network";
+  if (results.archetypeKey === "monismo_doctrinal") iconName = "infinity";
+  else if (results.archetypeKey === "pluralismo_sistemico") iconName = "network";
+  else if (results.archetypeKey === "monismo_eclectico") iconName = "shuffle";
+  else if (results.archetypeKey === "pluralismo_pragmatico") iconName = "binary";
 
-  // 3. Renderizar Lista de Barras de Ingredientes (Filtrar > 0%)
+  // Inyectar cabecera e icono
+  document.getElementById("result-archetype-name").innerHTML = `
+    <i data-lucide="${iconName}" class="icon-inline" style="margin-right: 10px; color: var(--accent-gold);"></i>
+    ${archetype.nombre}
+  `;
+  document.getElementById("result-archetype-sub").textContent = archetype.subtitulo;
+  document.getElementById("result-archetype-desc").textContent = `${archetype.descripcion} ${quadrant.descripcion}`;
+  document.getElementById("result-virtue").textContent = archetype.virtud;
+
+  // Resacas
+  const localHangoverTitle = isEs ? "RIESGO DE RESACA: " : "HANGOVER RISK: ";
+  document.getElementById("result-hangover-title").innerHTML = `
+    <i data-lucide="alert-octagon" aria-hidden="true"></i> 
+    ${localHangoverTitle} ${concentration.riesgo}
+  `;
+  document.getElementById("result-hangover-desc").textContent = `${concentration.narrativa} ${archetype.resaca}`;
+
+  // Barras de porcentajes
   const barList = document.getElementById("results-bar-list");
   barList.innerHTML = "";
 
-  // Ordenar escuelas de mayor a menor porcentaje
   const sortedSchools = Object.entries(results.porcentajes)
     .filter(([_, pct]) => pct > 0)
     .sort((a, b) => b[1] - a[1]);
@@ -854,30 +991,30 @@ function renderResultsToUI(results) {
 
     const item = document.createElement("div");
     item.className = "result-bar-item";
+    item.setAttribute("role", "listitem");
     
     item.innerHTML = `
       <div class="result-bar-header">
         <span class="result-bar-name">${escuela.nombre}</span>
         <span class="result-bar-val">${pct}%</span>
       </div>
-      <div class="result-bar-track">
+      <div class="result-bar-track" aria-hidden="true">
         <div class="result-bar-fill" style="--bar-color: ${escuela.color}"></div>
       </div>
     `;
 
     barList.appendChild(item);
 
-    // Animación de rampa progresiva en barra de progreso
     setTimeout(() => {
-      item.querySelector(".result-bar-fill").style.width = `${pct}%`;
+      const fill = item.querySelector(".result-bar-fill");
+      if (fill) fill.style.width = `${pct}%`;
     }, 100);
   });
 
-  // 4. Inyectar Líquidos de Capas en la Botella Personalizada
+  // Capas de la Botella
   const bottleLiquid = document.getElementById("bottle-liquid-container");
   bottleLiquid.innerHTML = "";
 
-  // Usar los 4 principales ingredientes ordenados para las capas
   const topIngredients = sortedSchools.slice(0, 4);
   const totalVolumeInBottle = topIngredients.reduce((acc, curr) => acc + curr[1], 0);
 
@@ -885,7 +1022,6 @@ function renderResultsToUI(results) {
     const escuela = ESCUELAS[schoolId];
     if (!escuela) return;
 
-    // Calcular proporción relativa dentro del frasco (que se llena un 80% total)
     const relativeHeight = (pct / totalVolumeInBottle) * 100;
 
     const layer = document.createElement("div");
@@ -895,64 +1031,68 @@ function renderResultsToUI(results) {
 
     bottleLiquid.appendChild(layer);
 
-    // Animación de llenado progresivo
     setTimeout(() => {
       layer.style.setProperty("--layer-height", `${relativeHeight}%`);
     }, 150);
   });
 
-  // 5. Dibujar Gráfico de Radar en el Canvas nativo
+  // Radar Canvas
   renderRadarChart(results.qScores);
 
   // Botón Reiniciar
-  document.getElementById("btn-restart-test").onclick = () => {
+  const btnRestart = document.getElementById("btn-restart-test");
+  const restartAction = () => {
+    state.activeResults = null;
     document.getElementById("test-results-screen").classList.add("hidden");
     document.getElementById("test-start-screen").classList.remove("hidden");
+    document.getElementById("test").scrollIntoView({ behavior: 'smooth' });
   };
+  btnRestart.onclick = restartAction;
+  addKeyboardSupport(btnRestart, restartAction);
 
   // Botón Exportar Tarjeta
-  document.getElementById("btn-export-card").onclick = () => {
+  const btnExport = document.getElementById("btn-export-card");
+  const exportAction = () => {
     exportTastingCard(results);
   };
+  btnExport.onclick = exportAction;
+  addKeyboardSupport(btnExport, exportAction);
 
   if (window.lucide) {
     window.lucide.createIcons();
   }
 }
 
-// ── RENDER DEL GRÁFICO DE RADAR EN CANVAS NATIVO ───────────────────────────
+// ── RENDER DEL GRÁFICO DE RADAR EN CANVAS NATIVO CON DISEÑO DEFENSIVO ───────
 function renderRadarChart(qScores) {
   const canvas = document.getElementById("radar-canvas");
   if (!canvas) return;
 
-  const ctx = canvas.getContext("2d");
-  const width = canvas.width;
-  const height = canvas.height;
-  const cx = width / 2;
-  const cy = height / 2;
-  const radius = Math.min(width, height) / 2 - 30; // 30px margen para etiquetas
+  // Setup de Canvases en Alta Resolución DPR
+  const logicalWidth = 240;
+  const logicalHeight = 240;
+  const ctx = setupCanvasDPR(canvas, logicalWidth, logicalHeight);
 
-  ctx.clearRect(0, 0, width, height);
+  const cx = logicalWidth / 2;
+  const cy = logicalHeight / 2;
+  
+  // Safety Margin defensivo de 35px para evitar desbordamientos tipográficos en HD
+  const radius = Math.min(logicalWidth, logicalHeight) / 2 - 35; 
 
-  // Ejes del Radar: 
-  // Arriba (Q1): Equidad
-  // Derecha (Q2 / Q2 no es un cuadrante complejo en Chang pero lo mapeamos a individual/mercado):
-  // Usamos el mapeo coordinado del spec:
-  // Eje Y+ (Arriba): Equidad y Sostenibilidad
-  // Eje X+ (Derecha): Mercado libre y Descentralización
-  // Eje Y- (Abajo): Productividad y Crecimiento
-  // Eje X- (Izquierda): Estado y Planificación
+  const isEs = state.currentLang === "es";
+
+  // Ejes basados en la fuerza vectorial
   const axes = [
-    { label: "Equidad", score: qScores.Q1 + qScores.Q2 * 0.5 },
-    { label: "Mercado", score: qScores.Q4 + qScores.Q2 * 0.5 },
-    { label: "Crecimiento", score: qScores.Q4 * 0.3 + qScores.Q3 * 0.7 },
-    { label: "Estado", score: qScores.Q1 * 0.4 + qScores.Q3 * 0.6 }
+    { label: isEs ? "Equidad" : "Equity", score: qScores.Q1 + qScores.Q2 * 0.5 },
+    { label: isEs ? "Mercado" : "Market", score: qScores.Q4 + qScores.Q2 * 0.5 },
+    { label: isEs ? "Crecimiento" : "Growth", score: qScores.Q4 * 0.3 + qScores.Q3 * 0.7 },
+    { label: isEs ? "Estado" : "State", score: qScores.Q1 * 0.4 + qScores.Q3 * 0.6 }
   ];
 
   const maxVal = 100;
   const levels = 4;
 
-  // 1. Dibujar círculos concéntricos de niveles
+  // 1. Círculos concéntricos de niveles
   ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
   ctx.lineWidth = 1;
   for (let i = 1; i <= levels; i++) {
@@ -962,11 +1102,11 @@ function renderRadarChart(qScores) {
     ctx.stroke();
   }
 
-  // 2. Dibujar líneas de los ejes
+  // 2. Líneas de los ejes
   ctx.strokeStyle = "rgba(217, 167, 82, 0.12)";
   ctx.beginPath();
   axes.forEach((_, idx) => {
-    const angle = (Math.PI / 2) * idx - Math.PI / 2; // Iniciar en el eje Y+ (arriba)
+    const angle = (Math.PI / 2) * idx - Math.PI / 2;
     const ax = cx + Math.cos(angle) * radius;
     const ay = cy + Math.sin(angle) * radius;
     ctx.moveTo(cx, cy);
@@ -974,12 +1114,11 @@ function renderRadarChart(qScores) {
   });
   ctx.stroke();
 
-  // 3. Calcular puntos del polígono del usuario
+  // 3. Puntos del polígono de afinidades
   const points = axes.map((axis, idx) => {
     const angle = (Math.PI / 2) * idx - Math.PI / 2;
-    // Ponderar puntaje para que siempre brille en el gráfico de forma proporcional
     const normScore = Math.max(axis.score, 10); // mínimo visual
-    const dist = (normScore / maxVal) * radius * 1.5; // multiplicador de escala
+    const dist = (normScore / maxVal) * radius * 1.4;
     const clampedDist = Math.min(dist, radius);
     return {
       x: cx + Math.cos(angle) * clampedDist,
@@ -987,8 +1126,8 @@ function renderRadarChart(qScores) {
     };
   });
 
-  // 4. Dibujar polígono relleno con gradiente
-  ctx.fillStyle = "rgba(217, 167, 82, 0.2)";
+  // 4. Dibujar polígono relleno translúcido (Tufte clean)
+  ctx.fillStyle = "rgba(217, 167, 82, 0.15)";
   ctx.strokeStyle = "#d9a752";
   ctx.lineWidth = 2;
   ctx.beginPath();
@@ -1000,7 +1139,7 @@ function renderRadarChart(qScores) {
   ctx.fill();
   ctx.stroke();
 
-  // Dibujar pequeños diamantes en los vértices del polígono
+  // Vértices diamantes
   ctx.fillStyle = "#fcd34d";
   points.forEach(pt => {
     ctx.beginPath();
@@ -1008,42 +1147,58 @@ function renderRadarChart(qScores) {
     ctx.fill();
   });
 
-  // 5. Dibujar etiquetas de texto para los ejes
-  ctx.fillStyle = "rgba(245, 243, 239, 0.4)";
+  // 5. Etiquetas tipográficas del eje con ALINEACIÓN ANGULAR REACTIVA ANTICOLISIÓN
+  ctx.fillStyle = "rgba(245, 243, 239, 0.7)"; // WCAG Contrastado
   ctx.font = "bold 9px 'JetBrains Mono', monospace";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-
-  const offsets = [
-    { x: 0, y: -15 },  // Equidad (arriba)
-    { x: 25, y: 0 },   // Mercado (derecha)
-    { x: 0, y: 15 },   // Crecimiento (abajo)
-    { x: -25, y: 0 }   // Estado (izquierda)
-  ];
 
   axes.forEach((axis, idx) => {
     const angle = (Math.PI / 2) * idx - Math.PI / 2;
-    const tx = cx + Math.cos(angle) * (radius + 20) + offsets[idx].x;
-    const ty = cy + Math.sin(angle) * (radius + 12) + offsets[idx].y;
+    
+    // Safety padding radial respecto al vértice
+    const tx = cx + Math.cos(angle) * (radius + 14);
+    const ty = cy + Math.sin(angle) * (radius + 10);
+    
+    // Alineación reactiva defensiva contra desbordamiento de límites
+    if (idx === 0) {
+      // Superior: Equidad
+      ctx.textAlign = "center";
+      ctx.textBaseline = "bottom";
+    } else if (idx === 1) {
+      // Derecho: Mercado
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+    } else if (idx === 2) {
+      // Inferior: Crecimiento
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+    } else if (idx === 3) {
+      // Izquierdo: Estado
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+    }
+
     ctx.fillText(axis.label.toUpperCase(), tx, ty);
   });
 }
 
 // ── EXPORTACIÓN DE LA TARJETA DE CATAS (Browser Print) ──────────────────────
 function exportTastingCard(results) {
-  // Formatear ingredientes ordenados en texto legible
+  const ui = TRANSLATIONS[state.currentLang].ui;
+  const archetype = PERFILES_COGNITIVOS[results.archetypeKey];
+  const quadrant = PERFILES_CUADRANTES[results.quadrantKey];
+  const concentration = PERFILES_CONCENTRACION[results.concentrationKey];
+
   const topIngredients = Object.entries(results.porcentajes)
     .filter(([_, pct]) => pct > 0)
     .sort((a, b) => b[1] - a[1])
     .map(([id, pct]) => `${pct}% ${ESCUELAS[id].nombre}`)
     .join(" / ");
 
-  // Crear una ventana estilizada optimizada para impresión (estilo tarjeta de lujo speakeasy)
   const printWindow = window.open("", "_blank");
   printWindow.document.write(`
     <html>
       <head>
-        <title>Mi Tarjeta de Alcoholemia Política - Elixires de la Razón</title>
+        <title>${ui.exportDocTitle}</title>
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
         <style>
           body {
@@ -1126,33 +1281,33 @@ function exportTastingCard(results) {
       <body>
         <div class="ticket-card">
           <div class="card-header">
-            <span class="title-tag">ACTA OFICIAL DE ALCOHOLEMIA</span>
-            <h1>${results.archetype.nombre}</h1>
-            <span class="archetype-sub">${results.archetype.subtitulo}</span>
+            <span class="title-tag">${ui.exportOfficialAct}</span>
+            <h1>${archetype.nombre}</h1>
+            <span class="archetype-sub">${archetype.subtitulo}</span>
           </div>
 
           <div class="card-block">
-            <span class="block-label">FÓRMULA MOLECULAR DE DOCTRINAS</span>
+            <span class="block-label">${ui.exportMolecularFormula}</span>
             <p class="block-text" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">${topIngredients}</p>
           </div>
 
           <div class="card-block">
-            <span class="block-label">DIAGNÓSTICO COGNITIVO</span>
-            <p class="block-text">${results.archetype.descripcion} ${results.quadrant.descripcion}</p>
+            <span class="block-label">${ui.exportCognitiveDiag}</span>
+            <p class="block-text">${archetype.descripcion} ${quadrant.descripcion}</p>
           </div>
 
           <div class="card-block">
-            <span class="block-label">VIRTUD INTELECTUAL</span>
-            <p class="block-text">${results.archetype.virtud}</p>
+            <span class="block-label">${ui.exportVirtue}</span>
+            <p class="block-text">${archetype.virtud}</p>
           </div>
 
           <div class="card-block">
-            <span class="block-label">RIESGO LATENTE DE RESACA</span>
-            <p class="block-text">${results.concentration.riesgo}: ${results.concentration.narrativa} ${results.archetype.resaca}</p>
+            <span class="block-label">${ui.exportHangoverRisk}</span>
+            <p class="block-text">${concentration.riesgo}: ${concentration.narrativa} ${archetype.resaca}</p>
           </div>
 
           <div class="watermark">
-            CÁTEDRA DE COCTELERÍA ECONÓMICA • ELIXIRES DE LA RAZÓN
+            ${ui.exportWatermark}
           </div>
         </div>
         <script>
@@ -1172,12 +1327,11 @@ function initScrollReveal() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("in-view");
-        // Desregistrar para no recalcular
         observer.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.12 // Activa cuando el 12% del componente está en viewport
+    threshold: 0.12
   });
 
   document.querySelectorAll(".reveal").forEach(el => {
