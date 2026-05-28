@@ -10,7 +10,7 @@
 export const TRANSLATIONS = {
   es: {
     ui: {
-      navLogo: "ELIXIRES <em>de la</em> RAZÓN",
+      navLogo: "ELIXIRES <em>de la</em> RAZÓN ECONÓMICA",
       navShelf: "El Estante",
       navMenu: "La Carta",
       navCabinet: "Boticario",
@@ -72,8 +72,23 @@ export const TRANSLATIONS = {
       exportCognitiveDiag: "DIAGNÓSTICO COGNITIVO",
       exportVirtue: "VIRTUD INTELECTUAL",
       exportHangoverRisk: "RIESGO LATENTE DE RESACA",
-      exportWatermark: "CÁTEDRA DE COCTELERÍA ECONÓMICA • ELIXIRES DE LA RAZÓN",
-      exportDocTitle: "Mi Tarjeta de Alcoholemia Política - Elixires de la Razón"
+      exportWatermark: "CÁTEDRA DE COCTELERÍA ECONÓMICA • ELIXIRES DE LA RAZÓN ECONÓMICA",
+      exportDocTitle: "Mi Tarjeta de Alcoholemia Política - Elixires de la Razón Económica",
+      footerColDatasheetTitle: "📋 Ficha Técnica",
+      footerLabelTitle: "Título",
+      footerValueTitle: "ELIXIRES de la RAZÓN ECONÓMICA",
+      footerLabelEdition: "Edición",
+      footerLabelMoreInfo: "More info",
+      footerValueMoreInfo: "README del Proyecto",
+      footerLabelCite: "Cita Bibliográfica",
+      footerValueCite: "Artunduaga Viana, William Camilo (2026). Elixires de la Razón Económica. URL: https://github.com/willkwolf/economic-bar",
+      footerColLinksTitle: "🔗 Enlaces de Interés",
+      footerLinkLibertyTitle: "🗽 Arquitectura de Libertad <span class=\"link-arrow\">→</span>",
+      footerLinkLibertyDesc: "Infografía interactiva sobre Isaiah Berlin y la libertad.",
+      footerLinkOriginTitle: "📈 Economic School Map (Origen) <span class=\"link-arrow\">→</span>",
+      footerLinkOriginDesc: "El mapa original del cual deriva este desarrollo.",
+      footerColMethodTitle: "🧪 Código & Metodología",
+      footerMethodDesc: "Para detalles metodológicos, formalización y código fuente, visita el proyecto directamente en GitHub."
     },
     escuelas: {
       marxista: {
@@ -82,9 +97,9 @@ export const TRANSLATIONS = {
         fundador: "Karl Marx & Friedrich Engels (1867)",
         color: "#8c2323",
         abv: "90% Vol. Conflicto Estructural",
-        tastingNotes: "Intensa y con cuerpo. Notas predominantes de lucha de clases, materialismo histórico y contradicciones estructurales. Deja un regusto prolongado a valor-trabajo y superación del capital.",
-        sideEffects: "Propenso a la intoxicación dogmática, ceguera ante la flexibilidad de los mercados autorregulados y propensión a la rigidez burocrática del comité central.",
-        descripcion_corta: "Crítica sistémica del capital, clases sociales y plusvalía."
+        tastingNotes: "Cuerpo denso e implacable. Revela notas profundas de materialismo histórico, asimetrías en la propiedad de los medios de producción y la extracción sistémica de plusvalor ($s$). Marcado carácter de la ley del valor-trabajo y contradicciones de acumulación (caída de la tasa de ganancia).",
+        sideEffects: "Riesgo de ceguera ante los mecanismos de autorregulación del mercado y la adaptabilidad del capitalismo tardío; propensión a la parálisis burocrática y al autoritarismo centralista.",
+        descripcion_corta: "Crítica de la acumulación de capital, teoría del plusvalor y contradicciones sistémicas."
       },
       feminista: {
         id: "feminista",
@@ -92,9 +107,9 @@ export const TRANSLATIONS = {
         fundador: "Silvia Federici & Marilyn Waring (1980)",
         color: "#bd777a",
         abv: "75% Vol. Sostenimiento Vital",
-        tastingNotes: "Terrosa y reconfortante. Notas de base sobre trabajo reproductivo no remunerado, economía del cuidado y deconstrucción de la frontera público/privado. Muy equilibrada.",
-        sideEffects: "A veces diluye la modelación agregada de corto plazo; puede provocar parálisis ante la urgencia de equilibrios fiscales inmediatos en economías de mercado.",
-        descripcion_corta: "Visibilización del cuidado doméstico y reproducción social."
+        tastingNotes: "Orgánica y vital. Cimientos sólidos sobre la teoría de la reproducción social y la visibilización del trabajo de cuidados no remunerado. Desafía el sesgo androcéntrico de la macroeconomía tradicional (como la exclusión del hogar en el PIB) e integra el bienestar de la vida sobre el valor de cambio.",
+        sideEffects: "Complejidad analítica al integrar variables no monetizables en los modelos agregados estándar; puede chocar con la inmediatez de los balances contables en economías altamente financiarizadas.",
+        descripcion_corta: "Economía del cuidado, reproducción social y crítica del sesgo androcéntrico."
       },
       ecologica: {
         id: "ecologica",
@@ -102,9 +117,9 @@ export const TRANSLATIONS = {
         fundador: "Kate Raworth & Nicholas Georgescu-Roegen (2012)",
         color: "#2c5e3b",
         abv: "80% Vol. Límites Planetarios",
-        tastingNotes: "Herbácea y refrescante. Aromas a termodinámica social, límites biofísicos y economía circular (Donut). Postulado firme sobre el suelo social y el techo ecológico.",
-        sideEffects: "Riesgo de estancamiento involuntario del bienestar si el decrecimiento no se acompaña de una redistribución institucional impecable; rechazo al crecimiento nominal.",
-        descripcion_corta: "Economía incrustada en la biósfera y bases sociales."
+        tastingNotes: "Complejidad termodinámica pura. Notas dominantes de entropía física, límites planetarios irrevocables y metabolismo social. Exige encastrar la economía como un subsistema abierto de la biosfera con topes estrictos de escala y huella ecológica.",
+        sideEffects: "Riesgo de decrecimiento recesivo o estancamiento del bienestar material si la transición carece de un marco distributivo radical; tensiones con la arquitectura de deudas e interés del capitalismo.",
+        descripcion_corta: "Economía biofísica, límites ecológicos (Donut) y entropía social."
       },
       tradicion_desarrollista: {
         id: "tradicion_desarrollista",
@@ -112,9 +127,9 @@ export const TRANSLATIONS = {
         fundador: "Ha-Joon Chang & Friedrich List (1841)",
         color: "#c8350d",
         abv: "85% Vol. Soberanía Industrial",
-        tastingNotes: "Densa y persistente. Notas fuertes de protección de industrias nacientes, catching-up productivo, subsidios y regulación de importaciones. Un trago de envejecimiento lento.",
-        sideEffects: "Alta dependencia de la probidad del Estado. El consumo desmedido causa ineficiencias de captura de rentas corporativas y parasitismo industrial subsidiado.",
-        descripcion_corta: "Planificación industrial y desarrollo de capacidades locales."
+        tastingNotes: "Densa, de cocción lenta y estratégica. Notas marcadas de políticas industriales selectivas, protección de industrias nacientes y catching-up tecnológico. Apunta a superar el atrapamiento del libre comercio asimétrico (tesis Prebisch-Singer) mediante capacidades productivas locales.",
+        sideEffects: "Fomenta la captura de rentas corporativas y el parasitismo de oligopolios subsidiados; vulnerabilidad institucional si el aparato de Estado carece de autonomía y probidad.",
+        descripcion_corta: "Catching-up tecnológico, políticas industriales y superación de asimetrías comerciales."
       },
       keynesiana: {
         id: "keynesiana",
@@ -122,9 +137,9 @@ export const TRANSLATIONS = {
         fundador: "John Maynard Keynes (1936)",
         color: "#86ad34",
         abv: "70% Vol. Estabilización Fiscal",
-        tastingNotes: "Efervescente y estimulante. Ricas notas de demanda agregada, impulsos emprendedores y política fiscal contracíclica. Diseñada para calentar economías deprimidas.",
-        sideEffects: "Resaca severa de deuda acumulada, presiones inflacionarias a largo plazo si el estímulo excede el producto potencial, y tendencia a ignorar la oferta agregada.",
-        descripcion_corta: "Gestión contracíclica de la demanda y espíritus animales."
+        tastingNotes: "Efervescente e inyectora de liquidez. Notas ricas en gestión de demanda agregada ($Y = C + I + G + NX$), espíritus animales ante la incertidumbre radical, y el efecto multiplicador. Diseñada para corregir equilibrios con desempleo involuntario mediante políticas fiscales activas.",
+        sideEffects: "Resaca de desequilibrios fiscales crónicos, presiones inflacionarias de demanda si se sobrepasa el producto potencial, e infravaloración de las restricciones estructurales de la oferta.",
+        descripcion_corta: "Gestión de demanda agregada, estabilización fiscal e incertidumbre radical."
       },
       institucionalista: {
         id: "institucionalista",
@@ -132,9 +147,9 @@ export const TRANSLATIONS = {
         fundador: "Douglass North & Elinor Ostrom (1920)",
         color: "#579ea4",
         abv: "65% Vol. Gobernanza Común",
-        tastingNotes: "Compleja y estructurada. Notas de reglas de juego, costos de transacción y acuerdos colectivos policéntricos para gestionar comunes. Sabor equilibrado e integrador.",
-        sideEffects: "Dificultad para modelar y formalizar matemáticamente sus dinámicas; tendencia a la descripción empírica sin recetas de acción rápidas durante emergencias.",
-        descripcion_corta: "Análisis de reglas, contratos y gobernanza de comunes."
+        tastingNotes: "Compleja, estructurada y empírica. Notas profundas de reglas de juego (formales e informales), costos de transacción y derechos de propiedad. Brilla por sus enfoques policéntricos para la autogobernanza de recursos comunes (Elinor Ostrom), rompiendo el binomio Estado-Mercado.",
+        sideEffects: "Dificultad para formalizar modelos de equilibrio matemático general; propensión a descripciones históricas ricas pero con pocas recetas macroeconómicas de urgencia inmediata.",
+        descripcion_corta: "Análisis institucional, costos de transacción y gobernanza policéntrica de comunes."
       },
       estado_emprendedor: {
         id: "estado_emprendedor",
@@ -142,9 +157,9 @@ export const TRANSLATIONS = {
         fundador: "Mariana Mazzucato (2013)",
         color: "#df7713",
         abv: "75% Vol. Innovación Estratégica",
-        tastingNotes: "Brillante y frutal. Marcados aromas a misiones audaces de innovación, inversión pública de alto riesgo inicial y creación/moldeamiento de nuevos mercados tecnológicos.",
-        sideEffects: "Riesgos de socializar pérdidas y privatizar ganancias si los contratos no están bien diseñados; propensión a elegir ganadores tecnológicos equivocados.",
-        descripcion_corta: "Inversión estatal de riesgo y misiones tecnológicas."
+        tastingNotes: "Vibrante, audaz y de vanguardia. Notas intensas de inversión pública de riesgo inicial (capital paciente) y misiones tecnológicas de frontera. Desafía el dogma del Estado como simple 'corrector de fallas' postulándolo como co-creador dinámico de mercados de alto valor.",
+        sideEffects: "Severa asimetría si se socializan las pérdidas y se privatizan los retornos financieros (patentes); riesgo de captura burocrática al 'seleccionar ganadores' erróneos.",
+        descripcion_corta: "Inversión pública estratégica, capital paciente y misiones de innovación."
       },
       conductista: {
         id: "conductista",
@@ -152,9 +167,9 @@ export const TRANSLATIONS = {
         fundador: "Daniel Kahneman & Richard Thaler (2008)",
         color: "#bd777a",
         abv: "60% Vol. Sesgos Cognitivos",
-        tastingNotes: "Aromática y sutil. Notas marcadas de nudging (pequeños empujones), arquitectura de decisión e irracionalidades predecibles. Muy matizada.",
-        sideEffects: "Uso excesivo puede degenerar en un paternalismo libertario manipulador; asume que el cambio individual es suficiente para corregir fallas estructurales.",
-        descripcion_corta: "Sesgos heurísticos y arquitectura de decisiones reales."
+        tastingNotes: "Matizada, empírica y psicológica. Notas claras de racionalidad acotada, sesgos heurísticos e irracionalidades cognitivas predecibles. Desmantela el mito del *Homo Economicus* optimizador, refinando la economía a través de la arquitectura de decisiones (*nudging*).",
+        sideEffects: "Riesgo de derivar en un 'paternalismo libertario' manipulador de la conducta; tiende a sobrevalorar soluciones individuales de micro-ajuste, obviando desequilibrios institucionales o macro-estructurales.",
+        descripcion_corta: "Racionalidad acotada, sesgos cognitivos e ingeniería de decisiones (*nudges*)."
       },
       clasica: {
         id: "clasica",
@@ -162,9 +177,9 @@ export const TRANSLATIONS = {
         fundador: "Adam Smith & David Ricardo (1776)",
         color: "#5d7298",
         abv: "80% Vol. Libertad Natural",
-        tastingNotes: "Seca, limpia e imperecedera. Aromas a división del trabajo, ventaja comparativa, mano invisible y el cimiento del libre comercio. Muy aromática.",
-        sideEffects: "Ignora por completo los límites biofísicos de la biosfera y las crisis cíclicas de demanda; tendencia a subestimar el conflicto inherente de la distribución.",
-        descripcion_corta: "División del trabajo, libre comercio y acumulación de capital."
+        tastingNotes: "Seca, austera y fundacional. Notas robustas de acumulación de capital, división del trabajo y libre mercado coordinado por la mano invisible. Sabor asentado en ventajas comparativas y la búsqueda del interés individual como motor de riqueza social.",
+        sideEffects: "Incapacidad para concebir los límites de absorción ecológica; propensión a justificar salarios de subsistencia y subestimar la naturaleza conflictiva de la distribución de la renta.",
+        descripcion_corta: "Mano invisible, división del trabajo y ventajas comparativas."
       },
       neoclasica: {
         id: "neoclasica",
@@ -172,9 +187,9 @@ export const TRANSLATIONS = {
         fundador: "Léon Walras & Alfred Marshall (1870)",
         color: "#2d2651",
         abv: "85% Vol. Utilidad Marginal",
-        tastingNotes: "Cristalina y geométrica. Notas de optimización matemática, utilidad marginal y equilibrio general de precios de mercado. Es un destilado de alta pureza matemática.",
-        sideEffects: "Causa desprendimiento crónico de la realidad debido a supuestos hiperracionales (Homo Economicus); desorientación severa ante monopolios naturales y fallas sistémicas.",
-        descripcion_corta: "Optimización matemática de agentes racionales y equilibrio."
+        tastingNotes: "Hiper-destilada, cristalina y axiomática. Notas de utilidad marginal, optimización restringida del consumidor y productor, y equilibrio general competitivo. Abstracción matemática pura que asume agentes racionales y mercados eficientes autoregulados.",
+        sideEffects: "Desprendimiento severo del comportamiento real del mercado por supuestos de información simétrica e hiper-racionalidad; incapacidad inherente para anticipar crisis endógenas y asimetrías de poder crónicas.",
+        descripcion_corta: "Optimización marginalista, equilibrio general competitivo y eficiencia asignativa."
       },
       austriaca: {
         id: "austriaca",
@@ -182,9 +197,9 @@ export const TRANSLATIONS = {
         fundador: "Friedrich Hayek & Ludwig von Mises (1871)",
         color: "#c8350d",
         abv: "90% Vol. Individualismo Radical",
-        tastingNotes: "Seca y de graduación alcohólica extrema. Notas puras de orden espontáneo, conocimiento disperso e imposibilidad del cálculo económico centralizado. Altamente volátil.",
-        sideEffects: "Resaca de parálisis estatal ante externalidades masivas (como el cambio climático); ceguera ideológica que rechaza la provisión pública de bienes comunes.",
-        descripcion_corta: "Conocimiento disperso, orden espontáneo y libre mercado."
+        tastingNotes: "Seca, punzante y de alto octanaje ideológico. Notas intensas de subjetivismo metodológico, orden espontáneo de mercado y la función coordinadora de los precios frente al conocimiento disperso. Defiende la imposibilidad matemática del cálculo económico centralizado.",
+        sideEffects: "Riesgo de ceguera absoluta ante externalidades de gran escala (ecológicas); parálisis regulatoria dogmática que descarta todo bien público y demoniza los bancos centrales y la moneda fiduciaria.",
+        descripcion_corta: "Precios como información dispersa, orden espontáneo y rechazo al intervencionismo estatal."
       },
       schumpeteriana: {
         id: "schumpeteriana",
@@ -192,9 +207,9 @@ export const TRANSLATIONS = {
         fundador: "Joseph Schumpeter (1942)",
         color: "#f9c000",
         abv: "80% Vol. Destrucción Creativa",
-        tastingNotes: "Efervescente, punzante y ácida. Predominan las notas a innovación destructiva, el empresario schumpeteriano y los ciclos de obsolescencia tecnológica acelerada.",
-        sideEffects: "Tolerancia excesiva a monopolios transitorios bajo la premisa de la innovación; puede desatender la precarización social que causa el desempleo tecnológico.",
-        descripcion_corta: "Innovación destructiva y ciclos evolutivos de mercado."
+        tastingNotes: "Efervescente, ácida e inestable. Notas potentes de destrucción creativa, el papel del empresario innovador como perturbador del equilibrio estático, y ciclos tecnológicos de larga onda. Justifica los monopolios temporales como prima legítima a la innovación disruptiva.",
+        sideEffects: "Elevada tolerancia a la concentración monopolística corporativa; desatención de la exclusión social y el desempleo tecnológico estructural bajo la justificación del progreso evolutivo.",
+        descripcion_corta: "Destrucción creativa, ciclos tecnológicos y dinámica evolutiva de mercados."
       }
     },
     cocteles: [
@@ -578,7 +593,7 @@ export const TRANSLATIONS = {
   },
   en: {
     ui: {
-      navLogo: "ELIXIRS <em>of</em> REASON",
+      navLogo: "ELIXIRS <em>of</em> ECONOMIC REASON",
       navShelf: "The Shelf",
       navMenu: "The Menu",
       navCabinet: "Apothecary",
@@ -640,8 +655,23 @@ export const TRANSLATIONS = {
       exportCognitiveDiag: "COGNITIVE DIAGNOSIS",
       exportVirtue: "INTELLECTUAL VIRTUE",
       exportHangoverRisk: "LATENT HANGOVER RISK",
-      exportWatermark: "CHAIR OF ECONOMIC MIXOLOGY • ELIXIRS OF REASON",
-      exportDocTitle: "My Political Inebriation Certificate - Elixirs of Reason"
+      exportWatermark: "CHAIR OF ECONOMIC MIXOLOGY • ELIXIRS OF ECONOMIC REASON",
+      exportDocTitle: "My Political Inebriation Certificate - Elixirs of Economic Reason",
+      footerColDatasheetTitle: "📋 Technical Datasheet",
+      footerLabelTitle: "Title",
+      footerValueTitle: "ELIXIRS of ECONOMIC REASON",
+      footerLabelEdition: "Edition",
+      footerLabelMoreInfo: "More info",
+      footerValueMoreInfo: "Project README",
+      footerLabelCite: "How to cite",
+      footerValueCite: "Artunduaga Viana, William Camilo (2026). Elixirs of Economic Reason. URL: https://github.com/willkwolf/economic-bar",
+      footerColLinksTitle: "🔗 Links of Interest",
+      footerLinkLibertyTitle: "🗽 Architecture of Liberty <span class=\"link-arrow\">→</span>",
+      footerLinkLibertyDesc: "Interactive infographic on Isaiah Berlin and liberty.",
+      footerLinkOriginTitle: "📈 Economic School Map (Origin) <span class=\"link-arrow\">→</span>",
+      footerLinkOriginDesc: "The original map from which this project derives.",
+      footerColMethodTitle: "🧪 Code & Methodology",
+      footerMethodDesc: "For methodological details, formalization, and source code, visit the project directly on GitHub."
     },
     escuelas: {
       marxista: {
@@ -650,9 +680,9 @@ export const TRANSLATIONS = {
         fundador: "Karl Marx & Friedrich Engels (1867)",
         color: "#8c2323",
         abv: "90% Vol. Structural Conflict",
-        tastingNotes: "Intense and full-bodied. Dominated by notes of class struggle, historical materialism, and structural contradictions. Leaves a long-lasting aftertaste of labor-value and the critique of capital.",
-        sideEffects: "Prone to dogmatic intoxication, blindness to the self-regulating capacity of markets, and a tendency toward central planning bureaucratization.",
-        descripcion_corta: "Systemic critique of capital, social classes, and surplus value."
+        tastingNotes: "Heavy, unrelenting body. Reveals deep notes of historical materialism, private ownership of the means of production, and systemic extraction of surplus value ($s$). Distinct finish of the labor theory of value and structural crises of capital accumulation.",
+        sideEffects: "Prone to dogmatic rigidity and blindness to market self-correction and the adaptability of late capitalism; high risk of bureaucratic centralist paralysis.",
+        descripcion_corta: "Critique of capital accumulation, surplus value theory, and systemic contradictions."
       },
       feminista: {
         id: "feminista",
@@ -660,9 +690,9 @@ export const TRANSLATIONS = {
         fundador: "Silvia Federici & Marilyn Waring (1980)",
         color: "#bd777a",
         abv: "75% Vol. Social Reproduction",
-        tastingNotes: "Earthy and comforting. Base notes of unpaid reproductive work, care economics, and the deconstruction of the public/private boundary. Highly balanced.",
-        sideEffects: "Sometimes dilutes short-term aggregated macroeconomic modeling; can cause paralysis when immediate fiscal balances are demanded in market economies.",
-        descripcion_corta: "Visibility of domestic care work and social reproduction."
+        tastingNotes: "Organic and life-centric. Solid foundation in social reproduction theory and the valuation of unpaid care labor. Boldly challenges the androcentric bias of standard macroeconomics (such as the exclusion of domestic work from GDP) by placing life sustainability over exchange value.",
+        sideEffects: "Analytical complexity when incorporating non-monetizable variables into standard aggregate models; potential friction with immediate fiscal constraints in highly financialized economies.",
+        descripcion_corta: "Care economy, social reproduction, and critique of androcentric biases."
       },
       ecologica: {
         id: "ecologica",
@@ -670,9 +700,9 @@ export const TRANSLATIONS = {
         fundador: "Kate Raworth & Nicholas Georgescu-Roegen (2012)",
         color: "#2c5e3b",
         abv: "80% Vol. Biophysical Boundaries",
-        tastingNotes: "Herbaceous and refreshing. Aromas of social thermodynamics, ecological boundaries, and circular economics (Donut). Firm stance on social foundations and ecological ceilings.",
-        sideEffects: "Risk of involuntary welfare stagnation if degrowth is not paired with impeccable institutional redistribution; rejects nominal growth.",
-        descripcion_corta: "Economics embedded in the biosphere and social foundations."
+        tastingNotes: "Pure thermodynamic complexity. Dominant notes of physical entropy, irrevocable planetary boundaries, and social metabolism. Explicitly treats the economy as an open subsystem embedded within the finite biosphere, demanding absolute limits on material throughput.",
+        sideEffects: "Risk of recessive degrowth or material stagnation if transition policies lack radical distributive mechanisms; structural tension with debt-driven capitalist architectures.",
+        descripcion_corta: "Biophysical economics, planetary boundaries (Donut), and social entropy."
       },
       tradicion_desarrollista: {
         id: "tradicion_desarrollista",
@@ -680,9 +710,9 @@ export const TRANSLATIONS = {
         fundador: "Ha-Joon Chang & Friedrich List (1841)",
         color: "#c8350d",
         abv: "85% Vol. Industrial Sovereignty",
-        tastingNotes: "Dense and persistent. Strong notes of infant industry protection, productive catching-up, subsidies, and import regulations. A slow-aging, heavy spirit.",
-        sideEffects: "High reliance on state capability. Excessive consumption leads to rent-seeking, corporate capture, and subsidized industrial parasitism.",
-        descripcion_corta: "Industrial planning and development of local capabilities."
+        tastingNotes: "Dense, slow-cooked, and highly strategic. Marked notes of selective industrial policies, infant industry protection, and technological catching-up. Seeks to break free from asymmetric trade dependency (Prebisch-Singer thesis) by actively constructing domestic productive capabilities.",
+        sideEffects: "Prone to rent-seeking and the cultivation of subsidized, uncompetitive domestic oligopolies; highly vulnerable to corruption if the state apparatus lacks autonomy.",
+        descripcion_corta: "Technological catching-up, industrial policy, and trade asymmetry management."
       },
       keynesiana: {
         id: "keynesiana",
@@ -690,9 +720,9 @@ export const TRANSLATIONS = {
         fundador: "John Maynard Keynes (1936)",
         color: "#86ad34",
         abv: "70% Vol. Fiscal Stabilization",
-        tastingNotes: "Effervescent and stimulating. Rich notes of aggregate demand, entrepreneurial drives, and countercyclical fiscal policy. Engineered to warm up frozen economies.",
-        sideEffects: "Severe hangover of accumulated public debt, long-term inflationary pressures if stimulus exceeds potential output, and a tendency to ignore aggregate supply.",
-        descripcion_corta: "Countercyclical demand management and animal spirits."
+        tastingNotes: "Effervescent and highly liquid. Rich notes of aggregate demand management ($Y = C + I + G + NX$), systemic animal spirits facing radical uncertainty, and the multiplier effect. Formulated to correct macroequilibria under involuntary unemployment through active fiscal interventions.",
+        sideEffects: "Risk of chronic public deficits, demand-pull inflationary pressures if potential output is exceeded, and underestimation of microeconomic structural supply constraints.",
+        descripcion_corta: "Aggregate demand management, fiscal stabilization, and radical uncertainty."
       },
       institucionalista: {
         id: "institucionalista",
@@ -700,9 +730,9 @@ export const TRANSLATIONS = {
         fundador: "Douglass North & Elinor Ostrom (1920)",
         color: "#579ea4",
         abv: "65% Vol. Common Governance",
-        tastingNotes: "Complex and structured. Notes of rules of the game, transaction costs, and polycentric collective agreements to manage the commons. Highly balanced and integrative.",
-        sideEffects: "Difficulty in formalizing and mathematically modeling its dynamics; tends toward empirical descriptions over rapid actions during crises.",
-        descripcion_corta: "Analysis of rules, contracts, and polycentric governance of commons."
+        tastingNotes: "Intricate, structured, and deeply empirical. Complex notes of the formal and informal rules of the game, transaction costs, and property rights. Outstanding for its polycentric self-governance models for managing common-pool resources (Elinor Ostrom), bypassing the rigid State-Market binary.",
+        sideEffects: "Inherent difficulty in mathematical formalization; prone to descriptive institutional narratives that offer few actionable macro prescriptions during sudden crises.",
+        descripcion_corta: "Institutional analysis, transaction costs, and polycentric commons governance."
       },
       estado_emprendedor: {
         id: "estado_emprendedor",
@@ -710,9 +740,9 @@ export const TRANSLATIONS = {
         fundador: "Mariana Mazzucato (2013)",
         color: "#df7713",
         abv: "75% Vol. Strategic Innovation",
-        tastingNotes: "Bright and fruity. Pronounced aromas of daring innovation missions, high-risk initial public investment, and the active shaping/creation of new technological markets.",
-        sideEffects: "Risks of socializing losses and privatizing gains if contracts are poorly designed; prone to backing the wrong technological winners.",
-        descripcion_corta: "High-risk public venture investment and innovation missions."
+        tastingNotes: "Vibrant, bold, and forward-looking. Intense notes of early-stage public risk capital (patient finance) and frontier technology missions. Rejects the limited view of the state as a mere 'market failure corrector,' casting it instead as an active, market-shaping force.",
+        sideEffects: "Asymmetric extraction risks where losses are socialized while returns (such as patents) are privatized; high potential for rent-seeking when bureaucratic agencies pick technological winners.",
+        descripcion_corta: "Strategic public investment, patient capital, and mission-oriented innovation."
       },
       conductista: {
         id: "conductista",
@@ -720,9 +750,9 @@ export const TRANSLATIONS = {
         fundador: "Daniel Kahneman & Richard Thaler (2008)",
         color: "#bd777a",
         abv: "60% Vol. Cognitive Biases",
-        tastingNotes: "Aromatic and subtle. Strong notes of choice architecture, nudges, and predictable irrationalities. Extremely nuanced and micro-focused.",
-        sideEffects: "Excessive use can degenerate into manipulative libertarian paternalism; assumes that individual changes are sufficient to cure structural systemic failures.",
-        descripcion_corta: "Heuristics, biases, and real-world choice architecture."
+        tastingNotes: "Nuanced, empirical, and psychological. Clear notes of bounded rationality, heuristic biases, and predictable cognitive systematic deviations. Dismantles the clean abstraction of optimizing *Homo Economicus*, grounding economics in realistic choice architecture (*nudging*).",
+        sideEffects: "Danger of sliding into manipulative 'libertarian paternalism' and behavioral engineering; risks overemphasizing micro-nudges over necessary deep structural and institutional interventions.",
+        descripcion_corta: "Bounded rationality, cognitive biases, and choice architecture (*nudging*)."
       },
       clasica: {
         id: "clasica",
@@ -730,9 +760,9 @@ export const TRANSLATIONS = {
         fundador: "Adam Smith & David Ricardo (1776)",
         color: "#5d7298",
         abv: "80% Vol. Natural Liberty",
-        tastingNotes: "Dry, clean, and timeless. Aromas of division of labor, comparative advantage, the invisible hand, and the bedrock of free trade. Highly aromatic.",
-        sideEffects: "Completely ignores the biophysical limits of the biosphere and cyclical demand crises; tends to underestimate the conflict inherent in wealth distribution.",
-        descripcion_corta: "Division of labor, free trade, and capital accumulation."
+        tastingNotes: "Dry, austere, and foundational. Robust notes of capital accumulation, division of labor, and a free market coordinated by the invisible hand. Anchored in comparative advantages and individual self-interest as the driving engine of social wealth.",
+        sideEffects: "Complete disregard for biophysical resource constraints and systemic market-clearing friction; prone to justifying subsistence wages and downplaying conflict in factor distribution.",
+        descripcion_corta: "Invisible hand, division of labor, and comparative advantages."
       },
       neoclasica: {
         id: "neoclasica",
@@ -740,9 +770,9 @@ export const TRANSLATIONS = {
         fundador: "Léon Walras & Alfred Marshall (1870)",
         color: "#2d2651",
         abv: "85% Vol. Marginal Utility",
-        tastingNotes: "Crystalline and geometric. Notes of mathematical optimization, marginal utility, and general equilibrium of market prices. A high-purity mathematical distillate.",
-        sideEffects: "Causes chronic detachment from real social behavior due to hyper-rational assumptions (Homo Economicus); severe disorientation in the face of natural monopolies.",
-        descripcion_corta: "Mathematical optimization of rational agents and general equilibrium."
+        tastingNotes: "Highly distilled, crystalline, and axiomatic. Elegant notes of marginal utility, constrained optimization for rational actors, and competitive general equilibrium. A mathematical tour de force assuming perfectly clearing markets and optimizing, rational agents.",
+        sideEffects: "Severe epistemological detachment from empirical friction due to symmetric information and hyper-rationality assumptions; structural blindness to endogenously generated financial crises and persistent power dynamics.",
+        descripcion_corta: "Marginal optimization, competitive general equilibrium, and allocative efficiency."
       },
       austriaca: {
         id: "austriaca",
@@ -750,9 +780,9 @@ export const TRANSLATIONS = {
         fundador: "Friedrich Hayek & Ludwig von Mises (1871)",
         color: "#c8350d",
         abv: "90% Vol. Radical Individualism",
-        tastingNotes: "Dry and extremely high-proof. Pure notes of spontaneous order, dispersed knowledge, and the impossibility of centralized economic calculation. Highly volatile.",
-        sideEffects: "Hangover of state paralysis in the face of massive externalities (like climate change); ideological blindness that rejects public provision of common goods.",
-        descripcion_corta: "Dispersed knowledge, spontaneous order, and free market."
+        tastingNotes: "Bone-dry, sharp, and high-proof. Pungent notes of methodological subjectivism, market spontaneous order, and the essential informational function of price signals in coordinating dispersed knowledge. Asserts the absolute impossibility of centralized economic calculation.",
+        sideEffects: "Extreme blind spot regarding large-scale market failures and negative externalities (e.g., climate crisis); dogmatic refusal to acknowledge public goods, leading to structural paralysis of public administration.",
+        descripcion_corta: "Prices as dispersed information, spontaneous order, and anti-interventionist critique."
       },
       schumpeteriana: {
         id: "schumpeteriana",
@@ -760,9 +790,9 @@ export const TRANSLATIONS = {
         fundador: "Joseph Schumpeter (1942)",
         color: "#f9c000",
         abv: "80% Vol. Creative Destruction",
-        tastingNotes: "Effervescent, sharp, and acidic. Dominated by notes of disruptive innovation, the heroic entrepreneur, and accelerated cycles of technological obsolescence (creative destruction).",
-        sideEffects: "Excessive tolerance of temporary monopolies under the guise of innovation; can neglect the social precarity caused by technological unemployment.",
-        descripcion_corta: "Disruptive innovation and evolutionary cycles of markets."
+        tastingNotes: "Effervescent, sharp, and dynamically unstable. Strong notes of creative destruction, the disruptive innovator shattering static circular flows, and long-wave technological cycles. Defends transient technological monopolies as necessary rewards for high-risk innovation.",
+        sideEffects: "Dangerous tolerance for oligopolistic and monopolistic corporate concentration; extreme neglect of immediate social displacement and technological unemployment in the name of evolution.",
+        descripcion_corta: "Creative destruction, technological cycles, and evolutionary market dynamics."
       }
     },
     cocteles: [
