@@ -1036,16 +1036,20 @@ function renderResultsToUI(results) {
     layer.style.setProperty("--layer-height", "0%");
     layer.setAttribute("title", `${escuela.nombre}: ${pct}%`);
 
-    // Eventos de hover interactivos para inspeccionar ingredientes de la botella
+    // Eventos de hover interactivos para inspeccionar ingredientes de la botella (con cambio de color dinámico y brillo)
     layer.addEventListener("mouseenter", () => {
       if (hoverReadout) {
         hoverReadout.style.color = escuela.color;
+        hoverReadout.style.borderColor = escuela.color;
+        hoverReadout.style.boxShadow = `0 0 15px ${escuela.color}40`; // Brillo sutil del color de la escuela
         hoverReadout.textContent = `${escuela.nombre}: ${pct}%`;
       }
     });
     layer.addEventListener("mouseleave", () => {
       if (hoverReadout) {
         hoverReadout.style.color = "var(--accent-gold)";
+        hoverReadout.style.borderColor = "var(--border-glass)";
+        hoverReadout.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
         hoverReadout.textContent = isEs ? "Posa el cursor para inspeccionar" : "Hover over layers to inspect";
       }
     });
@@ -1089,16 +1093,16 @@ function renderRadarChart(qScores) {
   const canvas = document.getElementById("radar-canvas");
   if (!canvas) return;
 
-  // Setup de Canvases en Alta Resolución DPR
-  const logicalWidth = 280;
-  const logicalHeight = 280;
+  // Setup de Canvases en Alta Resolución DPR (Aumentado para evitar recortes de leyendas)
+  const logicalWidth = 360;
+  const logicalHeight = 300;
   const ctx = setupCanvasDPR(canvas, logicalWidth, logicalHeight);
 
   const cx = logicalWidth / 2;
   const cy = logicalHeight / 2;
   
-  // Safety Margin defensivo de 45px para evitar desbordamientos tipográficos en HD
-  const radius = Math.min(logicalWidth, logicalHeight) / 2 - 45; 
+  // Radio defensivo de 95px que deja >80px a los lados y >50px arriba/abajo para leyendas completas
+  const radius = 95; 
 
   const isEs = state.currentLang === "es";
 

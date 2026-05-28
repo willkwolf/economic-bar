@@ -280,9 +280,8 @@
             <span class="results-archetype-sub" id="result-archetype-sub">La Adaptabilidad de la Complejidad</span>
           </div>
 
-          <!-- Bloque 2: Fórmulas Visuales (Botella y Radar lado a lado) -->
-          <div class="results-visuals-block">
-            <!-- Botella Personalizada con Readout de Hover interactivo -->
+          <!-- Bloque 2: El Cóctel Personalizado (Sección Horizontal) -->
+          <div class="results-bottle-block">
             <div class="personalized-bottle-wrapper">
               <div class="custom-bottle" role="img" aria-label="Tu botella de elixir ideológico personalizada">
                 <div class="custom-bottle-neck"></div>
@@ -292,17 +291,19 @@
                 <div class="custom-bottle-reflection" aria-hidden="true"></div>
               </div>
               <span class="bottle-label-caption" data-i18n="resultsBottleCaption">TU FÓRMULA DE RAZÓN</span>
-              <!-- Indicador de hover interactivo de ingredientes -->
+              <!-- Indicador de hover interactivo de ingredientes con diseño elegante -->
               <div class="bottle-hover-readout" id="bottle-hover-readout">&nbsp;</div>
-            </div>
-
-            <!-- Gráfico de Radar de gran tamaño sin recortes -->
-            <div class="radar-chart-container">
-              <canvas id="radar-canvas" width="280" height="280" aria-label="Gráfico de radar de tus 4 ejes económicos" role="img"></canvas>
             </div>
           </div>
 
-          <!-- Bloque 3: Composición Detallada (Rejilla de Barras con espacio) -->
+          <!-- Bloque 3: Gráfico de Afinidades (Radar) (Sección Horizontal) -->
+          <div class="results-radar-block">
+            <div class="radar-chart-container">
+              <canvas id="radar-canvas" width="360" height="300" aria-label="Gráfico de radar de tus 4 ejes económicos" role="img"></canvas>
+            </div>
+          </div>
+
+          <!-- Bloque 4: Composición Detallada (Rejilla de Barras con espacio) -->
           <div class="results-composition-block">
             <span class="results-block-label"><i data-lucide="bar-chart-2" aria-hidden="true"></i> COMPOSICIÓN MOLECULAR (PORCENTAJES)</span>
             <div class="results-ingredient-bars" id="results-bar-list" role="list">
@@ -310,7 +311,7 @@
             </div>
           </div>
 
-          <!-- Bloque 4: Fórmulas Teóricas y Diagnósticos Amplios -->
+          <!-- Bloque 5: Fórmulas Teóricas y Diagnósticos Amplios -->
           <div class="results-narrative-block">
             <div class="results-text-desc-wrapper">
               <p class="results-archetype-desc" id="result-archetype-desc">
@@ -319,19 +320,19 @@
             </div>
             
             <div class="results-cards-grid">
-              <div class="results-info-card">
+              <div class="results-info-card animate-hover-ring">
                 <span class="results-block-label" data-i18n="resultsVirtueTitle"><i data-lucide="award" aria-hidden="true"></i> VIRTUD INTELECTUAL</span>
                 <p class="results-text" id="result-virtue"></p>
               </div>
 
-              <div class="results-info-card">
+              <div class="results-info-card animate-hover-ring">
                 <span class="results-block-label color-alert" id="result-hangover-title"><i data-lucide="alert-octagon" aria-hidden="true"></i> RIESGO DE RESACA</span>
                 <p class="results-text" id="result-hangover-desc"></p>
               </div>
             </div>
           </div>
 
-          <!-- Bloque 5: Acciones (Botones Amplios y bien distribuidos) -->
+          <!-- Bloque 6: Acciones (Botones Amplios y bien distribuidos) -->
           <div class="results-actions-block">
             <button class="btn btn-primary" id="btn-export-card" data-i18n="resultsBtnExport">
               <i data-lucide="download" aria-hidden="true"></i> Descargar Tarjeta de Alcoholemia

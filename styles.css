@@ -1527,7 +1527,7 @@ section {
 
 /* ── PANTALLA DE RESULTADOS Y DIAGNÓSTICO (Tufte Glass Dashboard) ──────────── */
 .test-results-card {
-  padding: 45px;
+  padding: clamp(20px, 4vw, 45px);
 }
 
 /* Nueva Estructura Horizontal de Resultados */
@@ -1538,58 +1538,71 @@ section {
   margin-bottom: 35px;
 }
 
-.results-visuals-block {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3.5rem;
+/* Bloques Horizontales Apilados */
+.results-bottle-block {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-items: center;
-  background: rgba(255, 255, 255, 0.015);
+  background: rgba(255, 255, 255, 0.012);
   border: 1px solid var(--border-glass);
-  padding: 40px;
+  padding: 40px 20px;
   border-radius: 6px;
   margin-bottom: 35px;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.4);
+  position: relative;
 }
 
-/* Botella Personalizada Dinámica */
+.results-radar-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.008);
+  border: 1px solid var(--border-glass);
+  padding: 40px 20px;
+  border-radius: 6px;
+  margin-bottom: 35px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Botella Personalizada Dinámica Magnificada */
 .personalized-bottle-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   perspective: 1000px;
+  width: 100%;
 }
 
 .custom-bottle {
-  width: 120px;
-  height: 240px;
-  border: 2.5px solid rgba(255, 255, 255, 0.18);
-  border-radius: 12px 12px 28px 28px;
+  width: 150px; /* Aumentado de 120px */
+  height: 300px; /* Aumentado de 240px */
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px 14px 34px 34px;
   position: relative;
-  background: rgba(255, 255, 255, 0.01);
-  box-shadow: inset 0 5px 20px rgba(255, 255, 255, 0.05), 0 15px 35px rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.015);
+  box-shadow: inset 0 8px 30px rgba(255, 255, 255, 0.08), 0 20px 45px rgba(0, 0, 0, 0.8);
   overflow: hidden;
 }
 
 .custom-bottle-neck {
-  width: 32px;
-  height: 45px;
-  border: 2.5px solid rgba(255, 255, 255, 0.18);
+  width: 40px; /* Aumentado de 32px */
+  height: 55px; /* Aumentado de 45px */
+  border: 3px solid rgba(255, 255, 255, 0.2);
   border-bottom: none;
   position: absolute;
-  top: -44px;
+  top: -54px; /* Ajustado */
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.01);
 }
 
 .custom-bottle-cork {
-  width: 36px;
-  height: 18px;
+  width: 44px; /* Aumentado de 36px */
+  height: 22px; /* Aumentado de 18px */
   background: #5c4332;
-  border-radius: 3px;
+  border-radius: 4px;
   position: absolute;
-  top: -55px;
+  top: -68px; /* Ajustado */
   left: 50%;
   transform: translateX(-50%);
   box-shadow: inset 0 2px 4px rgba(255,255,255,0.1);
@@ -1611,11 +1624,11 @@ section {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80%; /* La llenura de la botella */
+  height: 80%;
   display: flex;
   flex-direction: column-reverse;
   overflow: hidden;
-  border-radius: 0 0 24px 24px;
+  border-radius: 0 0 30px 30px;
 }
 
 /* Capas de líquido táctiles e interactivas */
@@ -1625,7 +1638,7 @@ section {
   height: var(--layer-height);
   position: relative;
   transition: height 1.5s var(--ease-expo);
-  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 4px 8px rgba(255, 255, 255, 0.18), inset 0 -4px 8px rgba(0, 0, 0, 0.18);
   cursor: pointer;
 }
 
@@ -1643,38 +1656,46 @@ section {
 
 .liquid-layer:hover {
   filter: brightness(1.25);
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.3), 0 0 15px var(--layer-color);
+  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.35), 0 0 20px var(--layer-color);
 }
 
 .bottle-label-caption {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.15em;
   color: var(--accent-gold);
   margin-top: 15px;
 }
 
-/* Indicador de hover interactivo para ingredientes de botella */
+/* Indicador de hover interactivo para ingredientes de botella (Diseño de Ticket Elegante) */
 .bottle-hover-readout {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   color: var(--accent-gold);
-  margin-top: 12px;
-  height: 18px;
+  margin-top: 15px;
+  height: 22px;
   text-align: center;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border-glass);
+  min-width: 240px;
+  display: inline-block;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* Contenedor del Radar de gran tamaño sin recortes */
+/* Contenedor del Radar de gran tamaño sin recortes (Optimizado para 340px) */
 .radar-chart-container {
-  width: 280px;
+  width: 100%;
+  max-width: 340px;
   height: 280px;
   border: 1px solid var(--border-subtle);
-  border-radius: 50%;
-  padding: 12px;
+  border-radius: 8px;
+  padding: 10px;
   background-color: rgba(6, 6, 6, 0.4);
   display: flex;
   align-items: center;
@@ -1684,6 +1705,7 @@ section {
 #radar-canvas {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   display: block;
 }
 
@@ -1714,44 +1736,64 @@ section {
   margin-bottom: 5px;
 }
 
-/* Bloque de Fórmulas y Diagnósticos Amplios */
+/* Bloque de Fórmulas y Diagnósticos Amplios (Spacious single column flow) */
 .results-narrative-block {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
   margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.005);
+  border: 1px solid var(--border-glass);
+  padding: clamp(20px, 4vw, 40px);
+  border-radius: 6px;
 }
 
 .results-text-desc-wrapper {
-  font-size: clamp(15px, 1.2vw, 17px);
-  line-height: 1.65;
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.75;
   color: var(--text-primary);
-  text-align: justify;
+  text-align: left;
   border-bottom: 1px solid var(--border-glass);
-  padding-bottom: 25px;
+  padding-bottom: 30px;
+  width: 100%;
 }
 
 .results-archetype-desc {
-  font-size: 0.95rem;
-  line-height: 1.55;
+  font-family: var(--font-body);
+  font-weight: 300;
+  letter-spacing: 0.01em;
 }
 
+/* Tarjetas de Diagnóstico apiladas verticalmente */
 .results-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  width: 100%;
+  max-width: 700px;
 }
 
 .results-info-card {
-  background-color: rgba(6, 6, 6, 0.3);
+  background-color: rgba(6, 6, 6, 0.45);
   border: 1px solid var(--border-glass);
-  padding: 25px 30px;
-  border-radius: 4px;
-  height: 100%;
+  padding: 30px 35px;
+  border-radius: 6px;
+  width: 100%;
+  transition: all 0.4s var(--ease-expo);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.results-info-card:hover {
+  border-color: var(--accent-gold-dark);
+  box-shadow: 0 12px 30px rgba(217, 167, 82, 0.04);
+  transform: translateY(-2px);
 }
 
 .results-stats-block {
-  margin-bottom: 0px; /* Reset */
+  margin-bottom: 0px;
 }
 
 .results-block-label {
@@ -1815,20 +1857,30 @@ section {
 }
 
 .results-text {
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.6;
   font-weight: 300;
   word-break: break-word;
 }
 
-/* Distribución de Botones Amplia */
+/* Distribución de Botones Amplia y Responsiva */
 .results-actions-block {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 2rem;
   margin-top: 40px;
   border-top: 1px solid var(--border-glass);
-  padding-top: 30px;
+  padding-top: 35px;
+  flex-wrap: wrap;
+}
+
+.results-actions-block .btn {
+  min-width: 240px;
+  padding: 1rem 2.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  border-radius: 4px;
 }
 
 /* ── MANIFIESTO Y REFLEXIÓN ──────────────────────────────────────────────── */
