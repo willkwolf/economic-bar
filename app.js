@@ -687,6 +687,8 @@ function renderQuestion() {
     sliderWrapper.classList.remove("hidden");
 
     // Llenar los polos conceptuales del Slider
+    document.getElementById("slider-left-title").textContent = q.izquierda.titulo;
+    document.getElementById("slider-right-title").textContent = q.derecha.titulo;
     document.getElementById("slider-left-text").textContent = q.izquierda.texto;
     document.getElementById("slider-right-text").textContent = q.derecha.texto;
   }

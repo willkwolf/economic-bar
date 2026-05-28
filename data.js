@@ -69,7 +69,7 @@ export const ESCUELAS = {
   },
   estado_emprendedor: {
     id: "estado_emprendedor",
-    nombre: "Estado Emprendedor",
+    nombre: "Emprendedor",
     fundador: "Mariana Mazzucato (2013)",
     color: "#df7713", // Ámbar de Misión
     abv: "75% Vol. Innovación Estratégica",
@@ -617,11 +617,13 @@ export const PREGUNTAS = [
     dimension: "estimulo",
     texto: "Dilema de Estabilidad vs. Estímulo: ¿Qué debe priorizarse en una recesión?",
     izquierda: {
+      titulo: "Estabilidad / Rigor",
       texto: "Disciplina fiscal absoluta, control severo de inflación y masa monetaria, asumiendo desempleo temporal como purga necesaria del mercado.",
       pesos: { austriaca: 3, neoclasica: 2, clasica: 2 }
     },
     derecha: {
-      texto: "Pleno empleo forzoso e inyecciones masivas de gasto público para sostener el bienestar social, tolerando déficit público y riesgos inflacionarios.",
+      titulo: "Estímulo / Empleo",
+      texto: "Garantizar el pleno empleo y la inyección de estímulos mediante inversión social y monetaria, tolerando déficit público y riesgos inflacionarios.",
       pesos: { keynesiana: 4, estado_emprendedor: 2 }
     }
   },
@@ -631,10 +633,12 @@ export const PREGUNTAS = [
     dimension: "donut",
     texto: "Dilema de Crecimiento vs. Límites: ¿Qué debe guiar nuestro aparato productivo?",
     izquierda: {
+      titulo: "Expansión / Productividad",
       texto: "Acelerar la competitividad industrial, innovación y productividad a gran escala para asegurar la expansión material de la riqueza.",
       pesos: { schumpeteriana: 3, neoclasica: 2, tradicion_desarrollista: 2 }
     },
     derecha: {
+      titulo: "Límites / Regeneración",
       texto: "Alinear estrictamente la huella ecológica material bajo topes planetarios biofísicos innegociables y priorizar la economía reproductiva.",
       pesos: { ecologica: 4, feminista: 3 }
     }
@@ -645,10 +649,12 @@ export const PREGUNTAS = [
     dimension: "globalizacion",
     texto: "Dilema de Globalización vs. Soberanía: ¿Cómo relacionarse con los mercados mundiales?",
     izquierda: {
+      titulo: "Apertura Global",
       texto: "Desregulación de aranceles absoluta, libre comercio transfronterizo e integración total en cadenas globales de valor eficiente.",
       pesos: { clasica: 3, neoclasica: 2, austriaca: 2 }
     },
     derecha: {
+      titulo: "Soberanía Nacional",
       texto: "Soberanía industrial y comercial estratégica. Proteger capacidades de manufactura locales y regular flujos globales financieros hostiles.",
       pesos: { tradicion_desarrollista: 4, estado_emprendedor: 2, marxista: 2 }
     }
@@ -695,7 +701,7 @@ export const PERFILES_CUADRANTES = {
   Q2: {
     titulo: "Bebida de Micro-Incentivos y Empatía Heurística",
     descripcion: "Tu balance se apoya en un Estado que, sin hipertrofiarse burocráticamente, intervenga de manera quirúrgica y conductual para sanar fallas de mercado. Creas en el empoderamiento del consumidor, en el nudging como facilitador de arquitectura de decisiones justas y en un diseño sutil con empatía en el comportamiento humano real.",
-    afinity: "Economía Conductista (Kahneman/Thaler) y Microeconomía adaptada."
+    afinidad: "Economía Conductista (Kahneman/Thaler) y Microeconomía adaptada."
   },
   Q3: {
     titulo: "Destilado de Misión Industrial y Estabilización",

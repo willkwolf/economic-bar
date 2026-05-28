@@ -67,30 +67,6 @@
         </div>
       </div>
     </div>
-
-    <!-- TICKET DE ANÁLISIS ALQUÍMICO (Tooltip Premium Absoluto) -->
-    <div class="tasting-tooltip" id="bottle-tooltip">
-      <div class="tooltip-header">
-        <div>
-          <h3 class="tooltip-name" id="tooltip-name">Escuela Marxista</h3>
-          <span class="tooltip-origin" id="tooltip-founder">Karl Marx (1867)</span>
-        </div>
-        <span class="tooltip-abv" id="tooltip-abv">90% Vol.</span>
-      </div>
-      <div class="tooltip-body">
-        <div class="tooltip-section">
-          <span class="tooltip-label"><i data-lucide="compass" class="icon-inline"></i> NOTAS DE CATA</span>
-          <p class="tooltip-text" id="tooltip-notes"></p>
-        </div>
-        <div class="tooltip-section">
-          <span class="tooltip-label color-alert"><i data-lucide="alert-triangle" class="icon-inline"></i> RIESGO DE INTOXICACIÓN</span>
-          <p class="tooltip-text" id="tooltip-effects"></p>
-        </div>
-      </div>
-      <div class="tooltip-footer">
-        <span class="tooltip-action-hint"><i data-lucide="sparkles" class="icon-inline"></i> Haz clic en la botella para sumarla al vaso</span>
-      </div>
-    </div>
   </section>
 
   <!-- SECCIÓN 2: LA CARTA DE CÓCTELES PREMIUM -->
@@ -154,10 +130,6 @@
               <span class="mix-block-label color-alert"><i data-lucide="shield-alert"></i> RIESGOS SISTÉMICOS ASOCIADOS</span>
               <p class="mix-text-desc" id="mix-risks"></p>
             </div>
-
-            <button class="btn btn-primary btn-block" id="mix-reheat-btn">
-              <i data-lucide="flame"></i> Volver a Servir Mezcla
-            </button>
           </div>
         </div>
       </div>
@@ -169,7 +141,7 @@
     <div class="container">
       <div class="section-header reveal">
         <span class="section-tag">EL BOTICARIO COGNITIVO</span>
-        <h2 class="section-title">Apothecary Cabinet of Problems</h2>
+        <h2 class="section-title">Gabinete de Boticario: Crisis y Diagnósticos</h2>
         <p class="section-desc">
           Abre los cajones del mueble de boticario antiguo para extraer los expedientes de crisis reales. Analiza y compara las prescripciones de diferentes escuelas y sus efectos secundarios.
         </p>
@@ -252,11 +224,11 @@
           <div class="test-slider-container hidden" id="test-slider-wrapper">
             <div class="slider-dilemma-wrapper">
               <div class="slider-pole pole-left">
-                <span class="pole-title">Monetarismo</span>
+                <span class="pole-title" id="slider-left-title">Monetarismo</span>
                 <p class="pole-text" id="slider-left-text">Disciplina fiscal absoluta, control severo de inflación...</p>
               </div>
               <div class="slider-pole pole-right">
-                <span class="pole-title">Keynesianismo</span>
+                <span class="pole-title" id="slider-right-title">Keynesianismo</span>
                 <p class="pole-text" id="slider-right-text">Pleno empleo forzoso e inyecciones masivas de gasto...</p>
               </div>
             </div>
@@ -393,6 +365,30 @@
       </div>
     </div>
   </footer>
+
+  <!-- TICKET DE ANÁLISIS ALQUÍMICO (Tooltip Premium Absoluto) -->
+  <div class="tasting-tooltip" id="bottle-tooltip">
+    <div class="tooltip-header">
+      <div>
+        <h3 class="tooltip-name" id="tooltip-name">Escuela Marxista</h3>
+        <span class="tooltip-origin" id="tooltip-founder">Karl Marx (1867)</span>
+      </div>
+      <span class="tooltip-abv" id="tooltip-abv">90% Vol.</span>
+    </div>
+    <div class="tooltip-body">
+      <div class="tooltip-section">
+        <span class="tooltip-label"><i data-lucide="compass" class="icon-inline"></i> NOTAS DE CATA</span>
+        <p class="tooltip-text" id="tooltip-notes"></p>
+      </div>
+      <div class="tooltip-section">
+        <span class="tooltip-label color-alert"><i data-lucide="alert-triangle" class="icon-inline"></i> RIESGO DE INTOXICACIÓN</span>
+        <p class="tooltip-text" id="tooltip-effects"></p>
+      </div>
+    </div>
+    <div class="tooltip-footer">
+      <span class="tooltip-action-hint"><i data-lucide="sparkles" class="icon-inline"></i> Haz clic en la botella para sumarla al vaso</span>
+    </div>
+  </div>
 
   <!-- Script modular de lógica interactiva y animaciones -->
   <script type="module" src="app.js"></script>
