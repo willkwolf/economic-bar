@@ -1,0 +1,1817 @@
+/*
+ * BAR DE ESCUELAS ECONÓMICAS - ELIXIRES DE LA RAZÓN
+ * styles.css - Estilos Premium Inmersivos (Carbon Speakeasy)
+ */
+
+/* ── DESIGN TOKENS ──────────────────────────────────────────────────────── */
+:root {
+  /* Paleta Base Speakeasy */
+  --bg-darker: #060606;
+  --bg-dark: #0d0d0c;
+  --bg-card: rgba(14, 14, 13, 0.75);
+  --bg-card-hover: rgba(22, 22, 20, 0.85);
+  
+  /* Acentos de Lujo (Oro / Cobre Cepillado) */
+  --accent-gold: #d9a752;
+  --accent-gold-dark: #b88628;
+  --accent-gold-glow: rgba(217, 167, 82, 0.15);
+  
+  /* Colores de Alerta y Monitoreo */
+  --alert-red: #8c2323;
+  --alert-red-glow: rgba(140, 35, 35, 0.2);
+  --text-primary: #f5f3ef;
+  --text-muted: rgba(245, 243, 239, 0.45);
+  --border-glass: rgba(217, 167, 82, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  
+  /* Fuentes de Cátedra */
+  --font-display: 'Instrument Serif', 'Cormorant Garamond', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Curvas de Animación y Espaciados */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --section-pad: clamp(70px, 9vw, 130px);
+  --container-max: min(1280px, 90vw);
+}
+
+/* ── RESET Y CONFIGURACIÓN BASE ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-gold-dark) var(--bg-darker);
+}
+
+body {
+  background-color: var(--bg-darker);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Luces de Atmósfera */
+.ambient-glow {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+  filter: blur(140px);
+  opacity: 0.55;
+  transition: all 1s ease;
+}
+
+.ambient-glow.shadow-left {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(217, 167, 82, 0.05) 0%, transparent 70%);
+}
+
+.ambient-glow.shadow-right {
+  bottom: -10%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(140, 35, 35, 0.03) 0%, transparent 70%);
+}
+
+.ambient-glow.center-light {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(217, 167, 82, 0.02) 0%, transparent 80%);
+}
+
+/* ── TIPOGRAFÍA COMÚN ───────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent-gold);
+}
+
+p {
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Botones Premium */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-expo);
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.btn-primary {
+  background-color: var(--accent-gold);
+  color: #0d0d0c;
+  border-color: var(--accent-gold);
+  box-shadow: 0 4px 20px rgba(217, 167, 82, 0.15);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(217, 167, 82, 0.25);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-glass);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent-gold);
+  background-color: rgba(255, 255, 255, 0.02);
+  transform: translateY(-2px);
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.icon-inline {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.color-alert {
+  color: var(--accent-gold) !important;
+}
+
+/* ── NAVEGACIÓN COMPONENTIZADA ──────────────────────────────────────────── */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all 0.4s var(--ease-expo);
+}
+
+.nav-bar.scrolled {
+  background-color: rgba(6, 6, 6, 0.85);
+  backdrop-filter: blur(16px);
+  padding: 0.95rem 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.nav-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.nav-logo {
+  text-decoration: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-icon {
+  font-size: 1.4rem;
+}
+
+.logo-text {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.logo-text em {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  text-transform: lowercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: var(--accent-gold);
+}
+
+.btn-test-link {
+  border: 1px solid var(--border-glass);
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  color: var(--accent-gold);
+  background-color: var(--accent-gold-glow);
+}
+
+.btn-test-link:hover {
+  background-color: var(--accent-gold);
+  color: #000;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* ── HERO SECTION: EL ALCOVAR ALQUÍMICO ──────────────────────────────────── */
+.hero-section {
+  min-height: 100vh;
+  padding-top: 150px;
+  padding-bottom: 80px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.hero-header {
+  max-width: 780px;
+  margin-bottom: 60px;
+}
+
+.hero-tag, .section-tag, .dossier-tag, .manifesto-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.hero-title {
+  font-size: clamp(48px, 6.5vw, 84px);
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
+  word-spacing: 0.05em;
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.5vw, 30px);
+  color: var(--text-primary);
+  font-style: italic;
+  margin-bottom: 1.2rem;
+}
+
+.hero-intro {
+  font-size: 1.05rem;
+  max-width: 680px;
+}
+
+/* ── ESTANTERÍA VIRTUAL Y BOTELLAS ────────────────────────────────────────── */
+.shelf-wrapper {
+  margin-top: 40px;
+  perspective: 1000px;
+}
+
+.shelf-wood {
+  background: linear-gradient(180deg, #181816 0%, #0d0d0c 100%);
+  border: 1px solid rgba(217, 167, 82, 0.08);
+  border-bottom: 16px solid #141412;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  padding: 40px 30px 10px 30px;
+  position: relative;
+}
+
+.shelf-board-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--accent-gold-glow);
+  box-shadow: 0 -4px 15px var(--accent-gold-glow);
+}
+
+.bottles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 1.8rem;
+  justify-items: center;
+  align-items: end;
+}
+
+/* La Botella Individual CSS */
+.bottle-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.4s var(--ease-back);
+}
+
+.bottle-flask {
+  width: 48px;
+  height: 95px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px 6px 14px 14px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.01);
+  box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.05), 0 8px 16px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s var(--ease-back);
+  overflow: hidden;
+}
+
+/* El Cuello de la botella */
+.bottle-neck {
+  width: 14px;
+  height: 22px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-bottom: none;
+  position: absolute;
+  top: -21px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.bottle-cork {
+  width: 16px;
+  height: 10px;
+  background: #6a4f3b;
+  border-radius: 2px;
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: inset 0 2px 3px rgba(255,255,255,0.1);
+}
+
+/* El Líquido */
+.bottle-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  background-color: var(--school-color, #d9a752);
+  opacity: 0.75;
+  transition: height 0.6s var(--ease-expo), background-color 0.4s ease;
+  box-shadow: inset 0 5px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Efecto Ola */
+.bottle-liquid::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 200%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 40%;
+  animation: wave 4s linear infinite;
+  transform: translateX(-25%);
+}
+
+.bottle-label {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(6, 6, 6, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  padding: 1px 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.bottle-title {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 10px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  transition: color 0.3s;
+}
+
+/* Hover en la Botella */
+.bottle-item:hover {
+  transform: translateY(-12px) scale(1.05);
+}
+
+.bottle-item:hover .bottle-flask {
+  border-color: var(--school-color);
+  box-shadow: 0 0 25px var(--school-color-glow), inset 0 0 10px var(--school-color-glow);
+}
+
+.bottle-item:hover .bottle-neck {
+  border-color: var(--school-color);
+}
+
+.bottle-item:hover .bottle-title {
+  color: var(--text-primary);
+}
+
+@keyframes wave {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(0%) rotate(360deg); }
+}
+
+/* ── TICKET DE ANÁLISIS ALQUÍMICO (Tooltip) ──────────────────────────────── */
+.tasting-tooltip {
+  position: absolute;
+  z-index: 90;
+  width: 320px;
+  background-color: rgba(10, 10, 9, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--accent-gold-dark);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(217, 167, 82, 0.05);
+  padding: 20px;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: opacity 0.4s var(--ease-expo), transform 0.4s var(--ease-expo), visibility 0.4s;
+  pointer-events: none;
+}
+
+.tasting-tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.tooltip-name {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.tooltip-founder {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.tooltip-abv {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background-color: var(--alert-red-glow);
+  border: 1px solid var(--alert-red);
+  color: var(--accent-gold);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.tooltip-section {
+  margin-bottom: 12px;
+}
+
+.tooltip-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.tooltip-text {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.tooltip-footer {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 8px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.tooltip-action-hint {
+  font-size: 0.65rem;
+  font-style: italic;
+  color: var(--accent-gold);
+}
+
+/* ── SECCIONES COMUNES ───────────────────────────────────────────────────── */
+section {
+  padding: var(--section-pad) 0;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  max-width: 680px;
+  margin-bottom: 50px;
+}
+
+.section-title {
+  font-size: clamp(36px, 4.5vw, 56px);
+  margin-bottom: 1rem;
+}
+
+.section-desc {
+  font-size: 1rem;
+}
+
+/* ── GRID DE CÓCTELES ────────────────────────────────────────────────────── */
+.cocktails-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.cocktail-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  padding: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-expo);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.cocktail-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--cocktail-color, var(--accent-gold));
+  opacity: 0.3;
+  transition: opacity 0.4s;
+}
+
+.cocktail-card:hover {
+  background-color: var(--bg-card-hover);
+  border-color: var(--cocktail-color, var(--accent-gold));
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--cocktail-color-glow);
+}
+
+.cocktail-card:hover::before {
+  opacity: 1;
+}
+
+.cocktail-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cocktail-intensity {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-gold);
+  border: 1px solid var(--border-glass);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.cocktail-card-title {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.cocktail-card-desc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.cocktail-card-ingredients {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.ingredient-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+/* ── DRAWER LATERAL DE MEZCLADO (Mixing Drawer) ──────────────────────────── */
+.mixing-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 150;
+  pointer-events: none;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mixing-drawer.open {
+  pointer-events: all;
+}
+
+.drawer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-expo);
+  z-index: 1;
+}
+
+.mixing-drawer.open .drawer-overlay {
+  opacity: 1;
+}
+
+.drawer-content {
+  position: relative;
+  z-index: 2;
+  width: 480px;
+  max-width: 100vw;
+  background-color: rgba(8, 8, 8, 0.96);
+  backdrop-filter: blur(24px);
+  border-left: 1px solid var(--accent-gold-dark);
+  box-shadow: -20px 0 50px rgba(0, 0, 0, 0.8);
+  height: 100%;
+  transform: translateX(100%);
+  transition: transform 0.6s var(--ease-expo);
+  display: flex;
+  flex-direction: column;
+}
+
+.mixing-drawer.open .drawer-content {
+  transform: translateX(0);
+}
+
+.drawer-close-btn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s;
+}
+
+.drawer-close-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+  color: var(--accent-gold);
+}
+
+.drawer-scrollable {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 40px;
+  scrollbar-width: thin;
+}
+
+.mixing-showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 30px;
+}
+
+/* Contenedor del Vaso de Cristal */
+.glass-container {
+  width: 260px;
+  height: 340px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#liquid-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.glass-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
+  border-radius: 0 0 100px 100px;
+  pointer-events: none;
+  box-shadow: inset 15px 0 30px rgba(255, 255, 255, 0.03), inset -15px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.mixing-cocktail-name {
+  font-size: 2.6rem;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.mixing-cocktail-intensity {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+}
+
+.mix-block {
+  margin-bottom: 25px;
+}
+
+.mix-block-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.15em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 8px;
+}
+
+.mix-block-label svg {
+  width: 12px;
+  height: 12px;
+}
+
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.recipe-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  border-bottom: 1px dashed var(--border-subtle);
+  padding-bottom: 4px;
+}
+
+.recipe-item-name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.recipe-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.recipe-pct {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-primary);
+}
+
+.vector-readout {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.vector-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.mix-text-desc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* ── SECCION GABINETE BOTICARIO (Problem Explorer) ───────────────────────── */
+.cabinet-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* Mueble Cajonera 3D */
+.apothecary-chest {
+  background: linear-gradient(135deg, #161614 0%, #0a0a09 100%);
+  border: 1.5px solid rgba(217, 167, 82, 0.12);
+  padding: 25px;
+  border-radius: 6px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.cabinet-drawer {
+  background: linear-gradient(180deg, #222220 0%, #161615 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-bottom: 2px solid #0d0d0c;
+  border-radius: 4px;
+  padding: 20px 15px;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-back);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.05), 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* El tirador de metal */
+.drawer-handle {
+  width: 32px;
+  height: 10px;
+  border: 1.5px solid var(--accent-gold-dark);
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s var(--ease-back);
+}
+
+.drawer-handle::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: -2px;
+  right: -2px;
+  height: 2px;
+  background-color: var(--accent-gold-dark);
+}
+
+.drawer-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Hover y Activo en el cajón */
+.cabinet-drawer:hover {
+  transform: translateZ(10px) translateY(-2px);
+  border-color: var(--accent-gold-dark);
+  background: linear-gradient(180deg, #282825 0%, #1b1b1a 100%);
+}
+
+.cabinet-drawer:hover .drawer-handle {
+  transform: translateY(-2px);
+  border-color: var(--accent-gold);
+}
+
+.cabinet-drawer.active {
+  transform: translateZ(25px) scale(1.02);
+  background: linear-gradient(180deg, #1b1b1a 0%, #0d0d0c 100%);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 20px rgba(217, 167, 82, 0.15), inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.cabinet-drawer.active .drawer-handle {
+  transform: scaleY(0.9);
+  border-color: var(--accent-gold);
+}
+
+/* El Pergamino del Expediente */
+.dossier-scroll {
+  background-color: rgba(14, 14, 13, 0.6);
+  border: 1px solid var(--border-glass);
+  min-height: 480px;
+  height: 100%;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dossier-empty-state {
+  text-align: center;
+  padding: 40px;
+  max-width: 380px;
+}
+
+.dossier-feather {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1.5rem;
+  opacity: 0.3;
+  animation: float 4s ease-in-out infinite;
+}
+
+.dossier-empty-state h3 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.dossier-sheet {
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  overflow-y: auto;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s var(--ease-expo);
+}
+
+.dossier-sheet.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  display: none;
+}
+
+.dossier-header {
+  border-bottom: 1px solid var(--accent-gold-dark);
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+}
+
+.dossier-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.15em;
+  display: block;
+}
+
+.dossier-title {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+.dossier-question {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+.dossier-prescriptions {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.prescription-item {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 20px;
+}
+
+.prescription-item:last-child {
+  border-bottom: none;
+}
+
+.prescription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.prescription-school {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.ph-metric {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ph-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--text-muted);
+}
+
+.ph-bar-track {
+  width: 60px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ph-bar-fill {
+  height: 100%;
+  background-color: var(--accent-gold);
+}
+
+.prescription-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.prescription-toxicity {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--accent-gold-dark);
+}
+
+/* ── TEST DE ALCOHOLEMIA POLÍTICA ────────────────────────────────────────── */
+.test-card-wrapper {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.test-intro-card {
+  padding: 50px;
+  text-align: center;
+}
+
+.test-intro-badge {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  animation: float 4s ease-in-out infinite;
+}
+
+.test-intro-card h3 {
+  font-size: 2.6rem;
+  margin-bottom: 15px;
+}
+
+.test-intro-card p {
+  max-width: 580px;
+  margin: 0 auto 35px auto;
+  font-size: 1rem;
+}
+
+/* Pantalla de Preguntas */
+.test-question-card {
+  padding: 40px 50px;
+}
+
+.test-progress-bar-wrapper {
+  margin-bottom: 35px;
+}
+
+.test-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.test-step-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.test-phase-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.1em;
+}
+
+.test-progress-track {
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.test-progress-fill {
+  height: 100%;
+  background-color: var(--accent-gold);
+  transition: width 0.5s var(--ease-expo);
+  box-shadow: 0 0 10px var(--accent-gold);
+}
+
+.test-question-text {
+  font-size: clamp(24px, 3.2vw, 36px);
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+/* Opciones de Tarjeta (Fase 1 y 2) */
+.test-options-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.test-option-card {
+  background-color: rgba(6, 6, 6, 0.4);
+  border: 1px solid var(--border-subtle);
+  padding: 22px 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-expo);
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.option-marker {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--border-glass);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.option-marker::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-gold);
+  transform: scale(0);
+  transition: transform 0.3s var(--ease-back);
+}
+
+.test-option-card:hover {
+  background-color: rgba(255, 255, 255, 0.01);
+  border-color: var(--border-glass);
+  transform: translateX(4px);
+}
+
+.test-option-card:hover .option-marker {
+  border-color: var(--accent-gold);
+}
+
+.test-option-card.selected {
+  border-color: var(--accent-gold);
+  background-color: rgba(217, 167, 82, 0.03);
+}
+
+.test-option-card.selected .option-marker {
+  border-color: var(--accent-gold);
+  background-color: var(--accent-gold-glow);
+}
+
+.test-option-card.selected .option-marker::after {
+  transform: scale(1);
+}
+
+.option-text {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Sliders de Dilemas (Fase 3) */
+.test-slider-container {
+  margin-top: 20px;
+}
+
+.slider-dilemma-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 35px;
+}
+
+.slider-pole {
+  border-top: 1px solid var(--border-glass);
+  padding-top: 15px;
+}
+
+.pole-title {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.pole-text {
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.slider-control-group {
+  margin-bottom: 35px;
+  background-color: rgba(6, 6, 6, 0.5);
+  border: 1px solid var(--border-subtle);
+  padding: 25px 30px;
+  border-radius: 4px;
+}
+
+.slider-indicators {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.slider-value-display {
+  color: var(--accent-gold);
+  font-weight: 500;
+}
+
+.luxury-range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  outline: none;
+  border-radius: 2px;
+}
+
+.luxury-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  border: 1.5px solid var(--bg-darker);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--accent-gold);
+  transition: transform 0.2s;
+}
+
+.luxury-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Carga del Alquimista */
+.test-loading-card {
+  padding: 60px 50px;
+  text-align: center;
+}
+
+.test-loading-card h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.test-loading-card p {
+  max-width: 480px;
+  margin: 0 auto;
+  font-size: 0.85rem;
+}
+
+.alchemical-spinner {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 30px auto;
+  position: relative;
+}
+
+.spinner-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.spinner-ring.ring-outer {
+  border-top-color: var(--accent-gold);
+  animation: spin 3s linear infinite;
+}
+
+.spinner-ring.ring-middle {
+  border-bottom-color: var(--alert-red);
+  margin: 10px;
+  animation: spin-reverse 2s linear infinite;
+}
+
+.spinner-ring.ring-inner {
+  border-left-color: var(--accent-gold-dark);
+  margin: 20px;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-fluid {
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--accent-gold-dark);
+  border-radius: 50%;
+  filter: blur(4px);
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+/* ── PANTALLA DE RESULTADOS Y DIAGNÓSTICO ────────────────────────────────── */
+.test-results-card {
+  padding: 50px;
+}
+
+.results-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.results-visuals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* Botella Personalizada Dinámica */
+.personalized-bottle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.custom-bottle {
+  width: 110px;
+  height: 220px;
+  border: 2.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px 12px 28px 28px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.01);
+  box-shadow: inset 0 5px 20px rgba(255, 255, 255, 0.05), 0 15px 35px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+
+.custom-bottle-neck {
+  width: 30px;
+  height: 45px;
+  border: 2.5px solid rgba(255, 255, 255, 0.18);
+  border-bottom: none;
+  position: absolute;
+  top: -44px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.custom-bottle-cork {
+  width: 34px;
+  height: 18px;
+  background: #5c4332;
+  border-radius: 3px;
+  position: absolute;
+  top: -55px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.1);
+}
+
+.custom-bottle-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, transparent 20%, rgba(255,255,255,0.02) 80%, rgba(255,255,255,0.08) 100%);
+  pointer-events: none;
+}
+
+/* El Contenedor de Capas de Líquido */
+.custom-bottle-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 75%; /* La llenura de la botella */
+  display: flex;
+  flex-direction: column-reverse; /* Se llena de abajo hacia arriba */
+  overflow: hidden;
+  border-radius: 0 0 24px 24px;
+}
+
+.liquid-layer {
+  width: 100%;
+  background-color: var(--layer-color);
+  height: var(--layer-height);
+  position: relative;
+  transition: height 1.5s var(--ease-expo);
+  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.15), inset 0 -3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.liquid-layer::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 200%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 40%;
+  animation: wave 3s linear infinite;
+}
+
+.bottle-label-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--accent-gold);
+  margin-top: 15px;
+}
+
+/* Contenedor del Radar */
+.radar-chart-container {
+  width: 240px;
+  height: 240px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  padding: 10px;
+  background-color: rgba(6, 6, 6, 0.3);
+}
+
+#radar-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Dossier de Resultados */
+.results-dossier {
+  border-left: 1px solid var(--border-glass);
+  padding-left: 3.5rem;
+}
+
+.results-archetype-name {
+  font-size: clamp(32px, 4.5vw, 48px);
+  margin-bottom: 2px;
+  color: var(--text-primary);
+}
+
+.results-archetype-sub {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--accent-gold);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.results-archetype-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-bottom: 30px;
+}
+
+.results-stats-block {
+  margin-bottom: 30px;
+}
+
+.results-block-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.12em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 12px;
+}
+
+.results-block-label svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Lista de Barras de Ingrediente */
+.results-ingredient-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.result-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.result-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.result-bar-name {
+  font-weight: 500;
+}
+
+.result-bar-val {
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+
+.result-bar-track {
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.result-bar-fill {
+  height: 100%;
+  background-color: var(--bar-color);
+  width: 0;
+  transition: width 1.5s var(--ease-expo);
+  border-radius: 3px;
+  box-shadow: 0 0 6px var(--bar-color);
+}
+
+.results-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.results-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 40px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 30px;
+}
+
+/* ── MANIFIESTO Y REFLEXIÓN ──────────────────────────────────────────────── */
+.manifesto-section {
+  background: linear-gradient(180deg, var(--bg-darker) 0%, #0c0c0b 100%);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.manifesto-content {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.manifesto-title {
+  font-size: clamp(32px, 4.5vw, 52px);
+  margin-bottom: 1.5rem;
+}
+
+.manifesto-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.8rem;
+  color: var(--text-primary);
+  font-weight: 300;
+}
+
+.manifesto-signature {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.signature-line {
+  width: 40px;
+  height: 1px;
+  background-color: var(--accent-gold-dark);
+}
+
+.signature-author {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+}
+
+/* ── FOOTER EDITORIAL ────────────────────────────────────────────────────── */
+.footer {
+  background-color: #050505;
+  padding: 40px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.footer-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ── ESTADOS DE ANIMACIÓN CON REVEAL ─────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s var(--ease-expo), transform 1.1s var(--ease-expo);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ── RESPONSIVE Y ADAPTACIONES MÓVILES ───────────────────────────────────── */
+@media (max-width: 992px) {
+  .cabinet-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .results-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .results-dossier {
+    border-left: none;
+    padding-left: 0;
+  }
+  
+  .results-visuals {
+    flex-direction: row;
+    justify-content: center;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Se podría inyectar menú hamburguesa si se desea */
+  }
+  
+  .menu-toggle {
+    display: block;
+  }
+  
+  .hero-section {
+    padding-top: 120px;
+  }
+  
+  .slider-dilemma-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .results-visuals {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  .results-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .test-question-card {
+    padding: 30px 20px;
+  }
+}
