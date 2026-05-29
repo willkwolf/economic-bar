@@ -18,7 +18,7 @@ export const TRANSLATIONS = {
       heroTag: "COCTELERÍA DOCTRINAL & SIMULADOR COGNITIVO",
       heroTitle: "BAR DE ESCUELAS ECONÓMICAS",
       heroSubtitle: "“Toda teoría económica es un destilado parcial de la realidad. Las ideologías también intoxican.”",
-      heroIntro: "Cada arquitectura de política pública surge de destilados e ingredientes teóricos preexistentes. Explora este aparador conceptual: posa tu cursor sobre los frascos de boticario para analizar sus notas de cata epistemológicas, sus graduaciones ideológicas (ABV) y las tensiones sistémicas de su dosificación. Conocer los efectos colaterales y límites de nuestras propias combinaciones teóricas no es una lección moralizante, sino un ejercicio de responsabilidad democrática y rigor académico.",
+      heroIntro: "Cada arquitectura de política pública surge de destilados e ingredientes teóricos preexistentes. Explora este aparador conceptual: posa tu cursor sobre los frascos de boticario para analizar sus notas de cata epistemológicas, sus graduaciones ideológicas (ABV) y las tensiones sistémicas de su dosificación. Conocer los efectos colaterales y límites de nuestras propias combinaciones teóricas no es una lección moralizante, sino un ejercicio de responsabilidad democrática y rigor intelectual.",
       shelfLoading: "Cargando destilados de la razón...",
       menuTag: "NUESTRA COCTELERÍA DOCTRINAL",
       menuTitle: "El Menú de Mezclas Recomendadas",
@@ -559,7 +559,7 @@ export const TRANSLATIONS = {
         nombre: "Pluralismo Camuflado (Pluralismo Pragmático)",
         subtitulo: "La Doctrina bajo el Disfraz de la Apertura",
         descripcion: "Presentas formalmente un discurso intelectual abierto, empírico y tolerante, autopercibiéndote como un pluralista libre de ataduras doctrinarias. No obstante, tus decisiones políticas reales y tus ponderaciones de dilemas de alta tensión revelan un anclaje inamovible, sumamente concentrado en defender un solo eje de libertad (sea la no interferencia del mercado o la capacidad reguladora estatal). Utilizas el sofisticado lenguaje de la flexibilidad pluralista para justificar y blindar operativamente un núcleo esencialmente monista.",
-        virtud: "Extraordinaria eficacia operativa al combinar la fuerza de una doctrina unificada con la diplomacia y el prestigio intelectual de la apertura académica.",
+        virtud: "Extraordinaria eficacia operativa al combinar la fuerza de una doctrina unificada con la diplomacia y el prestigio intelectual de la apertura intelectual.",
         resaca: "Riesgo de incurrir en una disonancia tácita o en una hipocresía epistemológica involuntaria, exigiendo matices y concesiones a los marcos ajenos que tu propio núcleo duro se niega a realizar."
       }
     },
@@ -627,7 +627,7 @@ export const TRANSLATIONS = {
       heroTag: "DOCTRINAL MIXOLOGY & COGNITIVE SIMULATOR",
       heroTitle: "ECONOMIC SCHOOLS BAR",
       heroSubtitle: "“Every economic theory is a partial distillate of reality. Ideologies intoxicate as well.”",
-      heroIntro: "Every public policy architecture arises from pre-existing theoretical distillates and ingredients. Explore this conceptual shelf: hover over each apothecary flask to analyze its epistemological tasting notes, ideological proof (ABV), and the systemic tensions of its dosage. Recognizing the side effects and limitations of our own theoretical combinations is not a moralizing sermon, but an exercise in democratic responsibility and academic rigor.",
+      heroIntro: "Every public policy architecture arises from pre-existing theoretical distillates and ingredients. Explore this conceptual shelf: hover over each apothecary flask to analyze its epistemological tasting notes, ideological proof (ABV), and the systemic tensions of its dosage. Recognizing the side effects and limitations of our own theoretical combinations is not a moralizing sermon, but an exercise in democratic responsibility and intellectual rigor.",
       shelfLoading: "Loading distillates of reason...",
       menuTag: "OUR DOCTRINAL COCKTAILS",
       menuTitle: "Recommended Mixtures Menu",
@@ -1168,7 +1168,7 @@ export const TRANSLATIONS = {
         nombre: "Camouflaged Pluralism (Pragmatic Pluralism)",
         subtitulo: "Doctrine Under the Guise of Openness",
         descripcion: "You formally project an open, empirical, and highly tolerant intellectual discourse, perceiving yourself as a flexible pluralist free from dogmatic handcuffs. Nonetheless, your actual political choices and your scoring on high-tension dilemmas reveal an unyielding, coherent, and highly concentrated anchor in a single concept of liberty (either pure non-interference or state capability coordination). You masterfully deploy the sophisticated language of pluralist flexibility to justify and operationalize an essentially monistic core.",
-        virtud: "Exceptional strategic efficacy, combining the driving force of a unified doctrine with the diplomatic prestige of academic openness.",
+        virtud: "Exceptional strategic efficacy, combining the driving force of a unified doctrine with the diplomatic prestige of intellectual openness.",
         resaca: "Risk of tacit cognitive dissonance or involuntary epistemological hypocrisy—demanding flexibility, nuance, and concessions from other frameworks while your own hard core remains strictly non-negotiable."
       }
     },
@@ -1201,7 +1201,7 @@ export const TRANSLATIONS = {
       },
       sintetico: {
         riesgo: "⚖️ Decisional Friction",
-        narrativa: "You have formulated a balanced, synthetic cocktail, blending theoretical schools with pragmatic adaptability. Your primary virtue is the capacity to weigh costs, externalities, and trade-offs with academic equanimity and civic balance. Your potential hangover is overthinking or decision paralysis due to excessive analytical deliberation before taking action on inevitable trade-offs."
+        narrativa: "You have formulated a balanced, synthetic cocktail, blending theoretical schools with pragmatic adaptability. Your primary virtue is the capacity to weigh costs, externalities, and trade-offs with intellectual equanimity and civic balance. Your potential hangover is overthinking or decision paralysis due to excessive analytical deliberation before taking action on inevitable trade-offs."
       },
       disperso: {
         riesgo: "🌪️ Solitude of the Eclectic",
