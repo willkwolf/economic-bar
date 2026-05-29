@@ -7,7 +7,7 @@
  * Todo estructurado bajo un diccionario reactivo dual para evitar colisiones tipográficas.
  */
 
-export const TRANSLATIONS = {
+const TRANSLATIONS = {
   es: {
     ui: {
       navLogo: "ELIXIRES <em>de la</em> RAZÓN ECONÓMICA",
@@ -1227,3 +1227,6 @@ export const TRANSLATIONS = {
     }
   }
 };
+
+// Asegurar disponibilidad global en navegadores
+window.TRANSLATIONS = TRANSLATIONS;

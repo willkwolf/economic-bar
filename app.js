@@ -3,7 +3,7 @@
  * app.js - Lógica interactiva, simulador de fluidos DPR, radar defensivo y motor i18n
  */
 
-import { TRANSLATIONS } from './data.js';
+/* global TRANSLATIONS */
 
 // ── VARIABLES DE DATOS ACTIVAS (Se actualizan en setLanguage) ───────────────
 let ESCUELAS = {};
@@ -106,6 +106,11 @@ function initLanguageSwitcher() {
 }
 
 function setLanguage(lang) {
+  // Asegurar que el idioma sea soportado (es o en), de lo contrario aplicar "es" como fallback
+  if (!lang || typeof TRANSLATIONS === 'undefined' || !TRANSLATIONS[lang]) {
+    lang = "es";
+  }
+
   state.currentLang = lang;
   localStorage.setItem("economic_bar_lang", lang);
 
@@ -749,7 +754,6 @@ function initTestEngine() {
     }
 
     // Configurar Onboarding Paso 0
-    const onboardingScreen = document.getElementById("test-onboarding-screen");
     const onboardingNextBtn = document.getElementById("onboarding-next-btn");
     if (onboardingNextBtn) {
       const nextAction = () => {
@@ -1723,6 +1727,14 @@ function exportTastingCard(results) {
 
 // ── INTERSECTION OBSERVER PARA TRANSICIONES REVEAL ─────────────────────────
 function initScrollReveal() {
+  if (!window.IntersectionObserver) {
+    // Si el navegador no soporta IntersectionObserver, mostrar todo de inmediato
+    document.querySelectorAll(".reveal").forEach(el => {
+      el.classList.add("in-view");
+    });
+    return;
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
