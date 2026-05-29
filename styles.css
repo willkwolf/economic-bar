@@ -2355,3 +2355,372 @@ section {
   box-shadow: 0 12px 30px var(--result-accent-glow, rgba(217, 167, 82, 0.04));
   transform: translateY(-2px);
 }
+
+/* ==========================================================================
+   NUEVOS ESTILOS DEL ECOSISTEMA Y LINK BUILDING (UNIFIED FOOTER & CALLOUT)
+   ========================================================================== */
+
+/* Bloque del Callout del Ecosistema en Resultados */
+.results-ecosystem-link-block {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  transition: all 0.4s var(--ease-expo);
+  width: 100%;
+}
+
+.ecosystem-callout-card {
+  background: linear-gradient(135deg, rgba(20, 20, 19, 0.5) 0%, rgba(217, 167, 82, 0.03) 100%);
+  border: 1.5px solid var(--border-glass);
+  border-radius: 6px;
+  padding: 30px;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  text-align: left;
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.02), 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.results-ecosystem-link-block:hover {
+  transform: translateY(-2px);
+}
+
+.results-ecosystem-link-block:hover .ecosystem-callout-card {
+  border-color: var(--accent-gold);
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.02), 0 20px 45px rgba(217, 167, 82, 0.05);
+}
+
+.ecosystem-callout-card .callout-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(217, 167, 82, 0.3);
+  background-color: rgba(217, 167, 82, 0.05);
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(217, 167, 82, 0.1);
+}
+
+.ecosystem-callout-card .callout-badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ecosystem-callout-card .callout-body {
+  flex: 1;
+}
+
+.ecosystem-callout-card .callout-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.ecosystem-callout-card .callout-title {
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.ecosystem-callout-card .callout-text {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Botón Dorado */
+.btn-gold {
+  background-color: var(--accent-gold-dark);
+  color: var(--bg-darker) !important;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(217, 167, 82, 0.15);
+}
+
+.btn-gold:hover {
+  background-color: var(--accent-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(217, 167, 82, 0.3);
+}
+
+/* Modificaciones al Footer del Ecosistema */
+.footer {
+  background-color: #0b0b0a !important;
+  color: var(--text-primary);
+  padding: 4rem 2rem 3rem !important;
+  border-top: 1px solid var(--border-glass) !important;
+  text-align: center;
+  position: relative;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.ecosystem-stepper-section {
+  text-align: center;
+  width: 100%;
+}
+
+.ecosystem-stepper-section h3 {
+  color: var(--text-primary);
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.ecosystem-stepper-section .stepper-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.ecosystem-stepper {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .ecosystem-stepper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    max-width: 500px;
+  }
+}
+
+/* Stepper connector line (Desktop only) */
+.ecosystem-stepper::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+  .ecosystem-stepper::after {
+    display: none;
+  }
+}
+
+.ecosystem-stepper .step-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  position: relative;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  padding: 1.25rem 0.75rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+  .ecosystem-stepper .step-item {
+    flex-direction: row;
+    gap: 1.25rem;
+    padding: 1rem;
+    text-align: left;
+    align-items: center;
+  }
+}
+
+.ecosystem-stepper .step-item:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(217, 167, 82, 0.3);
+  transform: translateY(-2px);
+}
+
+.ecosystem-stepper .step-item:hover:not(.active) .step-badge {
+  background-color: rgba(217, 167, 82, 0.1);
+  border-color: var(--accent-gold);
+  color: var(--text-primary);
+}
+
+.ecosystem-stepper .step-item.active {
+  background: rgba(217, 167, 82, 0.02);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(217, 167, 82, 0.12), inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.ecosystem-stepper .step-item.active .step-badge {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-dark) 100%);
+  border-color: var(--accent-gold);
+  color: var(--bg-darker);
+  box-shadow: 0 0 10px rgba(217, 167, 82, 0.3);
+}
+
+.ecosystem-stepper .step-item.active .step-meta .step-status {
+  color: var(--accent-gold);
+  font-weight: bold;
+}
+
+.ecosystem-stepper .step-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background-color: #0b0b0a;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .ecosystem-stepper .step-badge {
+    margin-bottom: 0;
+  }
+}
+
+.ecosystem-stepper .step-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .ecosystem-stepper .step-meta {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.ecosystem-stepper .step-meta .step-title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.ecosystem-stepper .step-meta .step-project {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.ecosystem-stepper .step-meta .step-status {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.footer-divider {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.04);
+  margin: 1rem 0 0.5rem;
+}
+
+.footer-bottom-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  text-align: left;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .footer-bottom-grid {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+}
+
+.footer-bottom-grid .footer-info {
+  flex: 1;
+}
+
+.footer-bottom-grid .footer-info p {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.footer-bottom-grid .footer-info p strong {
+  color: var(--text-primary);
+}
+
+.footer-bottom-grid .footer-info .footer-meta {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0;
+}
+
+.footer-bottom-grid .footer-links-column {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .footer-bottom-grid .footer-links-column {
+    justify-content: center;
+  }
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+  border-bottom-color: var(--accent-gold);
+}
