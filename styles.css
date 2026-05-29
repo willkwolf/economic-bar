@@ -607,7 +607,7 @@ p {
 }
 
 .tooltip-section {
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 
 .tooltip-label {
@@ -616,14 +616,14 @@ p {
   color: var(--accent-gold);
   letter-spacing: 0.1em;
   display: block;
-  margin-bottom: 3px;
+  margin-bottom: 6px;
 }
 
 .tooltip-text {
   font-size: 0.8rem;
   font-weight: 300;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.55;
   word-break: break-word;
 }
 
@@ -725,14 +725,14 @@ section {
 
 .cocktail-card-title {
   font-size: clamp(20px, 2vw, 26px);
-  margin-bottom: 10px;
+  margin-bottom: 14px;
   color: var(--text-primary);
 }
 
 .cocktail-card-desc {
   font-size: 0.85rem;
-  line-height: 1.5;
-  margin-bottom: 20px;
+  line-height: 1.6;
+  margin-bottom: 26px;
   flex-grow: 1;
 }
 
@@ -1151,7 +1151,7 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   flex-wrap: wrap; /* Defensive */
   gap: 0.5rem;
 }
@@ -1192,8 +1192,8 @@ section {
 
 .prescription-desc {
   font-size: 0.9rem;
-  line-height: 1.5;
-  margin-bottom: 8px;
+  line-height: 1.6;
+  margin-bottom: 14px;
   word-break: break-word;
   hyphens: auto;
 }
@@ -1202,6 +1202,7 @@ section {
   font-size: 0.75rem;
   font-style: italic;
   color: var(--accent-gold-dark);
+  display: block;
 }
 
 /* ── TEST DE ALCOHOLEMIA POLÍTICA ────────────────────────────────────────── */
@@ -1292,7 +1293,7 @@ section {
 .test-question-text {
   font-size: clamp(22px, 2.8vw, 32px);
   margin-bottom: 30px;
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 /* Opciones de Tarjeta (Fase 1 y 2) con áreas amplias táctiles */
@@ -1395,12 +1396,12 @@ section {
   text-transform: uppercase;
   color: var(--text-primary);
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .pole-text {
   font-size: 0.8rem;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 .slider-control-group {
@@ -1720,7 +1721,7 @@ section {
 
 .results-archetype-name {
   font-size: clamp(26px, 3.5vw, 42px);
-  margin-bottom: 2px;
+  margin-bottom: 8px;
   color: var(--text-primary);
   display: flex;
   align-items: center;
@@ -1733,7 +1734,7 @@ section {
   font-style: italic;
   color: var(--result-accent, var(--accent-gold));
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 12px;
 }
 
 /* Bloque de Fórmulas y Diagnósticos Amplios (Spacious single column flow) */
@@ -1972,7 +1973,7 @@ section {
   font-family: var(--font-display);
   font-size: 1.25rem; /* Highly elegant, not overly large */
   color: var(--accent-gold);
-  margin-bottom: 18px;
+  margin-bottom: 24px;
   border-bottom: 1px solid rgba(217, 167, 82, 0.06);
   padding-bottom: 8px;
   text-transform: capitalize;
