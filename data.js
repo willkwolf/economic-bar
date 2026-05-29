@@ -11,14 +11,14 @@ export const TRANSLATIONS = {
   es: {
     ui: {
       navLogo: "ELIXIRES <em>de la</em> RAZÓN ECONÓMICA",
-      navShelf: "El Estante",
+      navShelf: "DESTILADOS",
       navMenu: "La Carta",
       navCabinet: "Boticario",
       navTestLink: "Test de Sobriedad",
       heroTag: "COCTELERÍA DOCTRINAL & SIMULADOR COGNITIVO",
       heroTitle: "BAR DE ESCUELAS ECONÓMICAS",
       heroSubtitle: "“Toda teoría económica es un destilado parcial de la realidad. Las ideologías también intoxican.”",
-      heroIntro: "Explora la estantería del barman. Posa tu cursor sobre cada frasco de boticario para analizar sus notas de cata epistemológicas, graduación alcohólica (ABV) y efectos colaterales de intoxicación sistemática.",
+      heroIntro: "Cada arquitectura de política pública surge de destilados e ingredientes teóricos preexistentes. Explora este aparador conceptual: posa tu cursor sobre los frascos de boticario para analizar sus notas de cata epistemológicas, sus graduaciones ideológicas (ABV) y las tensiones sistémicas de su dosificación. Conocer los efectos colaterales y límites de nuestras propias combinaciones teóricas no es una lección moralizante, sino un ejercicio de responsabilidad democrática y rigor académico.",
       shelfLoading: "Cargando destilados de la razón...",
       menuTag: "NUESTRA COCTELERÍA DOCTRINAL",
       menuTitle: "El Menú de Mezclas Recomendadas",
@@ -620,14 +620,14 @@ export const TRANSLATIONS = {
   en: {
     ui: {
       navLogo: "ELIXIRS <em>of</em> ECONOMIC REASON",
-      navShelf: "The Shelf",
+      navShelf: "DISTILLATES",
       navMenu: "The Menu",
       navCabinet: "Apothecary",
       navTestLink: "Sobriety Test",
       heroTag: "DOCTRINAL MIXOLOGY & COGNITIVE SIMULATOR",
       heroTitle: "ECONOMIC SCHOOLS BAR",
       heroSubtitle: "“Every economic theory is a partial distillate of reality. Ideologies intoxicate as well.”",
-      heroIntro: "Explore the barman's shelves. Hover over each apothecary flask to analyze its epistemological tasting notes, alcohol by volume (ABV), and the side effects of systemic intoxication.",
+      heroIntro: "Every public policy architecture arises from pre-existing theoretical distillates and ingredients. Explore this conceptual shelf: hover over each apothecary flask to analyze its epistemological tasting notes, ideological proof (ABV), and the systemic tensions of its dosage. Recognizing the side effects and limitations of our own theoretical combinations is not a moralizing sermon, but an exercise in democratic responsibility and academic rigor.",
       shelfLoading: "Loading distillates of reason...",
       menuTag: "OUR DOCTRINAL COCKTAILS",
       menuTitle: "Recommended Mixtures Menu",
