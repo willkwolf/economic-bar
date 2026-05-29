@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(venvScriptspython.exe scripts/generate_static_plot.py)",
+      "Bash(dir:*)",
+      "Bash(venv/Scripts/python.exe:*)",
+      "Bash(where:*)",
+      "Bash(../venv/Scripts/python.exe:*)",
+      "Bash(c:/Users/CAMILO/OneDrive/Documents/PythonScripts/mapa-escuelas-politicas/venv/Scripts/python.exe:*)",
+      "Bash(\"c:\\Users\\CAMILO\\OneDrive\\Documents\\PythonScripts\\mapa-escuelas-politicas\\venv\\Scripts\\python.exe\" -m http.server:*)",
+      "Bash(uv run python -m http.server 8000)",
+      "Bash(uv run:*)",
+      "Bash(timeout 2 cmd:*)",
+      "Bash(NUL)",
+      "Bash(del base.json balanced.json state-emphasis.json equity-emphasis.json market-emphasis.json growth-emphasis.json historical-emphasis.json pragmatic-emphasis.json 2)",
+      "Bash(nul)",
+      "Bash(copy dataescuelas.json docsdataescuelas.json)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(.gitignore)",
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(git rm:*)",
+      "Bash(git push:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
