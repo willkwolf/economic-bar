@@ -210,6 +210,58 @@
           </button>
         </div>
 
+        <!-- Pantalla de Calibración de Priors (Paso 0) -->
+        <div class="test-question-card hidden" id="test-onboarding-screen">
+          <div class="test-progress-bar-wrapper">
+            <div class="test-progress-header">
+              <span class="test-step-label" id="onboarding-step-label" data-i18n="testOnboardingTitle">Calibración Alquímica de Priors</span>
+              <span class="test-phase-label" data-i18n="testTag">DIAGNÓSTICO COGNITIVO MENTAL</span>
+            </div>
+            <div class="test-progress-track" aria-hidden="true">
+              <div class="test-progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <h3 class="test-question-text" data-i18n="testOnboardingSubtitle">Define tu perfil declarado inicial para contrastar tu coherencia deductiva.</h3>
+
+          <div class="onboarding-group">
+            <span class="onboarding-group-label" data-i18n="onboardingCocktailLabel" style="display: block; margin-bottom: 12px;">1. ¿Cuál es tu elixir o cóctel de preferencia en la barra?</span>
+            <div class="onboarding-cocktails-grid" id="onboarding-cocktails-grid" role="group" aria-label="Cócteles de preferencia">
+              <!-- Renderizado dinámicamente desde JS -->
+            </div>
+          </div>
+
+          <div class="onboarding-sliders-group" style="margin-top: 30px;">
+            <span class="onboarding-group-label" data-i18n="onboardingSlidersLabel" style="display: block; margin-bottom: 15px;">2. ¿Cómo evaluarías tu alineación inicial con estos dos grandes ejes de tensión?</span>
+            
+            <!-- Slider 1: Estado vs Mercado -->
+            <div class="onboarding-slider-item" style="margin-bottom: 20px;">
+              <span class="onboarding-slider-title" id="onboarding-title-state" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block; margin-bottom: 8px;">Estado vs Mercado</span>
+              <div class="onboarding-slider-labels" style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px;">
+                <span id="onboarding-state-left-label" data-i18n="sliderValLeft">Sesgo Mercado</span>
+                <span class="onboarding-slider-value" id="onboarding-state-market-display" style="color: var(--accent-gold); font-weight: 500;">Equilibrio Central (50%)</span>
+                <span id="onboarding-state-right-label" data-i18n="sliderValRight">Sesgo Planificación</span>
+              </div>
+              <input type="range" id="onboarding-state-market-slider" min="0" max="100" value="50" class="luxury-range-slider">
+            </div>
+
+            <!-- Slider 2: Equidad vs Crecimiento -->
+            <div class="onboarding-slider-item">
+              <span class="onboarding-slider-title" id="onboarding-title-equity" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block; margin-bottom: 8px;">Equidad vs Crecimiento</span>
+              <div class="onboarding-slider-labels" style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px;">
+                <span id="onboarding-equity-left-label">Crecimiento</span>
+                <span class="onboarding-slider-value" id="onboarding-equity-growth-display" style="color: var(--accent-gold); font-weight: 500;">Equilibrio Central (50%)</span>
+                <span id="onboarding-equity-right-label">Equidad</span>
+              </div>
+              <input type="range" id="onboarding-equity-growth-slider" min="0" max="100" value="50" class="luxury-range-slider">
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block" id="onboarding-next-btn" style="margin-top: 35px; width: 100%;">
+            <span data-i18n="onboardingNextBtn">Fijar Priors e Iniciar Test</span> <i data-lucide="chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
         <!-- Pantalla de Preguntas Activa (Hidden por defecto) -->
         <div class="test-question-card hidden" id="test-question-screen">
           <div class="test-progress-bar-wrapper">
@@ -328,6 +380,17 @@
               <div class="results-info-card animate-hover-ring">
                 <span class="results-block-label color-alert" id="result-hangover-title"><i data-lucide="alert-octagon" aria-hidden="true"></i> RIESGO DE RESACA</span>
                 <p class="results-text" id="result-hangover-desc"></p>
+              </div>
+
+              <div class="results-info-card animate-hover-ring" id="result-consistency-card">
+                <span class="results-block-label" id="result-consistency-title"><i data-lucide="scale" aria-hidden="true"></i> CONSECUENCIA INTELECTUAL</span>
+                <div class="consistency-wrapper" style="display: flex; flex-direction: column; gap: 1rem;">
+                  <div class="consistency-percentage-block" style="border-left: 2px solid var(--result-accent, var(--accent-gold)); padding-left: 15px; margin-bottom: 5px;">
+                    <div class="consistency-pct" id="result-consistency-pct" style="font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--result-accent, var(--accent-gold)); line-height: 1;">92.4%</div>
+                    <div class="consistency-label" id="result-consistency-label" data-i18n="resultsConsistencyLabel" style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; letter-spacing: 0.05em;">Consistencia Cognitiva y Confianza Estadística</div>
+                  </div>
+                  <p class="results-text" id="result-consistency-desc" style="font-weight: 300; font-size: 0.95rem; line-height: 1.6;"></p>
+                </div>
               </div>
             </div>
           </div>

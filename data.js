@@ -88,7 +88,16 @@ export const TRANSLATIONS = {
       footerLinkOriginTitle: "📈 Economic School Map (Origen) <span class=\"link-arrow\">→</span>",
       footerLinkOriginDesc: "El mapa original del cual deriva este desarrollo.",
       footerColMethodTitle: "🧪 Código & Metodología",
-      footerMethodDesc: "Para detalles metodológicos, formalización y código fuente, visita el proyecto directamente en GitHub."
+      footerMethodDesc: "Para detalles metodológicos, formalización y código fuente, visita el proyecto directamente en GitHub.",
+      testOnboardingTitle: "Calibración Alquímica de Priors",
+      testOnboardingSubtitle: "Define tu perfil declarado inicial para contrastar tu coherencia deductiva.",
+      onboardingCocktailLabel: "1. ¿Cuál es tu elixir o cóctel de preferencia en la barra?",
+      onboardingSlidersLabel: "2. ¿Cómo evaluarías tu alineación inicial con estos dos grandes ejes de tensión?",
+      onboardingNextBtn: "Fijar Priors e Iniciar Test",
+      resultsConsistencyTitle: "CONSECUENCIA INTELECTUAL",
+      resultsConsistencyLabel: "Consistencia Cognitiva y Confianza Estadística",
+      onboardingAxisState: "Estado vs Mercado",
+      onboardingAxisEquity: "Equidad vs Crecimiento"
     },
     escuelas: {
       marxista: {
@@ -589,6 +598,23 @@ export const TRANSLATIONS = {
         riesgo: "🌪️ Soledad del Ecléctico",
         narrativa: "Tu mezcla presenta una dispersión teórica extrema. Eres un catador cívico de múltiples estantes, inmune por completo al dogmatismo ortodoxo. Esto te otorga una soberana humildad epistemológica. No obstante, tu resaca ideológica es la completa inoperancia práctica o la soledad política: al carecer de un anclaje doctrinal unificado, corres el riesgo de diluir tu fuerza transformadora y no encajar en ninguna coalición organizada de acción colectiva."
       }
+    },
+    perfiles_consistencia: {
+      high: {
+        nombre: "Coherencia de Alta Fidelidad",
+        subtitulo: "Tu paladar ideológico es sumamente consistente.",
+        descripcion: "Tus decisiones teóricas en los dilemas prácticos se alinean casi a la perfección con tu cóctel preferido y tu autoevaluación. Eres un catador de doctrina con alta coherencia de principios."
+      },
+      moderate: {
+        nombre: "Pluralismo Adaptativo",
+        subtitulo: "Presentas una afinidad equilibrada y pragmática.",
+        descripcion: "Tienes un rumbo claro, pero muestras matices prácticos interesantes que tensionan tu cóctel seleccionado cuando te enfrentas a trade-offs de alta tensión. Esto es signo de un pluralismo saludable."
+      },
+      low: {
+        nombre: "Disonancia Cognitiva Enriquecedora",
+        subtitulo: "¡Fascinante disonancia cognitiva detectada!",
+        descripcion: "Te deleita el aroma del cóctel que seleccionaste como prior, pero bajo la presión de dilemas reales, tus decisiones se inclinan hacia principios opuestos. Experimentas una tensión epistemológica muy enriquecedora."
+      }
     }
   },
   en: {
@@ -671,7 +697,16 @@ export const TRANSLATIONS = {
       footerLinkOriginTitle: "📈 Economic School Map (Origin) <span class=\"link-arrow\">→</span>",
       footerLinkOriginDesc: "The original map from which this project derives.",
       footerColMethodTitle: "🧪 Code & Methodology",
-      footerMethodDesc: "For methodological details, formalization, and source code, visit the project directly on GitHub."
+      footerMethodDesc: "For methodological details, formalization, and source code, visit the project directly on GitHub.",
+      testOnboardingTitle: "Alchemical Prior Calibration",
+      testOnboardingSubtitle: "Define your initial declared profile to measure your deductive coherence.",
+      onboardingCocktailLabel: "1. Which is your favorite doctrinal cocktail from the menu?",
+      onboardingSlidersLabel: "2. How would you self-assess your initial alignment on these tension axes?",
+      onboardingNextBtn: "Set Priors & Start Test",
+      resultsConsistencyTitle: "INTELLECTUAL COHERENCE",
+      resultsConsistencyLabel: "Cognitive Consistency & Statistical Confidence",
+      onboardingAxisState: "State vs Market",
+      onboardingAxisEquity: "Equity vs Growth"
     },
     escuelas: {
       marxista: {
@@ -1171,6 +1206,23 @@ export const TRANSLATIONS = {
       disperso: {
         riesgo: "🌪️ Solitude of the Eclectic",
         narrativa: "Your mixture displays extreme theoretical dispersion. You are a civic taster of all shelves, completely immune to orthodox dogmas. While this grants you sovereign epistemological humility, your ideological hangover is political inoperancy: without a unified doctrinal anchor, you risk diluting your transformative force and failing to align with any organized coalition for collective change."
+      }
+    },
+    perfiles_consistencia: {
+      high: {
+        nombre: "High-Fidelity Coherence",
+        subtitulo: "Your ideological palate is highly consistent.",
+        descripcion: "Your theoretical choices under practical dilemmas align almost perfectly with your preferred cocktail and self-assessment. You are a doctrine taster with high coherence of principles."
+      },
+      moderate: {
+        nombre: "Adaptive Pluralism",
+        subtitulo: "You present a balanced and pragmatic affinity.",
+        descripcion: "You have a clear path, but you show interesting practical nuances that challenge your chosen cocktail when facing high-tension trade-offs. This is a sign of healthy pluralism."
+      },
+      low: {
+        nombre: "Enriching Cognitive Dissonance",
+        subtitulo: "Fascinating cognitive dissonance detected!",
+        descripcion: "You enjoy the aroma of your selected cocktail, but under the pressure of theoretical dilemmas and real allocation choices, your empirical decisions lean toward opposite principles. You experience a highly enriching epistemological tension."
       }
     }
   }

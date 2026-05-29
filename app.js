@@ -13,6 +13,7 @@ let PREGUNTAS = [];
 let PERFILES_COGNITIVOS = {};
 let PERFILES_CUADRANTES = {};
 let PERFILES_CONCENTRACION = {};
+let PERFILES_CONSISTENCIA = {};
 
 // ── ESTADO GLOBAL DE LA APLICACIÓN ─────────────────────────────────────────
 const state = {
@@ -117,6 +118,21 @@ function setLanguage(lang) {
   PERFILES_COGNITIVOS = dict.perfiles_cognitivos;
   PERFILES_CUADRANTES = dict.perfiles_cuadrantes;
   PERFILES_CONCENTRACION = dict.perfiles_concentracion;
+  PERFILES_CONSISTENCIA = dict.perfiles_consistencia;
+
+  // Localizar dinámicamente los sliders del onboarding
+  const isEs = lang === "es";
+  const stateTitle = document.getElementById("onboarding-title-state");
+  if (stateTitle) stateTitle.textContent = isEs ? "Gobernanza (Estado vs Mercado)" : "Governance (State vs Market)";
+  
+  const equityTitle = document.getElementById("onboarding-title-equity");
+  if (equityTitle) equityTitle.textContent = isEs ? "Propósito (Equidad vs Crecimiento)" : "Purpose (Equity vs Growth)";
+
+  const equityLeft = document.getElementById("onboarding-equity-left-label");
+  if (equityLeft) equityLeft.textContent = isEs ? "Crecimiento / Growth" : "Growth / Crecimiento";
+  
+  const equityRight = document.getElementById("onboarding-equity-right-label");
+  if (equityRight) equityRight.textContent = isEs ? "Equidad / Equity" : "Equity / Equidad";
 
   // 2. Actualizar estado activo de los botones selectores
   document.querySelectorAll(".lang-btn").forEach(btn => {
@@ -682,12 +698,14 @@ function initTestEngine() {
 
   if (!startBtn) return;
 
+  const onboardingScreen = document.getElementById("test-onboarding-screen");
+
   const startAction = () => {
     startScreen.classList.add("hidden");
-    questionScreen.classList.remove("hidden");
-    state.currentTestQuestion = 0;
-    state.answers = {};
-    renderQuestion();
+    onboardingScreen.classList.remove("hidden");
+    state.prior = { cocktailId: null, stateMarket: 0.5, equityGrowth: 0.5 };
+    renderOnboardingCocktails();
+    setupOnboardingSliders();
   };
   startBtn.addEventListener("click", startAction);
   addKeyboardSupport(startBtn, startAction);
@@ -726,10 +744,113 @@ function initTestEngine() {
         triggerAlchemicalCalculation();
       }
     };
-    sliderNextBtn.addEventListener("click", sliderAction);
-    addKeyboardSupport(sliderNextBtn, sliderAction);
+      sliderNextBtn.addEventListener("click", sliderAction);
+      addKeyboardSupport(sliderNextBtn, sliderAction);
+    }
+
+    // Configurar Onboarding Paso 0
+    const onboardingScreen = document.getElementById("test-onboarding-screen");
+    const onboardingNextBtn = document.getElementById("onboarding-next-btn");
+    if (onboardingNextBtn) {
+      const nextAction = () => {
+        // Si no se ha elegido cóctel prior, asignamos el primero por defecto
+        if (!state.prior || !state.prior.cocktailId) {
+          if (COCTELES.length > 0) {
+            state.prior = state.prior || {};
+            state.prior.cocktailId = COCTELES[0].id;
+          }
+        }
+        onboardingScreen.classList.add("hidden");
+        questionScreen.classList.remove("hidden");
+        state.currentTestQuestion = 0;
+        state.answers = {};
+        renderQuestion();
+      };
+      onboardingNextBtn.addEventListener("click", nextAction);
+      addKeyboardSupport(onboardingNextBtn, nextAction);
+    }
   }
-}
+
+  // RENDERIZADOR DINÁMICO DE CÓCTELES EN EL ONBOARDING
+  function renderOnboardingCocktails() {
+    const grid = document.getElementById("onboarding-cocktails-grid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    COCTELES.forEach(coctel => {
+      const card = document.createElement("div");
+      card.className = "mini-cocktail-card";
+      card.dataset.id = coctel.id;
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.style.setProperty("--cocktail-color", coctel.colorPredominante);
+
+      card.innerHTML = `
+        <span class="mini-cocktail-dot" style="background-color: ${coctel.colorPredominante}"></span>
+        <span class="mini-cocktail-name">${coctel.nombre}</span>
+      `;
+
+      const selectPrior = () => {
+        document.querySelectorAll(".mini-cocktail-card").forEach(c => c.classList.remove("selected"));
+        card.classList.add("selected");
+        state.prior.cocktailId = coctel.id;
+      };
+
+      card.addEventListener("click", selectPrior);
+      addKeyboardSupport(card, selectPrior);
+      grid.appendChild(card);
+    });
+
+    // Autoseleccionar el primero para garantizar un prior por defecto robusto
+    if (grid.firstChild) {
+      grid.firstChild.click();
+    }
+  }
+
+  // CONFIGURADOR DE DESLIZADORES DE ONBOARDING
+  function setupOnboardingSliders() {
+    const stateSlider = document.getElementById("onboarding-state-market-slider");
+    const stateDisplay = document.getElementById("onboarding-state-market-display");
+    const equitySlider = document.getElementById("onboarding-equity-growth-slider");
+    const equityDisplay = document.getElementById("onboarding-equity-growth-display");
+
+    const updateDisplay = (val, display, leftLabel, rightLabel) => {
+      const isEs = state.currentLang === "es";
+      let text = isEs ? "Equilibrio Central (50%)" : "Central Balance (50%)";
+      if (val < 40) {
+        text = `${leftLabel} (${100 - val * 2}%)`;
+      } else if (val > 60) {
+        text = `${rightLabel} (${(val - 50) * 2}%)`;
+      }
+      display.textContent = text;
+    };
+
+    if (stateSlider && stateDisplay) {
+      stateSlider.value = 50;
+      stateDisplay.textContent = state.currentLang === "es" ? "Equilibrio Central (50%)" : "Central Balance (50%)";
+      stateSlider.oninput = (e) => {
+        const val = parseInt(e.target.value);
+        state.prior.stateMarket = val / 100;
+        const isEs = state.currentLang === "es";
+        const leftL = isEs ? "Sesgo Mercado" : "Market Bias";
+        const rightL = isEs ? "Sesgo Planificación" : "Planning Bias";
+        updateDisplay(val, stateDisplay, leftL, rightL);
+      };
+    }
+
+    if (equitySlider && equityDisplay) {
+      equitySlider.value = 50;
+      equityDisplay.textContent = state.currentLang === "es" ? "Equilibrio Central (50%)" : "Central Balance (50%)";
+      equitySlider.oninput = (e) => {
+        const val = parseInt(e.target.value);
+        state.prior.equityGrowth = val / 100;
+        const isEs = state.currentLang === "es";
+        const leftL = isEs ? "Crecimiento" : "Growth";
+        const rightL = isEs ? "Equidad" : "Equity";
+        updateDisplay(val, equityDisplay, leftL, rightL);
+      };
+    }
+  }
 
 // RENDERIZADOR DE PREGUNTA DEL TEST
 function renderQuestion() {
@@ -937,13 +1058,84 @@ function calculateAlchemicalResults() {
   if (hhi >= 0.18) concentrationKey = "monocultura";
   else if (hhi < 0.12) concentrationKey = "disperso";
 
+  // 6. Cálculo de Consistencia Cognitiva (ICC / Bayesian Prior Match)
+  let consistencyPct = 90.0; // Fallback por defecto si no hay onboarding
+  let consistencyKey = "moderate";
+
+  if (state.prior && state.prior.cocktailId) {
+    // 1. Similitud de Coseno de Licores
+    const priorCocktail = COCTELES.find(c => c.id === state.prior.cocktailId);
+    if (priorCocktail) {
+      // Construir vector de Prior a partir del cóctel seleccionado
+      const priorVector = {};
+      Object.keys(ESCUELAS).forEach(id => {
+        priorVector[id] = priorCocktail.ingredientes[id] || 0;
+      });
+
+      // Similitud de coseno entre priorVector y porcentajes
+      let dotProduct = 0;
+      let normPrior = 0;
+      let normT = 0;
+
+      Object.keys(ESCUELAS).forEach(id => {
+        const pVal = priorVector[id];
+        const tVal = porcentajes[id] || 0;
+        dotProduct += pVal * tVal;
+        normPrior += pVal * pVal;
+        normT += tVal * tVal;
+      });
+
+      let cosSim = 1.0;
+      if (normPrior > 0 && normT > 0) {
+        cosSim = dotProduct / (Math.sqrt(normPrior) * Math.sqrt(normT));
+      }
+
+      // 2. Similitud de Ejes Geométricos
+      // Coordenadas final
+      const axisStateScore = qScores.Q1 * 0.4 + qScores.Q3 * 0.6;
+      const axisMarketScore = qScores.Q4 + qScores.Q2 * 0.5;
+      const axisEquityScore = qScores.Q1 + qScores.Q2 * 0.5;
+      const axisGrowthScore = qScores.Q4 * 0.3 + qScores.Q3 * 0.7;
+
+      const sumStateMarket = axisStateScore + axisMarketScore || 1;
+      const sumEquityGrowth = axisEquityScore + axisGrowthScore || 1;
+
+      const xFinal = axisStateScore / sumStateMarket;
+      const yFinal = axisEquityScore / sumEquityGrowth;
+
+      // Priors declarados
+      const xPrior = state.prior.stateMarket; // [0,1]
+      const yPrior = state.prior.equityGrowth; // [0,1]
+
+      // Distancia euclidiana
+      const dist = Math.sqrt(Math.pow(xFinal - xPrior, 2) + Math.pow(yFinal - yPrior, 2));
+      // Máxima distancia es sqrt(2)
+      const axesSim = Math.max(0, 1 - (dist / Math.sqrt(2)));
+
+      // Índice de Consistencia Total (ICC): 60% cosSim + 40% axesSim
+      const totalSim = 0.6 * cosSim + 0.4 * axesSim;
+      consistencyPct = Math.round(totalSim * 1000) / 10;
+
+      // Claves de consistencia
+      if (consistencyPct >= 85) {
+        consistencyKey = "high";
+      } else if (consistencyPct >= 65) {
+        consistencyKey = "moderate";
+      } else {
+        consistencyKey = "low";
+      }
+    }
+  }
+
   return {
     porcentajes,
     hhi,
     archetypeKey: finalArchetypeKey,
     quadrantKey: dominantQuadrant,
     concentrationKey,
-    qScores
+    qScores,
+    consistencyPct,
+    consistencyKey
   };
 }
 
@@ -998,6 +1190,42 @@ function renderResultsToUI(results) {
     ${localHangoverTitle} ${concentration.riesgo}
   `;
   document.getElementById("result-hangover-desc").textContent = `${concentration.narrativa} ${archetype.resaca}`;
+
+  // Consistencia Cognitiva y Confianza Estadística
+  const consistency = PERFILES_CONSISTENCIA[results.consistencyKey];
+  const pctEl = document.getElementById("result-consistency-pct");
+  const titleEl = document.getElementById("result-consistency-title");
+  const descEl = document.getElementById("result-consistency-desc");
+
+  if (pctEl) {
+    pctEl.textContent = `${results.consistencyPct}%`;
+    let color = "var(--result-accent, var(--accent-gold))";
+    if (results.consistencyKey === "moderate") {
+      color = "var(--accent-gold-dark)";
+    } else if (results.consistencyKey === "low") {
+      color = "#e53e3e"; // amber/red
+    }
+    pctEl.style.color = color;
+    const consistencyCard = document.getElementById("result-consistency-card");
+    if (consistencyCard) {
+      consistencyCard.style.setProperty("--result-accent", color);
+      const r = parseInt(color.slice(1, 3), 16) || 217;
+      const g = parseInt(color.slice(3, 5), 16) || 167;
+      const b = parseInt(color.slice(5, 7), 16) || 82;
+      consistencyCard.style.setProperty("--result-accent-glow", `rgba(${r}, ${g}, ${b}, 0.04)`);
+    }
+  }
+
+  if (titleEl) {
+    titleEl.innerHTML = `<i data-lucide="scale" aria-hidden="true"></i> ${isEs ? "CONSECUENCIA INTELECTUAL" : "INTELLECTUAL COHERENCE"}`;
+  }
+
+  if (descEl) {
+    const priorName = state.prior && state.prior.cocktailId
+      ? COCTELES.find(c => c.id === state.prior.cocktailId)?.nombre
+      : (isEs ? "Ninguno" : "None");
+    descEl.innerHTML = `<strong>${isEs ? "Cóctel Referencia" : "Reference Cocktail"}:</strong> <em>${priorName}</em>.<br>${consistency.subtitulo} ${consistency.descripcion}`;
+  }
 
   // Barras de porcentajes
   const barList = document.getElementById("results-bar-list");
@@ -1227,132 +1455,261 @@ function renderRadarChart(qScores) {
 // ── EXPORTACIÓN DE LA TARJETA DE CATAS (Browser Print) ──────────────────────
 function exportTastingCard(results) {
   const ui = TRANSLATIONS[state.currentLang].ui;
+  const isEs = state.currentLang === "es";
   const archetype = PERFILES_COGNITIVOS[results.archetypeKey];
   const quadrant = PERFILES_CUADRANTES[results.quadrantKey];
   const concentration = PERFILES_CONCENTRACION[results.concentrationKey];
+  const consistency = PERFILES_CONSISTENCIA[results.consistencyKey];
 
   const topIngredients = Object.entries(results.porcentajes)
     .filter(([_, pct]) => pct > 0)
     .sort((a, b) => b[1] - a[1])
     .map(([id, pct]) => `${pct}% ${ESCUELAS[id].nombre}`)
-    .join(" / ");
+    .join("  |  ");
+
+  const priorCocktailName = state.prior && state.prior.cocktailId 
+    ? COCTELES.find(c => c.id === state.prior.cocktailId)?.nombre 
+    : (isEs ? "Ninguno" : "None");
 
   const printWindow = window.open("", "_blank");
   printWindow.document.write(`
     <html>
       <head>
         <title>${ui.exportDocTitle}</title>
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
         <style>
+          @page {
+            size: A4 portrait;
+            margin: 1.0cm;
+          }
+          * {
+            box-sizing: border-box;
+          }
           body {
-            background-color: #060606;
-            color: #f5f3ef;
+            background-color: #f7f5f0;
+            color: #1a1a18;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            padding: 40px;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
           }
-          .ticket-card {
-            border: 2px solid #b88628;
-            padding: 40px;
-            max-width: 540px;
+          .academic-sheet {
+            background-color: #ffffff;
+            border: 2px solid #b39a74;
+            outline: 1px solid #b39a74;
+            outline-offset: -8px;
+            padding: 40px 50px;
+            max-width: 800px;
             width: 100%;
-            background-color: #0d0d0c;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            height: auto;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
           }
-          .card-header {
-            border-bottom: 1px solid #b88628;
-            padding-bottom: 20px;
-            margin-bottom: 25px;
+          .sheet-header {
             text-align: center;
+            border-bottom: 2px double #b39a74;
+            padding-bottom: 18px;
+            margin-bottom: 25px;
           }
-          .title-tag {
+          .academic-tag {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
-            color: #d9a752;
-            letter-spacing: 0.2em;
+            color: #8c7653;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 500;
           }
           h1 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.8rem;
-            margin: 10px 0 5px 0;
-            font-weight: 400;
+            margin: 8px 0 2px 0;
+            font-weight: 600;
+            color: #1a1a18;
+            line-height: 1.1;
           }
           .archetype-sub {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: 1.4rem;
-            color: #d9a752;
+            font-size: 1.35rem;
+            color: #8c7653;
+            margin-top: 2px;
+            display: block;
+          }
+          .academic-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+            margin-bottom: 20px;
+          }
+          .academic-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
           }
           .card-block {
-            margin-bottom: 20px;
+            text-align: left;
           }
           .block-label {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
-            color: #d9a752;
-            letter-spacing: 0.1em;
+            color: #8c7653;
+            letter-spacing: 0.12em;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border-bottom: 1px dashed rgba(140, 118, 83, 0.2);
+            padding-bottom: 3px;
           }
           .block-text {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             line-height: 1.5;
-            color: rgba(245,243,239,0.8);
-            font-weight: 300;
+            color: #2b2b28;
+            font-weight: 400;
+            margin: 0;
+            text-align: justify;
           }
-          .watermark {
+          .formula-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: #1a1a18;
+            font-weight: 500;
+            background-color: #fcfbf9;
+            border: 1px solid #eadecd;
+            padding: 8px 12px;
+            border-radius: 3px;
+            line-height: 1.4;
+          }
+          .consistency-badge {
+            background-color: #f7f5f0;
+            border: 1px solid #b39a74;
+            border-radius: 4px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+          }
+          .consistency-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #8c7653;
+            line-height: 1;
+            border-right: 1px solid #c5b59f;
+            padding-right: 15px;
+          }
+          .consistency-desc {
+            font-size: 0.76rem;
+            line-height: 1.4;
+            color: #3b3b38;
+            margin: 0;
+          }
+          .signature-watermark {
             text-align: center;
-            margin-top: 30px;
-            border-top: 1px dashed rgba(255,255,255,0.08);
-            padding-top: 20px;
+            margin-top: 25px;
+            border-top: 1.5px double #b39a74;
+            padding-top: 15px;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.65rem;
-            color: rgba(245,243,239,0.3);
+            color: #8c7653;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 500;
           }
           @media print {
-            body { background: white; color: black; }
-            .ticket-card { border-color: black; background: white; color: black; box-shadow: none; }
-            .block-text { color: black; }
-            .title-tag, .block-label, .archetype-sub { color: black; }
+            body {
+              background-color: #ffffff !important;
+              color: #000000 !important;
+            }
+            .academic-sheet {
+              border-color: #000000 !important;
+              outline-color: #000000 !important;
+              box-shadow: none !important;
+              padding: 30px 40px !important;
+              height: 100vh !important;
+              max-height: 29.7cm !important;
+              justify-content: space-between !important;
+            }
+            .block-text {
+              color: #000000 !important;
+            }
+            .formula-text {
+              background-color: #ffffff !important;
+              border-color: #000000 !important;
+            }
+            .consistency-badge {
+              background-color: #ffffff !important;
+              border-color: #000000 !important;
+            }
+            .consistency-num, .block-label, .archetype-sub, .academic-tag, .signature-watermark {
+              color: #000000 !important;
+            }
           }
         </style>
       </head>
       <body>
-        <div class="ticket-card">
-          <div class="card-header">
-            <span class="title-tag">${ui.exportOfficialAct}</span>
+        <div class="academic-sheet">
+          <div class="sheet-header">
+            <span class="academic-tag">${ui.exportOfficialAct}</span>
             <h1>${archetype.nombre}</h1>
             <span class="archetype-sub">${archetype.subtitulo}</span>
           </div>
 
-          <div class="card-block">
-            <span class="block-label">${ui.exportMolecularFormula}</span>
-            <p class="block-text" style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;">${topIngredients}</p>
+          <div class="academic-grid">
+            <!-- Columna Izquierda: Diagnóstico e Implicaciones -->
+            <div class="academic-column">
+              <div class="card-block">
+                <span class="block-label">${ui.exportCognitiveDiag}</span>
+                <p class="block-text">${archetype.descripcion} ${quadrant.descripcion}</p>
+              </div>
+
+              <div class="card-block">
+                <span class="block-label">${ui.exportVirtue}</span>
+                <p class="block-text">${archetype.virtud}</p>
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Molecular y Resaca -->
+            <div class="academic-column">
+              <div class="card-block">
+                <span class="block-label">${ui.exportMolecularFormula}</span>
+                <div class="formula-text">${topIngredients}</div>
+              </div>
+
+              <div class="card-block">
+                <span class="block-label">${ui.exportHangoverRisk}</span>
+                <p class="block-text" style="font-size: 0.78rem; line-height: 1.45;"><strong>${concentration.riesgo}:</strong> ${concentration.narrativa} ${archetype.resaca}</p>
+              </div>
+            </div>
           </div>
 
-          <div class="card-block">
-            <span class="block-label">${ui.exportCognitiveDiag}</span>
-            <p class="block-text">${archetype.descripcion} ${quadrant.descripcion}</p>
+          <!-- Bloque de Consistencia e Índice de Confianza Bayesiana -->
+          <div class="card-block" style="margin-bottom: 5px;">
+            <span class="block-label">${ui.resultsConsistencyTitle}</span>
+            <div class="consistency-badge">
+              <div class="consistency-num">${results.consistencyPct}%</div>
+              <div class="consistency-desc">
+                <strong>${ui.resultsConsistencyLabel}:</strong> 
+                ${isEs ? "Elixires de Prior de Referencia" : "Reference Prior Elixirs"}: <em>${priorCocktailName}</em>. 
+                ${consistency.subtitulo} ${consistency.descripcion}
+              </div>
+            </div>
           </div>
 
-          <div class="card-block">
-            <span class="block-label">${ui.exportVirtue}</span>
-            <p class="block-text">${archetype.virtud}</p>
-          </div>
-
-          <div class="card-block">
-            <span class="block-label">${ui.exportHangoverRisk}</span>
-            <p class="block-text">${concentration.riesgo}: ${concentration.narrativa} ${archetype.resaca}</p>
-          </div>
-
-          <div class="watermark">
-            ${ui.exportWatermark}
+          <!-- Firma única al final -->
+          <div class="signature-watermark">
+            ${isEs ? "ELIXIRES DE LA RAZÓN ECONÓMICA" : "ELIXIRS OF ECONOMIC REASON"}
           </div>
         </div>
+
         <script>
           window.onload = function() {
             window.print();
