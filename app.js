@@ -409,10 +409,14 @@ function openMixingDrawer(coctel) {
     ingList.appendChild(item);
   });
 
+  // Guardar posición de scroll actual antes de bloquear para evitar saltos de cámara
+  const scrollY = window.scrollY;
+  document.body.style.top = `-${scrollY}px`;
+
   // Abrir Drawer
   drawer.classList.add("open");
   drawer.setAttribute("aria-hidden", "false");
-  document.body.classList.add("drawer-open"); // Bloquear scroll del sitio
+  document.body.classList.add("drawer-open"); // Bloquear scroll del sitio de forma inamovible
   drawer.querySelector(".drawer-scrollable").focus();
 
   // Detener cualquier simulación previa del líquido
@@ -430,7 +434,15 @@ const closeDrawer = () => {
   if (drawer) {
     drawer.classList.remove("open");
     drawer.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("drawer-open"); // Desbloquear scroll del sitio
+    
+    // Desbloquear scroll restaurando la posición de visualización original
+    if (document.body.classList.contains("drawer-open")) {
+      const scrollY = Math.abs(parseInt(document.body.style.top || "0", 10));
+      document.body.classList.remove("drawer-open");
+      document.body.style.top = "";
+      window.scrollTo(0, scrollY);
+    }
+    
     if (state.mixingAnimationId) {
       cancelAnimationFrame(state.mixingAnimationId);
     }
