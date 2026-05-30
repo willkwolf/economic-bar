@@ -22,7 +22,8 @@ const state = {
   answers: {}, // Respuestas { qId: valor }
   mixingAnimationId: null,
   activeDossierId: null,
-  activeResults: null
+  activeResults: null,
+  activeTouchBottleId: null // ID de la botella con tooltip/modal abierto en táctil
 };
 
 // Helper para soporte de teclado en elementos interactivos
@@ -63,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initTestEngine();
   initScrollReveal();
   initLanguageSwitcher();
+  initDrawerGestures();
 });
 
 // ── NAVEGACIÓN REACTIVA AL SCROLL ──────────────────────────────────────────
@@ -229,8 +231,28 @@ function initBottleShelf() {
     bottleItem.addEventListener("focus", (e) => showTastingTooltip(e, escuela));
     bottleItem.addEventListener("blur", hideTastingTooltip);
 
-    // Enviar scroll al test al hacer click
-    const action = () => {
+    // Enviar scroll al test al hacer click (con gestos inteligentes para móviles)
+    const action = (e) => {
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 992;
+      
+      if (isTouch) {
+        if (state.activeTouchBottleId !== escuela.id) {
+          e?.stopPropagation(); // Evitar cierre inmediato por click en body
+          showTastingTooltip(e, escuela);
+          state.activeTouchBottleId = escuela.id;
+          
+          // Registrar listener para cerrar al hacer tap fuera
+          document.removeEventListener("click", dismissTooltipOnOutsideTap);
+          document.addEventListener("click", dismissTooltipOnOutsideTap);
+          return;
+        } else {
+          // Segundo tap: ir al test
+          hideTastingTooltip();
+          state.activeTouchBottleId = null;
+          document.removeEventListener("click", dismissTooltipOnOutsideTap);
+        }
+      }
+      
       const testSection = document.getElementById("test");
       if (testSection) {
         testSection.scrollIntoView({ behavior: 'smooth' });
@@ -286,6 +308,20 @@ function hideTastingTooltip() {
   if (tooltip) {
     tooltip.setAttribute("aria-hidden", "true");
     tooltip.classList.remove("visible");
+  }
+}
+
+// Función global para cerrar el tooltip al hacer tap fuera en dispositivos móviles
+function dismissTooltipOnOutsideTap(e) {
+  const tooltip = document.getElementById("bottle-tooltip");
+  if (tooltip && tooltip.classList.contains("visible")) {
+    const isClickInsideBottle = e.target.closest(".bottle-item");
+    const isClickInsideTooltip = e.target.closest("#bottle-tooltip");
+    if (!isClickInsideBottle && !isClickInsideTooltip) {
+      hideTastingTooltip();
+      state.activeTouchBottleId = null;
+      document.removeEventListener("click", dismissTooltipOnOutsideTap);
+    }
   }
 }
 
@@ -400,6 +436,44 @@ const closeDrawer = () => {
 };
 document.getElementById("drawer-close-btn")?.addEventListener("click", closeDrawer);
 document.getElementById("drawer-close-overlay")?.addEventListener("click", closeDrawer);
+
+// Gestos táctiles inteligentes (Swipe to Dismiss) para el Cajón de Mezclado en Móvil
+function initDrawerGestures() {
+  const drawerContent = document.querySelector("#mixing-drawer .drawer-content");
+  if (!drawerContent) return;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let touchEndY = 0;
+
+  drawerContent.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  drawerContent.addEventListener("touchmove", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  drawerContent.addEventListener("touchend", () => {
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    
+    // Umbrales del gesto swipe
+    const swipeThreshold = 80; // píxeles
+    
+    // 1. Swipe Right: Deslizar hacia la derecha para cerrar (el cajón se oculta a la derecha)
+    if (deltaX > swipeThreshold && Math.abs(deltaY) < swipeThreshold * 1.5) {
+      closeDrawer();
+    }
+    // 2. Swipe Down: Deslizar hacia abajo para cerrar
+    else if (deltaY > swipeThreshold && Math.abs(deltaX) < swipeThreshold * 1.5) {
+      closeDrawer();
+    }
+  }, { passive: true });
+}
 
 // ── SIMULADOR DE FLUIDOS EN CANVAS 2D CON DPR SCALING ──────────────────────────
 function startLiquidSimulation(coctel) {
