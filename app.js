@@ -1476,10 +1476,25 @@ How intellectually sober are you? Distill your own elixir and measure your cogni
 👉 https://willkwolf.github.io/economic-bar/`;
 
       const shareText = isEs ? textEs : textEn;
-      const encodedText = encodeURIComponent(shareText);
-      const waUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
       
-      window.open(waUrl, "_blank");
+      // Intentar utilizar la API de Compartido Nativo (Web Share API) en móviles para abrir el Share Sheet del OS
+      if (navigator.share) {
+        navigator.share({
+          title: isEs ? 'Mi Tarjeta de Sobriedad Económica' : 'My Economic Sobriety Card',
+          text: shareText,
+          url: 'https://willkwolf.github.io/economic-bar/'
+        }).catch(err => {
+          // Fallback a enlace directo si se cancela o falla
+          const encodedText = encodeURIComponent(shareText);
+          const waUrl = `https://wa.me/?text=${encodedText}`;
+          window.open(waUrl, "_blank");
+        });
+      } else {
+        // Enlace oficial wa.me para redirección nativa directa de WhatsApp (Móvil y WhatsApp Web)
+        const encodedText = encodeURIComponent(shareText);
+        const waUrl = `https://wa.me/?text=${encodedText}`;
+        window.open(waUrl, "_blank");
+      }
     };
     btnShare.onclick = shareAction;
     addKeyboardSupport(btnShare, shareAction);
