@@ -1481,8 +1481,7 @@ How intellectually sober are you? Distill your own elixir and measure your cogni
       if (navigator.share) {
         navigator.share({
           title: isEs ? 'Mi Tarjeta de Sobriedad Económica' : 'My Economic Sobriety Card',
-          text: shareText,
-          url: 'https://willkwolf.github.io/economic-bar/'
+          text: shareText
         }).catch(err => {
           // Fallback a enlace directo si se cancela o falla
           const encodedText = encodeURIComponent(shareText);
