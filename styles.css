@@ -2890,4 +2890,120 @@ section {
     align-items: center !important;
     justify-content: center !important;
   }
+
+  /* Polos del Dilema del Test (Fase 3) apilados verticalmente con señales de dirección inequívocas */
+  .slider-dilemma-wrapper {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    margin-bottom: 25px !important;
+    position: relative;
+  }
+
+  .slider-pole {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid var(--border-glass) !important;
+    border-radius: 6px !important;
+    padding: 16px 20px !important;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  /* Distinción visual para el polo izquierdo (apilado arriba) */
+  .slider-pole.pole-left {
+    border-left: 3px solid var(--accent-gold) !important;
+    border-top: 1px solid var(--border-glass) !important;
+  }
+
+  /* Distinción visual para el polo derecho (apilado abajo) */
+  .slider-pole.pole-right {
+    border-left: 3px solid rgba(255, 255, 255, 0.3) !important;
+    border-top: 1px solid var(--border-glass) !important;
+  }
+
+  .pole-title {
+    font-size: 0.85rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  /* Etiquetas de dirección háptica y visual en los títulos del dilema en móvil */
+  .slider-pole.pole-left .pole-title::after {
+    content: '← Deslizar Izquierda' !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.58rem !important;
+    color: var(--accent-gold) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    background-color: rgba(217, 167, 82, 0.08) !important;
+    border: 1px solid rgba(217, 167, 82, 0.2) !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+  }
+
+  .slider-pole.pole-right .pole-title::after {
+    content: 'Deslizar Derecha →' !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.58rem !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+  }
+
+  .pole-text {
+    font-size: 0.78rem !important;
+    margin-top: 6px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Panel de control del slider móvil espacioso y claro */
+  .slider-control-group {
+    background-color: rgba(6, 6, 6, 0.4) !important;
+    border: 1px solid var(--border-glass) !important;
+    border-radius: 6px !important;
+    padding: 16px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .slider-indicators {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  /* Indicadores premium de las prioridades del slider */
+  #slider-left-hint, #slider-right-hint {
+    font-family: var(--font-mono) !important;
+    font-size: 0.72rem !important;
+    color: var(--accent-gold-dark) !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  #slider-left-hint {
+    color: var(--accent-gold) !important;
+    border-bottom: 1px dashed rgba(217, 167, 82, 0.15) !important;
+    padding-bottom: 6px !important;
+  }
+
+  #slider-right-hint {
+    color: var(--text-muted) !important;
+    border-top: 1px dashed rgba(255, 255, 255, 0.05) !important;
+    padding-top: 6px !important;
+  }
+
+  .slider-value-display {
+    font-size: 0.85rem !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    margin: 4px 0 !important;
+  }
 }
