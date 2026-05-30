@@ -435,12 +435,23 @@ const closeDrawer = () => {
     drawer.classList.remove("open");
     drawer.setAttribute("aria-hidden", "true");
     
-    // Desbloquear scroll restaurando la posición de visualización original
+    // Desbloquear scroll restaurando la posición de visualización original de forma instantánea
     if (document.body.classList.contains("drawer-open")) {
       const scrollY = Math.abs(parseInt(document.body.style.top || "0", 10));
+      
+      // Desactivar temporalmente el scroll suave en el documento para evitar barridos de cámara
+      const htmlEl = document.documentElement;
+      const prevScrollBehavior = htmlEl.style.scrollBehavior;
+      htmlEl.style.scrollBehavior = "auto";
+      
       document.body.classList.remove("drawer-open");
       document.body.style.top = "";
-      window.scrollTo(0, scrollY);
+      window.scrollTo(0, scrollY); // Desplazamiento instantáneo sin animación
+      
+      // Forzar un reflujo para asegurar la ejecución inmediata del salto
+      htmlEl.offsetHeight; 
+      
+      htmlEl.style.scrollBehavior = prevScrollBehavior;
     }
     
     if (state.mixingAnimationId) {
