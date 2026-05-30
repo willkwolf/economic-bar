@@ -1415,6 +1415,51 @@ function renderResultsToUI(results) {
   btnExport.onclick = exportAction;
   addKeyboardSupport(btnExport, exportAction);
 
+  // Botón Compartir en WhatsApp (Fórmula de Viralidad de Alto Impacto)
+  const btnShare = document.getElementById("btn-share-whatsapp");
+  if (btnShare) {
+    const shareAction = () => {
+      const isEs = state.currentLang === "es";
+      const archName = archetype?.nombre || (isEs ? "Afinidad Económica" : "Economic Affinity");
+      const archSub = archetype?.subtitulo || "";
+      const consPct = results.consistencyPct ? `${results.consistencyPct}%` : "90%";
+      
+      // Principales 3 ingredientes de la fórmula
+      const topIngredients = Object.entries(results.porcentajes)
+        .filter(([_, pct]) => pct > 0)
+        .sort((a, b) => b[1] - a[1])
+        .map(([id, pct]) => `${pct}% ${ESCUELAS[id]?.nombre || id}`)
+        .slice(0, 3)
+        .join(", ");
+
+      const textEs = `🍸 *¡He destilado mi cóctel ideológico en el Bar de Escuelas Económicas!*
+
+🏛️ *Mi Arquetipo:* ${archName} (${archSub})
+🔮 *Consistencia Cognitiva:* ${consPct}
+🧪 *Fórmula Destilada:* ${topIngredients}
+
+¿Qué tan sobrio eres intelectualmente? Destila tu propio elixir y mide tus sesgos cognitivos aquí:
+👉 https://willkwolf.github.io/economic-bar/`;
+
+      const textEn = `🍸 *I've distilled my ideological cocktail at the Economic Schools Bar!*
+
+🏛️ *My Archetype:* ${archName} (${archSub})
+🔮 *Cognitive Consistency:* ${consPct}
+🧪 *Distilled Formula:* ${topIngredients}
+
+How intellectually sober are you? Distill your own elixir and measure your cognitive biases here:
+👉 https://willkwolf.github.io/economic-bar/`;
+
+      const shareText = isEs ? textEs : textEn;
+      const encodedText = encodeURIComponent(shareText);
+      const waUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+      
+      window.open(waUrl, "_blank");
+    };
+    btnShare.onclick = shareAction;
+    addKeyboardSupport(btnShare, shareAction);
+  }
+
   if (window.lucide) {
     window.lucide.createIcons();
   }
