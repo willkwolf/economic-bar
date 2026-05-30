@@ -412,6 +412,7 @@ function openMixingDrawer(coctel) {
   // Abrir Drawer
   drawer.classList.add("open");
   drawer.setAttribute("aria-hidden", "false");
+  document.body.classList.add("drawer-open"); // Bloquear scroll del sitio
   drawer.querySelector(".drawer-scrollable").focus();
 
   // Detener cualquier simulación previa del líquido
@@ -429,6 +430,7 @@ const closeDrawer = () => {
   if (drawer) {
     drawer.classList.remove("open");
     drawer.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("drawer-open"); // Desbloquear scroll del sitio
     if (state.mixingAnimationId) {
       cancelAnimationFrame(state.mixingAnimationId);
     }
@@ -450,6 +452,9 @@ function initDrawerGestures() {
   drawerContent.addEventListener("touchstart", (e) => {
     touchStartX = e.changedTouches[0].screenX;
     touchStartY = e.changedTouches[0].screenY;
+    // Capturar coordenadas iniciales para evitar lecturas fantasmas si no hay movimiento
+    touchEndX = touchStartX;
+    touchEndY = touchStartY;
   }, { passive: true });
 
   drawerContent.addEventListener("touchmove", (e) => {
@@ -461,16 +466,30 @@ function initDrawerGestures() {
     const deltaX = touchEndX - touchStartX;
     const deltaY = touchEndY - touchStartY;
     
-    // Umbrales del gesto swipe
+    const scrollable = document.querySelector("#mixing-drawer .drawer-scrollable");
+    // Verificar si el usuario está en los límites del scroll interno
+    const isAtTop = scrollable ? scrollable.scrollTop <= 5 : true;
+    const isAtBottom = scrollable ? (scrollable.scrollTop + scrollable.clientHeight >= scrollable.scrollHeight - 10) : true;
+    
+    // Umbral del gesto swipe
     const swipeThreshold = 80; // píxeles
     
-    // 1. Swipe Right: Deslizar hacia la derecha para cerrar (el cajón se oculta a la derecha)
-    if (deltaX > swipeThreshold && Math.abs(deltaY) < swipeThreshold * 1.5) {
+    // 1. Swipe Horizontal (Izquierda-Derecha o Derecha-Izquierda): Descartar inmediatamente (no hay scroll horizontal en el cajón)
+    if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaY) < swipeThreshold * 1.5) {
       closeDrawer();
+      return;
     }
-    // 2. Swipe Down: Deslizar hacia abajo para cerrar
-    else if (deltaY > swipeThreshold && Math.abs(deltaX) < swipeThreshold * 1.5) {
+    
+    // 2. Swipe Down (Hacia abajo): Descartar solo si estamos al inicio del scroll interno
+    if (deltaY > swipeThreshold && Math.abs(deltaX) < swipeThreshold * 1.5 && isAtTop) {
       closeDrawer();
+      return;
+    }
+    
+    // 3. Swipe Up (Hacia arriba): Descartar solo si estamos al final del scroll interno
+    if (deltaY < -swipeThreshold && Math.abs(deltaX) < swipeThreshold * 1.5 && isAtBottom) {
+      closeDrawer();
+      return;
     }
   }, { passive: true });
 }
