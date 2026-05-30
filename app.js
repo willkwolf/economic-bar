@@ -1018,6 +1018,14 @@ function renderQuestion() {
     document.getElementById("slider-right-title").textContent = q.derecha.titulo;
     document.getElementById("slider-left-text").textContent = q.izquierda.texto;
     document.getElementById("slider-right-text").textContent = q.derecha.texto;
+
+    // Configurar indicadores dinámicos del slider para máxima claridad en móvil y escritorio
+    const leftHint = document.getElementById("slider-left-hint");
+    const rightHint = document.getElementById("slider-right-hint");
+    if (leftHint && rightHint) {
+      leftHint.textContent = `← ${q.izquierda.titulo}`;
+      rightHint.textContent = `${q.derecha.titulo} →`;
+    }
   }
 }
 
