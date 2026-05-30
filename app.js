@@ -956,6 +956,12 @@ function renderQuestion() {
 
   const isEs = state.currentLang === "es";
 
+  // Centrar el viewport de manera fluida en la sección del test
+  const testSection = document.getElementById("test");
+  if (testSection) {
+    testSection.scrollIntoView({ behavior: 'smooth' });
+  }
+
   // Actualizar indicadores
   document.getElementById("test-step-label").textContent = isEs 
     ? `PREGUNTA ${state.currentTestQuestion + 1} DE ${PREGUNTAS.length}`
