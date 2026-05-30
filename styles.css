@@ -3026,3 +3026,22 @@ section {
   box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
   outline: none;
 }
+
+/* ── PREVENCIÓN DE DESPLAZAMIENTO Y ENCADENAMIENTO DE SCROLL (Scroll Lock & Containment) ── */
+body.drawer-open {
+  overflow: hidden !important;
+  height: 100vh !important;
+  position: fixed !important; /* Inamovible en iOS Safari y Android Chrome */
+  width: 100vw !important;
+}
+
+/* Permitir scroll únicamente dentro del contenedor del cajón scrollable */
+body.drawer-open .drawer-scrollable {
+  overscroll-behavior: contain !important; /* Evita que el scroll de límite afecte al body */
+  -webkit-overflow-scrolling: touch !important; /* Inercia fluida en iOS */
+}
+
+body.drawer-open .mixing-drawer {
+  pointer-events: auto !important;
+  overscroll-behavior: contain !important;
+}
