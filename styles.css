@@ -1306,29 +1306,31 @@ section {
 }
 
 .test-option-card {
-  background-color: rgba(6, 6, 6, 0.4);
-  border: 1px solid var(--border-subtle);
+  background-color: rgba(20, 20, 18, 0.95); /* Fondo diferenciado más profundo y opaco */
+  border: 1.5px solid rgba(255, 255, 255, 0.08); /* Borde claro de separación */
   padding: 22px 28px;
   min-height: 52px;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s var(--ease-expo);
   display: flex;
   align-items: center;
   gap: 1.2rem;
   text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .option-marker {
-  width: 20px;
-  height: 20px;
-  border: 1.5px solid var(--border-glass);
+  width: 22px; /* Ligeramente más grande para notoriedad y accesibilidad táctil */
+  height: 22px;
+  border: 1.5px solid rgba(217, 167, 82, 0.5); /* Anillo dorado distintivo visible por defecto */
+  background-color: rgba(6, 6, 6, 0.7);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.3s;
+  transition: all 0.3s var(--ease-expo);
 }
 
 .option-marker::after {
@@ -1336,30 +1338,34 @@ section {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--accent-gold);
+  background-color: #0d0d0c; /* Punto central oscuro de alto contraste */
   transform: scale(0);
   transition: transform 0.3s var(--ease-back);
 }
 
 .test-option-card:hover, .test-option-card:focus {
-  background-color: rgba(255, 255, 255, 0.01);
-  border-color: var(--border-glass);
+  background-color: rgba(28, 28, 26, 0.98); /* Fondo de hover más claro y visible */
+  border-color: var(--accent-gold); /* Borde dorado en hover */
   transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 10px rgba(217, 167, 82, 0.05);
   outline: none;
 }
 
 .test-option-card:hover .option-marker, .test-option-card:focus .option-marker {
   border-color: var(--accent-gold);
+  box-shadow: 0 0 8px rgba(217, 167, 82, 0.3);
 }
 
 .test-option-card.selected {
   border-color: var(--accent-gold);
-  background-color: rgba(217, 167, 82, 0.03);
+  background-color: rgba(217, 167, 82, 0.06); /* Matiz ámbar/dorado de fondo */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(217, 167, 82, 0.1);
 }
 
 .test-option-card.selected .option-marker {
   border-color: var(--accent-gold);
-  background-color: var(--accent-gold-glow);
+  background-color: var(--accent-gold); /* Relleno dorado sólido espectacular */
+  box-shadow: 0 0 10px rgba(217, 167, 82, 0.4);
 }
 
 .test-option-card.selected .option-marker::after {
