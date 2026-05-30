@@ -2724,3 +2724,120 @@ section {
   color: var(--accent-gold);
   border-bottom-color: var(--accent-gold);
 }
+
+/* ── PRESET DE ESTANTERÍA DOCTRINAL PREMIUM (Versión de Escritorio 3x4) ─── */
+@media (min-width: 992px) {
+  /* Enfoque riguroso de 3 filas y 4 columnas */
+  .bottles-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 5.5rem 3rem; /* Espaciado sumamente aireado para destacar cada elixir y sus notas */
+    padding: 20px 10px;
+  }
+
+  .bottle-item {
+    display: grid;
+    grid-template-rows: 95px auto;
+    justify-items: center;
+    align-items: end;
+    position: relative;
+    width: 100%;
+    flex-direction: unset; /* Sobrescribir flex móvil de forma limpia */
+  }
+
+  /* Mantener el contenedor del estante estático para que las tablas de madera no se desplacen */
+  .bottle-item:hover, .bottle-item:focus {
+    transform: none;
+    outline: none;
+  }
+
+  /* Dinamismo interactivo: Solo el frasco de boticario levita al seleccionarlo */
+  .bottle-item:hover .bottle-flask, .bottle-item:focus .bottle-flask {
+    transform: translateY(-15px) scale(1.08);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7), 0 0 25px var(--school-color-glow), inset 0 0 10px var(--school-color-glow);
+  }
+
+  /* Movimiento muy sutil en las letras para una respuesta háptica virtual */
+  .bottle-item:hover .bottle-title, .bottle-item:focus .bottle-title {
+    transform: translateY(-2px);
+  }
+
+  /* Buen punto y legibilidad del texto en escritorio (Tufte Editorial Spacing) */
+  .bottle-title {
+    font-size: 0.82rem; /* Legibilidad excelente e incremento de tamaño */
+    margin-top: 22px; /* Separación perfecta y holgada desde la base de madera */
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    transition: color 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 36px; /* Altura garantizada para evitar desalineaciones por saltos de línea */
+  }
+
+  /* Detalle de Lujo: Punto de luz (dot) indicador que se enciende en hover */
+  .bottle-title::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--school-color);
+    box-shadow: 0 0 8px var(--school-color);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.3s var(--ease-expo), transform 0.3s var(--ease-expo);
+  }
+
+  .bottle-item:hover .bottle-title::before, .bottle-item:focus .bottle-title::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Plancha horizontal de madera premium con ribete de bronce/oro */
+  .bottle-item::before {
+    content: '';
+    position: absolute;
+    top: 95px; /* Base exacta debajo de cada frasco */
+    left: -15%; /* Traslape continuo que une las celdas colindantes */
+    width: 130%;
+    height: 10px; /* Grosor robusto de madera maciza */
+    background: linear-gradient(180deg, #1d1d1b 0%, #0d0d0c 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 3px solid var(--accent-gold-dark); /* Borde frontal dorado de boticario */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border-radius: 2px;
+    transition: border-bottom-color 0.4s, box-shadow 0.4s;
+    pointer-events: none;
+  }
+
+  /* Efecto Alquímico Reactivo: El segmento de repisa bajo la botella brilla con su color doctrinal */
+  .bottle-item:hover::before {
+    border-bottom-color: var(--school-color);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9), 0 0 12px var(--school-color-glow);
+  }
+
+  /* Elevar el frasco por encima del nivel de la repisa */
+  .bottle-flask {
+    z-index: 2;
+  }
+
+  /* Perfeccionar el encuadre del mueble completo en pantallas grandes */
+  .shelf-wood {
+    padding: 50px 40px 40px 40px;
+    background: linear-gradient(180deg, #131311 0%, #090908 100%);
+    border: 1px solid rgba(217, 167, 82, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Brillo extendido para la repisa inferior del gabinete */
+  .shelf-board-glow {
+    height: 8px;
+    box-shadow: 0 -4px 20px var(--accent-gold-glow);
+  }
+}
