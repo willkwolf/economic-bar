@@ -118,7 +118,24 @@ const TRANSLATIONS = {
       resultsConsistencyTitle: "CONSECUENCIA INTELECTUAL",
       resultsConsistencyLabel: "Consistencia Cognitiva y Confianza Estadística",
       onboardingAxisState: "Estado vs Mercado",
-      onboardingAxisEquity: "Equidad vs Crecimiento"
+      onboardingAxisEquity: "Equidad vs Crecimiento",
+      a11yTitle: "Herramientas de Lectura",
+      a11yBtnToggle: "Panel de Accesibilidad y Lectura",
+      a11yContrast: "Contraste Visual",
+      a11yContrastStandard: "Estándar Speakeasy",
+      a11yContrastHigh: "Contraste Alto AAA",
+      a11ySize: "Tamaño de Fuente",
+      a11ySizeStd: "Estándar (A)",
+      a11ySizeMedium: "Grande (A+)",
+      a11ySizeLarge: "Extra Grande (A++)",
+      a11ySpacing: "Espaciado de Líneas",
+      a11ySpacingStd: "Estándar",
+      a11ySpacingSpacious: "Espacioso",
+      a11yTufteMode: "Modo Tufte (Tinta Max)",
+      a11yTufteDesc: "Apaga brillos, reflejos y grids complejos. Deja el 100% de la tinta de pantalla enfocada en textos y datos de alta legibilidad.",
+      a11yFont: "Tipografía de Cuerpo",
+      a11yFontSans: "Legibilidad Sans",
+      a11yFontMono: "Técnica Mono"
     },
     escuelas: {
       marxista: {
@@ -748,7 +765,24 @@ const TRANSLATIONS = {
       resultsConsistencyTitle: "INTELLECTUAL COHERENCE",
       resultsConsistencyLabel: "Cognitive Consistency & Statistical Confidence",
       onboardingAxisState: "State vs Market",
-      onboardingAxisEquity: "Equity vs Growth"
+      onboardingAxisEquity: "Equity vs Growth",
+      a11yTitle: "Reading Toolkit",
+      a11yBtnToggle: "Accessibility & Reading Panel",
+      a11yContrast: "Visual Contrast",
+      a11yContrastStandard: "Speakeasy Default",
+      a11yContrastHigh: "High Contrast AAA",
+      a11ySize: "Font Size",
+      a11ySizeStd: "Standard (A)",
+      a11ySizeMedium: "Large (A+)",
+      a11ySizeLarge: "Extra Large (A++)",
+      a11ySpacing: "Line Spacing",
+      a11ySpacingStd: "Standard",
+      a11ySpacingSpacious: "Spacious",
+      a11yTufteMode: "Tufte Mode (Max Ink)",
+      a11yTufteDesc: "Turns off ambient glows, glass reflections, and heavy grids. Focuses 100% of screen ink on clear, legible texts and graphics.",
+      a11yFont: "Body Typography",
+      a11yFontSans: "Legible Sans",
+      a11yFontMono: "Technical Mono"
     },
     escuelas: {
       marxista: {

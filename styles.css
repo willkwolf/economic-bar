@@ -3045,3 +3045,449 @@ body.drawer-open .mixing-drawer {
   pointer-events: auto !important;
   overscroll-behavior: contain !important;
 }
+
+/* ── HERRAMIENTAS DE ACCESIBILIDAD Y LECTURA (Reading Accessibility Toolkit) ── */
+:root {
+  --a11y-font-scale: 1;
+  --a11y-line-height: 1.6;
+  --a11y-font-family: var(--font-body);
+}
+
+html {
+  font-size: calc(16px * var(--a11y-font-scale)) !important;
+}
+
+body {
+  font-family: var(--a11y-font-family) !important;
+}
+
+/* Modificadores de texto específicos para asegurar que el line-height se propague */
+p, .mix-text-desc, .results-text, .test-question-text, .tooltip-text, .manifesto-section p, .dossier-question, .prescription-desc, .pole-text {
+  line-height: var(--a11y-line-height) !important;
+}
+
+/* Botón flotante disparador de accesibilidad */
+.btn-a11y-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(14, 14, 13, 0.95);
+  border: 1.5px solid var(--accent-gold);
+  color: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px var(--accent-gold-glow);
+  cursor: pointer;
+  z-index: 240; /* Justo debajo del tasting tooltip modal en móvil */
+  transition: all 0.3s var(--ease-expo);
+  outline: none;
+}
+
+.btn-a11y-float:hover, .btn-a11y-float:focus {
+  background: var(--accent-gold);
+  color: var(--bg-darker);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 6px 20px rgba(217, 167, 82, 0.4), 0 0 15px var(--accent-gold);
+}
+
+/* Panel de Accesibilidad */
+.a11y-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 300;
+  display: flex;
+  align-items: flex-end; /* En móvil actúa como bottom sheet */
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-expo), visibility 0.4s;
+  pointer-events: none;
+}
+
+.a11y-panel.open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.a11y-panel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.a11y-panel-content {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(14, 14, 13, 0.98);
+  backdrop-filter: blur(25px);
+  border-top: 2px solid var(--accent-gold);
+  border-left: 1px solid var(--border-glass);
+  border-right: 1px solid var(--border-glass);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.95), inset 0 0 20px rgba(217, 167, 82, 0.04);
+  z-index: 2;
+  transform: translateY(100%);
+  transition: transform 0.45s var(--ease-expo);
+  padding: 24px;
+}
+
+.a11y-panel.open .a11y-panel-content {
+  transform: translateY(0);
+}
+
+.a11y-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 12px;
+}
+
+.a11y-header-title {
+  font-size: 1.3rem !important;
+  color: var(--accent-gold);
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.a11y-close-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-glass);
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.a11y-close-btn:hover, .a11y-close-btn:focus {
+  background: rgba(217, 167, 82, 0.1);
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.a11y-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-bottom: 10px;
+}
+
+.a11y-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.a11y-control-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.a11y-options-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.a11y-option-btn {
+  flex: 1;
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-expo);
+  text-align: center;
+  outline: none;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.a11y-option-btn:hover, .a11y-option-btn:focus {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-gold-dark);
+  color: var(--text-primary);
+}
+
+.a11y-option-btn.active {
+  background: rgba(217, 167, 82, 0.1);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(217, 167, 82, 0.15);
+}
+
+/* Switch styling for Tufte Mode */
+.a11y-switch-group {
+  flex-direction: row !important;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border-glass);
+  padding: 12px 16px;
+  border-radius: 6px;
+  gap: 15px !important;
+}
+
+.a11y-switch-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.a11y-control-desc {
+  font-size: 0.68rem !important;
+  color: var(--text-muted);
+  line-height: 1.4 !important;
+}
+
+.a11y-switch-btn {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+
+.a11y-switch-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition: transform 0.3s var(--ease-expo), background-color 0.3s;
+}
+
+.a11y-switch-btn[aria-checked="true"] {
+  background: rgba(217, 167, 82, 0.15);
+  border-color: var(--accent-gold);
+}
+
+.a11y-switch-btn[aria-checked="true"] .a11y-switch-slider {
+  transform: translateX(20px);
+  background: var(--accent-gold);
+  box-shadow: 0 0 8px var(--accent-gold);
+}
+
+/* ── MODO CONTRASTE ALTO AAA (.high-contrast-mode) ── */
+body.high-contrast-mode {
+  --bg-darker: #000000 !important;
+  --bg-dark: #000000 !important;
+  --text-primary: #ffffff !important;
+  --text-muted: rgba(255, 255, 255, 0.92) !important;
+  --border-glass: rgba(255, 255, 255, 0.25) !important;
+  --border-subtle: rgba(255, 255, 255, 0.2) !important;
+  background-color: #000000 !important;
+}
+
+body.high-contrast-mode .test-option-card {
+  background-color: #0a0a09 !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important;
+}
+
+body.high-contrast-mode .test-option-card.selected {
+  border-color: var(--accent-gold) !important;
+  background-color: rgba(217, 167, 82, 0.08) !important;
+}
+
+body.high-contrast-mode .cabinet-drawer {
+  background: #0a0a09 !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+body.high-contrast-mode .dossier-sheet {
+  background: #0a0a09 !important;
+  border-color: var(--accent-gold) !important;
+}
+
+body.high-contrast-mode .nav-bar {
+  background: #000000 !important;
+  border-bottom: 2px solid var(--accent-gold) !important;
+}
+
+body.high-contrast-mode .tasting-tooltip {
+  background-color: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+body.high-contrast-mode :focus-visible {
+  outline: 3px solid #ffffff !important;
+  outline-offset: 4px !important;
+}
+
+/* ── MODO TUFTE (.tufte-mode) ── */
+body.tufte-mode {
+  /* Apagar brillos, reflejos y decoraciones 3D */
+  --bg-card: #0a0a09 !important;
+}
+
+body.tufte-mode .ambient-glow {
+  display: none !important;
+}
+
+body.tufte-mode .glass-reflection {
+  display: none !important;
+}
+
+body.tufte-mode .custom-bottle-reflection {
+  display: none !important;
+}
+
+body.tufte-mode .shelf-board-glow {
+  display: none !important;
+}
+
+/* Simplificar estantería de botellas */
+body.tufte-mode .shelf-wood {
+  background: #0d0d0c !important;
+  border: 1px solid var(--border-glass) !important;
+  box-shadow: none !important;
+}
+
+body.tufte-mode .bottle-item::before {
+  display: none !important; /* Quitar estantes de madera decorativos */
+}
+
+body.tufte-mode .bottle-item {
+  border-bottom: 1px solid var(--border-glass) !important;
+  padding-bottom: 15px !important;
+  border-radius: 0 !important;
+}
+
+body.tufte-mode .bottle-item:hover, body.tufte-mode .bottle-item:focus {
+  transform: none !important;
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  box-shadow: none !important;
+}
+
+/* Simplificar Cabinet de boticario */
+body.tufte-mode .apothecary-chest {
+  box-shadow: none !important;
+  border: 1px solid var(--border-glass) !important;
+}
+
+body.tufte-mode .cabinet-drawer {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+body.tufte-mode .cabinet-drawer:hover, body.tufte-mode .cabinet-drawer:focus {
+  transform: none !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Dibujos e Ingredientes en Modo Tufte */
+body.tufte-mode .glass-container {
+  border: 1.5px solid var(--border-glass) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body.tufte-mode .custom-bottle {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body.tufte-mode .ph-bar-track {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+body.tufte-mode .results-info-card {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: #0d0d0c !important;
+  border: 1px solid var(--border-glass) !important;
+}
+
+body.tufte-mode .results-info-card:hover, body.tufte-mode .results-info-card:focus {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--accent-gold) !important;
+}
+
+body.tufte-mode .test-option-card {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+body.tufte-mode .test-option-card:hover, body.tufte-mode .test-option-card:focus {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Estilos de escritorio para el Panel de Accesibilidad */
+@media (min-width: 769px) {
+  .a11y-panel {
+    align-items: center; /* En escritorio se centra en la pantalla como modal */
+  }
+
+  .a11y-panel-content {
+    border-radius: 12px;
+    border: 1.5px solid var(--accent-gold);
+    max-height: 90vh;
+    transform: scale(0.9) translateY(30px);
+    transition: transform 0.4s var(--ease-expo), opacity 0.4s;
+    opacity: 0;
+  }
+
+  .a11y-panel.open .a11y-panel-content {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-a11y-float {
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .a11y-panel-content {
+    padding: 20px 16px;
+  }
+}

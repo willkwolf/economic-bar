@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initLanguageSwitcher();
   initDrawerGestures();
+  initAccessibilityPanel();
 });
 
 // ── NAVEGACIÓN REACTIVA AL SCROLL ──────────────────────────────────────────
@@ -1556,9 +1557,12 @@ function renderRadarChart(qScores) {
   const maxVal = 100;
   const levels = 4;
 
+  const isTufte = document.body.classList.contains("tufte-mode");
+  const isHighContrast = document.body.classList.contains("high-contrast-mode");
+
   // 1. Círculos concéntricos de niveles
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
-  ctx.lineWidth = 1;
+  ctx.strokeStyle = isTufte ? "rgba(255, 255, 255, 0.08)" : "rgba(255, 255, 255, 0.04)";
+  ctx.lineWidth = 0.75;
   for (let i = 1; i <= levels; i++) {
     const r = (radius / levels) * i;
     ctx.beginPath();
@@ -1567,7 +1571,7 @@ function renderRadarChart(qScores) {
   }
 
   // 2. Líneas de los ejes
-  ctx.strokeStyle = "rgba(217, 167, 82, 0.12)";
+  ctx.strokeStyle = isTufte ? "rgba(217, 167, 82, 0.25)" : "rgba(217, 167, 82, 0.12)";
   ctx.beginPath();
   axes.forEach((_, idx) => {
     const angle = (Math.PI / 2) * idx - Math.PI / 2;
@@ -1590,10 +1594,10 @@ function renderRadarChart(qScores) {
     };
   });
 
-  // 4. Dibujar polígono relleno translúcido (Tufte clean)
-  ctx.fillStyle = "rgba(217, 167, 82, 0.15)";
-  ctx.strokeStyle = "#d9a752";
-  ctx.lineWidth = 2;
+  // 4. Dibujar polígono relleno translúcido (Tufte clean: sin relleno para maximizar data-ink)
+  ctx.fillStyle = isTufte ? "transparent" : "rgba(217, 167, 82, 0.15)";
+  ctx.strokeStyle = isHighContrast ? "#ffffff" : "#d9a752";
+  ctx.lineWidth = isTufte ? 1.5 : 2;
   ctx.beginPath();
   ctx.moveTo(points[0].x, points[0].y);
   for (let i = 1; i < points.length; i++) {
@@ -1603,17 +1607,17 @@ function renderRadarChart(qScores) {
   ctx.fill();
   ctx.stroke();
 
-  // Vértices diamantes
-  ctx.fillStyle = "#fcd34d";
+  // Vértices diamantes (Tufte clean: más pequeños para evitar chartjunk)
+  ctx.fillStyle = isHighContrast ? "#ffffff" : "#fcd34d";
   points.forEach(pt => {
     ctx.beginPath();
-    ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+    ctx.arc(pt.x, pt.y, isTufte ? 2 : 3, 0, Math.PI * 2);
     ctx.fill();
   });
 
   // 5. Etiquetas tipográficas del eje con ALINEACIÓN ANGULAR REACTIVA ANTICOLISIÓN
-  ctx.fillStyle = "rgba(245, 243, 239, 0.7)"; // WCAG Contrastado
-  ctx.font = "bold 9px 'JetBrains Mono', monospace";
+  ctx.fillStyle = isHighContrast ? "#ffffff" : (isTufte ? "rgba(245, 243, 239, 0.9)" : "rgba(245, 243, 239, 0.7)"); // WCAG Contrastado
+  ctx.font = isTufte ? "bold 8.5px 'JetBrains Mono', monospace" : "bold 9px 'JetBrains Mono', monospace";
 
   axes.forEach((axis, idx) => {
     const angle = (Math.PI / 2) * idx - Math.PI / 2;
@@ -2060,3 +2064,226 @@ window.runDiagnosticCombinatoricsTest = function() {
     quadrantDistribution
   };
 };
+
+// ── PANEL DE ACCESIBILIDAD Y LECTURA PERSISTENTE ─────────────────────────────
+function initAccessibilityPanel() {
+  const panel = document.getElementById("a11y-toolkit-panel");
+  const btnTrigger = document.getElementById("btn-a11y-toolkit");
+  const btnClose = document.getElementById("a11y-panel-close-btn");
+  const overlay = document.getElementById("a11y-panel-close-overlay");
+
+  if (!panel || !btnTrigger) return;
+
+  // Cargar estado inicial persistente o valores estándar por defecto
+  const a11yState = {
+    contrast: localStorage.getItem("economic_bar_a11y_contrast") || "std",
+    size: localStorage.getItem("economic_bar_a11y_size") || "std",
+    spacing: localStorage.getItem("economic_bar_a11y_spacing") || "std",
+    font: localStorage.getItem("economic_bar_a11y_font") || "sans",
+    tufte: localStorage.getItem("economic_bar_a11y_tufte") === "true"
+  };
+
+  // Abrir y Cerrar Panel
+  const openPanel = () => {
+    panel.classList.add("open");
+    panel.setAttribute("aria-hidden", "false");
+    if (btnClose) btnClose.focus();
+  };
+
+  const closePanel = () => {
+    panel.classList.remove("open");
+    panel.setAttribute("aria-hidden", "true");
+    btnTrigger.focus();
+  };
+
+  btnTrigger.addEventListener("click", openPanel);
+  addKeyboardSupport(btnTrigger, openPanel);
+
+  if (btnClose) {
+    btnClose.addEventListener("click", closePanel);
+    addKeyboardSupport(btnClose, closePanel);
+  }
+
+  if (overlay) {
+    overlay.addEventListener("click", closePanel);
+  }
+
+  // Cerrar presionando Esc
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && panel.classList.contains("open")) {
+      closePanel();
+    }
+  });
+
+  // Función para aplicar clases visuales de accesibilidad
+  const applySettings = () => {
+    const body = document.body;
+
+    // 1. Contraste
+    body.classList.toggle("high-contrast-mode", a11yState.contrast === "high");
+    
+    // 2. Tamaño de fuente en HTML (Multiplicador de rem)
+    let scaleVal = "1";
+    if (a11yState.size === "med") scaleVal = "1.15";
+    if (a11yState.size === "lg") scaleVal = "1.30";
+    document.documentElement.style.setProperty("--a11y-font-scale", scaleVal);
+
+    // 3. Espaciado de líneas (Line-height)
+    const spacingVal = a11yState.spacing === "spacious" ? "1.85" : "1.6";
+    document.documentElement.style.setProperty("--a11y-line-height", spacingVal);
+
+    // 4. Familia tipográfica
+    const fontVal = a11yState.font === "mono" ? "var(--font-mono)" : "var(--font-body)";
+    document.documentElement.style.setProperty("--a11y-font-family", fontVal);
+
+    // 5. Modo Tufte
+    body.classList.toggle("tufte-mode", a11yState.tufte);
+
+    // Guardar en localStorage
+    localStorage.setItem("economic_bar_a11y_contrast", a11yState.contrast);
+    localStorage.setItem("economic_bar_a11y_size", a11yState.size);
+    localStorage.setItem("economic_bar_a11y_spacing", a11yState.spacing);
+    localStorage.setItem("economic_bar_a11y_font", a11yState.font);
+    localStorage.setItem("economic_bar_a11y_tufte", a11yState.tufte ? "true" : "false");
+
+    // Actualizar estados activos de los botones del panel
+    updateButtonStates();
+
+    // Re-dibujar el radar de forma reactiva si el test de resultados está cargado
+    if (state.activeResults) {
+      renderRadarChart(state.activeResults.qScores);
+    }
+  };
+
+  // Actualizar la apariencia de los botones radio del panel
+  const updateButtonStates = () => {
+    // Contraste
+    const btnContrastStd = document.getElementById("btn-contrast-std");
+    const btnContrastHigh = document.getElementById("btn-contrast-high");
+    if (btnContrastStd && btnContrastHigh) {
+      const isHigh = a11yState.contrast === "high";
+      btnContrastStd.classList.toggle("active", !isHigh);
+      btnContrastStd.setAttribute("aria-checked", !isHigh ? "true" : "false");
+      btnContrastHigh.classList.toggle("active", isHigh);
+      btnContrastHigh.setAttribute("aria-checked", isHigh ? "true" : "false");
+    }
+
+    // Tamaño de Fuente
+    const btnSizeStd = document.getElementById("btn-size-std");
+    const btnSizeMed = document.getElementById("btn-size-med");
+    const btnSizeLg = document.getElementById("btn-size-lg");
+    if (btnSizeStd && btnSizeMed && btnSizeLg) {
+      btnSizeStd.classList.toggle("active", a11yState.size === "std");
+      btnSizeStd.setAttribute("aria-checked", a11yState.size === "std" ? "true" : "false");
+      btnSizeMed.classList.toggle("active", a11yState.size === "med");
+      btnSizeMed.setAttribute("aria-checked", a11yState.size === "med" ? "true" : "false");
+      btnSizeLg.classList.toggle("active", a11yState.size === "lg");
+      btnSizeLg.setAttribute("aria-checked", a11yState.size === "lg" ? "true" : "false");
+    }
+
+    // Espaciado
+    const btnSpacingStd = document.getElementById("btn-spacing-std");
+    const btnSpacingSpacious = document.getElementById("btn-spacing-spacious");
+    if (btnSpacingStd && btnSpacingSpacious) {
+      const isSpacious = a11yState.spacing === "spacious";
+      btnSpacingStd.classList.toggle("active", !isSpacious);
+      btnSpacingStd.setAttribute("aria-checked", !isSpacious ? "true" : "false");
+      btnSpacingSpacious.classList.toggle("active", isSpacious);
+      btnSpacingSpacious.setAttribute("aria-checked", isSpacious ? "true" : "false");
+    }
+
+    // Tipografía
+    const btnFontSans = document.getElementById("btn-font-sans");
+    const btnFontMono = document.getElementById("btn-font-mono");
+    if (btnFontSans && btnFontMono) {
+      const isMono = a11yState.font === "mono";
+      btnFontSans.classList.toggle("active", !isMono);
+      btnFontSans.setAttribute("aria-checked", !isMono ? "true" : "false");
+      btnFontMono.classList.toggle("active", isMono);
+      btnFontMono.setAttribute("aria-checked", isMono ? "true" : "false");
+    }
+
+    // Toggle Tufte Mode
+    const btnTufteToggle = document.getElementById("btn-tufte-toggle");
+    if (btnTufteToggle) {
+      btnTufteToggle.setAttribute("aria-checked", a11yState.tufte ? "true" : "false");
+    }
+  };
+
+  // Vincular eventos de clics a opciones de control de accesibilidad
+  const setupControls = () => {
+    // Contraste
+    const btnContrastStd = document.getElementById("btn-contrast-std");
+    const btnContrastHigh = document.getElementById("btn-contrast-high");
+    if (btnContrastStd && btnContrastHigh) {
+      const setContrast = (val) => {
+        a11yState.contrast = val;
+        applySettings();
+      };
+      btnContrastStd.addEventListener("click", () => setContrast("std"));
+      btnContrastHigh.addEventListener("click", () => setContrast("high"));
+      addKeyboardSupport(btnContrastStd, () => setContrast("std"));
+      addKeyboardSupport(btnContrastHigh, () => setContrast("high"));
+    }
+
+    // Tamaño de Fuente
+    const btnSizeStd = document.getElementById("btn-size-std");
+    const btnSizeMed = document.getElementById("btn-size-med");
+    const btnSizeLg = document.getElementById("btn-size-lg");
+    if (btnSizeStd && btnSizeMed && btnSizeLg) {
+      const setSize = (val) => {
+        a11yState.size = val;
+        applySettings();
+      };
+      btnSizeStd.addEventListener("click", () => setSize("std"));
+      btnSizeMed.addEventListener("click", () => setSize("med"));
+      btnSizeLg.addEventListener("click", () => setSize("lg"));
+      addKeyboardSupport(btnSizeStd, () => setSize("std"));
+      addKeyboardSupport(btnSizeMed, () => setSize("med"));
+      addKeyboardSupport(btnSizeLg, () => setSize("lg"));
+    }
+
+    // Espaciado
+    const btnSpacingStd = document.getElementById("btn-spacing-std");
+    const btnSpacingSpacious = document.getElementById("btn-spacing-spacious");
+    if (btnSpacingStd && btnSpacingSpacious) {
+      const setSpacing = (val) => {
+        a11yState.spacing = val;
+        applySettings();
+      };
+      btnSpacingStd.addEventListener("click", () => setSpacing("std"));
+      btnSpacingSpacious.addEventListener("click", () => setSpacing("spacious"));
+      addKeyboardSupport(btnSpacingStd, () => setSpacing("std"));
+      addKeyboardSupport(btnSpacingSpacious, () => setSpacing("spacious"));
+    }
+
+    // Tipografía
+    const btnFontSans = document.getElementById("btn-font-sans");
+    const btnFontMono = document.getElementById("btn-font-mono");
+    if (btnFontSans && btnFontMono) {
+      const setFont = (val) => {
+        a11yState.font = val;
+        applySettings();
+      };
+      btnFontSans.addEventListener("click", () => setFont("sans"));
+      btnFontMono.addEventListener("click", () => setFont("mono"));
+      addKeyboardSupport(btnFontSans, () => setFont("sans"));
+      addKeyboardSupport(btnFontMono, () => setFont("mono"));
+    }
+
+    // Tufte Switch
+    const btnTufteToggle = document.getElementById("btn-tufte-toggle");
+    if (btnTufteToggle) {
+      const toggleTufte = () => {
+        a11yState.tufte = !a11yState.tufte;
+        applySettings();
+      };
+      btnTufteToggle.addEventListener("click", toggleTufte);
+      addKeyboardSupport(btnTufteToggle, toggleTufte);
+    }
+  };
+
+  // Inicializar e instalar los controles
+  setupControls();
+  applySettings();
+}

@@ -548,6 +548,73 @@
     </div>
   </div>
 
+  <!-- BOTÓN FLOTANTE Y PANEL DE ACCESIBILIDAD DE LECTURA (Móvil y Escritorio) -->
+  <button id="btn-a11y-toolkit" class="btn-a11y-float" aria-label="Abrir panel de accesibilidad de lectura" data-i18n="a11yBtnToggle">
+    <i data-lucide="accessibility"></i>
+  </button>
+
+  <div class="a11y-panel" id="a11y-toolkit-panel" role="dialog" aria-modal="true" aria-labelledby="a11y-title" aria-hidden="true">
+    <div class="a11y-panel-overlay" id="a11y-panel-close-overlay" tabindex="-1"></div>
+    <div class="a11y-panel-content">
+      <div class="a11y-panel-header">
+        <h3 id="a11y-title" class="a11y-header-title" data-i18n="a11yTitle">Herramientas de Lectura</h3>
+        <button class="a11y-close-btn" id="a11y-panel-close-btn" aria-label="Cerrar panel de accesibilidad">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="a11y-panel-body">
+        <!-- Control 1: Contraste Visual -->
+        <div class="a11y-control-group">
+          <span class="a11y-control-label" data-i18n="a11yContrast">Contraste Visual</span>
+          <div class="a11y-options-row" role="radiogroup" aria-label="Contraste Visual">
+            <button class="a11y-option-btn active" id="btn-contrast-std" role="radio" aria-checked="true" data-i18n="a11yContrastStandard">Estándar Speakeasy</button>
+            <button class="a11y-option-btn" id="btn-contrast-high" role="radio" aria-checked="false" data-i18n="a11yContrastHigh">Contraste Alto AAA</button>
+          </div>
+        </div>
+
+        <!-- Control 2: Tamaño de Fuente -->
+        <div class="a11y-control-group">
+          <span class="a11y-control-label" data-i18n="a11ySize">Tamaño de Fuente</span>
+          <div class="a11y-options-row" role="radiogroup" aria-label="Tamaño de Fuente">
+            <button class="a11y-option-btn active" id="btn-size-std" role="radio" aria-checked="true" data-i18n="a11ySizeStd">Estándar (A)</button>
+            <button class="a11y-option-btn" id="btn-size-med" role="radio" aria-checked="false" data-i18n="a11ySizeMedium">Grande (A+)</button>
+            <button class="a11y-option-btn" id="btn-size-lg" role="radio" aria-checked="false" data-i18n="a11ySizeLarge">Extra Grande (A++)</button>
+          </div>
+        </div>
+
+        <!-- Control 3: Espaciado de Líneas -->
+        <div class="a11y-control-group">
+          <span class="a11y-control-label" data-i18n="a11ySpacing">Espaciado de Líneas</span>
+          <div class="a11y-options-row" role="radiogroup" aria-label="Espaciado de Líneas">
+            <button class="a11y-option-btn active" id="btn-spacing-std" role="radio" aria-checked="true" data-i18n="a11ySpacingStd">Estándar</button>
+            <button class="a11y-option-btn" id="btn-spacing-spacious" role="radio" aria-checked="false" data-i18n="a11ySpacingSpacious">Espacioso</button>
+          </div>
+        </div>
+
+        <!-- Control 4: Tipografía de Cuerpo -->
+        <div class="a11y-control-group">
+          <span class="a11y-control-label" data-i18n="a11yFont">Tipografía de Cuerpo</span>
+          <div class="a11y-options-row" role="radiogroup" aria-label="Tipografía de Cuerpo">
+            <button class="a11y-option-btn active" id="btn-font-sans" role="radio" aria-checked="true" data-i18n="a11yFontSans">Legibilidad Sans</button>
+            <button class="a11y-option-btn" id="btn-font-mono" role="radio" aria-checked="false" data-i18n="a11yFontMono">Técnica Mono</button>
+          </div>
+        </div>
+
+        <!-- Control 5: Modo Tufte (Interruptor) -->
+        <div class="a11y-control-group a11y-switch-group">
+          <div class="a11y-switch-text">
+            <span class="a11y-control-label" data-i18n="a11yTufteMode">Modo Tufte (Tinta Max)</span>
+            <p class="a11y-control-desc" data-i18n="a11yTufteDesc">Apaga brillos, reflejos y grids complejos. Deja el 100% de la tinta de pantalla enfocada en textos y datos de alta legibilidad.</p>
+          </div>
+          <button class="a11y-switch-btn" id="btn-tufte-toggle" role="switch" aria-checked="false" aria-label="Alternar Modo Tufte">
+            <span class="a11y-switch-slider"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts de base de datos y lógica interactiva de coctelería -->
   <script src="data.js"></script>
   <script src="app.js"></script>
