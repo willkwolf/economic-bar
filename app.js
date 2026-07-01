@@ -264,6 +264,9 @@ function initBottleShelf() {
 
     shelf.appendChild(bottleItem);
   });
+
+  // Apply glossary tooltips to rendered bottle shelf
+  if (typeof applyGlossaryTooltips === 'function') applyGlossaryTooltips(shelf);
 }
 
 // ── CONTROL DEL TOOLTIP (TICKET DE CATAS) ──────────────────────────────────
@@ -375,6 +378,9 @@ function initCocktailMenu() {
   if (window.lucide) {
     window.lucide.createIcons();
   }
+
+  // Apply glossary tooltips to rendered cocktail cards
+  if (typeof applyGlossaryTooltips === 'function') applyGlossaryTooltips(grid);
 }
 
 // ── CAJÓN LATERAL DE MEZCLADO Y ANIMACIÓN CANVAS ────────────────────────────
@@ -810,6 +816,12 @@ function openDossier(probId) {
   if (window.lucide) {
     window.lucide.createIcons();
   }
+
+  // Apply glossary tooltips to rendered dossier prescriptions
+  if (typeof applyGlossaryTooltips === 'function') {
+    const dossierSheet = document.getElementById('dossier-sheet');
+    if (dossierSheet) applyGlossaryTooltips(dossierSheet);
+  }
 }
 
 // ── SECCIÓN 4: TEST DE ALCOHOLEMIA POLÍTICA ────────────────────────────────
@@ -1075,6 +1087,12 @@ function renderQuestion() {
       leftHint.textContent = `← ${q.izquierda.titulo}`;
       rightHint.textContent = `${q.derecha.titulo} →`;
     }
+  }
+
+  // Apply glossary tooltips to rendered test question
+  if (typeof applyGlossaryTooltips === 'function') {
+    const questionScreen = document.getElementById('test-question-screen');
+    if (questionScreen) applyGlossaryTooltips(questionScreen);
   }
 }
 
@@ -1525,6 +1543,12 @@ How intellectually sober are you? Distill your own elixir and measure your cogni
 
   if (window.lucide) {
     window.lucide.createIcons();
+  }
+
+  // Apply glossary tooltips to rendered results
+  if (typeof applyGlossaryTooltips === 'function') {
+    const resultsScreen = document.getElementById('test-results-screen');
+    if (resultsScreen) applyGlossaryTooltips(resultsScreen);
   }
 }
 
@@ -2287,3 +2311,220 @@ function initAccessibilityPanel() {
   setupControls();
   applySettings();
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// GLOSSARY TOOLTIP SYSTEM — Accesibilidad Lingüística
+// Wraps irreducible technical terms with hover/tap tooltips in plain language.
+// ══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Apply glossary tooltips to a container element.
+ * Scans text nodes for terms matching the current-language GLOSSARY keys,
+ * wraps the FIRST occurrence of each term in a <span class="glossary-term">.
+ * @param {HTMLElement} containerEl - The DOM element to scan
+ */
+function applyGlossaryTooltips(containerEl) {
+  // Guard: GLOSSARY must exist and have current language
+  if (typeof GLOSSARY === 'undefined' || !containerEl) return;
+  const lang = state.currentLang || 'es';
+  const dict = GLOSSARY[lang];
+  if (!dict || typeof dict !== 'object') return;
+
+  const terms = Object.keys(dict);
+  if (terms.length === 0) return;
+
+  // Track which terms have already been wrapped in this container
+  const appliedTerms = new Set();
+
+  // Build a single regex matching any glossary term (case-insensitive, word boundaries)
+  // Sort by length descending so longer terms match first (e.g., "trade-off" before "trade")
+  const sortedTerms = terms.slice().sort((a, b) => b.length - a.length);
+  const escapedTerms = sortedTerms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const termRegex = new RegExp(`\\b(${escapedTerms.join('|')})\\b`, 'i');
+
+  // Tags to skip (don't scan inside these)
+  const SKIP_TAGS = new Set([
+    'SCRIPT', 'STYLE', 'INPUT', 'TEXTAREA', 'SELECT', 'BUTTON',
+    'CODE', 'PRE', 'CANVAS', 'SVG', 'IFRAME'
+  ]);
+
+  /**
+   * Recursively walk the DOM tree and process text nodes.
+   */
+  function walkAndWrap(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent;
+      if (!text || text.trim().length === 0) return;
+
+      const match = termRegex.exec(text);
+      if (!match) return;
+
+      const matchedText = match[0];
+      // Find the glossary key (case-insensitive lookup)
+      const termKey = terms.find(t => t.toLowerCase() === matchedText.toLowerCase());
+      if (!termKey || appliedTerms.has(termKey.toLowerCase())) return;
+
+      appliedTerms.add(termKey.toLowerCase());
+
+      // Split the text node around the match
+      const before = text.substring(0, match.index);
+      const after = text.substring(match.index + matchedText.length);
+
+      const parent = node.parentNode;
+      if (!parent) return;
+
+      // Create the glossary-term span
+      const span = document.createElement('span');
+      span.className = 'glossary-term';
+      span.setAttribute('tabindex', '0');
+      span.setAttribute('data-glossary-key', termKey);
+      span.setAttribute('aria-describedby', 'glossary-popup');
+      span.textContent = matchedText;
+
+      // Build fragment: [before text] [span] [after text]
+      const frag = document.createDocumentFragment();
+      if (before) frag.appendChild(document.createTextNode(before));
+      frag.appendChild(span);
+      if (after) frag.appendChild(document.createTextNode(after));
+
+      parent.replaceChild(frag, node);
+      return;
+    }
+
+    if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+    // Skip forbidden tags and existing glossary-terms
+    if (SKIP_TAGS.has(node.tagName)) return;
+    if (node.classList && node.classList.contains('glossary-term')) return;
+    if (node.classList && node.classList.contains('glossary-popup')) return;
+
+    // Snapshot children to iterate safely (DOM mutations during walk)
+    const children = Array.from(node.childNodes);
+    for (const child of children) {
+      walkAndWrap(child);
+    }
+  }
+
+  walkAndWrap(containerEl);
+}
+
+/**
+ * Initialize glossary popup event listeners (run once on DOMContentLoaded).
+ */
+(function initGlossaryPopup() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const popup = document.getElementById('glossary-popup');
+    const popupText = document.getElementById('glossary-popup-text');
+    const popupTitle = document.getElementById('glossary-popup-title');
+    if (!popup || !popupText) return;
+
+    let activeGlossaryTerm = null;
+    let isTouchDevice = false;
+
+    // Detect touch device
+    window.addEventListener('touchstart', () => { isTouchDevice = true; }, { once: true, passive: true });
+
+    function getGlossaryDefinition(termKey) {
+      if (typeof GLOSSARY === 'undefined') return null;
+      const lang = (typeof state !== 'undefined' && state.currentLang) ? state.currentLang : 'es';
+      const dict = GLOSSARY[lang];
+      if (!dict) return null;
+      return dict[termKey] || null;
+    }
+
+    function showGlossaryPopup(termEl) {
+      const termKey = termEl.getAttribute('data-glossary-key');
+      if (!termKey) return;
+      const definition = getGlossaryDefinition(termKey);
+      if (!definition) return;
+
+      // Update popup title based on language
+      if (popupTitle) {
+        const lang = (typeof state !== 'undefined' && state.currentLang) ? state.currentLang : 'es';
+        popupTitle.textContent = lang === 'es' ? '¿Qué significa?' : 'What does this mean?';
+      }
+
+      popupText.textContent = definition;
+      popup.setAttribute('aria-hidden', 'false');
+
+      // Position the popup
+      const rect = termEl.getBoundingClientRect();
+      const popupHeight = popup.offsetHeight || 120;
+      const popupWidth = popup.offsetWidth || 280;
+      const margin = 8;
+
+      // Try to place above; if not enough space, place below
+      let top = rect.top - popupHeight - margin;
+      if (top < margin) {
+        top = rect.bottom + margin;
+      }
+
+      // Center horizontally on term; clamp to viewport edges
+      let left = rect.left + (rect.width / 2) - (popupWidth / 2);
+      if (left < margin) left = margin;
+      if (left + popupWidth > window.innerWidth - margin) {
+        left = window.innerWidth - popupWidth - margin;
+      }
+
+      popup.style.top = `${top}px`;
+      popup.style.left = `${left}px`;
+      popup.classList.add('visible');
+      activeGlossaryTerm = termEl;
+
+      // Re-render Lucide icons inside popup
+      if (window.lucide) window.lucide.createIcons({ nodes: [popup] });
+    }
+
+    function hideGlossaryPopup() {
+      popup.classList.remove('visible');
+      popup.setAttribute('aria-hidden', 'true');
+      activeGlossaryTerm = null;
+    }
+
+    // Event delegation on body for glossary terms
+    document.body.addEventListener('mouseenter', (e) => {
+      const term = e.target.closest('.glossary-term');
+      if (term && !isTouchDevice) showGlossaryPopup(term);
+    }, true);
+
+    document.body.addEventListener('mouseleave', (e) => {
+      const term = e.target.closest('.glossary-term');
+      if (term && !isTouchDevice) hideGlossaryPopup();
+    }, true);
+
+    // Focus/blur for keyboard accessibility
+    document.body.addEventListener('focusin', (e) => {
+      const term = e.target.closest('.glossary-term');
+      if (term) showGlossaryPopup(term);
+    });
+
+    document.body.addEventListener('focusout', (e) => {
+      const term = e.target.closest('.glossary-term');
+      if (term) hideGlossaryPopup();
+    });
+
+    // Touch: toggle on tap
+    document.body.addEventListener('click', (e) => {
+      if (!isTouchDevice) return;
+      const term = e.target.closest('.glossary-term');
+      if (term) {
+        e.preventDefault();
+        if (activeGlossaryTerm === term) {
+          hideGlossaryPopup();
+        } else {
+          showGlossaryPopup(term);
+        }
+      } else if (activeGlossaryTerm) {
+        // Tap outside dismisses
+        hideGlossaryPopup();
+      }
+    });
+
+    // Escape key dismisses
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && activeGlossaryTerm) {
+        hideGlossaryPopup();
+      }
+    });
+  });
+})();

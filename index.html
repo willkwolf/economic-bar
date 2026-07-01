@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Simulador cognitivo e interactivo de coctelería económica. Analiza tu arquitectura mental entre Monismo o Pluralismo y destila tu mezcla ideológica en un speakeasy de lujo conceptual.">
+  <meta name="description" content="Descubre qué ideas económicas influyen en tu forma de pensar. Un simulador interactivo y gratuito para explorar las principales escuelas de economía.">
   
-  <title>Bar de Escuelas Económicas | Elixires de la Razón</title>
+  <title>Bar de Escuelas Económicas | Descubre tu mezcla de ideas</title>
   
   <!-- Google Fonts: Serif de lujo y Sans-serif de alta legibilidad -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -300,7 +300,7 @@
                 <span class="slider-value-display" id="slider-value-readout">Equilibrio Central (50%)</span>
                 <span id="slider-right-hint" data-i18n="sliderRightHint">Prioridad Derecha →</span>
               </div>
-              <label for="luxury-slider" class="sr-only">Nivel de dilema de trade-off</label>
+              <label for="luxury-slider" class="sr-only">Tu posición en este dilema</label>
               <input type="range" id="luxury-slider" min="0" max="100" value="50" class="luxury-range-slider">
             </div>
 
@@ -613,6 +613,15 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- TOOLTIP DE GLOSARIO (Sistema de Accesibilidad Lingüística) -->
+  <div class="glossary-popup" id="glossary-popup" role="tooltip" aria-hidden="true">
+    <span class="glossary-popup-label">
+      <i data-lucide="book-open" class="icon-inline" aria-hidden="true"></i>
+      <span id="glossary-popup-title">¿Qué significa?</span>
+    </span>
+    <p class="glossary-popup-text" id="glossary-popup-text"></p>
   </div>
 
   <!-- Scripts de base de datos y lógica interactiva de coctelería -->
