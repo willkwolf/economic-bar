@@ -3491,3 +3491,107 @@ body.tufte-mode .test-option-card:hover, body.tufte-mode .test-option-card:focus
     padding: 20px 16px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════
+   GLOSSARY TOOLTIP SYSTEM — Accesibilidad Lingüística
+   ═══════════════════════════════════════════════════════ */
+
+.glossary-term {
+  border-bottom: 1.5px dotted var(--accent-gold, #d4a853);
+  cursor: help;
+  position: relative;
+  display: inline;
+  transition: border-color 0.2s ease;
+}
+
+.glossary-term:hover,
+.glossary-term:focus {
+  border-bottom-color: var(--text-primary, #f0e6d3);
+}
+
+.glossary-term .glossary-icon {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin-left: 2px;
+  vertical-align: super;
+  font-size: 0.6em;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.glossary-term:hover .glossary-icon {
+  opacity: 1;
+}
+
+/* The floating tooltip popup */
+.glossary-popup {
+  position: fixed;
+  z-index: 10000;
+  max-width: 320px;
+  min-width: 200px;
+  padding: 14px 18px;
+  background: var(--glass-bg, rgba(20, 16, 12, 0.97));
+  border: 1px solid var(--accent-gold, #d4a853);
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 168, 83, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+}
+
+.glossary-popup.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.glossary-popup-label {
+  display: flex;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold, #d4a853);
+  margin-bottom: 6px;
+  align-items: center;
+  gap: 5px;
+}
+
+.glossary-popup-label .icon-inline {
+  width: 12px;
+  height: 12px;
+}
+
+.glossary-popup-text {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-primary, #f0e6d3);
+  font-weight: 300;
+  margin: 0;
+}
+
+/* Mobile: larger touch target */
+@media (max-width: 768px) {
+  .glossary-term {
+    padding: 2px 0;
+  }
+  .glossary-popup {
+    max-width: 280px;
+    left: 10px !important;
+    right: 10px !important;
+  }
+}
+
+/* High contrast mode support */
+[data-contrast="high"] .glossary-term {
+  border-bottom-color: #fff;
+}
+[data-contrast="high"] .glossary-popup {
+  background: #000;
+  border-color: #fff;
+}
