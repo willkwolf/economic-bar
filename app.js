@@ -137,10 +137,20 @@ function setLanguage(lang) {
   if (equityTitle) equityTitle.textContent = isEs ? "Propósito (Equidad vs Crecimiento)" : "Purpose (Equity vs Growth)";
 
   const equityLeft = document.getElementById("onboarding-equity-left-label");
-  if (equityLeft) equityLeft.textContent = isEs ? "Crecimiento / Growth" : "Growth / Crecimiento";
+  if (equityLeft) equityLeft.textContent = isEs ? "Crecimiento" : "Growth";
   
   const equityRight = document.getElementById("onboarding-equity-right-label");
-  if (equityRight) equityRight.textContent = isEs ? "Equidad / Equity" : "Equity / Equidad";
+  if (equityRight) equityRight.textContent = isEs ? "Equidad" : "Equity";
+
+  // Actualizar dinámicamente el texto de los sliders si el usuario ya los interactuó
+  const stateSlider = document.getElementById("onboarding-state-market-slider");
+  if (stateSlider && stateSlider.oninput) {
+    stateSlider.oninput({ target: stateSlider });
+  }
+  const equitySlider = document.getElementById("onboarding-equity-growth-slider");
+  if (equitySlider && equitySlider.oninput) {
+    equitySlider.oninput({ target: equitySlider });
+  }
 
   // 2. Actualizar estado activo de los botones selectores
   document.querySelectorAll(".lang-btn").forEach(btn => {
@@ -844,6 +854,29 @@ function initTestEngine() {
   startBtn.addEventListener("click", startAction);
   addKeyboardSupport(startBtn, startAction);
 
+  /**
+   * Genera la descripción cualitativa psicométrica y el porcentaje continuo para un slider (0-100).
+   * Implementa una escala Likert de 7 puntos con terminología neutra y porcentaje continuo.
+   */
+  function getSliderDescription(val, leftLabel, rightLabel, isEs) {
+    if (val >= 46 && val <= 54) {
+      return isEs ? "Equilibrio neutral" : "Neutral balance";
+    }
+    const percent = val < 50 ? (100 - val) : val;
+    const label = val < 50 ? leftLabel : rightLabel;
+    
+    let intensity = "";
+    if (val <= 15 || val >= 85) {
+      intensity = isEs ? "Preferencia fuerte por" : "Strong preference for";
+    } else if (val <= 35 || val >= 65) {
+      intensity = isEs ? "Preferencia moderada por" : "Moderate preference for";
+    } else {
+      intensity = isEs ? "Inclinación leve por" : "Slight preference for";
+    }
+    
+    return `${intensity} ${label} (${percent}%)`;
+  }
+
   // Listener para el Slider de la Fase 3
   const slider = document.getElementById("luxury-slider");
   const readout = document.getElementById("slider-value-readout");
@@ -851,14 +884,12 @@ function initTestEngine() {
     slider.addEventListener("input", (e) => {
       const val = parseInt(e.target.value);
       const isEs = state.currentLang === "es";
+      const q = PREGUNTAS[state.currentTestQuestion];
+      if (!q) return;
       
-      let text = isEs ? "Equilibrio Central (50%)" : "Central Balance (50%)";
-      if (val < 40) {
-        text = `${isEs ? "Sesgo Mercado" : "Market Bias"} (${100 - val * 2}%)`;
-      } else if (val > 60) {
-        text = `${isEs ? "Sesgo Planificación" : "Planning Bias"} (${(val - 50) * 2}%)`;
-      }
-      readout.textContent = text;
+      const leftL = q.izquierda.titulo;
+      const rightL = q.derecha.titulo;
+      readout.textContent = getSliderDescription(val, leftL, rightL, isEs);
     });
   }
 
@@ -947,40 +978,43 @@ function initTestEngine() {
     const equitySlider = document.getElementById("onboarding-equity-growth-slider");
     const equityDisplay = document.getElementById("onboarding-equity-growth-display");
 
-    const updateDisplay = (val, display, leftLabel, rightLabel) => {
-      const isEs = state.currentLang === "es";
-      let text = isEs ? "Equilibrio Central (50%)" : "Central Balance (50%)";
-      if (val < 40) {
-        text = `${leftLabel} (${100 - val * 2}%)`;
-      } else if (val > 60) {
-        text = `${rightLabel} (${(val - 50) * 2}%)`;
+    const getOnboardingLabels = (type, isEs) => {
+      if (type === "stateMarket") {
+        return {
+          left: isEs ? "Mercado" : "Market",
+          right: isEs ? "Planificación" : "Planning"
+        };
+      } else {
+        return {
+          left: isEs ? "Crecimiento" : "Growth",
+          right: isEs ? "Equidad" : "Equity"
+        };
       }
-      display.textContent = text;
     };
 
     if (stateSlider && stateDisplay) {
+      const isEs = state.currentLang === "es";
       stateSlider.value = 50;
-      stateDisplay.textContent = state.currentLang === "es" ? "Equilibrio Central (50%)" : "Central Balance (50%)";
+      stateDisplay.textContent = isEs ? "Equilibrio neutral" : "Neutral balance";
       stateSlider.oninput = (e) => {
         const val = parseInt(e.target.value);
         state.prior.stateMarket = val / 100;
-        const isEs = state.currentLang === "es";
-        const leftL = isEs ? "Sesgo Mercado" : "Market Bias";
-        const rightL = isEs ? "Sesgo Planificación" : "Planning Bias";
-        updateDisplay(val, stateDisplay, leftL, rightL);
+        const currentIsEs = state.currentLang === "es";
+        const labels = getOnboardingLabels("stateMarket", currentIsEs);
+        stateDisplay.textContent = getSliderDescription(val, labels.left, labels.right, currentIsEs);
       };
     }
 
     if (equitySlider && equityDisplay) {
+      const isEs = state.currentLang === "es";
       equitySlider.value = 50;
-      equityDisplay.textContent = state.currentLang === "es" ? "Equilibrio Central (50%)" : "Central Balance (50%)";
+      equityDisplay.textContent = isEs ? "Equilibrio neutral" : "Neutral balance";
       equitySlider.oninput = (e) => {
         const val = parseInt(e.target.value);
         state.prior.equityGrowth = val / 100;
-        const isEs = state.currentLang === "es";
-        const leftL = isEs ? "Crecimiento" : "Growth";
-        const rightL = isEs ? "Equidad" : "Equity";
-        updateDisplay(val, equityDisplay, leftL, rightL);
+        const currentIsEs = state.currentLang === "es";
+        const labels = getOnboardingLabels("equityGrowth", currentIsEs);
+        equityDisplay.textContent = getSliderDescription(val, labels.left, labels.right, currentIsEs);
       };
     }
   }
@@ -1022,7 +1056,7 @@ function renderQuestion() {
   const slider = document.getElementById("luxury-slider");
   if (slider) {
     slider.value = 50;
-    document.getElementById("slider-value-readout").textContent = isEs ? "Equilibrio Central (50%)" : "Central Balance (50%)";
+    document.getElementById("slider-value-readout").textContent = isEs ? "Equilibrio neutral" : "Neutral balance";
   }
 
   if (q.fase === 1 || q.fase === 2) {

@@ -252,11 +252,11 @@ const TRANSLATIONS = {
       recipeLabelRisks: "RIESGOS SI SE APLICA SIN EQUILIBRIO",
       phLabel: "pH Estatal:",
       phInterventionTitle: "Nivel de intervención del Estado",
-      sliderValCentral: "Punto medio (50%)",
-      sliderValLeft: "Más libertad de mercado",
-      sliderValRight: "Más intervención del gobierno",
-      sliderLeftHint: "← Prioridad Izquierda",
-      sliderRightHint: "Prioridad Derecha →",
+      sliderValCentral: "Equilibrio neutral",
+      sliderValLeft: "Prioridad Mercado",
+      sliderValRight: "Prioridad Estado",
+      sliderLeftHint: "← Mercado",
+      sliderRightHint: "Estado →",
       sliderConfirmBtn: "Confirmar mi posición y seguir",
       exportOfficialAct: "TU RESULTADO OFICIAL",
       exportMolecularFormula: "TU MEZCLA DE IDEAS ECONÓMICAS",
@@ -745,83 +745,83 @@ const TRANSLATIONS = {
       monismo_doctrinal: {
         nombre: "Idea Fuerte y Única",
         subtitulo: "La coherencia de seguir un solo camino",
-        descripcion: "Tu mente prefiere organizarse en torno a una sola idea económica principal. Al igual que el pensador clásico, crees que hay un principio básico que lo explica todo y actúas con gran firmeza y claridad. Sueles defender con fuerza un tipo de libertad: o la total libertad de mercado (que nadie intervenga en tus negocios) o la planificación del gobierno (para que todos tengan las mismas oportunidades). Esto te da mucha fuerza para actuar y defender tus ideas, pero puede hacer que ignores problemas que no encajan en tu teoría.",
-        virtur: "Gran claridad para tomar decisiones, firmeza en tus creencias y argumentos muy coherentes y ordenados.",
-        resaca: "Riesgo de cerrarse a otras ideas. Si te centras solo en el mercado, puedes ignorar la pobreza o el cuidado del medio ambiente; si te centras solo en el control del gobierno, puedes terminar apoyando un exceso de controles que asfixien la libertad individual."
+        descripcion: "Tu mente prefiere organizarse en torno a una idea económica principal. Al igual que los grandes teóricos clásicos, buscas un principio fundamental para explicar la sociedad. Defiendes con claridad una postura definida: ya sea la libertad de mercado (sin trabas para emprender) o la planificación del Estado (para garantizar oportunidades iguales). Esto te da gran firmeza y dirección al debatir, aunque a veces puede llevarte a pasar por alto problemas que no encajan en tu teoría.",
+        virtud: "Firmeza en tus convicciones, gran claridad para tomar decisiones y argumentos ordenados y coherentes.",
+        resaca: "Riesgo de rigidez doctrinal. Centrarse solo en el mercado puede hacerte ignorar las desigualdades sociales o el límite ecológico; priorizar solo el control estatal puede derivar en un exceso de burocracia que asfixie la iniciativa individual."
       },
       pluralismo_sistemico: {
         nombre: "Combinación Abierta",
         subtitulo: "La flexibilidad de ver varios puntos de vista",
-        descripcion: "Tu mente prefiere combinar distintas ideas según la situación. Sabes que la sociedad es muy compleja y que no existe una única fórmula económica perfecta para resolver todos los problemas. Entiendes que a veces la libertad individual y el bienestar del grupo entran en conflicto, y que gobernar implica elegir qué sacrificar en cada caso. Eres pragmático y no te dejas llevar por dogmas cerrados.",
-        virtud: "Mucha flexibilidad para adaptarte a los cambios, capacidad para escuchar otras opiniones y una mirada realista y libre de fanatismos.",
-        resaca: "Riesgo de parálisis o duda constante. Al entender tan bien que cada decisión tiene ventajas e inconvenientes, te puede costar tomar partido o decidir qué acción rápida se debe tomar en un momento de crisis."
+        descripcion: "Tu mente prefiere combinar distintas ideas según el problema. Entiendes que la sociedad es compleja y que no existe una única fórmula económica mágica. Para ti, gobernar implica equilibrar tensiones (como la libertad individual frente al bienestar común) sabiendo que cada decisión tiene pros y contras. Eres pragmático y prefieres las soluciones prácticas a los dogmas cerrados.",
+        virtud: "Gran flexibilidad para adaptarte a los cambios, capacidad para escuchar diversas posturas y una visión realista de la economía.",
+        resaca: "Riesgo de parálisis por análisis. Al ver con tanta claridad las ventajas y desventajas de cada opción, te puede costar tomar decisiones rápidas o definir una postura firme en momentos de crisis."
       },
       monismo_eclectico: {
         nombre: "Buscador de Respuestas (En Tensión)",
         subtitulo: "El deseo de encontrar una explicación que una todo",
-        descripcion: "Vives en una constante búsqueda de equilibrio. Tu mente quiere encontrar una sola teoría coherente que explique el mundo perfectamente, pero tu sentido común te dice que tanto la libertad de mercado como la intervención del gobierno tienen razones válidas. Esto te mantiene en un debate interno permanente, tratando de juntar ideas que a menudo chocan en la realidad.",
-        virtud: "Una mente muy activa y autocrítica, que no se conforma con respuestas simples y siempre busca profundizar.",
-        resaca: "Confusión interna constante. Puedes sentir que tus ideas se contradicen y que no encajas del todo con los que defienden teorías puras u ortodoxas."
+        descripcion: "Vives en una búsqueda constante de equilibrio. Tu mente quiere encontrar una teoría coherente que explique el mundo a la perfección, pero tu sentido común te recuerda que tanto el mercado libre como la regulación estatal tienen argumentos válidos. Esto te mantiene en un diálogo interno continuo, intentando reconciliar ideas que a menudo chocan en la práctica.",
+        virtud: "Una mentalidad crítica y autocrítica que huye de respuestas sencillas y siempre busca profundizar en las causas.",
+        resaca: "Dilema interno constante. Puedes sentir que tus ideas se contradicen y que no encajas del todo con las corrientes de pensamiento más tradicionales u ortodoxas."
       },
       pluralismo_pragmatico: {
         nombre: "Firmeza Disfrazada de Apertura",
         subtitulo: "Defender una sola idea con palabras flexibles",
-        descripcion: "Aunque dices tener una mente abierta y estar dispuesto a combinar teorías según la situación, tus respuestas revelan que en el fondo tienes un núcleo muy firme de creencias (ya sea a favor del mercado libre o del control del gobierno). Usas un lenguaje flexible y comprensivo para argumentar, pero tus decisiones finales siempre se inclinan hacia el mismo lado.",
-        virtud: "Mucha habilidad para negociar y dialogar con otros sin perder la claridad sobre lo que realmente quieres lograr.",
-        resaca: "Riesgo de no ser del todo sincero contigo mismo. Exiges a los demás que sean flexibles y cambien de opinión, mientras que tus propias ideas básicas siguen siendo inamovibles."
+        descripcion: "Aunque valoras la flexibilidad y te consideras abierto a combinar teorías según la situación, tus respuestas revelan que posees un núcleo firme de convicciones. Expresas tus opiniones con un lenguaje integrador y comprensivo, pero tus decisiones finales demuestran una inclinación clara hacia un modelo económico específico.",
+        virtud: "Habilidad para dialogar y tender puentes con otros sin perder de vista tus verdaderas prioridades.",
+        resaca: "Riesgo de inconsistencia percibida. Exigir flexibilidad a los demás mientras mantienes tus propias ideas inamovibles puede restar claridad a tu postura."
       }
     },
     perfiles_cuadrantes: {
       Q1: {
         titulo: "Apoyo al Estado Fuerte y Límites Ecológicos",
-        descripcion: "Crees que el gobierno debe ser fuerte para asegurar que los recursos se repartan de forma justa y que se respeten los límites de la naturaleza. Rechazas que la vida humana y la salud del planeta se manejen como simples negocios para obtener ganancias. Valoras la igualdad social y el cuidado del medio ambiente.",
-        afinidad: "Ideas del socialismo, la economía feminista del cuidado y el respeto a la naturaleza."
+        descripcion: "Crees en un papel activo del Estado para asegurar una distribución justa de la riqueza y el respeto a los límites de la naturaleza. Rechazas que los derechos fundamentales o el planeta se traten como simples mercancías para obtener ganancias. Valoras la justicia social, la equidad de género y la sostenibilidad.",
+        afinidad: "Socialismo democrático, economía ecológica y economía feminista del cuidado."
       },
       Q2: {
         titulo: "Regulación Inteligente y Ayudas Directas",
-        descripcion: "Crees en un gobierno que intervenga de forma precisa y solo cuando sea necesario, usando la psicología y el diseño de opciones para ayudar a las personas a elegir mejor (como incentivos sutiles). Buscas que el mercado funcione pero con un diseño que cuide el comportamiento real de la gente.",
-        afinidad: "Ideas de la economía del comportamiento y la regulación inteligente de los mercados."
+        descripcion: "Crees en una intervención pública precisa y selectiva. Apoyas el uso de incentivos indirectos y el diseño inteligente de opciones (psicología del comportamiento) para guiar decisiones colectivas, permitiendo que el mercado funcione pero protegiendo a las personas de decisiones impulsivas o engañosas.",
+        afinidad: "Economía del comportamiento (Nudge) y regulación inteligente de mercados."
       },
       Q3: {
         titulo: "Alianza Productiva y Apoyo en Crisis",
-        descripcion: "Crees en la unión entre el gobierno y las empresas. Para ti, el progreso viene de un Estado emprendedor que invierta en proyectos tecnológicos de gran escala y gaste dinero para crear empleo cuando la economía vaya mal. Valoras la planificación compartida y las reglas estables.",
-        afinidad: "Ideas del keynesianismo, el desarrollo industrial nacional y el Estado innovador."
+        descripcion: "Defiendes una alianza estratégica entre el gobierno y las empresas. Para ti, el motor del progreso es un Estado innovador que invierta en tecnología y proyectos de gran escala, y que gaste para sostener el empleo cuando la economía se frena. Valoras el desarrollo industrial y la planificación concertada.",
+        afinidad: "Keynesianismo, Estado emprendedor y desarrollo nacionalista."
       },
       Q4: {
         titulo: "Libertad de Mercado y Decisiones Libres",
-        descripcion: "Crees firmemente en la libertad individual y en que las empresas deben competir libremente sin que el gobierno se meta. Para ti, los precios que se fijan solos en el mercado son la mejor forma de organizar la economía de un país. Valoras la iniciativa privada y la libre competencia.",
-        afinidad: "Ideas del liberalismo clásico, la libertad individual y el mercado libre absoluto."
+        descripcion: "Priorizas la libertad individual y la iniciativa privada. Sostienes que los mercados descentralizados y el libre juego de la oferta y la demanda son las herramientas más eficientes para coordinar la producción y generar bienestar. Consideras que la intervención del gobierno suele generar distorsiones perjudiciales.",
+        afinidad: "Liberalismo clásico, economía de libre mercado y escuela austríaca."
       }
     },
     perfiles_concentracion: {
       monocultura: {
-        riesgo: "⚠️ Ideas muy rígidas",
-        narrativa: "Tus ideas están muy concentradas en una sola escuela o forma de ver la economía. Esto te da una identidad clara y mucha coherencia. Sin embargo, tu punto débil es la visión de túnel: te cuesta aceptar datos que contradigan tus ideas y puedes rechazar otras propuestas válidas solo porque no coinciden con tu teoría."
+        riesgo: "⚠️ Enfoque muy especializado",
+        narrativa: "Tus ideas están alineadas con una visión económica particular. Esto te da una postura muy sólida y clara. Sin embargo, tu área de mejora es evitar la visión de túnel: el riesgo de descartar datos reales o soluciones útiles solo porque no encajan en tu teoría de preferencia."
       },
       sintetico: {
-        riesgo: "⚖️ Dificultad para decidir",
-        narrativa: "Lograste una combinación equilibrada de distintas ideas económicas. Tu gran fortaleza es ver las ventajas y los costos de cada propuesta con mucha calma. Tu punto débil es que puedes tardar demasiado en tomar una decisión práctica por quedarte analizando todos los lados del problema."
+        riesgo: "⚖️ Equilibrio deliberativo",
+        narrativa: "Has logrado una combinación equilibrada de diferentes escuelas. Tu fortaleza es evaluar de forma objetiva los beneficios y costos de cada opción. Tu área de mejora es evitar que este análisis continuo demore la toma de decisiones prácticas."
       },
       disperso: {
-        riesgo: "🌪️ Ideas sin conexión clara",
-        narrativa: "Tu forma de pensar tiene ideas de muchas escuelas distintas sin un centro claro. Eres totalmente abierto y no te dejas llevar por dogmas. Sin embargo, tu punto débil es que te puede costar explicar con claridad en qué crees o unirte a grupos organizados para lograr cambios reales."
+        riesgo: "🌪️ Ideas independientes",
+        narrativa: "Tu forma de pensar toma elementos de múltiples corrientes sin un centro dominante. Eres libre de dogmas y muy adaptable. Tu área de mejora es estructurar estas ideas en una propuesta clara para poder coordinar acciones colectivas eficaces."
       }
     },
     perfiles_consistencia: {
       high: {
         nombre: "Alta Coherencia",
         subtitulo: "Tus respuestas coinciden muy bien con tu intuición.",
-        descripcion: "Tus respuestas en el test coinciden casi a la perfección con lo que dijiste creer al principio y con tu cóctel favorito. Tienes una forma de pensar muy ordenada y consistente."
+        descripcion: "Tus respuestas en el test coinciden de forma consistente con las creencias expresadas en tu onboarding y el cóctel seleccionado. Tienes un mapa de ideas muy ordenado e integrado."
       },
       moderate: {
         nombre: "Combinación Práctica",
         subtitulo: "Muestras ideas flexibles y adaptadas.",
-        descripcion: "Tienes un rumbo claro, pero cuando te enfrentas a problemas difíciles, estás dispuesto a aceptar soluciones de otras escuelas de pensamiento. Esto es señal de una mente práctica y dispuesta a adaptarse."
+        descripcion: "Muestras un rumbo claro, pero priorizas resolver problemas concretos antes que seguir una doctrina rígida. Estás dispuesto a aceptar ideas de otras corrientes si demuestran utilidad real."
       },
       low: {
-        nombre: "Contradicción Enriquecedora",
+        nombre: "Tensión Enriquecedora",
         subtitulo: "¡Tus respuestas muestran ideas muy diversas!",
-        descripcion: "Elegiste un cóctel de inicio pero, cuando respondiste a las preguntas sobre problemas reales, elegiste opciones que van hacia el lado contrario. Esto demuestra que tus ideas están en un debate muy interesante y que no te dejas llevar por recetas fijas."
+        descripcion: "Tus respuestas prácticas difieren de tus preferencias iniciales. Esto no es un error: refleja que estás en un proceso de debate interno saludable, cuestionando tus propios supuestos ante dilemas reales."
       }
     }
   },
@@ -899,11 +899,11 @@ const TRANSLATIONS = {
       recipeLabelRisks: "RISKS IF APPLIED WITHOUT BALANCE",
       phLabel: "State pH:",
       phInterventionTitle: "Level of State intervention",
-      sliderValCentral: "Middle point (50%)",
-      sliderValLeft: "More market freedom",
-      sliderValRight: "More government intervention",
-      sliderLeftHint: "← Left Priority",
-      sliderRightHint: "Right Priority →",
+      sliderValCentral: "Neutral balance",
+      sliderValLeft: "Market Priority",
+      sliderValRight: "State Priority",
+      sliderLeftHint: "← Market",
+      sliderRightHint: "State →",
       sliderConfirmBtn: "Confirm my position and continue",
       exportOfficialAct: "YOUR OFFICIAL RESULT",
       exportMolecularFormula: "YOUR MIX OF ECONOMIC IDEAS",
