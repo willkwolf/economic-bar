@@ -548,6 +548,28 @@
     </div>
   </div>
 
+  <!-- TOOLTIP DE CÓCTEL (Priors de Onboarding) -->
+  <div class="tasting-tooltip" id="cocktail-tooltip" role="tooltip" aria-hidden="true">
+    <div class="tooltip-header">
+      <div>
+        <h3 class="tooltip-name" id="cocktail-tooltip-name">Nombre</h3>
+        <span class="tooltip-founder" id="cocktail-tooltip-intensity">Intensidad</span>
+      </div>
+    </div>
+    <div class="tooltip-body" style="padding-top: 5px;">
+      <div class="tooltip-section">
+        <span class="tooltip-label" style="color: var(--accent-gold); display: flex; align-items: center; gap: 6px;"><i data-lucide="beaker" class="icon-inline" aria-hidden="true"></i> INGREDIENTES (ESCUELAS)</span>
+        <ul class="tooltip-ingredients-list" id="cocktail-tooltip-ingredients" style="list-style: none; padding: 0; margin: 8px 0 0 0; display: flex; flex-direction: column; gap: 4px;">
+          <!-- Inyectado dinámicamente -->
+        </ul>
+      </div>
+      <div class="tooltip-section" style="margin-top: 12px; border-top: 1px solid var(--border-glass); padding-top: 10px;">
+        <span class="tooltip-label" style="display: flex; align-items: center; gap: 6px;"><i data-lucide="compass" class="icon-inline" aria-hidden="true"></i> NOTAS DE CATA</span>
+        <p class="tooltip-text" id="cocktail-tooltip-notes" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; line-height: 1.3;"></p>
+      </div>
+    </div>
+  </div>
+
   <!-- BOTÓN FLOTANTE Y PANEL DE ACCESIBILIDAD DE LECTURA (Móvil y Escritorio) -->
   <button id="btn-a11y-toolkit" class="btn-a11y-float" aria-label="Abrir panel de accesibilidad de lectura" data-i18n="a11yBtnToggle">
     <i data-lucide="accessibility"></i>

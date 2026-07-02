@@ -339,6 +339,82 @@ function dismissTooltipOnOutsideTap(e) {
   }
 }
 
+// ── CONTROL DEL TOOLTIP DE CÓCTELES (ONBOARDING PRIORS) ──────────────────────
+function showCocktailTooltip(e, coctel) {
+  const tooltip = document.getElementById("cocktail-tooltip");
+  if (!tooltip) return;
+
+  const isEs = state.currentLang === "es";
+
+  document.getElementById("cocktail-tooltip-name").textContent = coctel.nombre;
+  document.getElementById("cocktail-tooltip-intensity").textContent = coctel.intensidad;
+  document.getElementById("cocktail-tooltip-notes").textContent = coctel.tastingNotes;
+
+  // Renderizar ingredientes con nombre y color de escuelas
+  const listEl = document.getElementById("cocktail-tooltip-ingredients");
+  listEl.innerHTML = "";
+
+  Object.entries(coctel.ingredientes).forEach(([schoolId, pct]) => {
+    const escuela = ESCUELAS[schoolId];
+    if (!escuela) return;
+
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <span class="ing-name">
+        <span class="ing-dot" style="background-color: ${escuela.color}"></span>
+        ${escuela.nombre}
+      </span>
+      <span class="ing-pct">${pct}%</span>
+    `;
+    listEl.appendChild(li);
+  });
+
+  tooltip.setAttribute("aria-hidden", "false");
+  tooltip.classList.add("visible");
+  
+  const rect = e.currentTarget.getBoundingClientRect();
+  const tooltipWidth = tooltip.offsetWidth;
+  const tooltipHeight = tooltip.offsetHeight;
+  const scrollY = window.scrollY;
+
+  let xPos = rect.left + rect.width / 2 - tooltipWidth / 2;
+  let yPos = rect.top + scrollY - tooltipHeight - 15; // 15px holgura
+
+  // Evitar desbordamiento por laterales
+  if (xPos < 15) xPos = 15;
+  if (xPos + tooltipWidth > window.innerWidth - 15) {
+    xPos = window.innerWidth - tooltipWidth - 15;
+  }
+
+  // Evitar desbordamiento superior
+  if (rect.top - tooltipHeight < 80) {
+    yPos = rect.bottom + scrollY + 15; 
+  }
+
+  tooltip.style.left = `${xPos}px`;
+  tooltip.style.top = `${yPos}px`;
+}
+
+function hideCocktailTooltip() {
+  const tooltip = document.getElementById("cocktail-tooltip");
+  if (tooltip) {
+    tooltip.setAttribute("aria-hidden", "true");
+    tooltip.classList.remove("visible");
+  }
+}
+
+function dismissCocktailTooltipOnOutsideTap(e) {
+  const tooltip = document.getElementById("cocktail-tooltip");
+  if (tooltip && tooltip.classList.contains("visible")) {
+    const isClickInsideCard = e.target.closest(".mini-cocktail-card");
+    const isClickInsideTooltip = e.target.closest("#cocktail-tooltip");
+    if (!isClickInsideCard && !isClickInsideTooltip) {
+      hideCocktailTooltip();
+      document.removeEventListener("click", dismissCocktailTooltipOnOutsideTap);
+    }
+  }
+}
+
 // ── CARTA DE CÓCTELES ──────────────────────────────────────────────────────
 function initCocktailMenu() {
   const grid = document.getElementById("cocktails-grid");
@@ -960,8 +1036,31 @@ function initTestEngine() {
         state.prior.cocktailId = coctel.id;
       };
 
-      card.addEventListener("click", selectPrior);
-      addKeyboardSupport(card, selectPrior);
+      // Manejadores de Tooltip para hover y foco en escritorio
+      const showTooltip = (e) => showCocktailTooltip(e, coctel);
+      const hideTooltip = () => hideCocktailTooltip();
+
+      card.addEventListener("mouseenter", showTooltip);
+      card.addEventListener("mouseleave", hideTooltip);
+      card.addEventListener("focus", showTooltip);
+      card.addEventListener("blur", hideTooltip);
+
+      // Selección y apertura del tooltip por clic / tap en móvil
+      card.addEventListener("click", (e) => {
+        selectPrior();
+        showCocktailTooltip(e, coctel);
+        
+        // Detener propagación para evitar que el manejador global de cierre lo oculte al instante
+        e.stopPropagation();
+        
+        document.removeEventListener("click", dismissCocktailTooltipOnOutsideTap);
+        document.addEventListener("click", dismissCocktailTooltipOnOutsideTap);
+      });
+
+      addKeyboardSupport(card, (e) => {
+        selectPrior();
+        showCocktailTooltip(e, coctel);
+      });
       grid.appendChild(card);
     });
 
