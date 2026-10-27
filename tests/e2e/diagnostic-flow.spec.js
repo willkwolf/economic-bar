@@ -49,7 +49,8 @@ test.describe('BAR-Economic Diagnostic Flow (End-to-End)', () => {
     await page.addInitScript(() => {
       window.getSliderDescription = function(val, leftLabel, rightLabel, isEs) {
         if (val >= 46 && val <= 54) {
-          return isEs ? "Equilibrio neutral" : "Neutral balance";
+          const neutralPct = val === 50 ? "50%" : `${val}%`;
+          return isEs ? `Equilibrio neutral (${neutralPct})` : `Neutral balance (${neutralPct})`;
         }
         const percent = val < 50 ? (100 - val) : val;
         const label = val < 50 ? leftLabel : rightLabel;
@@ -309,4 +310,123 @@ test.describe('BAR-Economic Diagnostic Flow (End-to-End)', () => {
     await expect(resultsScreen).toBeHidden();
   });
 
+
+  test('Back navigation preserves answer state and enables changing answers with transitions', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await startTest(page);
+
+    const onboardingScreen = page.locator('#test-onboarding-screen');
+    const questionScreen = page.locator('#test-question-screen');
+    await expect(onboardingScreen).toBeVisible();
+
+    // Verify initial display for onboarding sliders contains .slider-value-display and (50%)
+    const stateDisplay = page.locator('#onboarding-state-market-display');
+    const equityDisplay = page.locator('#onboarding-equity-growth-display');
+    await expect(stateDisplay).toHaveClass(/slider-value-display/);
+    await expect(stateDisplay).toContainText(/50%/);
+    await expect(equityDisplay).toHaveClass(/slider-value-display/);
+    await expect(equityDisplay).toContainText(/50%/);
+
+    // Confirm onboarding
+    const confirmOnboardingBtn = page.locator('#onboarding-next-btn');
+    await confirmOnboardingBtn.click();
+    await expect(questionScreen).toBeVisible();
+
+    // Question 1: Select first option
+    const stepLabel = page.locator('#test-step-label');
+    await expect(stepLabel).toContainText(/PREGUNTA 1 DE 12|QUESTION 1 OF 12/i);
+    const q1Options = page.locator('#test-options-grid .test-option-card');
+    await expect(q1Options).toHaveCount(2);
+    await q1Options.first().click();
+
+    // Advances to Question 2
+    await expect(stepLabel).toContainText(/PREGUNTA 2 DE 12|QUESTION 2 OF 12/i);
+
+    // Click Back button (#test-prev-btn) to return to Q1
+    const testPrevBtn = page.locator('#test-prev-btn');
+    await expect(testPrevBtn).toBeVisible();
+    await testPrevBtn.click();
+
+    // Verify we are back on Question 1 and first option is marked .selected
+    await expect(stepLabel).toContainText(/PREGUNTA 1 DE 12|QUESTION 1 OF 12/i);
+    const q1OptionsAfterBack = page.locator('#test-options-grid .test-option-card');
+    await expect(q1OptionsAfterBack.first()).toHaveClass(/selected/);
+
+    // Now change answer: click the second option
+    await q1OptionsAfterBack.nth(1).click();
+
+    // Advances to Question 2 again
+    await expect(stepLabel).toContainText(/PREGUNTA 2 DE 12|QUESTION 2 OF 12/i);
+
+    // Return to Q1 again and back to Onboarding (Priors)
+    await testPrevBtn.click();
+    await expect(stepLabel).toContainText(/PREGUNTA 1 DE 12|QUESTION 1 OF 12/i);
+    // On Q1, the back button label indicates returning to priors
+    await testPrevBtn.click();
+    await expect(onboardingScreen).toBeVisible();
+    await expect(questionScreen).toBeHidden();
+
+    // Return from Onboarding to Question 1
+    await confirmOnboardingBtn.click();
+    await expect(questionScreen).toBeVisible();
+    await expect(stepLabel).toContainText(/PREGUNTA 1 DE 12|QUESTION 1 OF 12/i);
+  });
+
+  test('Phase 3 slider displays qualitative description with percentage and back button preserves slider state', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await startTest(page);
+
+    const confirmOnboardingBtn = page.locator('#onboarding-next-btn');
+    await confirmOnboardingBtn.click();
+
+    // Answer Q1 - Q9 rapidly
+    for (let q = 1; q <= 9; q++) {
+      const options = page.locator('#test-options-grid .test-option-card');
+      await options.first().scrollIntoViewIfNeeded();
+      await options.first().click();
+      if (q < 9) {
+        await expect(page.locator('#test-step-label')).toContainText(new RegExp(`PREGUNTA ${q + 1} DE 12`, 'i'));
+      }
+    }
+
+    // Now in Question 10 (Fase 3 - Slider)
+    const stepLabel = page.locator('#test-step-label');
+    await expect(stepLabel).toContainText(/PREGUNTA 10 DE 12/i);
+
+    const sliderWrapper = page.locator('#test-slider-wrapper');
+    const luxurySlider = page.locator('#luxury-slider');
+    const sliderReadout = page.locator('#slider-value-readout');
+    const sliderNextBtn = page.locator('#slider-next-btn');
+    const sliderPrevBtn = page.locator('#slider-prev-btn');
+
+    await expect(sliderWrapper).toBeVisible();
+    await expect(sliderReadout).toHaveClass(/slider-value-display/);
+    // Initial readout should immediately show neutral equilibrium with 50%
+    await expect(sliderReadout).toContainText(/50%/);
+
+    // Move slider to 71%
+    await setSliderValue(luxurySlider, 71);
+    // Expect readout to match exact user format: "Preferencia moderada por ... (71%)"
+    await expect(sliderReadout).toContainText(/71%/);
+    await expect(sliderReadout).toContainText(/Preferencia moderada por|Moderate preference for/i);
+
+    // Confirm Q10 with 71%
+    await sliderNextBtn.click();
+
+    // Now on Q11
+    await expect(stepLabel).toContainText(/PREGUNTA 11 DE 12/i);
+    // Initial readout of Q11 starts with 50%
+    await expect(sliderReadout).toContainText(/50%/);
+
+    // Click slider prev button (#slider-prev-btn) to go back to Q10
+    await expect(sliderPrevBtn).toBeVisible();
+    await sliderPrevBtn.click();
+
+    // Back on Q10: verify preserved value of 71% and corresponding readout
+    await expect(stepLabel).toContainText(/PREGUNTA 10 DE 12/i);
+    const restoredValue = await luxurySlider.inputValue();
+    expect(restoredValue).toBe('71');
+    await expect(sliderReadout).toContainText(/71%/);
+    await expect(sliderReadout).toContainText(/Preferencia moderada por|Moderate preference for/i);
+  });
 });
