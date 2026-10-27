@@ -1,0 +1,2198 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-10-27T09:34:52Z",
+  "generator": "Vibium 26.8.21 (WebDriver BiDi)",
+  "viewport": {
+    "width": 1280,
+    "height": 800,
+    "device_scale_factor": 1
+  },
+  "total_checkpoints": 12,
+  "checkpoints": [
+    {
+      "checkpoint_id": "01_start_screen",
+      "name": "Pantalla Inicial del Test de Sobriedad",
+      "description": "Pantalla de bienvenida e introducción al test con insignia de balanza académica y botón de inicio.",
+      "container_selector": "#test-start-screen",
+      "container_id": "test-start-screen",
+      "active_classes": [
+        "test-intro-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "a7e159ebfc13d5cd145f0b08acd56efdb80e41a100a2255d1c8b6cb7b9760947",
+      "total_dom_elements": 10,
+      "interactive_elements_count": 1,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "class": "btn btn-primary",
+            "data-i18n": "testIntroBtn",
+            "id": "start-test-btn"
+          },
+          "bounding_box": {
+            "height": 44,
+            "width": 279,
+            "x": 496,
+            "y": 526
+          },
+          "classes": [
+            "btn",
+            "btn-primary"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": "#start-test-btn",
+          "tag": "button",
+          "text_preview": "INICIAR DESTILACIÓN MENTAL",
+          "visible": true
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#start-test-btn)",
+        "target": "02_onboarding_priors_default",
+        "type": "sync-dom-switch"
+      },
+      "snapshot_file": "01_start_screen.png",
+      "file_size_bytes": 94120,
+      "image_hash_sha256": "83c60248398050c5db02c53397b8c19128d6d0f4e16f8dc8589370b8a207dd3a"
+    },
+    {
+      "checkpoint_id": "02_onboarding_priors_default",
+      "name": "Onboarding: Calibración de Priors (Valores por Defecto)",
+      "description": "Paso 0 de calibración alquímica con primer cóctel seleccionado por defecto y dos sliders continuos al 50% (Equilibrio neutral).",
+      "container_selector": "#test-onboarding-screen",
+      "container_id": "test-onboarding-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "cb7be040f53dabdaede8bb47c5b7092dc93e6468999ac388532ccc47ebbda342",
+      "total_dom_elements": 54,
+      "interactive_elements_count": 11,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "class": "mini-cocktail-card selected",
+            "data-id": "martillo_dialectico",
+            "role": "button",
+            "style": "--cocktail-color: #8c2323;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 153,
+            "x": 286,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card",
+            "selected"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".mini-cocktail-card.selected",
+          "tag": "div",
+          "text_preview": "Martillo Dialéctico",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "libertad_liquida",
+            "role": "button",
+            "style": "--cocktail-color: #c8350d;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 168,
+            "x": 452,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Libertad Líquida",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "socialdemocracia_nordica",
+            "role": "button",
+            "style": "--cocktail-color: #579ea4;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 202,
+            "x": 632,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 2,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Socialdemocracia Nórdica",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "silicon_valley_sour",
+            "role": "button",
+            "style": "--cocktail-color: #f9c000;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 186,
+            "x": 847,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Silicon Valley Sour",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "equilibrio_esteril",
+            "role": "button",
+            "style": "--cocktail-color: #2d2651;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 153,
+            "x": 286,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 4,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Equilibrio Estéril",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "elixir_bien_comun",
+            "role": "button",
+            "style": "--cocktail-color: #2c5e3b;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 168,
+            "x": 452,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 5,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Elixir del Bien Común",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "destilado_desarrollista",
+            "role": "button",
+            "style": "--cocktail-color: #c8350d;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 202,
+            "x": 632,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 6,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Destilado Desarrollista",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "ponche_gran_crisis",
+            "role": "button",
+            "style": "--cocktail-color: #86ad34;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 186,
+            "x": 847,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 7,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Ponche de la Gran Crisis",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "onboarding-state-market-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 4,
+            "width": 698,
+            "x": 286,
+            "y": 529
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 8,
+          "selector": "#onboarding-state-market-slider",
+          "tag": "input",
+          "text_preview": "50",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "onboarding-equity-growth-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 4,
+            "width": 698,
+            "x": 286,
+            "y": 626
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 9,
+          "selector": "#onboarding-equity-growth-slider",
+          "tag": "input",
+          "text_preview": "50",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "id": "onboarding-next-btn",
+            "style": "margin-top: 35px; width: 100%;"
+          },
+          "bounding_box": {
+            "height": 53,
+            "width": 698,
+            "x": 286,
+            "y": 672
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 10,
+          "selector": "#onboarding-next-btn",
+          "tag": "button",
+          "text_preview": "GUARDAR MIS RESPUESTAS Y EMPEZAR EL TEST",
+          "visible": true
+        }
+      ],
+      "state_transition": {
+        "trigger": "input(#onboarding-state-market-slider, 75) & input(#onboarding-equity-growth-slider, 30)",
+        "target": "03_onboarding_sliders_adjusted",
+        "type": "user-slider-drag"
+      },
+      "snapshot_file": "02_onboarding_priors_default.png",
+      "file_size_bytes": 98792,
+      "image_hash_sha256": "458f3ad5af43fcf3e9cb3d66292f7f5bfab3121ff390c74889899281c08638b3"
+    },
+    {
+      "checkpoint_id": "03_onboarding_sliders_adjusted",
+      "name": "Onboarding: Sliders de Priors Ajustados",
+      "description": "Sliders calibrados a 75% Mercado y 30% Equidad con descripciones dinámicas actualizadas en tiempo real.",
+      "container_selector": "#test-onboarding-screen",
+      "container_id": "test-onboarding-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "553683352a6c438b8d392b7db8b7b055db297c008df436b454cc92047b3dc7aa",
+      "total_dom_elements": 54,
+      "interactive_elements_count": 11,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "class": "mini-cocktail-card selected",
+            "data-id": "martillo_dialectico",
+            "role": "button",
+            "style": "--cocktail-color: #8c2323;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 153,
+            "x": 286,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card",
+            "selected"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".mini-cocktail-card.selected",
+          "tag": "div",
+          "text_preview": "Martillo Dialéctico",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "libertad_liquida",
+            "role": "button",
+            "style": "--cocktail-color: #c8350d;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 168,
+            "x": 452,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Libertad Líquida",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "socialdemocracia_nordica",
+            "role": "button",
+            "style": "--cocktail-color: #579ea4;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 202,
+            "x": 632,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 2,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Socialdemocracia Nórdica",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "silicon_valley_sour",
+            "role": "button",
+            "style": "--cocktail-color: #f9c000;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 186,
+            "x": 847,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Silicon Valley Sour",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "equilibrio_esteril",
+            "role": "button",
+            "style": "--cocktail-color: #2d2651;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 153,
+            "x": 286,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 4,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Equilibrio Estéril",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "elixir_bien_comun",
+            "role": "button",
+            "style": "--cocktail-color: #2c5e3b;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 168,
+            "x": 452,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 5,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Elixir del Bien Común",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "destilado_desarrollista",
+            "role": "button",
+            "style": "--cocktail-color: #c8350d;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 202,
+            "x": 632,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 6,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Destilado Desarrollista",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "ponche_gran_crisis",
+            "role": "button",
+            "style": "--cocktail-color: #86ad34;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 186,
+            "x": 847,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 7,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Ponche de la Gran Crisis",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "onboarding-state-market-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 4,
+            "width": 698,
+            "x": 286,
+            "y": 529
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 8,
+          "selector": "#onboarding-state-market-slider",
+          "tag": "input",
+          "text_preview": "75",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "onboarding-equity-growth-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 4,
+            "width": 698,
+            "x": 286,
+            "y": 626
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 9,
+          "selector": "#onboarding-equity-growth-slider",
+          "tag": "input",
+          "text_preview": "30",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "id": "onboarding-next-btn",
+            "style": "margin-top: 35px; width: 100%;"
+          },
+          "bounding_box": {
+            "height": 53,
+            "width": 698,
+            "x": 286,
+            "y": 672
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 10,
+          "selector": "#onboarding-next-btn",
+          "tag": "button",
+          "text_preview": "GUARDAR MIS RESPUESTAS Y EMPEZAR EL TEST",
+          "visible": true
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(.mini-cocktail-card:nth-child(2))",
+        "target": "04_onboarding_cocktail_selected",
+        "type": "user-card-selection"
+      },
+      "snapshot_file": "03_onboarding_sliders_adjusted.png",
+      "file_size_bytes": 103131,
+      "image_hash_sha256": "8360cd5b5f26cc721c93a91048ba057d3a57f5ab2d597a970da1d29a2e0b9fc8"
+    },
+    {
+      "checkpoint_id": "04_onboarding_cocktail_selected",
+      "name": "Onboarding: Cóctel Prior Seleccionado",
+      "description": "Segundo cóctel seleccionado con halo dorado activo (.selected) y priors listos para ser fijados.",
+      "container_selector": "#test-onboarding-screen",
+      "container_id": "test-onboarding-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "553683352a6c438b8d392b7db8b7b055db297c008df436b454cc92047b3dc7aa",
+      "total_dom_elements": 54,
+      "interactive_elements_count": 11,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "martillo_dialectico",
+            "role": "button",
+            "style": "--cocktail-color: #8c2323;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 153,
+            "x": 286,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Martillo Dialéctico",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card selected",
+            "data-id": "libertad_liquida",
+            "role": "button",
+            "style": "--cocktail-color: #c8350d;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 168,
+            "x": 452,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card",
+            "selected"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".mini-cocktail-card.selected",
+          "tag": "div",
+          "text_preview": "Libertad Líquida",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "socialdemocracia_nordica",
+            "role": "button",
+            "style": "--cocktail-color: #579ea4;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 202,
+            "x": 632,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 2,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Socialdemocracia Nórdica",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "silicon_valley_sour",
+            "role": "button",
+            "style": "--cocktail-color: #f9c000;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 186,
+            "x": 847,
+            "y": 299
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Silicon Valley Sour",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "equilibrio_esteril",
+            "role": "button",
+            "style": "--cocktail-color: #2d2651;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 153,
+            "x": 286,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 4,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Equilibrio Estéril",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "elixir_bien_comun",
+            "role": "button",
+            "style": "--cocktail-color: #2c5e3b;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 168,
+            "x": 452,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 5,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Elixir del Bien Común",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "destilado_desarrollista",
+            "role": "button",
+            "style": "--cocktail-color: #c8350d;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 202,
+            "x": 632,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 6,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Destilado Desarrollista",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "mini-cocktail-card",
+            "data-id": "ponche_gran_crisis",
+            "role": "button",
+            "style": "--cocktail-color: #86ad34;",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 45,
+            "width": 186,
+            "x": 847,
+            "y": 356
+          },
+          "classes": [
+            "mini-cocktail-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 7,
+          "selector": ".mini-cocktail-card",
+          "tag": "div",
+          "text_preview": "Ponche de la Gran Crisis",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "onboarding-state-market-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 4,
+            "width": 698,
+            "x": 286,
+            "y": 529
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 8,
+          "selector": "#onboarding-state-market-slider",
+          "tag": "input",
+          "text_preview": "75",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "onboarding-equity-growth-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 4,
+            "width": 698,
+            "x": 286,
+            "y": 626
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 9,
+          "selector": "#onboarding-equity-growth-slider",
+          "tag": "input",
+          "text_preview": "30",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "id": "onboarding-next-btn",
+            "style": "margin-top: 35px; width: 100%;"
+          },
+          "bounding_box": {
+            "height": 53,
+            "width": 698,
+            "x": 286,
+            "y": 672
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 10,
+          "selector": "#onboarding-next-btn",
+          "tag": "button",
+          "text_preview": "GUARDAR MIS RESPUESTAS Y EMPEZAR EL TEST",
+          "visible": true
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#onboarding-next-btn)",
+        "target": "05_phase1_q1_monism_pluralism",
+        "type": "sync-question-init"
+      },
+      "snapshot_file": "04_onboarding_cocktail_selected.png",
+      "file_size_bytes": 118803,
+      "image_hash_sha256": "364a8f4003907bafd2b66cb994a6dbaec933d0af00b38e3828bb0f06517a1627"
+    },
+    {
+      "checkpoint_id": "05_phase1_q1_monism_pluralism",
+      "name": "Fase 1: Pregunta 1 (Monismo vs Pluralismo)",
+      "description": "Pregunta 1 de 12: Premisa Metodológica sobre la existencia de una única teoría universal versus múltiples marcos coexistentes.",
+      "container_selector": "#test-question-screen",
+      "container_id": "test-question-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "73cbefa28d77812f26d708f7d591f81d90585fb268f910b2f40e5b11f4cc87eb",
+      "total_dom_elements": 31,
+      "interactive_elements_count": 4,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "aria-label": "Las crisis ocurren por la combinación de MUCHAS causas complejas. Explicarlas con una sola razón es una simplificación peligrosa.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 396
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Las crisis ocurren por la combinación de MUCHAS causas complejas. Explicarlas con una sola razón es ",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "Toda gran crisis se debe principalmente a UNA sola gran causa (como el exceso de controles del gobierno, la codicia individual o la lucha entre ricos y pobres).",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 505
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Toda gran crisis se debe principalmente a UNA sola gran causa (como el exceso de controles del gobie",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "luxury-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 2,
+          "selector": "#luxury-slider",
+          "tag": "input",
+          "text_preview": "50",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "data-i18n": "sliderConfirmBtn",
+            "id": "slider-next-btn"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": "#slider-next-btn",
+          "tag": "button",
+          "text_preview": "Confirmar mi posición y seguir",
+          "visible": false
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#test-options-grid .test-option-card:first-child)",
+        "target": "06_phase1_q2",
+        "type": "auto-advance-300ms"
+      },
+      "snapshot_file": "05_phase1_q1_monism_pluralism.png",
+      "file_size_bytes": 94995,
+      "image_hash_sha256": "ebfbe960e3a67bef32cafdb77847a3ada13a6b8bda8f496f434f5d52316f6c7e"
+    },
+    {
+      "checkpoint_id": "06_phase1_q2",
+      "name": "Fase 1: Pregunta 2 (Racionalidad vs Economía Conductual)",
+      "description": "Pregunta 2 de 12: Premisa Metodológica sobre supuestos de optimización racional versus sesgos cognitivos e imperfecciones psicológicas.",
+      "container_selector": "#test-question-screen",
+      "container_id": "test-question-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "4a3511203d039516cbbb967c1fe879c5f3f5706ffaafe721cead1490ed595edc",
+      "total_dom_elements": 31,
+      "interactive_elements_count": 4,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "aria-label": "Su papel es dudar de sus propias teorías, adaptar sus propuestas a cada problema específico y aceptar que las soluciones prácticas valen más que las ideas fijas.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 396
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Su papel es dudar de sus propias teorías, adaptar sus propuestas a cada problema específico y acepta",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "Su papel es crear un plan económico único y coherente, y defenderlo con firmeza científica para guiar al país sin dudar por motivos políticos.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 505
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Su papel es crear un plan económico único y coherente, y defenderlo con firmeza científica para guia",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "luxury-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 2,
+          "selector": "#luxury-slider",
+          "tag": "input",
+          "text_preview": "50",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "data-i18n": "sliderConfirmBtn",
+            "id": "slider-next-btn"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": "#slider-next-btn",
+          "tag": "button",
+          "text_preview": "Confirmar mi posición y seguir",
+          "visible": false
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#test-options-grid .test-option-card:last-child)",
+        "target": "07_phase1_q3",
+        "type": "auto-advance-300ms"
+      },
+      "snapshot_file": "06_phase1_q2.png",
+      "file_size_bytes": 90914,
+      "image_hash_sha256": "697e9155e546f9a158a71de25850f9b56395ab1547ac6697671b9dc0def789bb"
+    },
+    {
+      "checkpoint_id": "07_phase1_q3",
+      "name": "Fase 1: Pregunta 3 (Neutralidad vs Conflicto de Poder)",
+      "description": "Pregunta 3 de 12: Premisa Metodológica sobre neutralidad tecnocrática versus conflicto distributivo y economía política.",
+      "container_selector": "#test-question-screen",
+      "container_id": "test-question-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "1519d022a0db161c5fe6e8fbf277b07c275d14fdbf5b8be2a32ed3e3949ac6f2",
+      "total_dom_elements": 31,
+      "interactive_elements_count": 4,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "aria-label": "Demuestra que la teoría que usaron tenía límites y no servía para esa situación real. Si las ideas fallan en la práctica, hay que cambiarlas.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 396
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Demuestra que la teoría que usaron tenía límites y no servía para esa situación real. Si las ideas f",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "Suele deberse a que no se aplicó con suficiente pureza, a que hubo sabotaje de grupos rivales o a que los políticos cambiaron el plan a mitad de camino.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 505
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Suele deberse a que no se aplicó con suficiente pureza, a que hubo sabotaje de grupos rivales o a qu",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "luxury-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 2,
+          "selector": "#luxury-slider",
+          "tag": "input",
+          "text_preview": "50",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "data-i18n": "sliderConfirmBtn",
+            "id": "slider-next-btn"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": "#slider-next-btn",
+          "tag": "button",
+          "text_preview": "Confirmar mi posición y seguir",
+          "visible": false
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#test-options-grid .test-option-card:first-child)",
+        "target": "08_phase2_q4_escuelas",
+        "type": "auto-advance-300ms-phase-shift"
+      },
+      "snapshot_file": "07_phase1_q3.png",
+      "file_size_bytes": 88502,
+      "image_hash_sha256": "21dd3f7c507cd71afb674d95312a18b611457ab370a86957ebb14cd4ef0ae488"
+    },
+    {
+      "checkpoint_id": "08_phase2_q4_escuelas",
+      "name": "Fase 2: Pregunta 4 (Ingredientes Doctrinales)",
+      "description": "Pregunta 4 de 12: Inicio de Fase 2 con cuadrícula de 4 escuelas doctrinales (mecanismo primordial de coordinación social).",
+      "container_selector": "#test-question-screen",
+      "container_id": "test-question-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "02578d3f1d4d96ab71857e5b87c4fb2c20e9a9f218aa8cb45f4686b6128e40cd",
+      "total_dom_elements": 38,
+      "interactive_elements_count": 6,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "aria-label": "No funciona solo. Depende totalmente de las leyes, la confianza de la sociedad, las costumbres y las reglas que las comunidades acuerden.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 287
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "No funciona solo. Depende totalmente de las leyes, la confianza de la sociedad, las costumbres y las",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "Es un lugar donde los dueños del dinero abusan de los trabajadores y se quedan con la riqueza. Debe ser transformado por completo.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 396
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Es un lugar donde los dueños del dinero abusan de los trabajadores y se quedan con la riqueza. Debe ",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "Es eficiente para producir, pero tiene fallas graves (como monopolios o contaminación) que obligan al gobierno a poner reglas estrictas.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 505
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 2,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Es eficiente para producir, pero tiene fallas graves (como monopolios o contaminación) que obligan a",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "Es un sistema libre y espontáneo que funciona solo a través de los precios. Si el gobierno interviene, distorsiona las señales y empeora las cosas.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 614
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Es un sistema libre y espontáneo que funciona solo a través de los precios. Si el gobierno intervien",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "luxury-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 4,
+          "selector": "#luxury-slider",
+          "tag": "input",
+          "text_preview": "50",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "data-i18n": "sliderConfirmBtn",
+            "id": "slider-next-btn"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 5,
+          "selector": "#slider-next-btn",
+          "tag": "button",
+          "text_preview": "Confirmar mi posición y seguir",
+          "visible": false
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#test-options-grid .test-option-card) a lo largo de Q4 a Q8",
+        "target": "09_phase2_q9",
+        "type": "sequential-auto-advance"
+      },
+      "snapshot_file": "08_phase2_q4_escuelas.png",
+      "file_size_bytes": 92224,
+      "image_hash_sha256": "52752322c124d9a25d6ee677cb8309837666839398a2782623518c134ce2fd23"
+    },
+    {
+      "checkpoint_id": "09_phase2_q9",
+      "name": "Fase 2: Pregunta 9 (Última de Ingredientes Doctrinales)",
+      "description": "Pregunta 9 de 12: Culminación de la Fase 2 con 4 opciones sobre derechos de propiedad, bienes comunes y gestión colectiva.",
+      "container_selector": "#test-question-screen",
+      "container_id": "test-question-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "17b6bc2f87575112dc33f5b3179119545581fc353cf52c82998269cd657d9c73",
+      "total_dom_elements": 37,
+      "interactive_elements_count": 6,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "aria-label": "Las cooperativas horizontales donde los trabajadores toman las decisiones juntos y se prioriza el bienestar social y el cuidado ecológico.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 287
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "Las cooperativas horizontales donde los trabajadores toman las decisiones juntos y se prioriza el bi",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "La propiedad privada bien protegida por las leyes, para que las personas tengan incentivos para trabajar, invertir y cuidar sus cosas.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 396
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "La propiedad privada bien protegida por las leyes, para que las personas tengan incentivos para trab",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "La propiedad pública del gobierno sobre los recursos clave (como agua, energía y salud) para evitar que las empresas privadas abusen.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 505
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 2,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "La propiedad pública del gobierno sobre los recursos clave (como agua, energía y salud) para evitar ",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "aria-label": "La propiedad comunitaria, gestionada de forma directa por los vecinos o usuarios mediante acuerdos locales y autogestión.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 93,
+            "width": 698,
+            "x": 286,
+            "y": 614
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "La propiedad comunitaria, gestionada de forma directa por los vecinos o usuarios mediante acuerdos l",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "luxury-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 4,
+          "selector": "#luxury-slider",
+          "tag": "input",
+          "text_preview": "50",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "data-i18n": "sliderConfirmBtn",
+            "id": "slider-next-btn"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 5,
+          "selector": "#slider-next-btn",
+          "tag": "button",
+          "text_preview": "Confirmar mi posición y seguir",
+          "visible": false
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#test-options-grid .test-option-card:first-child)",
+        "target": "10_phase3_q10_luxury_slider",
+        "type": "auto-advance-300ms-phase-shift"
+      },
+      "snapshot_file": "09_phase2_q9.png",
+      "file_size_bytes": 92847,
+      "image_hash_sha256": "d79d19928a1608b9b5aeb1bcc6ee8d2eb6e9bfa4cd2bf88299e5ba9bcabde145"
+    },
+    {
+      "checkpoint_id": "10_phase3_q10_luxury_slider",
+      "name": "Fase 3: Pregunta 10 (Dilema de Alta Tensión con Slider)",
+      "description": "Pregunta 10 de 12: Control deslizante de rango continuo (#luxury-slider) entre polos ideológicos con confirmación explícita.",
+      "container_selector": "#test-question-screen",
+      "container_id": "test-question-screen",
+      "active_classes": [
+        "test-question-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "ef0b13a40d7f269956d26e33265f9fbb2e7e0c06de51ac1bd174440f89153d5d",
+      "total_dom_elements": 38,
+      "interactive_elements_count": 6,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "aria-label": "Las cooperativas horizontales donde los trabajadores toman las decisiones juntos y se prioriza el bienestar social y el cuidado ecológico.",
+            "class": "test-option-card selected",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "test-option-card",
+            "selected"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 0,
+          "selector": ".test-option-card.selected",
+          "tag": "div",
+          "text_preview": "Las cooperativas horizontales donde los trabajadores toman las decisiones juntos y se prioriza el bi",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "aria-label": "La propiedad privada bien protegida por las leyes, para que las personas tengan incentivos para trabajar, invertir y cuidar sus cosas.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "La propiedad privada bien protegida por las leyes, para que las personas tengan incentivos para trab",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "aria-label": "La propiedad pública del gobierno sobre los recursos clave (como agua, energía y salud) para evitar que las empresas privadas abusen.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 2,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "La propiedad pública del gobierno sobre los recursos clave (como agua, energía y salud) para evitar ",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "aria-label": "La propiedad comunitaria, gestionada de forma directa por los vecinos o usuarios mediante acuerdos locales y autogestión.",
+            "class": "test-option-card",
+            "role": "button",
+            "tabindex": "0"
+          },
+          "bounding_box": {
+            "height": 0,
+            "width": 0,
+            "x": 0,
+            "y": 0
+          },
+          "classes": [
+            "test-option-card"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": ".test-option-card",
+          "tag": "div",
+          "text_preview": "La propiedad comunitaria, gestionada de forma directa por los vecinos o usuarios mediante acuerdos l",
+          "visible": false
+        },
+        {
+          "attributes": {
+            "class": "luxury-range-slider",
+            "id": "luxury-slider",
+            "max": "100",
+            "min": "0",
+            "type": "range",
+            "value": "50"
+          },
+          "bounding_box": {
+            "height": 4,
+            "width": 636,
+            "x": 317,
+            "y": 557
+          },
+          "classes": [
+            "luxury-range-slider"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "input",
+            "change"
+          ],
+          "index": 4,
+          "selector": "#luxury-slider",
+          "tag": "input",
+          "text_preview": "65",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary btn-block",
+            "data-i18n": "sliderConfirmBtn",
+            "id": "slider-next-btn"
+          },
+          "bounding_box": {
+            "height": 44,
+            "width": 698,
+            "x": 286,
+            "y": 629
+          },
+          "classes": [
+            "btn",
+            "btn-primary",
+            "btn-block"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 5,
+          "selector": "#slider-next-btn",
+          "tag": "button",
+          "text_preview": "CONFIRMAR MI POSICIÓN Y SEGUIR",
+          "visible": true
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#slider-next-btn) a través de Q10, Q11 y Q12",
+        "target": "11_loading_screen_alchemical_delay",
+        "type": "user-explicit-confirmation"
+      },
+      "snapshot_file": "10_phase3_q10_luxury_slider.png",
+      "file_size_bytes": 80812,
+      "image_hash_sha256": "3ab663a958e1f44c328927c3896bc83de6897f9dba2784ab41d14ffe6c1c94b3"
+    },
+    {
+      "checkpoint_id": "11_loading_screen_alchemical_delay",
+      "name": "Pantalla de Carga: Destilación Alquímica Sintética",
+      "description": "Pantalla de procesamiento estético (2.2s de retardo) con spinner de tres anillos concéntricos y barra de progreso al 100%.",
+      "container_selector": "#test-loading-screen",
+      "container_id": "test-loading-screen",
+      "active_classes": [
+        "test-loading-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "46cf5c0781e8bb29d3aaa744effec59d997ddd3c2f3be55b9e803de941fad5ef",
+      "total_dom_elements": 7,
+      "interactive_elements_count": 0,
+      "interactive_elements": [],
+      "state_transition": {
+        "trigger": "setTimeout 2200ms finalizado (triggerAlchemicalCalculation)",
+        "target": "12_results_screen_dashboard",
+        "type": "timer-alchemical-complete"
+      },
+      "snapshot_file": "11_loading_screen_alchemical_delay.png",
+      "file_size_bytes": 82934,
+      "image_hash_sha256": "be4171695c7f9d9ffa9ced6ae344d165bd87291facf2e5f3a14b3242968e42d9"
+    },
+    {
+      "checkpoint_id": "12_results_screen_dashboard",
+      "name": "Pantalla de Resultados: Dashboard Alquímico Completo",
+      "description": "Acta de sobriedad final con arquetipo intelectual, consistencia ICC, botella de líquido estratificado, radar canvas y barras moleculares.",
+      "container_selector": "#test-results-screen",
+      "container_id": "test-results-screen",
+      "active_classes": [
+        "test-results-card"
+      ],
+      "is_visible": true,
+      "content_hash_sha256": "7ae753cd02120a70f6670b308c3753809cbad4199dd0867450240c4160adcc0b",
+      "total_dom_elements": 151,
+      "interactive_elements_count": 4,
+      "interactive_elements": [
+        {
+          "attributes": {
+            "class": "btn btn-gold btn-sm",
+            "href": "https://willkwolf.github.io/isaiah-berlin-liberty-infographic/",
+            "id": "btn-go-liberty",
+            "rel": "noopener",
+            "style": "text-decoration: none; display: inline-flex; align-items: center; gap: 8px;",
+            "target": "_blank"
+          },
+          "bounding_box": {
+            "height": 44,
+            "width": 418,
+            "x": 384,
+            "y": 3127
+          },
+          "classes": [
+            "btn",
+            "btn-gold",
+            "btn-sm"
+          ],
+          "enabled": true,
+          "event_listeners": [],
+          "index": 0,
+          "selector": "#btn-go-liberty",
+          "tag": "a",
+          "text_preview": "EXPLORAR LA ARQUITECTURA DE LA LIBERTAD",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "btn btn-primary",
+            "data-i18n": "resultsBtnExport",
+            "id": "btn-export-card"
+          },
+          "bounding_box": {
+            "height": 50,
+            "width": 370,
+            "x": 289,
+            "y": 3278
+          },
+          "classes": [
+            "btn",
+            "btn-primary"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 1,
+          "selector": "#btn-export-card",
+          "tag": "button",
+          "text_preview": "DESCARGAR TARJETA DE SOBRIEDAD",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "btn btn-whatsapp",
+            "data-i18n": "resultsBtnShare",
+            "id": "btn-share-whatsapp"
+          },
+          "bounding_box": {
+            "height": 50,
+            "width": 290,
+            "x": 691,
+            "y": 3278
+          },
+          "classes": [
+            "btn",
+            "btn-whatsapp"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 2,
+          "selector": "#btn-share-whatsapp",
+          "tag": "button",
+          "text_preview": "COMPARTIR EN WHATSAPP",
+          "visible": true
+        },
+        {
+          "attributes": {
+            "class": "btn btn-ghost",
+            "data-i18n": "resultsBtnRestart",
+            "id": "btn-restart-test"
+          },
+          "bounding_box": {
+            "height": 50,
+            "width": 240,
+            "x": 515,
+            "y": 3360
+          },
+          "classes": [
+            "btn",
+            "btn-ghost"
+          ],
+          "enabled": true,
+          "event_listeners": [
+            "click",
+            "keydown"
+          ],
+          "index": 3,
+          "selector": "#btn-restart-test",
+          "tag": "button",
+          "text_preview": "VOLVER A DESTILAR",
+          "visible": true
+        }
+      ],
+      "state_transition": {
+        "trigger": "click(#btn-restart-test)",
+        "target": "01_start_screen",
+        "type": "full-cycle-reset"
+      },
+      "snapshot_file": "12_results_screen_dashboard.png",
+      "file_size_bytes": 72261,
+      "image_hash_sha256": "cf4223e7c0409405604160e0aafd72f0b318c58e286a24e1262a3c733425f202"
+    }
+  ]
+}

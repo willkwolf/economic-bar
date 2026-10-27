@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Test outputs and reports
+playwright-report/
+test-results/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Internal agent orchestration logs
+.agents/
+
+# System files
+.DS_Store
+Thumbs.db
