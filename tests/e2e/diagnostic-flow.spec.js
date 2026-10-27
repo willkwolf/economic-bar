@@ -429,4 +429,149 @@ test.describe('BAR-Economic Diagnostic Flow (End-to-End)', () => {
     await expect(sliderReadout).toContainText(/71%/);
     await expect(sliderReadout).toContainText(/Preferencia moderada por|Moderate preference for/i);
   });
+
+  test('Full end-to-end English diagnostic journey generates a complete English report with zero Spanish leaks', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+    // 1. Switch language to English via the language switcher button
+    const enBtn = page.locator('.lang-btn[data-lang="en"]');
+    await expect(enBtn).toBeVisible();
+    await enBtn.click();
+    await expect(enBtn).toHaveClass(/active/);
+
+    // 2. Start test in English
+    const startScreen = page.locator('#test-start-screen');
+    await expect(startScreen).toBeVisible();
+    const startBtn = page.locator('#start-test-btn');
+    await expect(startBtn).toBeVisible();
+    await startBtn.scrollIntoViewIfNeeded();
+    await startBtn.click();
+
+    // 3. Verify Onboarding in English
+    const onboardingScreen = page.locator('#test-onboarding-screen');
+    await expect(onboardingScreen).toBeVisible();
+
+    // Sliders titles and labels must be English
+    const stateTitle = page.locator('#onboarding-title-state');
+    const equityTitle = page.locator('#onboarding-title-equity');
+    await expect(stateTitle).toContainText(/Governance \(State vs Market\)/i);
+    await expect(equityTitle).toContainText(/Purpose \(Equity vs Growth\)/i);
+
+    const stateDisplay = page.locator('#onboarding-state-market-display');
+    const equityDisplay = page.locator('#onboarding-equity-growth-display');
+    await expect(stateDisplay).toContainText(/Neutral balance \(50%\)/i);
+    await expect(equityDisplay).toContainText(/Neutral balance \(50%\)/i);
+
+    // Move slider and verify English readout
+    const stateSlider = page.locator('#onboarding-state-market-slider');
+    await setSliderValue(stateSlider, 25);
+    await expect(stateDisplay).toContainText(/Market/i);
+
+    // Select prior cocktail
+    const cocktails = page.locator('#onboarding-cocktails-grid .mini-cocktail-card');
+    await expect(cocktails.first()).toBeVisible();
+    await cocktails.first().click();
+
+    // Confirm onboarding
+    const confirmOnboardingBtn = page.locator('#onboarding-next-btn');
+    await confirmOnboardingBtn.click();
+
+    // 4. Questions Screen in English
+    const questionScreen = page.locator('#test-question-screen');
+    await expect(questionScreen).toBeVisible();
+
+    const stepLabel = page.locator('#test-step-label');
+    const phaseLabel = page.locator('#test-phase-label');
+    const testPrevBtn = page.locator('#test-prev-btn');
+
+    // ── PHASE 1: COGNITIVE FRAMEWORK (Q1 - Q3) ──
+    for (let q = 1; q <= 3; q++) {
+      await expect(stepLabel).toContainText(new RegExp(`QUESTION ${q} OF 12`, 'i'));
+      await expect(phaseLabel).toContainText(/PHASE 1: COGNITIVE FRAMEWORK/i);
+
+      if (q === 1) {
+        await expect(testPrevBtn).toContainText(/Back \(Priors\)/i);
+      } else {
+        await expect(testPrevBtn).toContainText(/Back/i);
+      }
+
+      const options = page.locator('#test-options-grid .test-option-card');
+      await expect(options).toHaveCount(2);
+      await options.first().click();
+
+      if (q < 3) {
+        await expect(stepLabel).toContainText(new RegExp(`QUESTION ${q + 1} OF 12`, 'i'));
+      }
+    }
+
+    // ── PHASE 2: IDEOLOGICAL INGREDIENTS (Q4 - Q9) ──
+    for (let q = 4; q <= 9; q++) {
+      await expect(stepLabel).toContainText(new RegExp(`QUESTION ${q} OF 12`, 'i'));
+      await expect(phaseLabel).toContainText(/PHASE 2: IDEOLOGICAL INGREDIENTS/i);
+
+      const options = page.locator('#test-options-grid .test-option-card');
+      await expect(options).toHaveCount(4);
+      await options.nth((q - 4) % 4).click();
+
+      if (q < 9) {
+        await expect(stepLabel).toContainText(new RegExp(`QUESTION ${q + 1} OF 12`, 'i'));
+      }
+    }
+
+    // ── PHASE 3: HIGH-TENSION DILEMMAS (Q10 - Q12) ──
+    const sliderWrapper = page.locator('#test-slider-wrapper');
+    const luxurySlider = page.locator('#luxury-slider');
+    const sliderReadout = page.locator('#slider-value-readout');
+    const sliderNextBtn = page.locator('#slider-next-btn');
+
+    for (let q = 10; q <= 12; q++) {
+      await expect(stepLabel).toContainText(new RegExp(`QUESTION ${q} OF 12`, 'i'));
+      await expect(phaseLabel).toContainText(/PHASE 3: HIGH-TENSION DILEMMAS/i);
+
+      await expect(sliderWrapper).toBeVisible();
+      // Initial readout has Neutral balance (50%)
+      await expect(sliderReadout).toContainText(/Neutral balance \(50%\)/i);
+
+      // Adjust slider
+      await setSliderValue(luxurySlider, 75);
+      await expect(sliderReadout).toContainText(/75%/);
+      await expect(sliderReadout).toContainText(/preference for/i);
+
+      await sliderNextBtn.click();
+
+      if (q < 12) {
+        await expect(stepLabel).toContainText(new RegExp(`QUESTION ${q + 1} OF 12`, 'i'));
+      }
+    }
+
+    // 5. Results Screen in English
+    const resultsScreen = page.locator('#test-results-screen');
+    await expect(resultsScreen).toBeVisible({ timeout: 9000 });
+
+    // Assert official alchemical tag is translated to English
+    const resultsTag = resultsScreen.locator('[data-i18n="resultsTag"]');
+    await expect(resultsTag).toContainText(/ECONOMIC SOBRIETY CERTIFICATE/i);
+
+    // Assert archetype name is English (e.g. Systemic Pluralism, Doctrinal Monism)
+    const archetypeName = page.locator('#result-archetype-name');
+    await expect(archetypeName).toBeVisible();
+    await expect(archetypeName).not.toContainText(/Monismo Doctrinal|Pluralismo Sistémico/i);
+
+    // Assert coherence section is translated to English
+    const consistencyTitle = page.locator('#result-consistency-title');
+    await expect(consistencyTitle).toContainText(/INTELLECTUAL COHERENCE/i);
+
+    // Assert hangover risk header is in English
+    const hangoverTitle = page.locator('#result-hangover-title');
+    await expect(hangoverTitle).toContainText(/HANGOVER RISK:/i);
+
+    // Assert Action Buttons in English
+    await expect(page.locator('#btn-export-card')).toContainText(/Download Sobriety Card/i);
+    await expect(page.locator('#btn-share-whatsapp')).toContainText(/Share on WhatsApp/i);
+    await expect(page.locator('#btn-restart-test')).toContainText(/Take Test Again/i);
+
+    // Assert ecosystem callout is in English
+    await expect(resultsScreen.locator('[data-i18n="resultsEcosystemTag"]')).toContainText(/Critical Thought Path · Step 3/i);
+    await expect(resultsScreen.locator('#btn-go-liberty')).toContainText(/Architecture of Liberty/i);
+  });
 });
