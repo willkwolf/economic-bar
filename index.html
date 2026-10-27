@@ -242,24 +242,24 @@
             
             <!-- Slider 1: Estado vs Mercado -->
             <div class="onboarding-slider-item" style="margin-bottom: 20px;">
-              <span class="onboarding-slider-title" id="onboarding-title-state" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block; margin-bottom: 8px;">Estado vs Mercado</span>
+              <span class="onboarding-slider-title" id="onboarding-title-state" data-i18n="onboardingStateTitle" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block; margin-bottom: 8px;">Gobernanza (Estado vs Mercado)</span>
               <div class="onboarding-slider-labels" style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px;">
                 <span id="onboarding-state-left-label" data-i18n="sliderValLeft">Prioridad Mercado</span>
                 <span class="slider-value-display onboarding-slider-value" id="onboarding-state-market-display">Equilibrio neutral (50%)</span>
                 <span id="onboarding-state-right-label" data-i18n="sliderValRight">Prioridad Estado</span>
               </div>
-              <input type="range" id="onboarding-state-market-slider" min="0" max="100" value="50" class="luxury-range-slider">
+              <input type="range" id="onboarding-state-market-slider" min="0" max="100" value="50" class="luxury-range-slider" aria-label="Gobernanza Estado vs Mercado">
             </div>
 
             <!-- Slider 2: Equidad vs Crecimiento -->
             <div class="onboarding-slider-item">
-              <span class="onboarding-slider-title" id="onboarding-title-equity" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block; margin-bottom: 8px;">Equidad vs Crecimiento</span>
+              <span class="onboarding-slider-title" id="onboarding-title-equity" data-i18n="onboardingEquityTitle" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block; margin-bottom: 8px;">Propósito (Equidad vs Crecimiento)</span>
               <div class="onboarding-slider-labels" style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px;">
-                <span id="onboarding-equity-left-label">Crecimiento</span>
+                <span id="onboarding-equity-left-label" data-i18n="onboardingGrowthLabel">Crecimiento</span>
                 <span class="slider-value-display onboarding-slider-value" id="onboarding-equity-growth-display">Equilibrio neutral (50%)</span>
-                <span id="onboarding-equity-right-label">Equidad</span>
+                <span id="onboarding-equity-right-label" data-i18n="onboardingEquityLabel">Equidad</span>
               </div>
-              <input type="range" id="onboarding-equity-growth-slider" min="0" max="100" value="50" class="luxury-range-slider">
+              <input type="range" id="onboarding-equity-growth-slider" min="0" max="100" value="50" class="luxury-range-slider" aria-label="Propósito Equidad vs Crecimiento">
             </div>
           </div>
 
@@ -312,16 +312,16 @@
                 <span class="slider-value-display" id="slider-value-readout">Equilibrio neutral (50%)</span>
                 <span id="slider-right-hint" data-i18n="sliderRightHint">Prioridad Derecha →</span>
               </div>
-              <label for="luxury-slider" class="sr-only">Tu posición en este dilema</label>
-              <input type="range" id="luxury-slider" min="0" max="100" value="50" class="luxury-range-slider">
+              <label for="luxury-slider" class="sr-only" data-i18n="sliderAriaLabel">Tu posición en este dilema</label>
+              <input type="range" id="luxury-slider" min="0" max="100" value="50" class="luxury-range-slider" aria-label="Posición en el dilema">
             </div>
 
             <div class="slider-actions-wrapper">
-              <button type="button" class="btn btn-secondary btn-slider-back" id="slider-prev-btn" data-i18n="sliderBackBtn">
-                <i data-lucide="arrow-left" aria-hidden="true"></i> <span data-i18n="testBackBtn">Atrás</span>
+              <button type="button" class="btn btn-secondary btn-slider-back" id="slider-prev-btn" aria-label="Volver a la pregunta anterior">
+                <i data-lucide="arrow-left" aria-hidden="true"></i> <span data-i18n="sliderBackBtn">Atrás</span>
               </button>
-              <button class="btn btn-primary" id="slider-next-btn" data-i18n="sliderConfirmBtn">
-                <span>Confirmar Peso del Dilema</span> <i data-lucide="chevron-right" aria-hidden="true"></i>
+              <button class="btn btn-primary" id="slider-next-btn">
+                <span data-i18n="sliderConfirmBtn">Confirmar mi posición y seguir</span> <i data-lucide="chevron-right" aria-hidden="true"></i>
               </button>
             </div>
           </div>

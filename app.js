@@ -128,7 +128,7 @@ function setLanguage(lang) {
   PERFILES_CONCENTRACION = dict.perfiles_concentracion;
   PERFILES_CONSISTENCIA = dict.perfiles_consistencia;
 
-  // Localizar dinámicamente los sliders del onboarding
+  // Localizar dinámicamente los sliders y cócteles del onboarding
   const isEs = lang === "es";
   const stateTitle = document.getElementById("onboarding-title-state");
   if (stateTitle) stateTitle.textContent = isEs ? "Gobernanza (Estado vs Mercado)" : "Governance (State vs Market)";
@@ -141,6 +141,11 @@ function setLanguage(lang) {
   
   const equityRight = document.getElementById("onboarding-equity-right-label");
   if (equityRight) equityRight.textContent = isEs ? "Equidad" : "Equity";
+
+  // Actualizar cócteles del onboarding si la función existe
+  if (typeof renderOnboardingCocktails === 'function') {
+    renderOnboardingCocktails();
+  }
 
   // Actualizar dinámicamente el texto de los sliders si el usuario ya los interactuó
   const stateSlider = document.getElementById("onboarding-state-market-slider");
