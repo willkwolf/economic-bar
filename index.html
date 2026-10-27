@@ -214,7 +214,13 @@
         <div class="test-question-card hidden" id="test-onboarding-screen">
           <div class="test-progress-bar-wrapper">
             <div class="test-progress-header">
-              <span class="test-step-label" id="onboarding-step-label" data-i18n="testOnboardingTitle">Calibración Alquímica de Priors</span>
+              <div class="test-nav-left">
+                <button type="button" class="btn-test-back" id="onboarding-prev-btn" aria-label="Volver al inicio" title="Volver a la pantalla de inicio">
+                  <i data-lucide="arrow-left" aria-hidden="true"></i>
+                  <span data-i18n="testBackToStartBtn">Inicio</span>
+                </button>
+                <span class="test-step-label" id="onboarding-step-label" data-i18n="testOnboardingTitle">Calibración Alquímica de Priors</span>
+              </div>
               <span class="test-phase-label" data-i18n="testTag">DIAGNÓSTICO COGNITIVO MENTAL</span>
             </div>
             <div class="test-progress-track" aria-hidden="true">
@@ -239,7 +245,7 @@
               <span class="onboarding-slider-title" id="onboarding-title-state" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block; margin-bottom: 8px;">Estado vs Mercado</span>
               <div class="onboarding-slider-labels" style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px;">
                 <span id="onboarding-state-left-label" data-i18n="sliderValLeft">Prioridad Mercado</span>
-                <span class="onboarding-slider-value" id="onboarding-state-market-display" style="color: var(--accent-gold); font-weight: 500;">Equilibrio neutral</span>
+                <span class="slider-value-display onboarding-slider-value" id="onboarding-state-market-display">Equilibrio neutral (50%)</span>
                 <span id="onboarding-state-right-label" data-i18n="sliderValRight">Prioridad Estado</span>
               </div>
               <input type="range" id="onboarding-state-market-slider" min="0" max="100" value="50" class="luxury-range-slider">
@@ -250,7 +256,7 @@
               <span class="onboarding-slider-title" id="onboarding-title-equity" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-gold); display: block; margin-bottom: 8px;">Equidad vs Crecimiento</span>
               <div class="onboarding-slider-labels" style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px;">
                 <span id="onboarding-equity-left-label">Crecimiento</span>
-                <span class="onboarding-slider-value" id="onboarding-equity-growth-display" style="color: var(--accent-gold); font-weight: 500;">Equilibrio neutral</span>
+                <span class="slider-value-display onboarding-slider-value" id="onboarding-equity-growth-display">Equilibrio neutral (50%)</span>
                 <span id="onboarding-equity-right-label">Equidad</span>
               </div>
               <input type="range" id="onboarding-equity-growth-slider" min="0" max="100" value="50" class="luxury-range-slider">
@@ -266,7 +272,13 @@
         <div class="test-question-card hidden" id="test-question-screen">
           <div class="test-progress-bar-wrapper">
             <div class="test-progress-header">
-              <span class="test-step-label" id="test-step-label">PREGUNTA 1 DE 12</span>
+              <div class="test-nav-left">
+                <button type="button" class="btn-test-back" id="test-prev-btn" aria-label="Pregunta anterior" title="Volver a la pregunta anterior">
+                  <i data-lucide="arrow-left" aria-hidden="true"></i>
+                  <span data-i18n="testBackBtn">Atrás</span>
+                </button>
+                <span class="test-step-label" id="test-step-label">PREGUNTA 1 DE 12</span>
+              </div>
               <span class="test-phase-label" id="test-phase-label">FASE 1: ARQUITECTURA COGNITIVA</span>
             </div>
             <div class="test-progress-track" aria-hidden="true">
@@ -297,16 +309,21 @@
             <div class="slider-control-group">
               <div class="slider-indicators">
                 <span id="slider-left-hint" data-i18n="sliderLeftHint">← Prioridad Izquierda</span>
-                <span class="slider-value-display" id="slider-value-readout">Equilibrio neutral</span>
+                <span class="slider-value-display" id="slider-value-readout">Equilibrio neutral (50%)</span>
                 <span id="slider-right-hint" data-i18n="sliderRightHint">Prioridad Derecha →</span>
               </div>
               <label for="luxury-slider" class="sr-only">Tu posición en este dilema</label>
               <input type="range" id="luxury-slider" min="0" max="100" value="50" class="luxury-range-slider">
             </div>
 
-            <button class="btn btn-primary btn-block" id="slider-next-btn" data-i18n="sliderConfirmBtn">
-              Confirmar Peso del Dilema <i data-lucide="chevron-right" aria-hidden="true"></i>
-            </button>
+            <div class="slider-actions-wrapper">
+              <button type="button" class="btn btn-secondary btn-slider-back" id="slider-prev-btn" data-i18n="sliderBackBtn">
+                <i data-lucide="arrow-left" aria-hidden="true"></i> <span data-i18n="testBackBtn">Atrás</span>
+              </button>
+              <button class="btn btn-primary" id="slider-next-btn" data-i18n="sliderConfirmBtn">
+                <span>Confirmar Peso del Dilema</span> <i data-lucide="chevron-right" aria-hidden="true"></i>
+              </button>
+            </div>
           </div>
         </div>
 

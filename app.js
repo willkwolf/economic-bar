@@ -936,7 +936,8 @@ function initTestEngine() {
    */
   function getSliderDescription(val, leftLabel, rightLabel, isEs) {
     if (val >= 46 && val <= 54) {
-      return isEs ? "Equilibrio neutral" : "Neutral balance";
+      const neutralPct = val === 50 ? "50%" : `${val}%`;
+      return isEs ? `Equilibrio neutral (${neutralPct})` : `Neutral balance (${neutralPct})`;
     }
     const percent = val < 50 ? (100 - val) : val;
     const label = val < 50 ? leftLabel : rightLabel;
@@ -952,6 +953,27 @@ function initTestEngine() {
     
     return `${intensity} ${label} (${percent}%)`;
   }
+  window.getSliderDescription = getSliderDescription;
+
+  // NAVEGACIÓN HACIA ATRÁS EN EL DIAGNÓSTICO
+  function navigateBack() {
+    if (state.currentTestQuestion > 0) {
+      state.currentTestQuestion--;
+      renderQuestion("backward");
+    } else {
+      // Desde la primera pregunta, volver a calibración de priors (onboarding)
+      const questionScreen = document.getElementById("test-question-screen");
+      const onboardingScreen = document.getElementById("test-onboarding-screen");
+      if (questionScreen && onboardingScreen) {
+        questionScreen.classList.add("hidden");
+        onboardingScreen.classList.remove("hidden");
+        setupOnboardingSliders();
+        renderOnboardingCocktails();
+        onboardingScreen.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+  window.navigateDiagnosticBack = navigateBack;
 
   // Listener para el Slider de la Fase 3
   const slider = document.getElementById("luxury-slider");
@@ -961,7 +983,7 @@ function initTestEngine() {
       const val = parseInt(e.target.value);
       const isEs = state.currentLang === "es";
       const q = PREGUNTAS[state.currentTestQuestion];
-      if (!q) return;
+      if (!q || !q.izquierda || !q.derecha) return;
       
       const leftL = q.izquierda.titulo;
       const rightL = q.derecha.titulo;
@@ -975,40 +997,66 @@ function initTestEngine() {
     const sliderAction = () => {
       const val = parseInt(slider.value) / 100; // [0, 1]
       const q = PREGUNTAS[state.currentTestQuestion];
-      
-      state.answers[q.id] = val;
+      if (q) {
+        state.answers[q.id] = val;
+      }
       
       state.currentTestQuestion++;
       if (state.currentTestQuestion < PREGUNTAS.length) {
-        renderQuestion();
+        renderQuestion("forward");
       } else {
         triggerAlchemicalCalculation();
       }
     };
-      sliderNextBtn.addEventListener("click", sliderAction);
-      addKeyboardSupport(sliderNextBtn, sliderAction);
-    }
+    sliderNextBtn.addEventListener("click", sliderAction);
+    addKeyboardSupport(sliderNextBtn, sliderAction);
+  }
 
-    // Configurar Onboarding Paso 0
-    const onboardingNextBtn = document.getElementById("onboarding-next-btn");
-    if (onboardingNextBtn) {
-      const nextAction = () => {
-        // Si no se ha elegido cóctel prior, asignamos el primero por defecto
-        if (!state.prior || !state.prior.cocktailId) {
-          if (COCTELES.length > 0) {
-            state.prior = state.prior || {};
-            state.prior.cocktailId = COCTELES[0].id;
-          }
+  // Botón Atrás en el Slider de la Fase 3
+  const sliderPrevBtn = document.getElementById("slider-prev-btn");
+  if (sliderPrevBtn) {
+    sliderPrevBtn.addEventListener("click", () => navigateBack());
+    addKeyboardSupport(sliderPrevBtn, () => navigateBack());
+  }
+
+  // Botón Atrás general en la cabecera de Preguntas
+  const testPrevBtn = document.getElementById("test-prev-btn");
+  if (testPrevBtn) {
+    testPrevBtn.addEventListener("click", () => navigateBack());
+    addKeyboardSupport(testPrevBtn, () => navigateBack());
+  }
+
+  // Botón Atrás en Onboarding (para volver a la pantalla de inicio)
+  const onboardingPrevBtn = document.getElementById("onboarding-prev-btn");
+  if (onboardingPrevBtn) {
+    const backToStartAction = () => {
+      onboardingScreen.classList.add("hidden");
+      startScreen.classList.remove("hidden");
+      startScreen.scrollIntoView({ behavior: 'smooth' });
+    };
+    onboardingPrevBtn.addEventListener("click", backToStartAction);
+    addKeyboardSupport(onboardingPrevBtn, backToStartAction);
+  }
+
+  // Configurar Onboarding Paso 0
+  const onboardingNextBtn = document.getElementById("onboarding-next-btn");
+  if (onboardingNextBtn) {
+    const nextAction = () => {
+      // Si no se ha elegido cóctel prior, asignamos el primero por defecto
+      if (!state.prior || !state.prior.cocktailId) {
+        if (COCTELES.length > 0) {
+          state.prior = state.prior || {};
+          state.prior.cocktailId = COCTELES[0].id;
         }
-        onboardingScreen.classList.add("hidden");
-        questionScreen.classList.remove("hidden");
-        state.currentTestQuestion = 0;
-        state.answers = {};
-        renderQuestion();
-      };
-      onboardingNextBtn.addEventListener("click", nextAction);
-      addKeyboardSupport(onboardingNextBtn, nextAction);
-    }
+      }
+      onboardingScreen.classList.add("hidden");
+      questionScreen.classList.remove("hidden");
+      state.currentTestQuestion = 0;
+      renderQuestion("forward");
+    };
+    onboardingNextBtn.addEventListener("click", nextAction);
+    addKeyboardSupport(onboardingNextBtn, nextAction);
+  }
   }
 
   // RENDERIZADOR DINÁMICO DE CÓCTELES EN EL ONBOARDING
@@ -1093,33 +1141,43 @@ function initTestEngine() {
 
     if (stateSlider && stateDisplay) {
       const isEs = state.currentLang === "es";
-      stateSlider.value = 50;
-      stateDisplay.textContent = isEs ? "Equilibrio neutral" : "Neutral balance";
+      const val = (state.prior && state.prior.stateMarket !== undefined)
+        ? Math.round(state.prior.stateMarket * 100)
+        : (stateSlider.value ? parseInt(stateSlider.value) : 50);
+      stateSlider.value = val;
+      const labels = getOnboardingLabels("stateMarket", isEs);
+      stateDisplay.textContent = getSliderDescription(val, labels.left, labels.right, isEs);
       stateSlider.oninput = (e) => {
-        const val = parseInt(e.target.value);
-        state.prior.stateMarket = val / 100;
+        const currentVal = parseInt(e.target.value);
+        state.prior = state.prior || {};
+        state.prior.stateMarket = currentVal / 100;
         const currentIsEs = state.currentLang === "es";
-        const labels = getOnboardingLabels("stateMarket", currentIsEs);
-        stateDisplay.textContent = getSliderDescription(val, labels.left, labels.right, currentIsEs);
+        const currentLabels = getOnboardingLabels("stateMarket", currentIsEs);
+        stateDisplay.textContent = getSliderDescription(currentVal, currentLabels.left, currentLabels.right, currentIsEs);
       };
     }
 
     if (equitySlider && equityDisplay) {
       const isEs = state.currentLang === "es";
-      equitySlider.value = 50;
-      equityDisplay.textContent = isEs ? "Equilibrio neutral" : "Neutral balance";
+      const val = (state.prior && state.prior.equityGrowth !== undefined)
+        ? Math.round(state.prior.equityGrowth * 100)
+        : (equitySlider.value ? parseInt(equitySlider.value) : 50);
+      equitySlider.value = val;
+      const labels = getOnboardingLabels("equityGrowth", isEs);
+      equityDisplay.textContent = getSliderDescription(val, labels.left, labels.right, isEs);
       equitySlider.oninput = (e) => {
-        const val = parseInt(e.target.value);
-        state.prior.equityGrowth = val / 100;
+        const currentVal = parseInt(e.target.value);
+        state.prior = state.prior || {};
+        state.prior.equityGrowth = currentVal / 100;
         const currentIsEs = state.currentLang === "es";
-        const labels = getOnboardingLabels("equityGrowth", currentIsEs);
-        equityDisplay.textContent = getSliderDescription(val, labels.left, labels.right, currentIsEs);
+        const currentLabels = getOnboardingLabels("equityGrowth", currentIsEs);
+        equityDisplay.textContent = getSliderDescription(currentVal, currentLabels.left, currentLabels.right, currentIsEs);
       };
     }
   }
 
-// RENDERIZADOR DE PREGUNTA DEL TEST
-function renderQuestion() {
+// RENDERIZADOR DE PREGUNTA DEL TEST CON TRANSICIONES Y NAVEGACIÓN
+function renderQuestion(direction = "none") {
   const q = PREGUNTAS[state.currentTestQuestion];
   if (!q) return;
 
@@ -1129,6 +1187,18 @@ function renderQuestion() {
   const testSection = document.getElementById("test");
   if (testSection) {
     testSection.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Actualizar etiqueta del botón Atrás en cabecera
+  const testPrevBtn = document.getElementById("test-prev-btn");
+  if (testPrevBtn) {
+    const prevSpan = testPrevBtn.querySelector("[data-i18n]") || testPrevBtn.querySelector(".back-text") || testPrevBtn.querySelector("span");
+    const backLabel = isEs 
+      ? (state.currentTestQuestion === 0 ? "Atrás (Priors)" : "Atrás")
+      : (state.currentTestQuestion === 0 ? "Back (Priors)" : "Back");
+    if (prevSpan) {
+      prevSpan.textContent = backLabel;
+    }
   }
 
   // Actualizar indicadores
@@ -1146,41 +1216,75 @@ function renderQuestion() {
   document.getElementById("test-progress-fill").style.width = `${pct}%`;
 
   // Texto pregunta
-  document.getElementById("test-question-text").textContent = q.texto;
+  const questionTextEl = document.getElementById("test-question-text");
+  questionTextEl.textContent = q.texto;
 
   const optionsGrid = document.getElementById("test-options-grid");
   const sliderWrapper = document.getElementById("test-slider-wrapper");
 
-  // Reset del slider
-  const slider = document.getElementById("luxury-slider");
-  if (slider) {
-    slider.value = 50;
-    document.getElementById("slider-value-readout").textContent = isEs ? "Equilibrio neutral" : "Neutral balance";
+  // Transiciones direccionales fluidas
+  const animTarget = (q.fase === 3) ? sliderWrapper : optionsGrid;
+  const animClass = (direction === "backward") ? "anim-slide-in-left" : "anim-slide-in-right";
+  
+  if (direction !== "none") {
+    [questionTextEl, animTarget].forEach(el => {
+      if (el) {
+        el.classList.remove("anim-slide-in-right", "anim-slide-in-left");
+        void el.offsetWidth; // Reflow para reiniciar animación
+        el.classList.add(animClass);
+      }
+    });
   }
 
   if (q.fase === 1 || q.fase === 2) {
     optionsGrid.classList.remove("hidden");
     sliderWrapper.classList.add("hidden");
 
+    // Mantener orden consistente de opciones por pregunta
+    state.questionOptionOrder = state.questionOptionOrder || {};
+    if (!state.questionOptionOrder[q.id]) {
+      state.questionOptionOrder[q.id] = [...q.opciones].sort(() => Math.random() - 0.5);
+    }
+    const shuffledOptions = state.questionOptionOrder[q.id];
+
     optionsGrid.innerHTML = "";
     
-    // Aleatorizar el orden de las opciones/respuestas para eliminar sesgos de orden
-    const shuffledOptions = [...q.opciones].sort(() => Math.random() - 0.5);
+    const savedAnswer = state.answers[q.id];
+    const savedIndex = state.selectedOptionIndices ? state.selectedOptionIndices[q.id] : undefined;
     
-    shuffledOptions.forEach((opt) => {
+    shuffledOptions.forEach((opt, idx) => {
       const card = document.createElement("div");
       card.className = "test-option-card";
       card.tabIndex = 0;
       card.setAttribute("role", "button");
       card.setAttribute("aria-label", opt.texto);
       
+      // Restaurar estado seleccionado si ya había respuesta previa
+      let isSelected = false;
+      if (savedIndex !== undefined && savedIndex === idx) {
+        isSelected = true;
+      } else if (savedAnswer !== undefined) {
+        if (q.fase === 1 && savedAnswer === opt.tipo) isSelected = true;
+        if (q.fase === 2 && JSON.stringify(savedAnswer) === JSON.stringify(opt.pesos)) isSelected = true;
+      }
+
+      if (isSelected) {
+        card.classList.add("selected");
+      }
+
       card.innerHTML = `
         <div class="option-marker" aria-hidden="true"></div>
         <p class="option-text">${opt.texto}</p>
       `;
 
       const selectOption = () => {
+        const allCards = optionsGrid.querySelectorAll(".test-option-card");
+        allCards.forEach(c => c.classList.remove("selected"));
         card.classList.add("selected");
+        optionsGrid.classList.add("is-transitioning");
+
+        state.selectedOptionIndices = state.selectedOptionIndices || {};
+        state.selectedOptionIndices[q.id] = idx;
         
         if (q.fase === 1) {
           state.answers[q.id] = opt.tipo; // "monismo" o "pluralismo"
@@ -1189,13 +1293,14 @@ function renderQuestion() {
         }
 
         setTimeout(() => {
+          optionsGrid.classList.remove("is-transitioning");
           state.currentTestQuestion++;
           if (state.currentTestQuestion < PREGUNTAS.length) {
-            renderQuestion();
+            renderQuestion("forward");
           } else {
             triggerAlchemicalCalculation();
           }
-        }, 300);
+        }, 250);
       };
 
       card.addEventListener("click", selectOption);
@@ -1220,12 +1325,28 @@ function renderQuestion() {
       leftHint.textContent = `← ${q.izquierda.titulo}`;
       rightHint.textContent = `${q.derecha.titulo} →`;
     }
+
+    // Inicializar slider y readout inmediatamente desde el inicio con la descripción y porcentaje correctos
+    const slider = document.getElementById("luxury-slider");
+    const readout = document.getElementById("slider-value-readout");
+    if (slider && readout) {
+      const savedVal = (state.answers[q.id] !== undefined)
+        ? Math.round(state.answers[q.id] * 100)
+        : 50;
+      slider.value = savedVal;
+      readout.textContent = getSliderDescription(savedVal, q.izquierda.titulo, q.derecha.titulo, isEs);
+    }
   }
 
   // Apply glossary tooltips to rendered test question
   if (typeof applyGlossaryTooltips === 'function') {
     const questionScreen = document.getElementById('test-question-screen');
     if (questionScreen) applyGlossaryTooltips(questionScreen);
+  }
+
+  // Actualizar iconos Lucide dinámicos
+  if (window.lucide) {
+    window.lucide.createIcons();
   }
 }
 
@@ -1600,6 +1721,10 @@ function renderResultsToUI(results) {
   const btnRestart = document.getElementById("btn-restart-test");
   const restartAction = () => {
     state.activeResults = null;
+    state.currentTestQuestion = 0;
+    state.answers = {};
+    state.selectedOptionIndices = {};
+    state.questionOptionOrder = {};
     document.getElementById("test-results-screen").classList.add("hidden");
     document.getElementById("test-start-screen").classList.remove("hidden");
     document.getElementById("test").scrollIntoView({ behavior: 'smooth' });
