@@ -1,0 +1,23 @@
+{
+  "name": "bar-economic",
+  "version": "1.0.0",
+  "description": "El Bar de Escuelas Económicas - Motor de Autodiagnóstico y Selección de Cócteles Ideológicos",
+  "main": "app.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0"
+  },
+  "keywords": [
+    "economics",
+    "e2e",
+    "playwright",
+    "testing"
+  ],
+  "author": "BAR-Economic Team",
+  "license": "ISC"
+}
