@@ -1,9 +1,16 @@
 # Marco Epistemológico y Fundamentos Teóricos
 ## La Economía como Mosaico Pluralista y Alquimia Conceptual
 
+> **Metadatos Canónicos de Gobernanza Editorial (POL-ED-001)**  
+> **Código de Artefacto:** `ART-DOC-001` | **Versión:** `1.1.0` | **Estado:** `[VIGENTE]`  
+> **Autoría y Curaduría:** William Camilo Artunduaga Viana (`@willkwolf`)  
+> **Teleología Declarada:** Desmontar el monismo dogmático en economía política mediante el pluralismo metodológico de Ha-Joon Chang y la teoría del conocimiento de Isaiah Berlin.  
+> **Audiencia Diana:** Ciudadanos, estudiantes de ciencias sociales y economía, formuladores de políticas públicas y agentes autónomos de IA.  
+> **Límites de Alcance:** Artefacto analítico-pedagógico y marco conceptual; no constituye un manual de econometría aplicada ni prescribe recetas normativas cerradas.
+
 ---
 
-## 1. Introducción y Tesis Central
+## 1. Introducción y Tesis Central {#introduccion-y-tesis-central}
 
 El debate contemporáneo sobre política económica suele presentarse a la opinión pública como una disciplina técnica unívoca, en la que existen soluciones "óptimas" universales dictadas por leyes naturales incuestionables. Esta concepción tecnocrática oculta un hecho epistemológico fundamental: **la ciencia económica no es un cuerpo homogéneo de verdades cerradas, sino un mosaico histórico de tradiciones analíticas en pugna, cada una portadora de supuestos antropológicos, prioridades normativas y límites metodológicos particulares**.
 
@@ -15,7 +22,7 @@ A través de la metáfora inmersiva de un bar alquímico (*Carbon Speakeasy*), e
 
 ---
 
-## 2. La Taxonomía Pluralista de Ha-Joon Chang
+## 2. La Taxonomía Pluralista de Ha-Joon Chang {#taxonomia-ha-joon-chang}
 
 En su obra canónica de 2014, el economista heterodoxo Ha-Joon Chang desafía la hegemonía de la síntesis neoclásica proponiendo que ninguna escuela de pensamiento posee el monopolio de la explicación económica. Para Chang:
 * El **marxismo** comprende como ninguna otra tradición las relaciones asimétricas de poder y la distribución de la plusvalía entre clases sociales, pero suele subestimar los mecanismos de incentivos descentralizados.
@@ -54,7 +61,7 @@ flowchart TD
 
 ---
 
-## 3. El Dilema de Berlin: Erizos y Zorros en el Juicio Político
+## 3. El Dilema de Berlin: Erizos y Zorros en el Juicio Político {#dilema-de-berlin}
 
 El filósofo Isaiah Berlin rescató un fragmento del poeta griego Arquíloco que sentó las bases de su célebre ensayo:
 > *"Muchas cosas sabe el zorro, pero el erizo sabe una gran cosa."*
@@ -85,7 +92,7 @@ El motor del simulador evalúa en qué medida el usuario opera como un Erizo (at
 
 ---
 
-## 4. La Metáfora Mixológica: Dimensiones Organolépticas y Físicas
+## 4. La Metáfora Mixológica: Dimensiones Organolépticas y Físicas {#metafora-mixologica}
 
 La metáfora de la coctelería conceptual no es un mero adorno estético; actúa como un modelo heurístico con correspondencias analíticas estrictas:
 
@@ -98,7 +105,7 @@ La metáfora de la coctelería conceptual no es un mero adorno estético; actúa
 
 ---
 
-## 5. El Ecosistema Educativo de la Ruta del Pensamiento Crítico
+## 5. El Ecosistema Educativo de la Ruta del Pensamiento Crítico {#ecosistema-educativo}
 
 El Bar Económico forma parte de una secuencia pedagógica integral de cinco aplicaciones interactivas desarrolladas por William Camilo Artunduaga (`@willkwolf`), orientadas a democratizar la deliberación informada sobre economía política:
 
@@ -118,7 +125,15 @@ graph LR
 
 ---
 
-## 6. Referencias Bibliográficas Fundacionales
+## 6. Cierre Epistémico Falibilista y Cautela Ética {#cierre-falibilista}
+
+En consonancia con la advertencia de Karl Popper (1945) y la lección escéptica de Michel de Montaigne (1588), este artefacto declara explícitamente sus límites cognitivos:
+* **Ninguna fórmula alquímica es definitiva:** Toda política económica exitosa contiene en su seno los gérmenes de su propia obsolescencia o esclerosis si las condiciones demográficas, tecnológicas o ecológicas se transforman.
+* **El conflicto trágico de valores no se disuelve:** No es posible maximizar simultáneamente la autonomía negativa irrestricta, la justicia distributiva perfecta y la estabilidad ecológica absoluta sin incurrir en costes de oportunidad severos. La madurez cívica consiste en habitar conscientemente estas tensiones en lugar de subordinarlas a un único dogma salvífico.
+
+---
+
+## 7. Referencias Bibliográficas Fundacionales {#referencias-bibliograficas}
 
 * **Berlin, I.** (1953). *The Hedgehog and the Fox: An Essay on Tolstoy's View of History*. London: Weidenfeld & Nicolson.
 * **Berlin, I.** (1958). *Two Concepts of Liberty*. Oxford: Clarendon Press.
@@ -126,5 +141,19 @@ graph LR
 * **Hayek, F. A.** (1945). The Use of Knowledge in Society. *American Economic Review*, 35(4), 519–530.
 * **Keynes, J. M.** (1936). *The General Theory of Employment, Interest and Money*. London: Macmillan.
 * **Mazzucato, M.** (2013). *The Entrepreneurial State: Debunking Public vs. Private Sector Myths*. London: Anthem Press.
+* **Montaigne, M. de** (1588). *Les Essais*. París: Abel L'Angelier.
+* **Popper, K. R.** (1945). *The Open Society and Its Enemies*. London: Routledge.
 * **Raworth, K.** (2017). *Doughnut Economics: Seven Ways to Think Like a 21st-Century Economist*. White River Junction: Chelsea Green Publishing.
 * **Schumpeter, J. A.** (1942). *Capitalism, Socialism and Democracy*. New York: Harper & Brothers.
+
+### Citación Académica del Artefacto
+```bibtex
+@article{artunduaga2026framework,
+  author = {Artunduaga Viana, William Camilo},
+  title = {Marco Epistemologico: La Economia como Mosaico Pluralista y Alquimia Conceptual},
+  year = {2026},
+  journal = {El Bar Economico},
+  publisher = {GitHub},
+  url = {https://github.com/willkwolf/economic-bar/blob/main/docs/conceptual/epistemological_framework.md}
+}
+```
